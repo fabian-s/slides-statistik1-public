@@ -1,0 +1,82 @@
+## Empirische Verteilungsfunktion
+
+### Empirische Verteilungsfunktion
+
+Häufigkeitsfunktion: 
+$$H(x) := (\mbox{Anzahl der Werte} \leq x)  $$
+
+Verteilungsfunktion:
+\[
+F_n(x)  =  H(x)/n = (\mbox{Anteil der Werte}\,\,\, x_i \,\,\, \mbox{mit} \,\,\, x_i
+\leq x)
+\]
+bzw.
+\[
+F_n(x) =  f(a_1) + \ldots + f(a_j) = \sum_{i: a_i \leq x} f_i,
+\]
+für $a_j \leq x$ und $a_{j+1}>x$.
+
+\scriptsize **ECDF** (empirical cumulative distribution function) 
+
+###  Eigenschaften der ECDF $F_n(x)$
+
+-  monoton wachsende Treppenfunktionen mit Sprüngen an den
+Ausprägungen $a_1, \ldots, a_k$
+-  Sprunghöhen: $f_1, \ldots, f_k$
+-  rechtsseitig stetig
+- $F_n(x) = 0$ für $x < a_1, \,\,F_n(x) = 1$ für $x \geq a_k$
+
+
+### Beispiel: $F_n$(Quadratmetermiete) für Klein & Kalt 
+
+```{r, 02-ecdf, echo=FALSE}
+ggplot(klein_und_kalt, aes(nmqm)) + stat_ecdf(geom = "step") + 
+  xlab("Nettoquadratmetermiete [EUR/qm]") + ylab("F(x)")
+```
+
+### Beispiel: $F_n$(Quadratmetermiete) für Klein & Kalt 
+
+Wie groß ist der Anteil von kleinen Wohnungen ohne ZH mit qm-Miete $\leq$ 12 €?
+Wie viel kosten die günstigsten 25% der Wohnungen höchstens? 
+
+```{r, 02-ecdf-ex-q, echo=FALSE, out.height=".7\\textheight"}
+ggplot(klein_und_kalt, aes(nmqm)) + stat_ecdf(geom = "step") + 
+  xlab("Nettomiete / qm") + ylab("F(x)")
+```
+
+### Beispiel: $F_n$(Quadratmetermiete) für Klein & Kalt 
+
+Wie groß ist der Anteil von kleinen Wohnungen ohne ZH mit qm-Miete $\leq$ 12 €?
+
+```{r, 02-ecdf-ex-a1, echo=FALSE, out.height=".7\\textheight"}
+ggplot(klein_und_kalt, aes(nmqm)) + stat_ecdf(geom = "step") + 
+  xlab("Nettomiete / qm") + ylab("F(x)") + 
+  geom_vline(xintercept = 12, col = "red") + 
+  geom_hline(yintercept = mean(klein_und_kalt$nmqm <= 12), col = "red", lty = 2) 
+```
+$\Rightarrow \approx$ `r round(mean(klein_und_kalt$nmqm < 12)*100)`%
+
+### Beispiel: $F_n$(Quadratmetermiete) für Klein & Kalt 
+
+Wie viel kosten die günstigsten 25% der Wohnungen höchstens?  
+Was ist die maximale qm-Miete im billigsten unteren Viertel der Wohnungen?
+
+```{r  02-ecdf-ex-a2, echo=FALSE, out.height=".7\\textheight"}
+ggplot(klein_und_kalt, aes(nmqm)) + stat_ecdf(geom = "step") + 
+  xlab("Nettomiete / qm") + ylab("F(x)") + 
+  geom_hline(yintercept = .25, col = "red") + 
+  geom_vline(xintercept = quantile(klein_und_kalt$nmqm, .25), col = "red", lty = 2) 
+```
+$\Rightarrow \approx$ `r round(quantile(klein_und_kalt$nmqm, .25), 1)`€
+
+### Theorie & Empirie
+
+Theorie |  | Empirie
+--------|--|--------
+Zufallsvariable $X$ | $\cong$ | Merkmal $X$
+Träger $T_X$   | $\supseteq$ | Beobachtete Merkmalsausprägungen $\{a_1, \dots, a_k\}$ von $X$
+W.keitsfunktion $f_X(x)$ | $\leftrightarrow$ | relative H.keiten $f_X(a_j)$
+Verteilungsfunktion $F_X(x)$ | $\leftrightarrow$ | kumul. relative H.keiten / empirische Verteilungsfunktion $F_n(x)$
+
+
+

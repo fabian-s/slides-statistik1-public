@@ -1,0 +1,109 @@
+## Empirische Häufigkeitsverteilungen
+
+<!-- ### Beispiel: Befragung von Redakteuren -->
+
+<!-- \begin{center} -->
+<!--   \includegraphics[height=.8\textheight]{pics/2-befragung-redakteure} -->
+<!-- \end{center} -->
+
+### Zurück zur Empirie
+
+Zufallsvariablen sind Bestandteil der mathematischen Formalisierung eines zufälligen Prozesses.
+
+Jetzt: Betrachte *empirische* Entsprechungen der eben eingeführten Begriffe.
+
+
+### Häufigkeitsverteilung: Notation & Terminologie
+
+Im Weiteren:
+
+- $X, Y, \ldots$ Bezeichnung für **Merkmale**
+- $n$ ist Anzahl der **Untersuchungseinheiten**
+- $x_i, i \in \{1, \ldots, n\}$ ist **beobachteter Wert** bzw. **Merkmalsausprägung** von Merkmal $X$ für $i$-te Untersuchungseinheit 
+- $x_1, \ldots, x_n$ **Rohdaten**, **Urliste**
+- $a_1, a_2, \ldots, a_k, \, k \le n$ (evtl. der Größe nach geordnete) *verschiedene* Werte der Urliste $x_1,\ldots,x_n$: die **Menge der beobachteten Merkmalsausprägungen**  von $X$.
+
+### Eindimensionale Häufigkeitsverteilung
+
+  -  Sortierung der Daten nach einem Merkmal
+  -  Auszählen der Häufigkeiten der einzelnen Merkmalsausprägungen
+  -  **Relative Häufigkeiten** = Häufigkeit einer Merkmalsausprägung / Anzahl der Untersuchungseinheiten (*Anteil*)
+  -  **Kumulative relative Häufigkeiten** bei  ordinal oder metrisch skalierten Merkmalen sinnvoll:  
+ $F(x):=$ "Anteil UE mit Merkmalsausprägung $\leq x$"
+ heißt **empirische Verteilungsfunktion**
+
+### Häufigkeitsverteilungen
+
+**Bemerkungen:**
+
+-  Für Nominalskalen hat die Anordnung "$<$" keine
+inhaltliche Bedeutung.
+- Bei kategorialen Merkmalen $k =$ Anzahl der Kategorien  
+- Bei stetigen Merkmalen $k$ oft nicht oder kaum kleiner als $n$.
+
+
+### Absolute und relative Häufigkeiten
+
+\begin{tabular}{ll}
+$h(a_j) = h_j$ & \textbf{absolute Häufigkeit} der
+Ausprägung $a_j$,\\*[0.7cm]
+           &  d.h.~Anzahl der $x_i$ aus $x_1,\dots x_n$ mit $x_i = a_j$
+\\*[0.7cm]
+$ f(a_j) = f_j = h_j/n$ & \textbf{relative Häufigkeit}
+von $a_j$ \\*[0.7cm]
+$h_1 , \ldots , h_k$    & \textbf{absolute
+Häufigkeitsverteilung} \\*[0.7cm]
+$f_1 , \ldots , f_k $   & \textbf{relative
+Häufigkeitsverteilung}
+\end{tabular}
+
+
+### Bemerkungen:
+
+-  Wenn statt der Urliste bereits die Ausprägungen $a_1,\ldots,a_k$ und ihre Häufigkeiten $f_1,\ldots,f_k$ bzw. $h_1,\ldots,h_k$ vorliegen, sprechen wir von **Häufigkeitsdaten**.
+-  **Klassenbildung**, **gruppierte Daten**: Vor allem bei metrischen, stetigen (oder quasi-stetigen) Merkmalen oft
+Aggregation der Urliste durch Bildung geeigneter Klassen
+
+### Beispiel Nettomieten I
+
+```{r, 02-mietspiegel-kleinkalt-prep, echo=FALSE}
+url <- "http://chris.userweb.mwn.de/statistikbuch/mietspiegel2015.txt"
+mietspiegel <- read.table(file = url, header = TRUE)
+klein_und_kalt <- subset(mietspiegel, zh0 == 1 & wfl < 60)
+```
+
+Wir greifen aus dem gesamten Datensatz des Münchner Mietspiegels 2015 die Wohnungen ohne zentrale Warmwasserversorgung (`zh0 == 1`) und mit einer Wohnfläche kleiner als $60m^2$ (`wfl < 60`) heraus. 
+
+Die folgende Urliste zeigt, bereits der Größe nach geordnet, die Nettomieten dieser $n=`r nrow(klein_und_kalt)`$ Wohnungen:
+
+```{r, 02-mietspiegel-kleinkalt}
+mietspiegel_url <- "http://chris.userweb.mwn.de/statistikbuch/mietspiegel2015.txt"
+mietspiegel <- read.table(file = mietspiegel_url, header = TRUE)
+klein_und_kalt <- subset(mietspiegel, zh0 == 1 & wfl < 60)
+sort(klein_und_kalt[, "nm"]) |> print(digits = 4)
+```
+
+Alle Werte verschieden:  
+$\Rightarrow k=n$ und $\{x_1 , \ldots , x_n\} = \{a_1 , \ldots , a_k\};\; f_j = \frac{1}{`r nrow(klein_und_kalt)`} \,\forall\,  j = 1, \ldots, `r nrow(klein_und_kalt)`$.
+
+### Beispiel Nettomieten II
+
+Gruppiert man die Urliste in $7$ Klassen mit gleicher
+Klassenbreite von $100$€, so erhält man folgende
+Häufigkeitstabelle:
+
+```{r, 02-mietspiegel-kleinkalt-gruppiert}
+gruppierung <- seq(from = 150, to = 850, by = 100)
+klein_und_kalt[, "nm_gruppiert"] <- cut(klein_und_kalt[, "nm"], breaks = gruppierung)
+table(klein_und_kalt[, "nm_gruppiert"])
+```
+```{r, 02-mietspiegel-kleinkalt-gruppiert-table, echo=FALSE, results="asis", size = "normalsize"}
+library(xtable)
+tab <- as.data.frame(table(klein_und_kalt$nm_gruppiert))
+tab <- cbind(tab, tab[,2]/nrow(klein_und_kalt))
+tab[, 4] <- cumsum(tab[, 3])
+colnames(tab) <- c("Klasse", "absolute H.keit", "relative H.keit", "kumulative rel. H.keit")
+print(xtable(tab, align = c("r", "r", "r", "r", "r")), 
+  include.rownames = FALSE, comment = FALSE, hline.after = 0)
+```
+

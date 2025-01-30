@@ -1,0 +1,260 @@
+## Kovarianz und Korrelation von Zufallsvariablen
+
+### Kovarianzen und Korrelationen
+
+:::{.block}
+#### Def.: Kovarianz und Korrelation
+Die **Kovarianz**  $\Cov(X,Y)$ bzw die **Korrelation** $\rho(X,Y)$ zweier ZVn $X$, $Y$ sind Maße
+für die Stärke und Richtung der linearen Abhängigkeit von ZVn $X$ und $Y$. Es gilt:
+\begin{align*}
+\Cov(X,Y) &= E[(X - E(X))(Y - E(Y))]\\
+\text{ und }\rho(X,Y) &= \frac{\Cov(X,Y)}{\sqrt{\Var(X)} \sqrt{\Var(Y)}}.
+\end{align*}
+Letzteres unter der Voraussetzung, dass $\Var(X) > 0$ und $\Var(Y) > 0$.
+:::
+
+Beachte: $\Cov(X,X) = \Var(X)$
+
+\note{
+Intuition Kovarianz über Formel:
+positiv heisst abweichungen von EW tendenziell in die gleiche, negativ in verschiedene richtungen\\
+Korelation: in $[-1, 1]$, normierung der kovarianz
+}
+
+### Der Verschiebungssatz für die Kovarianz 
+
+Es gilt zudem:
+$$
+\Cov(X,Y) = E(XY) - E(X)E(Y)
+$$
+Beweis:
+\begin{align*}
+\Cov(X,Y) &= E((X-E(X))(Y-E(Y))) \\
+          &= E(XY - Y E(X) - X E(Y) + E(X)E(Y)) \\
+          &= E(XY) - 2E(X)E(Y) +  E(X)E(Y) = E(XY) - E(X)E(Y)
+\end{align*}
+
+### Unkorreliertheit 
+
+$X$ und $Y$ heißen **unkorreliert**, wenn
+$$
+\Cov(X,Y) = 0 \quad \mbox{bzw.~ } \rho(X,Y) = 0
+$$
+d.h. wenn
+$$
+E(XY) = E (X) \cdot E (Y)
+$$
+gilt.
+
+Beachte: Aus Unabhängigkeit folgt Unkorreliertheit, aber der Umkehrschluss gilt i.A. nicht!  
+
+
+$X$ und $Y$ sind **positiv/negativ korreliert** falls
+$$
+\rho(X,Y) > 0 \quad \mbox{bzw.~ } \rho(X,Y) < 0
+$$
+
+\note{
+*Beweis:*\\
+\begin{align*}
+E(XY) & =  \sum_x \sum_y x \cdot y \: f_{X,Y}(x,y)\\
+& \stackrel{\text{unabh.}}{=} & \sum_x \sum_y x \cdot y \: f_X(x)
+\, f_Y(y)\\
+& =  \sum_x x \: f_X(x) \, \sum_y y \: f_Y(y) 
+& =  E (X) \cdot E (Y)
+\end{align*}
+}
+
+
+### Beispiel: Unabhängig vs Unkorreliert 
+
+Seien  $X \sim {\mathcal B}(\pi = \frac{1}{2})$ und $Y \sim {\mathcal B}(\pi = \frac{1}{2})$
+unabhängig.
+
+Betrachte
+$$
+Z_1  =   X + Y = \left \{ \begin{array}{rl}
+0 & \mbox{ mit Wkeit }\frac{1}{4}\\
+1 & \mbox{ mit Wkeit }\frac{1}{2}\\
+2 & \mbox{ mit Wkeit }\frac{1}{4}
+\end{array}
+\right.\,;  \qquad 
+Z_2 =   X - Y = \left \{ \begin{array}{rl}
+-1 & \mbox{ mit Wkeit }\frac{1}{4}\\
+0 & \mbox{ mit Wkeit }\frac{1}{2}\\
+1 & \mbox{ mit Wkeit }\frac{1}{4}\\
+\end{array}
+\right.
+$$
+
+Dann sind $Z_1$ und $Z_2$ zwar unkorreliert aber nicht unabhängig:
+
+$$\begin{array}{c|ccc|c}
+f_{Z_1,Z_2}(z_1,z_2) & z_1 = 0 & z_1 = 1 & z_1 = 2 &
+f_{Z_2}(z_2)\\ \hline 
+z_2 = -1 & 0 & 1/4 & 0 & 1/4 \\
+z_2 = 0 & 1/4 & 0 & 1/4 & 1/2 \\
+z_2 = 1 & 0 & 1/4 & 0 & 1/4 \\ \hline
+f_{Z_1}(z_1) & 1/4 & 1/2 & 1/4 & 
+\end{array}$$
+$\implies f(z_1,z_2) \neq f(z_1) f(z_2)$ d.h. $Z_1$, $Z_2$ nicht unabhängig.  
+Aber $E(Z_1) = 1, E(Z_2) = 0; E(Z_1 Z_2) = 0$, also $\Cov(Z_1,Z_2) = 0$!
+
+
+
+### Eigenschaften von Korrelationen 
+
+
+Für alle ZVn $X$ und $Y$ gilt:
+$$
+-1 \leq \rho(X,Y) \leq 1
+$$
+$|\rho(X,Y)| = 1$ gilt genau dann, wenn perfekte lineare Abhängigkeit
+zwischen $X$ und $Y$ besteht:
+$$
+|\rho(X,Y)| = 1 \iff Y = a + b \cdot X \qquad \mbox{für } a,b \in \mathbb{R};\; b \neq 0 
+$$
+
+
+### Lineare Transformationen 
+
+Sei $a, b, c, d \in \mathbb{R}$ mit $b \cdot d > 0$ und
+$X, Y$ beliebige ZVn.  Dann gilt:
+$$
+\Cov(a + bX, c + dY) = b \cdot d \cdot \Cov(X,Y)
+$$
+Daher gilt:
+$$
+\rho(a + bX, c + dY)  =  \operatorname{sgn}(b) \cdot \operatorname{sgn}(d) \cdot \rho(X,Y)
+$$
+d.h. die Korrelation ist **invariant** bzgl. linearer Transformationen
+
+\vspace{3em}
+\scriptsize
+$\operatorname{sgn}(x) := \frac{x}{|x|} = \begin{cases} 1 & x > 0 \\ 0 & x=0 \\ -1 & x<0 \end{cases}$
+
+### Varianz der Summe zweier ZVn 
+
+Seien $X$ und $Y$ beliebige ZVn. Dann gilt für $X + Y$:
+$$
+\Var(X + Y) = \Var(X) + \Var(Y) + 2 \cdot \Cov(X,Y)
+$$
+
+Daher gilt speziell für *unabhängige* und damit unkorrelierte $X$ und $Y$:
+$$
+\Var(X + Y) = \Var(X) + \Var(Y)
+$$
+
+\note{
+\begin{align*}
+\lefteqn{\Var(X + Y) = E((X + Y) - E(X + Y))^2}\\
+& \stackrel{\text{lin. EWert}}{=}&
+E(X - E (X) + Y - E Y)^2\
+
+& = &  \underbrace{E(X - E X)^2}_{\Var(X)} +
+\underbrace{E(Y - E Y)^2}_{\Var(Y)} + 2\,\underbrace
+{E\,[(X - E X)(Y - E Y)]}_{\Cov(X,Y)}
+\end{align*}
+}
+
+### Anwendung: Bivariate Standardnormalverteilung 
+
+Die **bivariate Standardnormalverteilung** mit Parameter
+$\rho$ ($|\rho| < 1$) hat Träger $T = \mathbb R \times \mathbb R$ und Dichtefunktion
+$$
+f(x,y) \; = \; \frac{1}{2 \pi \sqrt{(1 - \rho^2)}} \: \exp
+\left(
+- \, \frac{1}{2 \, (1 - \rho^2)} \, (x^2 - 2 \rho x y + y^2)
+\right)
+$$
+
+- Die Randverteilungen von $X$ und $Y$ sind (für jedes
+$\rho$) standard-normalverteilt.\
+
+- Die Korrelation zwischen $X$ und $Y$ ist gleich $\rho$.\
+
+- Aus Unkorreliertheit von $X$ und $Y$ folgt in diesem Spezialfall die
+Unabhängigkeit von $X$ und $Y$.
+
+
+
+### Visualisierung: Bivariate Standardnormalverteilung 
+
+```{r vis-2dnorm-1, echo = FALSE, warnings = FALSE, message=FALSE}
+grid1 <- seq(-3, 3, l = 100)
+cov_pos <- diag(2); cov_pos[1, 2] <- cov_pos[2, 1] <- .8
+cov_neg <- diag(2); cov_neg[1, 2] <- cov_neg[2, 1] <- -.5
+f_pos <- outer(grid1, grid1, FUN = function(x,y) mvtnorm::dmvnorm(cbind(x,y), sigma = cov_pos))
+f_neg <- outer(grid1, grid1, FUN = function(x,y) mvtnorm::dmvnorm(cbind(x,y), sigma = cov_neg))
+f_0 <- outer(grid1, grid1, FUN = function(x,y) mvtnorm::dmvnorm(cbind(x,y), sigma = diag(2)))
+
+d_2dnorm <- tibble(expand.grid(grid1, grid1)) |> 
+  rename(x = Var1, y = Var2) |> 
+  mutate(pos = as.vector(f_pos),
+         neg = as.vector(f_neg),
+         null = as.vector(f_0))
+
+breaks <- pretty(c(0, max(f_pos, f_neg, f_0)), n = 15)
+
+p <- ggplot(d_2dnorm, aes(x = x, y= y)) + scale_fill_viridis_c("f(x,y)", limits = range(breaks)) +
+  coord_equal()
+
+p + geom_raster(aes(fill = pos)) + geom_contour(aes(z = pos), colour = rgb(1, 1, 1, .2), bins = 20) +
+  labs(subtitle = expression(rho == 0.8)) + theme(legend.position = "none") +
+p + geom_raster(aes(fill = null)) + geom_contour(aes(z = null), colour = rgb(1, 1, 1, .2), bins = 20) + 
+  labs(subtitle = expression(rho == 0)) +  theme(legend.position = "bottom") +
+p + geom_raster(aes(fill = neg))  + geom_contour(aes(z = neg), colour = rgb(1, 1, 1, .2), bins = 20) + 
+  labs(subtitle = expression(rho == - 0.5)) +  theme(legend.position = "none") +
+plot_layout(guides = 'collect')  & theme(legend.position = "bottom")
+```
+
+### Visualisierung: Bivariate Standardnormalverteilung
+
+```{r vis-2dnorm-2, echo = FALSE, warnings = FALSE, message=FALSE}
+layout(t(1:3))
+par(mar = c(.1, .1, 1, .1), oma = rep(0,4))
+persp(grid1, grid1, f_pos, zlim = range(f_pos, f_neg, f_0), 
+      xlab = "x", ylab = "y", zlab = "f(x,y)", 
+      border = scales::alpha("white", .2),
+      theta = 30, phi = 50, expand = 0.8, col = "lightblue",
+      ltheta = 120, shade = 0.75, main = expression(rho == 0.8))
+persp(grid1, grid1, f_0, zlim = range(f_pos, f_neg, f_0), 
+      xlab = "x", ylab = "y", zlab = "f(x,y)", 
+      border = scales::alpha("white", .2),
+      theta = 30, phi = 50, expand = 0.8, col = "lightblue",
+      ltheta = 120, shade = 0.75, main = expression(rho == 0))
+persp(grid1, grid1, f_neg, zlim = range(f_pos, f_neg, f_0), 
+      xlab = "x", ylab = "y", zlab = "f(x,y)", 
+      border = scales::alpha("white", .2),
+      theta = 30, phi = 50, expand = 0.8, col = "lightblue",
+      ltheta = -80, shade = 0.75, main = expression(rho == - 0.5))
+```
+
+
+
+### Multivariate Normalverteilung 
+
+Die allgemeine bivariate Normalverteilung erhält man durch 
+lineare Transformation der Komponenten der bivariaten Standardnormalverteilung:
+$$ X \to \mu_X + \sigma_X \cdot X; \qquad Y \to \mu_Y + \sigma_Y \cdot Y$$
+
+Insgesamt fünf Parameter: $\mu_X, \mu_Y, \sigma_X^2, \sigma_Y^2, \rho$.  
+Es gilt $\sigma_{XY} := \Cov(X,Y) = \rho\sigma_{X}\sigma_Y$
+
+Notation: 
+$$
+(X, Y) \sim \mathcal N_2\left(\symbf \mu = (\mu_X, \mu_Y)^T, \symbf \Sigma = \left(\begin{smallmatrix} 
+\sigma_X^2 & \sigma_{XY} \\ \sigma_{XY} & \sigma_Y^2
+\end{smallmatrix}\right)\right)
+$$
+
+Ausblick:
+Das Konzept ist auf beliebig hohe Dimensionen übertragbar. Die Parameter einer $d$-dimensionalen NV sind 
+ihr Erwartungswertvektor $\symbf \mu$ und ihre Kovarianzmatrix $\symbf \Sigma$:
+\begin{align*}
+\symbf X = (X_1, X_2, \dots, X_d)^T &\sim \mathcal N_d(\symbf \mu, \symbf \Sigma) \\
+\implies f(\symbf x) &= \frac{1}{\sqrt{(2\pi)^d|\symbf \Sigma|}} \exp\left(
+- \, \frac{1}{2} (\symbf x - \symbf \mu)^T \symbf \Sigma^{-1} (\symbf x - \symbf \mu)
+\right)
+\end{align*}
+

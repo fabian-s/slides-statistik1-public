@@ -1,0 +1,159 @@
+## Bedingte Häufigkeiten
+
+### Bedingte Häufigkeiten
+
+Zusammenhang zwischen $X$ und $Y$ aus **gemeinsamen** Häufigkeiten $h_{ij}$ bzw. $f_{ij}$ schwer ersichtlich.
+
+Deshalb: Blick auf **bedingte** Häufigkeiten  
+$\implies$ Verteilung eines Merkmals für festen Wert des 2. Merkmals
+
+### Bedingte Häufigkeiten: Beispiel
+
+**Wahlverhalten nach Geschlecht, Bundestagswahl 2021:**
+
+\begin{center}
+      \begin{tabular}{r | ccccccc | c}
+          & \text{SPD} & \text{CDU/CSU} & \text{Grüne} & \text{FDP} & \text{AfD} & \text{Linke} &  \text{Rest} \\ \hline
+          Männer & 25 & 24 & 14 & 13 & 12 & 5 & 7  & 100\\
+          Frauen & 27 & 24 & 16 & 10 &  8 & 5 & 10 & 100 \\ 
+      \end{tabular}
+\end{center}
+
+Prozentzahlen für Parteipräferenz in den Schichten (Subpopulationen) "Frauen",
+"Männer"  
+$=$ **bedingte relative Häufigkeiten für Parteipräferenzen bei gegebenem Geschlecht**
+
+
+### Bedingte relative Häufigkeitsverteilung
+
+Die **bedingte Häufigkeitsverteilung von** $Y$ **unter der Bedingung** $X=a_i$, kurz $Y|X=a_i$, ist bestimmt durch
+\begin{displaymath}
+f_{Y|X}(b_1|a_i) = \frac{h_{i1}}{h_{i\cdot}} ,\dots, f_{Y|X}(b_m|a_i) =
+\frac{h_{im}}{h_{i\cdot}}.
+\end{displaymath}
+\vspace{0.5cm}
+Die **bedingte Häufigkeitsverteilung von** $X$ **unter der Bedingung** $Y=b_j$, kurz $X|Y=b_j$, ist bestimmt durch
+\begin{displaymath}
+f_{X|Y}(a_1|b_j) = \frac{h_{1j}}{h_{\cdot j}},\dots,f_{X|Y}(a_k|b_j) =
+\frac{h_{kj}}{h_{\cdot j}}.
+\end{displaymath}
+
+
+
+
+### Bemerkung
+Wegen
+\begin{displaymath}
+\frac{h_{i1}}{h_{i\cdot}} = \frac{h_{i1}/n}{h_{i\cdot}/n} = \frac{f_{i1}}{f_{i\cdot}}
+\end{displaymath}
+gilt auch
+\begin{displaymath}
+\begin{array}{c}
+f_{Y|X}(b_1|a_i) = \frac{f_{i1}}{f_{i\cdot}} ,\ldots, f_{Y|X}(b_m|a_i) = \frac{f_{im}}{f_{i\cdot}} \\*[0.5cm]
+f_{X|Y}(a_1|b_j) = \frac{f_{1j}}{f_{\cdot j}} ,\ldots, f_{X|Y}(a_k|b_j) = \frac{f_{kj}}{f_{\cdot j}}.
+\end{array}
+\end{displaymath}
+
+\noindent 
+**Merksatz:**  
+Bedingte Häufigkeitsverteilungen werden durch Division der $h_{ij}$ bzw. $f_{ij}$ durch
+die entsprechende Zeilen- bzw. Spaltensumme gebildet.
+
+
+### Beispiel: Wahlverhalten
+
+\small
+    \begin{center}
+      \begin{tabular}{r | ccccccc | c}
+          & \text{SPD} & \text{CDU/CSU} & \text{Grüne} & \text{FDP} & \text{AfD} & \text{Linke} &  \text{Rest} & $\sum$ \\ \hline
+          Männer & 626 & 601 & 352 & 325 & 300 & 125 & 175 & 2504\\
+          Frauen & 567 & 504 & 335 & 211 &  167 & 104 & 210 & 2098 \\ 
+      \end{tabular}
+\end{center}
+
+\normalsize
+
+-  Zeile $X = a_1$ (Männer)  
+   Bedingte relative Häufigkeiten für Parteipräferenz der Männer $f_{Y|X}(Y = b_j | X = a_1)$:  
+   "1.Zeile / Randhäufigkeit für Männer"  
+   $\frac{h(a_1,b_1)}{h(a_1)} = f_{Y|X}(b_1|a_1),\ldots,\frac{h(a_1,b_j)}{h(a_1)} = f_{Y|X}(b_j|a_1) ,\ldots$   
+   $\frac{626}{2504} \approx 25\%, \ldots, \frac{175}{2504}\approx 7\%$ usw.
+-  Zeile $X = a_2$ (Frauen) analog, z.B. $\frac{h(a_2,b_1)}{h(a_2)} = \frac{567}{2098} \approx 27\%$ usw.
+
+### Bedingte und gemeinsame Häufigkeiten
+
+Man kann auch umgekehrt aus bedingten Häufigkeiten und Randhäufigkeiten die gemeinsamen Häufigkeiten ausrechnen. Bei der Nachwahlbefragung aus den bedingten Häufigkeiten und Randhäufigkeiten also z.B.
+\[
+h(a_1) = 2504\,\,\, \mbox{Männer},\,\,\, h(a_2) = 2098 \,\,\,\mbox{Frauen}; \,\,\,n = 4602.
+\]
+
+\[
+\begin{array}{lcl}
+& & h(a_1)\cdot f(b_1|a_1) = h(a_1,b_1)\\
+\implies & &\\
+& & 2504\cdot 25\% \approx 626 \quad\mbox{usw.}
+\end{array}
+\]
+
+
+### Beispiel: Arbeitslosigkeit
+
+\begin{displaymath}
+  \begin{array}{l}
+      f(b_j|a_i), \quad X = a_i, \,\,\,i=1,\ldots,4 \,\,\,\mbox{Ausbildungsniveau}
+      \\*[0.5cm] \mbox{z.B.}\,\,\, \frac{86}{123} = 0.699, \,\frac{19}{123} = 0.154,\ldots
+      \\*[0.5cm] \hspace*{1.5cm}\frac{170}{233} = 0.730,\ldots
+      \\*[0.5cm] \hspace*{1.5cm} \mbox{usw.}
+  \end{array}
+\end{displaymath}
+
+\vspace*{1cm}
+
+Für festgehaltenes Ausbildungsniveau $(X=a_i)$ erhält man die relative
+Verteilung über die Dauer der Arbeitslosigkeit durch die folgende Tabelle.
+
+### Bedingte Verteilung
+
+\begin{center}
+  \begin{small}
+   \begin{tabular}{l|ccc|c}
+\multicolumn{1}{c}{}
+& \multicolumn{1}{c}{Kurzzeit-}
+  & \multicolumn{1}{c}{mittelfristige}
+    & \multicolumn{1}{c}{Langzeit-}\\
+\multicolumn{1}{c}{}
+& \multicolumn{1}{c}{arbeitslosigkeit}
+  & \multicolumn{1}{c}{Arbeitslosigkeit}
+    & \multicolumn{1}{c}{arbeitslosigkeit}\\\cline{2-4}
+Keine Ausb.     & 0.699 & 0.154 & 0.147 & 1\\
+Lehre                & 0.730 & 0.184 & 0.086 & 1\\
+Fachspez. Aus. & 0.714 & 0.197 & 0.089 & 1\\
+Hochschula.    & 0.800 & 0.114 & 0.086 & 1\\\cline{2-4}
+    \end{tabular}
+   \end{small}
+  \end{center}
+
+-  Bedingen auf das Ausbildungsniveau:  
+    $\implies$ Verteilung der Dauer der Arbeitslosigkeit für die Subpopulationen \grqq Keine Ausbildung\grqq,
+\grqq Lehre\grqq, usw.
+-  Verteilungen lassen sich nun miteinander vergleichen
+
+$\implies$ Relative Häufigkeit für Kurzzeitarbeitslosigkeit ist in der Subpopulation \grqq Hochschulabschluss\grqq\ mit $0.8$ am größten.
+
+### Darstellung der bedingten Verteilung
+
+Zum Beispiel Stapeldiagramme:
+
+```{r, 03-conditional-freq, echo =FALSE}
+employment <- data.frame(
+  expand.grid(
+    Ausbildung = c("keine", "Lehre", "Fachspezifisch", "Hochschule"), 
+    Dauer = ordered(c("Kurzzeit", "mittelfristig", "Langzeit"), 
+      levels = rev(c("Kurzzeit", "mittelfristig", "Langzeit")),
+      labels = c("lang", "mittel", "kurz"))), 
+  count = c(86, 170, 40, 28, 19, 43, 11, 4, 18, 20, 5, 3))
+ggplot(employment) + geom_bar(aes(x = Ausbildung, y = count, fill = Dauer), 
+  stat = "identity", position = "fill") + 
+  ylab("bedingte relative Häufigkeit") + coord_flip() +
+  scale_fill_brewer("Dauer \nArbeitslosigkeit", palette = "RdYlBu", type = "seq", direction = -1, ) + guides(fill = guide_legend(reverse = TRUE)) + theme(legend.position = "bottom")
+```

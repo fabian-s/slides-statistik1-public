@@ -1,0 +1,115 @@
+## Stochastische Unabhängigkeit von Zufallsvariablen
+
+### Unabhängige Zufallsvariablen
+
+::: {.block}
+#### Def.: **Unabhängige Zufallsvariablen**
+Zufallsvariablen $X,Y$ sind genau dann *stochastisch unabhängig*, wenn
+$\forall\, x \in T_X, y \in T_Y$ ($X, Y$ diskret)
+bzw. $\forall\, x,y \in \mathbb{R}$ ($X, Y$ stetig) gilt:
+\begin{align*}
+F_{X,Y}(x,y) & = F_X(x) \cdot F_Y(y)\\
+\intertext{und damit }  f_{X,Y}(x,y) & =  f_X(x) \cdot f_Y(y) \\
+\text{(bzw. }  P(X = x, Y = y) &= P(X = x) \cdot P(Y = y) \text{ im diskreten Fall.)}
+\end{align*}
+:::
+
+### Vektoren von unabhängigen Zufallsvariablen
+
+Allgemein: ZVn $X_1, X_2, ..., X_n$ heißen **unabhängig**, falls
+\begin{align*}
+f_{X_1, \dots, X_n}(X_1 = x_1, ..., X_n = x_n) &= \prod_{i=1}^n f_{X_i}(x_i) \\
+\text{d.h. für diskrete $X_i$:}\qquad\qquad P\left(\bigcap_i (X_i = x_i)\right) &= \prod_{i=1}^n P(X_i = x_i) 
+\end{align*}
+für alle $x_1, x_2, ..., x_n$ aus den entsprechenden Trägern gilt.
+
+- Zufallsvariablen sind stochastisch unabhängig, wenn ihre gemeinsame Verteilung dem Produkt 
+ihrer Randverteilungen entspricht.  
+ Ihre gemeinsame Verteilung enthält dann also keine zusätzliche Information gegenüber den Randverteilungen. 
+ 
+- Analog zu stoch. Unabhängigkeit von Ereignissen $A, B$: 
+\begin{align*}
+A \perp B &\iff P(A\cap B) = P(A)P(B) \\ 
+X \perp Y &\iff P((X(\omega) \leq x) \cap (Y(\omega) \leq y)) = P(X(\omega) \leq x)P(Y(\omega) \leq y) \qquad \forall\, x,y \\
+                          &\iff F_{X,Y}(x, y) = F_X(x)F_Y(y)  \qquad \forall\, x,y  \\
+                          &\iff f_{X,Y}(x, y) = f_X(x)f_Y(y)  \qquad \forall\, x,y  \\
+\end{align*}
+
+
+<!-- todo: bedingte dichten & def unabh über bedingte dichten einführen..? -->
+
+### Beispiel: Randverteilung & Gemeinsame Verteilung
+
+```{r, sto-marginal-joint-prep, echo = FALSE}
+grid <- seq(-3, 3, l = 81)
+data <- expand.grid(x_1 = grid, x_2 = grid)
+data <- mutate(data,
+  f_dep = 0.5 * mvtnorm::dmvnorm(cbind(x_1, x_2), m = c(-2, -2)) + 
+    0.5 * mvtnorm::dmvnorm(cbind(x_1, x_2), m = c(2, 2)),
+  f_ind = (0.5 * dnorm(x_1, m = -2) + 0.5 * dnorm(x_1, m = 2)) * 
+    (0.5 * dnorm(x_2, m = -2) + 0.5 * dnorm(x_2, m = 2))
+) 
+delta_grid <- diff(grid)[1]
+data_x1 <- group_by(data, x_1) |> 
+  summarize(f_ind = sum(f_ind * delta_grid), f_dep = sum(f_dep* delta_grid))
+data_x2 <- group_by(data, x_2) |> 
+  summarize(f_ind = sum(f_ind* delta_grid), f_dep = sum(f_dep* delta_grid))
+
+p <- ggplot(data, aes(x = x_1, y= x_2)) + xlab(expression(X[1])) + ylab(expression(X[2])) + 
+  scale_fill_viridis(expression(f(x[1], x[2])), limits= range(data$f_ind, data$f_dep)) + theme(legend.position = "bottom")
+p_x1 <- ggplot(data_x1, aes(x = x_1)) + xlab(expression(X[1])) + ylab(expression(f[X1](x[1]))) + 
+  scale_y_continuous(breaks = scales::breaks_extended(n = 3))
+p_x2 <- ggplot(data_x2, aes(x = x_2)) + xlab(expression(X[2])) + ylab(expression(f[X2](x[2]))) + 
+  scale_y_continuous(breaks = scales::breaks_extended(n = 3)) + coord_flip()
+
+p_dep <- p + geom_raster(aes(fill = f_dep)) + geom_contour(aes(z = f_dep), colour = rgb(1, 1, 1, .1), bins = 20)
+p_x1_dep <- p_x1 + geom_line(aes(y = f_dep))
+p_x2_dep <- p_x2 + geom_line(aes(y = f_dep))
+
+p_ind <- p + geom_raster(aes(fill = f_ind)) + geom_contour(aes(z = f_ind), colour = rgb(1, 1, 1, .1), bins = 20)
+p_x1_ind <- p_x1 + geom_line(aes(y = f_ind))
+p_x2_ind <- p_x2 + geom_line(aes(y = f_ind))
+```
+
+```{r, sto-marginal-joint-1, echo = FALSE}
+p_x1_dep + plot_spacer() + p_dep + p_x2_dep +
+  plot_layout(
+    ncol = 2, 
+    nrow = 2, 
+    widths = c(4, 1),
+    heights = c(1, 4)
+  )  + 
+  plot_annotation(title = "Abhängige Zufallsvariablen ", 
+                  caption = expression(f(x[1], x[2]) != f[X1](x[1])*f[X2](x[2])),
+                  theme = theme(plot.caption = element_text(size = rel(2.5))))
+```
+
+### Beispiel: Randverteilung & Gemeinsame Verteilung
+
+```{r, sto-marginal-joint-2, echo = FALSE}
+p_x1_ind + plot_spacer() + p_ind + p_x2_ind +
+  plot_layout(
+    ncol = 2, 
+    nrow = 2, 
+    widths = c(4, 1),
+    heights = c(1, 4)
+  )  + 
+  plot_annotation(title = "Unabhängige Zufallsvariablen ", 
+                  caption = expression(f(x[1], x[2]) == f[X1](x[1])*f[X2](x[2])),
+                  theme = theme(plot.caption = element_text(size = rel(2.5))))
+```
+
+### Beispiel: Bernoulli-Kette 
+
+Sind $X_1, X_2, ..., X_n$ jeweils Bernoulli-verteilt mit Parameter $\pi$ und unabhängig, so
+heißt $\symbf{X}=(X_1, X_2, ..., X_n)$ **Bernoulli-Kette**.\
+  \
+Beispiel:  
+  \
+  
+$n = 3$, $\pi = \frac{1}{6}$; wegen der Unabhängigkeit gilt dann z.B. 
+\begin{align*}
+P(\symbf{X} = (1, 0, 0)) &= P(X_1 = 1, X_2 = 0, X_3 = 0) \\
+                         &= P(X_1 = 1) \cdot P(X_2 = 0) \cdot P(X_3 = 0)  \\
+                         &= \frac{1}{6} \left(\frac{5}{6}\right)^2 = \frac{25}{216}
+\end{align*}

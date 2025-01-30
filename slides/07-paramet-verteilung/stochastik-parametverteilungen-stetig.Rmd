@@ -1,0 +1,416 @@
+
+<!-- ```{r def-parametverteilung, echo = FALSE} -->
+<!-- source("setup.R") -->
+<!-- make_dist_data <- function(name, grid, params) { -->
+<!--   dens <- get(paste0("d",name), mode = "function") -->
+<!--   cdf <- get(paste0("p",name), mode = "function") -->
+<!--   data <- purrr::map2(params, seq_along(params), ~ { -->
+<!--     tibble( -->
+<!--       name = name, -->
+<!--       x = grid,  -->
+<!--       `f(x)` = do.call(dens, append(.x, list(x = grid))), -->
+<!--       `F(x)` = do.call(cdf, append(.x, list(q = grid))), -->
+<!--       param = as.character(.y), -->
+<!--       param_value = list(.x)) -->
+<!--   }) |> bind_rows() -->
+<!--   data -->
+<!-- } -->
+<!-- make_dist_plot <- function(data, discrete) { -->
+<!--   clr_scale <- colorspace::scale_color_discrete_qualitative("Dark 3") -->
+
+<!--   dgeom <- if (discrete) geom_point else geom_line -->
+<!--   dens <-  ggplot(data) + dgeom(aes(x = x, y = `f(x)`, col = param)) + -->
+<!--     theme(legend.position = "none") + clr_scale -->
+
+<!--   pgeom <- if (discrete) geom_step else geom_line -->
+<!--   cdf   <-  ggplot(data) + pgeom(aes(x = x, y = `F(x)`, col = param)) + -->
+<!--     theme(legend.position = "none") + clr_scale + ylim(c(0, 1)) -->
+
+<!--   if (discrete) { -->
+<!--     dens <- dens +  -->
+<!--       geom_segment(aes(x = x, xend = x, y = 0, yend =`f(x)`, col = param), alpha = .5, lwd = .2) +  -->
+<!--       scale_x_continuous() -->
+<!--     cdf <- cdf + geom_point(aes(x = x, y = `F(x)`, col = param), size = .5) -->
+<!--   } -->
+<!--   list(dens =  dens, cdf =  cdf) -->
+<!-- } -->
+
+<!-- distplot <- function(name, grid, params, discrete = TRUE) { -->
+<!--   data <- make_dist_data(name, grid, params) -->
+<!--   make_dist_plot(data, discrete) -->
+<!-- } -->
+<!-- if (FALSE) { -->
+<!--   p <- distplot("norm", seq(-3, 3, l = 105),  -->
+<!--                 params = list(list(m = 0, sd = 1), list(m=1, sd = 2)), FALSE) -->
+
+<!--   p <- distplot("geom", 0:30,  -->
+<!--                 params = list(list(prob = 0.1), list(prob = .8), list(prob = .4)), TRUE) -->
+<!--   p[[1]] + p[[2]] -->
+<!-- } -->
+<!-- ``` -->
+
+
+## Stetige parametrische Verteilungen
+
+### Wichtige stetige Verteilungen 
+
+Im Folgenden werden wir nun wichtige stetige parametrische Verteilungen kennenlernen.
+Diese hängen wie parametrische diskrete Verteilungen von einem oder mehreren **Parametern** ab. 
+
+Zur Charakterisierung geben wir meist die **Dichtefunktion** und den **Träger** an.
+
+
+### Stetige Gleichverteilung
+
+Die **stetige Gleichverteilung** hat 
+
+- Parameter $a \in \mathbb{R}$ und $b \in \mathbb{R}$ ($a < b$)
+- Dichtefunktion $$f(x) = \begin{cases} \frac{1}{b-a} & x \in [a, b] \\ 0 & \text{sonst} \end{cases}$$
+- Träger $T = [a,b]$.
+\  
+
+Notation: $$X \sim \mathcal{U}[a, b]$$
+\  
+
+Funktionen in R: `[dprq]unif()`
+
+### Exponentialverteilung 
+
+Eine stetige Zufallsvariable $X$ 
+
+- mit *nichtnegativem* Träger $T = \mathbb{R}^+_0$ 
+- und Dichtefunktion 
+$$
+f(x) = \begin{cases} 
+\lambda \exp (-\lambda x) & x \geq 0 \\
+0			 & \text{sonst}
+\end{cases}
+$$
+- mit Parameter $\lambda \in \mathbb{R}^+$
+
+heißt *exponentialverteilt.* Die Verteilungsfunktion ist 
+$$
+F(x) =  \begin{cases} 
+1 - \exp (-\lambda x)	&  x \geq 0 \\
+0			&  x < 0
+ \end{cases} 
+$$
+Notation: $$X \sim \mathcal{E}(\lambda)$$\
+
+in R: `[dpqr]exp(rate = `$\lambda$`, ...)`
+
+Wenn die *Wartezeit auf bzw. zwischen Ereignissen* $\mathcal{E}(\lambda)$-verteilt ist, dann ist die *Anzahl* der Ereignisse in einem Zeitintervall der Länge 1 $\mathcal{P}(\lambda)$-verteilt.
+
+### Visualisierung Exponentialverteilung 
+
+```{r, vis-dist-exp, echo=FALSE, warning = FALSE, message = FALSE}
+p_exp <- distplot("exp", seq(0, 10, l = 150), 
+                    params = list(list(rate = 0.2), list(rate = 1), list(rate = 4)), FALSE)
+p_exp[[1]] + p_exp[[2]] + 
+  plot_annotation(title = "Exponential Verteilung") +
+  colorspace::scale_color_discrete_qualitative("Dark 3", labels = expression(lambda == 0.2, lambda == 1, lambda == 4)) + 
+  theme(legend.position = "bottom", legend.title = element_blank())
+```
+
+### Gammaverteilung 
+
+Die **Gammaverteilung** ist eine Verallgemeinerung der Exponentialverteilung mit:
+
+- Parameter $\alpha \in \mathbb{R}^+$ und $\beta \in \mathbb{R}^+$
+- Dichtefunktion 
+$$
+f(x) = \begin{cases}
+\frac{\beta^\alpha}{\Gamma (\alpha)} x^{\alpha - 1} \exp (-\beta x) &  x > 0  \\
+0 & \text{sonst}
+\end{cases}
+$$
+- nichtnegativem Träger ${\cal T} = \mathbb{R}^+$
+\  
+
+$\Gamma(\alpha)$ bezeichnet die **Gammafunktion**  $\Gamma(\alpha) = \int_0^\infty x^{\alpha - 1} \exp(-x)\,dx,$
+wobei $\Gamma(x+1)=x!\,$ für $x=0,1,2,...$ gilt.
+
+Notation: $X \sim \mathcal{G}(\alpha, \beta)$
+
+in R: `[dpqr]gamma(shape =` $\alpha$`, rate =` $\beta$`, ...)`
+
+### Visualisierung Gammaverteilung
+
+```{r, vis-dist-gamma-1, echo=FALSE, warning = FALSE, message = FALSE}
+p_gamma1 <- distplot("gamma", seq(0, 10, l = 150), 
+                    params = list(list(shape = 2, rate = 1), list(shape = 2, rate = 2), list(shape = 2, rate = 5)), FALSE)
+clr_scale_gamma1 <- colorspace::scale_color_discrete_qualitative("Dark 3", labels = expression(alpha == 2 ~","~ beta == 1, 
+                                                                             alpha == 2 ~","~ beta == 2,
+                                                                             alpha == 2 ~","~ beta == 5))
+(p_gamma1[[1]] + clr_scale_gamma1 +
+    p_gamma1[[2]] + clr_scale_gamma1 +
+  plot_annotation(title = "Gamma Verteilung") +
+  plot_layout(guides = "collect")) & 
+    theme(legend.position = "bottom", legend.title = element_blank()) 
+```
+
+### Visualisierung Gammaverteilung
+
+```{r, vis-dist-gamma-2, echo=FALSE, warning = FALSE, message = FALSE}
+p_gamma2 <- distplot("gamma", seq(0, 10, l = 150), 
+                    params = list(list(shape = .5, rate = 0.1), list(shape = .5, rate = 0.2), list(shape = .5, rate = 0.5)), FALSE)
+clr_scale_gamma2 <- colorspace::scale_color_discrete_qualitative("Dark 3", labels = expression(alpha == 0.5 ~","~ beta == 0.1, 
+                                                                             alpha == 0.5 ~","~ beta == 0.2,
+                                                                             alpha == 0.5 ~","~ beta == 0.5))
+(p_gamma2[[1]] + clr_scale_gamma2 +
+    p_gamma2[[2]] + clr_scale_gamma2 +
+  plot_annotation(title = "Gamma Verteilung") +
+  plot_layout(guides = "collect")) & 
+    theme(legend.position = "bottom", legend.title = element_blank()) 
+```
+
+### Visualisierung Gammaverteilung
+
+```{r, vis-dist-gamma-3, echo=FALSE, warning = FALSE, message = FALSE}
+p_gamma3 <- distplot("gamma", seq(0, 2.5, l = 250), 
+                    params = list(list(shape = 2, rate = 3), list(shape = 0.8, rate = 3), list(shape = 6, rate = 3), list(shape = 0.8, rate = 0.6)), FALSE)
+clr_scale_gamma3 <- colorspace::scale_color_discrete_qualitative("Dark 3", labels = expression(alpha == 2 ~","~ beta == 3, 
+                                                                             alpha == 0.8 ~","~ beta == 3,
+                                                                             alpha == 6 ~","~ beta == 3,
+                                                                             alpha == 0.8 ~","~ beta == 0.6))
+(p_gamma3[[1]] + clr_scale_gamma3 +
+    p_gamma3[[2]] + clr_scale_gamma3 +
+  plot_annotation(title = "Gamma Verteilung") +
+  plot_layout(guides = "collect")) & 
+    theme(legend.position = "bottom", legend.title = element_blank()) 
+```
+
+
+### Eigenschaften der Gammaverteilung 
+
+- Für $\alpha = 1$ ergibt sich die Exponentialverteilung mit
+Parameter $\lambda = \beta$:  
+  $\mathcal{E}(\lambda) \equiv \mathcal{G}(\alpha = 1, \beta = \lambda)$
+  
+- Für $\alpha = \tfrac{d}{2}$ mit $d \in \mathbb{N}$ und $\beta = \frac{1}{2}$ ergibt sich die sogenannte
+$\chi^2$**-Verteilung** mit $d$ Freiheitsgraden: $X \sim \chi^2(d)$:  
+  $\chi^2(d) \equiv \mathcal{G}(\alpha = \tfrac{d}{2}, \beta = \frac{1}{2})$
+  
+-  in R:  
+    - Gammaverteilung: `[dpqr]gamma(..., shape =`$\alpha$`, rate = `$\beta$`)`
+    - $\chi^2$-Verteilung: `[dpqr]chisq(..., df=`$d$`)` 
+
+<!-- ### Wieso ist bei der Gammaverteilung $\int f(u) du = 1$?  -->
+
+<!-- % -->
+<!-- Verwendung der Substitutionsregel: -->
+<!-- $$ -->
+<!-- \int \tilde f(g(x)) \cdot g'(x) \,dx = \int \tilde f(z)\,dz -->
+<!-- $$ -->
+<!-- mit $g(x) = \beta \cdot x$:%; $g'(x) = \beta$: -->
+<!-- \begin{align*} -->
+<!-- f(x) &= & -->
+<!-- \frac{\beta^\alpha}{\Gamma (\alpha)} x^{\alpha - 1} -->
+<!-- \exp (-\beta x) \\ -->
+<!-- &= & -->
+<!-- \frac{\beta}{\Gamma (\alpha)}{g(x)^{\alpha - 1}} -->
+<!-- \exp (- g(x)) \\ -->
+<!-- &= & -->
+<!-- \frac{1}{\Gamma (\alpha)}{g(x)^{\alpha - 1}} -->
+<!-- \exp (- g(x)) \underbrace{\beta}_{g'(x)} -->
+<!-- \end{align*} -->
+
+
+### Normalverteilung 
+
+Eine Zufallsvariable $X$  
+
+- mit Träger ${\cal T} = \mathbb{R}$ 
+- Dichtefunktion
+$$
+f(x) = \frac{1}{\sqrt{2 \pi \sigma^2}} \exp \left(-\frac{1}{2} \, \frac{(x - \mu)^2}{\sigma^2} \right)
+\quad \mbox{für } x \in \mathbb{R}
+$$
+- mit Parametern $\mu \in \mathbb{R}$ und $\sigma^2 \in \mathbb{R}_+$ 
+
+heißt **normalverteilt**.\   
+
+Für $\mu = 0$ und $\sigma^2 = 1$ nennt man die Zufallsvariable
+**standardnormalverteilt**.\  
+
+Notation:  $$X \sim {\mathcal N}(\mu, \sigma^2)$$\  
+
+In R: `[dpqr]norm(m =` $\mu$`, sd = ` $\sqrt{\sigma^2}$`, ...)` (NB: $\sigma$ nicht $\sigma^2$!)
+
+*("Gaußsche Glockenkurve")*
+
+
+### Visualisierung Normalverteilung 
+
+```{r, vis-dist-norm, echo=FALSE, warning = FALSE, message = FALSE}
+p_norm <- distplot("norm", seq(-7, 7, l = 250), 
+                    params = list(list(m = -1, sd = 0.5), list(m = -1 , sd = 2), list(m = 0, sd = 1), list(m = 1.5, sd = 2)), FALSE)
+clr_scale_norm <- colorspace::scale_color_discrete_qualitative("Dark 3", labels = 
+                                                                  expression(m == -1 ~","~ sigma^2 == 0.25, 
+                                                                             m == -1 ~","~ sigma^2 == 4,
+                                                                             m == 0 ~","~ sigma^2 == 1,
+                                                                             m == 1.5 ~","~ sigma^2 == 4))
+(p_norm[[1]] + clr_scale_norm +
+    p_norm[[2]] + clr_scale_norm +
+  plot_annotation(title = "Normal-Verteilung") +
+  plot_layout(guides = "collect")) & 
+    theme(legend.position = "bottom", legend.title = element_blank()) 
+```
+
+### Mehr zur Normalverteilung 
+
+- Verschieben und Skalieren einer normalverteilten Zufallsvariable erzeugt eine neue normalverteilte Zufallsvariable:
+$$X \sim \mathcal{N}(\mu, \sigma^2) \implies (a + bX) \sim \mathcal{N}(a + b \mu, b^2\sigma^2)$$
+
+- Summen (und Differenzen) normalverteilter Zufallsvariablen sind normalverteilt:  
+$$X_i \sim \mathcal{N}(\mu_i, \sigma_i^2) \implies \sum_i X_i \sim \mathcal{N}(\sum_i \mu_i, \sum_i \sigma_i^2)$$
+
+- Das Integral der Normalverteilungsdichte ist nicht analytisch zugänglich, 
+d.h. $F(x) = \int_{-\infty}^x f(u)\,du$ hat keine geschlossene Form
+(d.h.\ man findet keine Stammfunktion und braucht numerische Integration).  
+Software-Implementation oft über "*error function* `Erf`" 
+
+<!-- ### Wieso ist bei der Normalverteilung $\int f(u) du = 1$?  -->
+
+<!-- Man weiß aus der Analysis, dass für $a > 0$ gilt: -->
+<!-- $$ -->
+<!-- %	\int_{-\infty}^\infty f(x) \,dx = 1 -->
+<!-- %	\quad \mbox{wegen} \quad -->
+<!-- \int_{-\infty}^\infty \exp(- a^2 x^2) \,dx = \frac{\sqrt{\pi}}{a} -->
+<!-- $$ -->
+
+<!-- Ferner kann man leicht zeigen, dass -->
+<!-- $$ -->
+<!-- \int \exp \left(-\frac{1}{2} \frac{(x - \mu)^2}{\sigma^2} \right) dx -->
+<!-- = \int \exp \left(-\frac{x^2}{2\sigma^2} \right) dx -->
+<!-- $$ -->
+<!-- für alle $\mu \in \mathbb{R}$ gilt. -->
+
+### Betaverteilung 
+
+
+Eine Zufallsvariable $X$ 
+
+- mit Träger ${\cal T} = (0,1)$
+- Dichtefunktion 
+$$
+f(x) =\begin{cases}
+\frac{1}{B(\alpha, \beta)} x^{\alpha - 1} (1 - x)^{\beta - 1} &  0 < x < 1  \\
+0 & \mbox{sonst}
+\end{cases}
+$$
+- und Parametern $\alpha \in \mathbb{R}_+$ und $\beta \in \mathbb{R}_+$ 
+
+heißt **betaverteilt**.\  
+
+Notation: $$X \sim \mathcal{Be}(\alpha, \beta)$$
+
+**Betafunktion** $B(\alpha, \beta)$ so definiert, dass Dichtefunktion die Normierungseigenschaft
+$\int\limits_0^1 f(x) \,dx = 1$ besitzt: $B(\alpha, \beta) = \frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha+\beta)} = \int_0^1 x^{\alpha-1} (1-x)^{\beta-1} \,dx.$
+
+In R: `[dpqr]beta(shape1 = ` $\alpha$`, shape2=` $\beta$`, ...)`
+
+
+### Visualisierung Betaverteilung
+
+```{r, vis-dist-beta, echo=FALSE, warning = FALSE, message = FALSE}
+p_beta <- distplot("beta", seq(0, 1, l = 250), 
+                    params = list(list(shape1 = 2, shape2 = 3), list(shape1 = 2, shape2 = .5), list(shape1 = 4, shape2 = 3),  list(shape1 = .7, shape2 = .5)), FALSE)
+clr_scale_beta <- colorspace::scale_color_discrete_qualitative("Dark 3", labels = 
+                                                                  expression(a ==  2~","~ b == 3,
+                                                                             a ==  2~","~ b == 0.5,
+                                                                             a ==  4~","~ b == 3,
+                                                                             a ==  0.7~","~ b == 0.5))
+(p_beta[[1]] + clr_scale_beta +
+    p_beta[[2]] + clr_scale_beta +
+  plot_annotation(title = "Beta-Verteilung") +
+  plot_layout(guides = "collect")) & 
+    theme(legend.position = "bottom", legend.title = element_blank()) 
+```
+
+### Cauchy-Verteilung
+
+Eine Zufallsvariable $X$ 
+
+- mit Träger ${\cal T} = \R$
+- und Dichte- bzw. Verteilungsfunktion
+\begin{align*}
+f(x) &=  \frac{1}{\pi} \cdot \frac{1}{1 + x^2} \\
+F(x) & =  \frac{1}{2} + \frac{\arctan(x)}{\pi}
+\end{align*}
+
+heißt *Cauchy*-verteilt.\  
+
+Notation: $$X \sim \mathcal C$$
+
+Die Cauchy-Verteilung hat "heavy tails", d.h. sehr viel Wahrscheinlichkeitsmasse verteilt sich auf extreme Werte. 
+
+### Vergleich Cauchy-Verteilung / Normalverteilung
+
+```{r, vis-dist-cauchy-norm, echo=FALSE, warning = FALSE, message = FALSE}
+cauchy_norm <- bind_rows(
+  make_dist_data("cauchy", seq(-10, 10, l = 250), 
+                 params = list(list(location = 0, scale = 1))),
+  make_dist_data("norm", seq(-10, 10, l = 250),
+                 params = list(list(m = 0, sd = 1))))
+
+clr_scale <- colorspace::scale_color_discrete_qualitative("Dark 3")
+
+ggplot(cauchy_norm) + 
+  geom_line(aes(x = x, y = `f(x)`, col = name)) +
+  theme(legend.position = "none") + clr_scale +
+ggplot(cauchy_norm) + 
+  geom_line(aes(x = x, y = `F(x)`, col = name)) +
+  theme(legend.position = "none") + clr_scale +
+  labs(caption = "N(0, 1) in grün; Cauchyv. in rot")
+```
+
+### Einige stetige Verteilungen 
+
+\begin{center}
+\begin{tabular}{l|c c c c}
+Name \& Symbol 
+& Parameter
+& Träger
+& $E(X)$
+& $\Var(X)$ \\
+\hline
+\\
+Stetige Gleichverteilung\\
+$ \mathcal{U}(a, b)$
+& $a, b  \in \mathbb R; a \leq b$
+& $[a, b] \subset \mathbb R$
+& $\frac{a + b}{2}$
+& $\frac{(b - a)^2}{12}$\\[1.5em]
+
+Exponentialverteilung\\
+$ \mathcal{E}(\lambda) $
+& $\lambda \in \mathbb R^+$
+& $\mathbb R^+$
+& $\frac{1}{\lambda}$
+& $\frac{1}{\lambda^2}$\\[1.5em]
+
+Gammaverteilung\\
+$\mathcal{G}(\alpha, \beta)$
+& $\alpha, \beta \in \mathbb R^+$
+& $\mathbb R^+$
+& $\frac{\alpha}{\beta}$
+& $\frac{\alpha}{\beta^2}$\\[1.5em]
+
+Normalverteilung\\
+$ \mathcal{N}(\mu, \sigma^2)$
+& $\mu \in \mathbb R; \sigma^2 \in \mathbb R^+$
+& $\mathbb R $
+& $\mu$
+& $\sigma^2$\\[1.5em]
+
+Betaverteilung\\
+$ {\mathcal Be}(\alpha, \beta)$
+& $\alpha, \beta \in \mathbb R^+$
+& $(0, 1)$
+& $\frac{\alpha}{\alpha + \beta}$
+& $\frac{\alpha \cdot \beta}
+{(\alpha+\beta)^2 (\alpha+\beta+1)}$
+\end{tabular}
+\end{center}
+Erwartungswert, Varianz und höhere Momente der Cauchyverteilung sind **nicht definiert**, die entsprechenden Integrale divergieren!

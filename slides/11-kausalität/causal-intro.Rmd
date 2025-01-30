@@ -1,0 +1,62 @@
+## Kausale & assoziative Strukturen
+
+### Kausale & assoziative Strukturen 
+
+\includegraphics[height=.6\textheight]{pics/5-causality-pickup.jpeg}
+
+### Kausale & assoziative Strukturen 
+
+\begin{small}
+$\xymatrix{A \ar[r] & B} \;:$ ``A ist \textit{Ursache} von B''   
+
+$\xymatrix{A \ar@{~}[r] & B} \;:$ ``A und B sind \textit{assoziiert}''
+
+\begin{displaymath}
+    \xymatrix@R-2pc{
+      &                   & Y &  & &\\
+  \text{``Fork''} &  X \ar[dr]\ar[ur] &   &  & &\\
+      &                   & Z &  & &\\
+      &                   &   &  & &\\
+      &                   & Y \ar[dl] & & & Y\ar@{~}[dd]\\
+   \text{``Collider''}    &  X  &  & \xRightarrow{\text{führen alle zu}}  & X \ar@{~}[dr]\ar@{~}[ur] &\\
+      &                   & Z \ar[ul] & & & Z\\
+      &                   &   & & &\\
+      &                   & Y \ar[dl] & & &\\
+   \text{``Pipe''}   &  X \ar[dr]  &   & & &\\
+      &                   & Z  & & &
+}  
+\end{displaymath}
+\end{small}
+
+
+### Kausale & assoziative Strukturen 
+
+\begin{small}
+$\xymatrix{A \ar[r] & B} \;:$ ``A ist \textit{Ursache} von B''  
+
+$\xymatrix{A \ar@{~}[r] & B}\;:$ ``A und B sind \textit{assoziiert} (nicht unabhängig)'' 
+
+\begin{displaymath}
+    \xymatrix@R-2pc{
+      &                   & Y \ar@{<.>}[dd] &  & &\\
+  \text{Still a ``Fork''} &  X \ar[dr]\ar[ur] &   &  & &\\
+      &                   & Z &  & &\\
+      &                   &   &  & &\\
+      &                   & Y \ar[dl]\ar@{<.}[dd]\ar@{.>}[dd] & & & Y\ar@{~}[dd]\\
+   \text{Still a ``Collider''} &  X  &  & \xRightarrow{\text{führen alle zu}}  & X \ar@{~}[dr]\ar@{~}[ur] &\\
+      &                   & Z \ar[ul] & & & Z\\
+      &                   &   & & &\\
+      &                   & Y\ar[dl]\ar@{.>}[dd] & & &\\
+   \text{Still a ``Pipe''}   &  X \ar[dr]  &   & & &\\
+      &                   & Z  & & &
+}  
+\end{displaymath}
+\end{small}
+
+
+### Kausale & assoziative Strukturen 
+
+- sehr unterschiedliche kausale Strukturen ergeben identische assoziative Struktur 
+- große Vorsicht bei (kausaler) Interpretation beobachteter Korrelationen / Assoziationen geboten
+- "Kausalität" hier stochastisch/probabilistisch gemeint, (meistens) nicht deterministisch.
+

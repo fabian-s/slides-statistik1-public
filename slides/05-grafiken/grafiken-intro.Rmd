@@ -1,0 +1,151 @@
+## Grammar of Graphics
+
+### Statistische Grafik
+
+Statistische Grafiken  
+repräsentieren die *Ausprägungen* gewisser *Merkmale* in einem *Datensatz*  
+durch die *ästhetischen* Eigenschaften *geometrischer* Objekte.
+
+Aus dieser Definition können wir eine formale "Grammatik" für grafische
+Darstellungen ableiten.
+
+\footnotesize
+
+(s.a. Wilkinson (2005) *The Grammar of Graphics*,  
+Wickham et al. (2020) [*`ggplot2 `: Elegant Graphics for Data Analysis*](https://ggplot2-book.org/))
+
+### Grammar of Graphics
+
+(Fast) jede sinnvolle Grafik lässt sich als Kombination der folgenden Basis-Elemente beschreiben:
+
+- *Daten*: enthalten die *Beobachtungen* der dargestellten *Merkmale*  
+   (Oft auch: daraus abgeleitete *Statistiken* wie Anteile, Mittelwerte, etc)  
+- *Geometrische Elemente*: z.B. Punkte, Linien, Rechtecke, etc...
+- *Ästhetische Zuordnungen*:  die *Ausprägungen* der in der Grafik dargestellten *Merkmale* werden durch sichtbare Eigenschaften der geometrischen Elemente repräsentiert, z.B. 
+  - Position (vertikal/horizontal)
+  - Farbe
+  - Größe
+  - Form
+
+
+### Grammar of Graphics
+
+Also: *Daten* werden über *ästhetische Eigenschaften* von *geometrischen Elementen* dargestellt.
+
+zusätzlich:  
+
+- *Datentransformationen*/*Statistiken*: Oft werden nicht Rohdaten selbst, sondern daraus abgeleitet Größen (Mittelwerte, Anteile, ....) abgebildet. Komplexere 
+geometrische Elemente basieren oft intern auf Datentransformationen ($\rightarrow$ Balkendiagramme, geglättete Trendlinien, Boxplots, ....).
+- *Skalen* ordnen für ein gegebenes *Merkmal*/*Statistik* und ihrer *ästhetischen Zuordnung* jeder *Ausprägungen* bestimmte Werte zu (z.B. Achsenabschnitte für Position, Farbpaletten für Farbe, etc...) und legen damit auch Legenden (z.B. für Farbskalen) und Achsenbeschriftungen fest.
+- *Koordinatensysteme*:  kartesische / logarithmische / Polarkoordinatensysteme; Kartenprojektionen
+
+### Grammar of Graphics
+
+zusätzlich:
+
+- *Facettierung* definiert anhand welcher Merkmale die Daten in Subgruppen aufgeteilt werden und wie die Darstellungen der verschiedenen Subgruppen arrangiert werden (s.a.: *small multiples* plot, *lattice* plots).
+- *Theme*: umfasst sämtliche Designaspekte wie Fonteigenschaften, Gitterlinien, Hintergrundfarben, Layout von Textelementen und Legenden, ... 
+
+Implementation in R: `ggplot2`  
+Python: `plotnine`
+
+### Beispiele: Geometrien
+
+![](pics/02-geoms1.png)  
+
+![](pics/02-geoms2.png)
+
+.. und viele viele mehr ...
+
+\footnotesize
+Abb: Wickham et al. (2020)
+
+### Beispiele: Ästhetiken
+
+![](pics/02-aesthetics.png)  
+\footnotesize
+Abb: [Wilke (2020)](https://clauswilke.com/dataviz/aesthetic_mapping_files/figure-html/common-aesthetics-1.png)  
+
+### Grammar of Graphics: Beispiele mit Code
+
+[Aden-Buie, 2018](https://pkg.garrickadenbuie.com/gentle-ggplot2/#68)
+
+[Reynolds, 2019](https://evamaerey.github.io/ggplot2_grammar_guide/ggplot2_grammar_guide.html#30)
+
+## Grafiken: Wahrnehmung
+
+### Wahrnehmung von Grafiken
+
+Wahrnehmungspsychologische Experimente zeigen deutliche Unterschiede in der korrekten Interpretation 
+der folgenden Grafiktypen:
+
+![](pics/02-clevelandgill1.png)
+
+\scriptsize
+Abb.: Healy, K. (2018). [Data visualization: a practical introduction](https://socviz.co). Princeton University Press. (übernommen aus [Heer & Bostock](http://vis.stanford.edu/files/2010-MTurk-CHI.pdf))
+
+\vskip 3em
+Cleveland, W.S., Mc3Gill, R. (1984): [Graphical Perception: Theory, Experimentation, and Application to the Development of Graphical Methods.](http://www.math.pku.edu.cn/teachers/xirb/Courses/biostatistics/Biostatistics2016/GraphicalPerception_Jasa1984.pdf) *JASA* 79(387), 531--554.  
+Heer, J., Bostock, M. (2010): [Crowdsourcing graphical perception: using Mechanical Turk to assess visualization design.](http://vis.stanford.edu/files/2010-MTurk-CHI.pdf) *SIGCHI Proceedings*, 203--212.
+
+
+
+### Wahrnehmung von Grafiken
+
+<!-- ![](pics/02-clevelandgill1.png) -->
+
+![](pics/02-clevelandgill2.png)
+
+
+### Wahrnehmung von Grafiken
+
+Hierarchie der korrekten Interpretation:
+
+1. Position (gemeinsame/parallele Skala $>$ verschobene Skalen)   
+1. Abstände & Längen 
+1. Steigung & Winkel 
+3. Flächen
+4. Volumen
+5. Farbton-Farbsättigung-Farbhelligkeit
+
+Da **Position & Abstände** am besten wahrgenommen werden, müssen diese
+verwendet werden um die wichtigsten Merkmale zu codieren.
+
+### *Principles of Graphical Excellence*
+
+- Graphical excellence is the well-designed presentation of interesting data -- a matter of *substance*, of *statistics*  and of *design*.
+- Graphical excellence consists of complex ideas communicated with *clarity, precision and efficiency*.
+- Graphical excellence is that which gives to the viewer the *greatest number of ideas* in the *shortest time* with the *least ink* in the *smallest space*.
+- Graphical excellence is nearly always *multivariate*.
+- And graphical excellence requires telling the *truth about the data*.
+
+\scriptsize 
+
+Tufte, E. (2001): *The Visual Display of Information.*
+Graphic Press 2nd ed.
+
+### Goldene Regeln für Grafikgestaltung
+
+- Verständnis von Grafiken erfordert:   
+   - *Detektion*: Erkennen welche geometrischen Elemente und ästhetische Eigenschaften welche Werte repräsentieren
+   - *Synthese*: Gruppierung & In-Relation-Setzen der entdeckten Inhalte
+   - *Evaluation*: Bewertung der relativen Größen und Bedeutung dieser Inhalte.  
+   Speziell: Unterscheidung, Rangbildung, Abschätzung von Verhältnissen.
+
+- alle drei Phasen unterstützt durch *bewusste Wahl*
+  - geeigneter Ästhetiken & Geometrien (s.o.: Abstände $>$ Farbe, etc.)
+  - geeigneter Achsen, Gitterlinien und Seitenverhältnisse
+  - inhaltlich adäquater Sortierung/Reihenfolge der Ausprägungen qualitativer Merkmale
+  - entsprechender Annotationen & Hervorhebungen
+
+$\implies$ **Kommunikationsabsicht** klarmachen:  
+Welche Informationen will ich primär vermitteln?  Welche zusätzlich?
+Auf welche Vergleiche soll Aufmerksamkeit gelenkt werden? 
+
+$\implies$ **Lesbarkeit** maximieren -- sowohl Genauigkeit als auch Geschwindigkeit/Schwierigkeit sind wichtig.
+
+
+\scriptsize
+Harrell, F.E. (2017), [Principles of Graph Construction](https://hbiostat.org/doc/graphscourse.pdf);  
+Grolemund, G., Wickham, H. (2017) [R for Data Science, Ch. 28](https://r4ds.had.co.nz/graphics-for-communication.html);
+Rauser, J. (2016) [How Humans See Data](https://www.youtube.com/watch?v=fSgEeI2Xpdc)

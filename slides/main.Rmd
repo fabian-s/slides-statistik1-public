@@ -1,0 +1,252 @@
+---
+title: | 
+    | Statistik I 
+subtitle: |
+    | *Deskriptive Statistik & Explorative Datenanalyse*
+author: | 
+    | **LMU München**
+output: 
+  beamer_presentation:
+    latex_engine: xelatex
+    keep_tex: true
+    slide_level: 3
+header-includes:
+  - \input{header.tex}
+fontsize: 10pt
+handout: false
+mathfont: "Fira Math"
+mainfont: "Fira Sans"
+sansfont: "Fira Sans"
+urlcolor: darkbrown
+linkcolor: darkbrown
+---
+<!-- see header.tex for additional font definitions, Fira does not provide all we need -->
+
+
+```{r setup, include=FALSE, cache=FALSE, code = readLines('setup.R')}
+```
+
+```{r 0-orga, child="orga-2024.Rmd"}
+```
+
+### Inhalt
+
+\begin{multicols}{2}
+\footnotesize
+\tableofcontents[subsectionstyle=hide]
+\end{multicols}
+
+# Einführung
+
+```{r 0-bsp, child="00-intro/intro-beispiele.Rmd"}
+```
+
+```{r 0-bsp, child="00-intro/intro-definition.Rmd"}
+```
+
+```{r 0-def, child="00-intro/intro-statistik-ki-ml.Rmd"}
+```
+
+```{r 0-def, child="00-intro/intro-theorie-empirie.Rmd"}
+```
+
+
+# Datenerhebung & Messung
+
+```{r 1-mess, child="01-messung-skala/messung-definition.Rmd"}
+```
+
+```{r 1-guete, child="01-messung-skala/messung-gütekriterien.Rmd", eval = FALSE}
+```
+
+```{r 1-skal, child="01-messung-skala/skalenniveaus.Rmd"}
+```
+
+```{r 1-erhebung, child="01-messung-skala/datenerhebung.Rmd"}
+```
+
+# Wahrscheinlichkeit: Grundlagen & Definitionen
+
+```{r sto-wbegriff, child="02-wrechnung-basics/stochastik-wahrscheinlichkeitsbegriff.Rmd"}
+```
+
+```{r sto-laplace, child="02-wrechnung-basics/stochastik-laplace-wraum.Rmd"}
+```
+
+```{r sto-axiome, child="02-wrechnung-basics/stochastik-kolmogorow-axiome.Rmd"}
+```
+
+```{r sto-bed-wkeit, child="02-wrechnung-basics/stochastik-bedingte-wkeit.Rmd"}
+```
+
+```{r sto-unabh, child="02-wrechnung-basics/stochastik-unabhaengigkeit-ereignisse.Rmd"}
+```
+
+```{r sto-bed-wkeit, child="02-wrechnung-basics/stochastik-bayessatz.Rmd"}
+```
+
+# Zusammenhangsmaße für diskrete Merkmale
+
+```{r kontingenz, child="03-zusammenhang-diskret/kontingenztafeln.Rmd"}
+```
+
+```{r bed-hfk, child="03-zusammenhang-diskret/bedingte-häufigkeit.Rmd"}
+```
+
+```{r odds, child="03-zusammenhang-diskret/odds-oddsratio.Rmd"}
+```
+
+```{r chisq, child="03-zusammenhang-diskret/chisquare.Rmd"}
+```
+
+```{r mosaic, child="03-zusammenhang-diskret/mosaicplot.Rmd"}
+```
+
+
+# Zufallsvariablen, Verteilungen & Häufigkeiten
+
+```{r sto-zv-diskret, child="04-zufallsvariablen-verteilungen/stochastik-zv-diskret.Rmd"}
+```
+
+```{r sto-cdf-diskret, child="04-zufallsvariablen-verteilungen/stochastik-cdf-diskret.Rmd"}
+```
+
+```{r sto-zv-stetig, child="04-zufallsvariablen-verteilungen/stochastik-zv-stetig.Rmd"}
+```
+
+```{r sta-hfk-uni, child="04-zufallsvariablen-verteilungen/häufigkeiten-univariat.Rmd"}
+```
+
+```{r sta-hfk-uni, child="04-zufallsvariablen-verteilungen/ecdf.Rmd"}
+```
+
+
+# Statistische Grafiken
+
+```{r grafik-intro, child="05-grafiken/grafiken-intro.Rmd"}
+```
+
+```{r grafik-infoviz, child="05-grafiken/grafik-vs-infoviz.Rmd"}
+```
+
+```{r grafik-farbe, child="05-grafiken/grafiken-farbskalen.Rmd"}
+```
+
+```{r grafik-typ, child="05-grafiken/grafiken-häufigkeiten.Rmd"}
+```
+
+```{r grafik-dichte, child="05-grafiken/dichteschätzung.Rmd"}
+```
+
+```{r scatter, child="05-grafiken/streudiagramme.Rmd"}
+```
+
+#  Kennwerte & Verteilungseigenschaften
+
+```{r, child="06-kennwerte-momente/lagemaße.Rmd"}
+```
+
+```{r, child="06-kennwerte-momente/stochastik-lagemasse.Rmd"}
+```
+
+```{r, child="06-kennwerte-momente/stochastik-erwartungswert.Rmd"}
+```
+
+```{r, child="06-kennwerte-momente/streuungsmaße.Rmd"}
+```
+
+```{r, child="06-kennwerte-momente/stochastik-varianz.Rmd"}
+```
+
+```{r, child="06-kennwerte-momente/verteilungscharakteristika.Rmd"}
+```
+
+```{r, child="06-kennwerte-momente/konzentration.Rmd"}
+```
+
+# Wichtige parametrische Verteilungen
+
+```{r, child="07-paramet-verteilung/stochastik-parametverteilungen-diskret.Rmd"}
+```
+
+```{r, child="07-paramet-verteilung/stochastik-parametverteilungen-stetig.Rmd"}
+```
+
+```{r, child="07-paramet-verteilung/stochastik-dichtetrafo.Rmd"}
+```
+
+# Zufallsvektoren & multivariate Verteilungen
+
+```{r, child="08-zufallsvektoren/stochastik-zufallsvektoren.Rmd"}
+```
+
+```{r, child="08-zufallsvektoren/stochastik-unabhaengigkeit-zv.Rmd"}
+```
+
+```{r, child="08-zufallsvektoren/stochastik-faltungen.Rmd"}
+```
+
+```{r, child="08-zufallsvektoren/stochastik-bedingte-dichte.Rmd"}
+```
+
+# Schätzung & Grenzwertsätze
+
+```{r, child="09-grenzwertsätze/stochastik-schaetzer.Rmd"}
+```
+
+```{r, child="09-grenzwertsätze/stochastik-ggz-fundamentalsatz.Rmd"}
+```
+
+```{r, child="09-grenzwertsätze/stochastik-zgws.Rmd"}
+```
+
+# Zusammenhangsmaße für metrische Merkmale
+
+```{r, child="10-zusammenhang-metrisch/kovarianz-korrelation.Rmd"}
+```
+
+```{r, child="10-zusammenhang-metrisch/multiplekorrelation.Rmd"}
+```
+
+```{r, child="10-zusammenhang-metrisch/stochastik-kovarianz-korrelation.Rmd"}
+```
+
+```{r, child="10-zusammenhang-metrisch/rang-distanz-korrelation.Rmd"}
+```
+
+```{r, child="10-zusammenhang-metrisch/korrelation-bsp.Rmd"}
+```
+
+```{r, child="10-zusammenhang-metrisch/sensi-spezi-roc.Rmd"}
+```
+
+# Korrelation & Kausalität
+
+```{r 5-causalintro, child="11-kausalität/causal-intro.Rmd"}
+```
+
+```{r 5-confounding, child="11-kausalität/causal-confounding.Rmd"}
+```
+
+```{r 5-simpson, child="11-kausalität/causal-simpsonparadox.Rmd"}
+```
+
+```{r 5-collider, child="11-kausalität/causal-collider.Rmd"}
+```
+
+
+### Colophon
+
+Material teils basierend auf früheren Vorlesungen von Helmut Küchenhoff, Torsten Hothorn und Leonhard Held.  
+Berechnungen mit **`R`**, gerendert mit `pandoc` via `{rmarkdown}` und XƎTeX. 
+Beamer-Theme "Simple" adaptiert von Facundo Muñoz.
+
+
+**`R`**-Pakete:
+
+- Grafiken mit `{ggplot2}`, `{ggrepel}`, `{grid}`, `{gridExtra}`, `{rayshader}`, `{patchwork}`, `{viridisLite}`, `{colorspace}`
+- Datensätze aus `{dslabs}`, `{socviz}` & `{datasaurus}`
+- Daten-Wrangling mit `{dplyr}` & `{tidyr}`
+- Interaktive Quizzes mit `{exams}`
+
+Fonts: Fira Sans, Fira Math, XITS Math

@@ -1,0 +1,72 @@
+## Stetige Zufallsvariablen
+
+### Stetige Zufallsvariable - Definition 1
+
+:::{.block}
+#### Def.: **Stetige Zufallsvariable**  
+Eine Zufallsvariable $X$ ist **stetig**, falls ihr Träger eine *überabzählbare* Teilmenge der reellen Zahlen $\mathbb{R}$ ist.\
+:::
+\  
+
+*Beispiel:*  
+Glücksrad mit stetigem Wertebereich $[0°, 360°)$  
+Von Interesse also die Zufallsvariable, die den *exakten* Winkel angibt, an dem das Glücksrad stehen bleibt.
+
+### Stetige Zufallsvariablen - Definition 2
+
+:::{.block}
+#### Def.: **Stetige Zufallsvariable**  
+Eine Zufallsvariable $X$ heißt *stetig*, wenn es eine Funktion $f(x) \geq 0$ gibt,
+so dass sich die Verteilungsfunktion $F_X(x) := P(X \leq x)$ von $X$ wie
+folgt darstellen lässt:
+$$F_X(x) = \int_{-\infty}^x f_X(u) du$$
+:::
+
+:::{.block}
+#### Def.: **Dichtefunktion einer (stetigen) ZV**  
+
+Diese nicht-negative Funktion $f(x)$ zur Verteilungsfunktion $F(x)$ heißt *Wahrscheinlichkeitsdichte*
+(auch: *Dichte* oder *Dichtefunktion*) von $X$. 
+:::
+\
+
+Beachte: bei *diskreten* Zufallsvariablen gilt $F(x) = \sum_{i: x_i \leq x} f(x_i)$.
+
+### Folgerungen 
+
+- $\int_{-\infty}^{+\infty} f(x)\,dx = 1$  
+\  
+
+- Mit Dichte- bzw. Verteilungsfunktion lassen sich W.keiten für beliebige Teilmengen des 
+Trägers ausrechnen:  
+  $P(X \in [a, b])	=  \int_a^b f(x)\,dx = F(b) - F(a)$  
+\  
+
+- Unintuitive Konsequenz:  
+  für stetige ZV $X$ gilt $P(X = x) = 0 \; \forall \; x \in \mathbb{R}$!  
+  
+  \scriptsize [Video dazu von `3blue1brown`](https://youtu.be/ZA4JkHKZM50)
+
+### Folgerungen
+
+- $\lim\limits_{x \to -\infty} F(x) = 0$ 
+- $\lim\limits_{x \to \infty} F(x) = 1$
+- $F'(x) = f(x)$ überall dort wo $f(x)$ stetig ist.
+
+- $P(a \leq X \leq b) = F(b) - F(a)$
+- $P(X > a) = 1 - F(a)$
+
+### Ausblick
+
+Stringentere Definitionen in späteren Vorlesungen zu W.keitstheorie
+\  
+
+Eine allgemein gültige Definition ohne Fallunterscheidungen zwischen 
+
+- diskreten ZVn, 
+- stetigen ZVn,
+- und ZVn, deren Träger teils stetig und teils diskret ist,
+
+benötigt Maßtheorie mit einem verallgemeinertem Integrationsbegriff.
+
+

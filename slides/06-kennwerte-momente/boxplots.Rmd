@@ -1,0 +1,113 @@
+### Anwendung in Visualisierung: Boxplot
+
+-  Überblicks-Darstellung der Verteilung eines Merkmals
+-  Visualisieren der 5-Punkte-Zusammenfassung:  
+   Minimum, 25-, 50-, 75-Perzentile, Maximum
+
+```{r, 02-boxplot-mietspiegel-simple, echo=FALSE, out.height= '.5\\textheight'}
+ggplot(mietspiegel, aes(x = factor(1), y = nmqm)) + coord_flip() +
+  xlab("") + theme(axis.text.y = element_blank()) + ylab("Nettomiete [EUR/qm]") + 
+  geom_boxplot(coef = 10) + 
+  scale_y_continuous(name = "x")
+```
+
+
+### Boxplot
+
+Einfacher **Boxplot**:
+  
+  - $\tilde x_{0.25}$ = Anfang der Schachtel (Box) (= unteres **Quartil**)
+- $\tilde x_{0.75}$ = Ende der Schachtel (= oberes **Quartil**)
+- $d_Q$ = Länge der Schachtel (= **Inter-Quartile-Range** (IQR) $\tilde x_{0.75} - \tilde x_{0.25}$)
+-  Der **Median** wird durch den Strich in der Box markiert
+-  Zwei Linien (*whiskers*) außerhalb der Box gehen bis
+zu $x_{min}$ und $x_{max}$.
+
+### Boxplot
+
+Modifizierter **Boxplot**:
+  
+- *whiskers* werden nur bis zu $x_{\min}$ bzw. $x_{\max}$ gezogen,
+falls $x_{\min}$ und $x_{\max}$ innerhalb des Bereichs $[z_u,z_o]$ der
+*Zäune* liegen.  
+Üblicherweise: $z_u = \tilde x_{0.25} - 1.5 d_Q$, $z_o = \tilde x_{0.75} + 1.5 d_Q$
+- Ansonsten gehen die Linien nur bis zum kleinsten bzw. größten Wert *innerhalb der Zäune*, die außerhalb liegenden Werte werden individuell als Punkte/Symbole eingezeichnet.
+
+### Boxplot: Beispiel Quadratmetermiete Mietspiegel
+
+```{r, 02-boxplot-mietspiegel, echo=FALSE}
+boxp_nm <- ggplot(mietspiegel, aes(x = factor(1), y = nmqm)) + coord_flip() +
+  xlab("") + theme(axis.text.y = element_blank()) + ylab("Nettomiete [EUR/qm]")
+grid.arrange(
+  boxp_nm + geom_boxplot(coef = 10) +
+    annotate("text", x = 1.4, y = 4, label  = "Einfacher Boxplot:"),
+  boxp_nm + geom_boxplot(outlier.color = rgb(0,0,0,.3)) +
+    annotate("text", x = 1.4, y = 4, label  = "Modifizierter Boxplot:"),
+  nrow = 2)
+```
+
+<!-- ### Boxplot:  SPSS -->
+  
+  <!-- SPSS-Output: -->
+  <!-- \begin{center} -->
+  <!-- \includegraphics[height=.8\textheight]{pics/02-boxplot1} -->
+  <!-- \end{center} -->
+  
+  
+### Gruppierter Boxplot: 
+  
+```{r, 02-grouped-boxplot-mietspiegel, echo=FALSE}
+ggplot(mietspiegel, aes(x = rooms, y = nmqm, group = rooms)) + coord_flip() +
+  xlab("# Zimmer") + ylab("Nettomiete [EUR/qm]") + 
+  geom_boxplot(outlier.color = rgb(0,0,0,.3), varwidth = T) + 
+  scale_x_continuous(breaks = 1:8, minor_breaks = c()) + 
+  labs(caption = "Höhe der Boxplots proportional zur Gruppengröße")
+```
+
+\footnotesize Gruppengrößen darstellbar über Höhe (horizontale Box) bzw. Breite (vertikale B.).
+
+### Boxplot: Vor- und Nachteile
+
+**+**:
+  
+-  kompakt
+-  geeignet für Vergleiche
+- zentraler Bereich der Daten einfach ablesbar
+-  **Ausreißer** sichtbar
+-  **Schiefe** sichtbar
+
+
+**--**:
+  
+  -  gegen Intuition (Viel Farbe -- wenig Daten) da Ausreißer sehr prominent
+-  **Multimodale** Verteilungen nicht sichtbar
+-  (Höhe der Box trägt keine Information)
+
+
+### Einfacher Boxplot: Grammar of Graphics
+
+*verwendete Geometrie:*  
+
+Rechteck mit vertikalem Band und horizontalen "whiskers".
+
+*zugeordnete Ästhetiken:*  
+
+- horizontale Ausdehnung des Rechtecks: von $\tilde x_{0.25}$ bis $\tilde x_{0.75}$
+- horizontale Position des vertikalen Bands: $\tilde x_{med}$
+- horizontale Positionen der Enden der "whiskers": $x_{\min}$ bzw. $x_{\max}$
+- optional: vertikale Ausdehnung der Box: Anzahl der eingeflossenen Beobachtungen
+
+$\implies$ zugeordnete Ästhetiken in statistischen Grafiken repäsentieren oft zusammenfassende Kennwerte der zugrundeliegenden Daten!  
+
+
+\scriptsize (hier nur für \textit{einfachen, horizontale} Boxplots, für vertikale Boxplots analog mit vertikaler Position.)
+
+
+### Boxplot: Grammar of Graphics
+
+- Für *modifizierten* Boxplot zusätzlich:
+  - Geometrie "Punkte/Symbole" für Beobachtungen außerhalb der Zäune 
+  - entsprechend modifizierte Position der "whiskers"
+
+- Alternative "Boxplots" auf Basis anderer Lage- und Streuungsmaße oder anderer Definition der "Zäune" auch zulässig und oft sinnvoll.
+

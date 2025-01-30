@@ -1,0 +1,156 @@
+## Laplace-Wahrscheinlichkeiten 
+
+### Laplace-Prinzip
+
+*Prinzip von Laplace* (Pierre-Simon de Laplace [1749-1827]): 
+
+*"Wenn nichts dagegen spricht, gehen wir davon aus, dass **alle Elementarereignisse gleichwahrscheinlich** sind."*
+
+### Laplace-Wahrscheinlichkeiten 
+
+Betrachte die endliche Grundgesamtheit von Elementarereignissen
+
+$$\Omega = \{\omega_1, \omega_2, ..., \omega_n \}$$
+
+:::{.block}
+#### Def.: Laplace-Wahrscheinlichkeit  
+Für ein **Ereignis** $A \subseteq \Omega$ ist die *Laplace-Wahrscheinlichkeit* 
+$$P(A) := \frac{|A|}{|\Omega|} = \frac{|A|}{n},$$
+wobei $|A|$ die Anzahl der Elemente in $A$ ist.
+:::
+
+$\implies$ **"Anzahl *günstiger* und gleichwahrscheinlicher Fälle durch Anzahl *möglicher* und gleichwahrscheinlicher Fälle"**
+
+\note[item]{Notation sauber einführen: Mengenmächtigkeit, ... }
+\note[item]{verbalisieren: Anzahl günstiger Fälle durch Anzahl möglicher Fälle. Nur gültig wenn alle  Fälle gleichwahrscheinlich sind.}
+
+### Folgerungen und Erweiterungen 
+
+- Jedes Elementarereignis $\omega_i$,  $i = 1, \ldots, n$, eines Laplace-W.keitsraums hat Wahrscheinlichkeit $P(\{\omega_i\})=\frac{1}{n}$.
+- Die Wahrscheinlichkeit von $\Omega$ ist $P(\Omega)=1$.
+\  
+
+- Die entsprechende **Abbildung** $P:{\mathcal P}(\Omega) \to [0,1]$ nennt man auch **diskrete Gleichverteilung** auf $\Omega$
+  - ${\mathcal P}(\Omega)$ ist die **Potenzmenge** (Menge aller Teilmengen) von $\Omega$ -- nicht zu verwechseln mit $P(\Omega)$!  
+\  
+
+- Die **Vereinigung** $U = A \cup B$ zweier Ereignisse $A, B$ definiert das Ereignis  
+  "A *oder* B *oder beide* treten ein"
+- Der **Schnitt** $I = A \cap B$ zweier Ereignisse $A, B$ definiert das Ereignis  
+  "A *und* B treten beide ein"
+  
+### Beispiel: Augensumme von zwei Würfeln 
+
+\begin{align*}
+\Omega &= \{(1, 1), (1, 2), ..., (6, 5), (6,6)\} \\
+|\Omega| &= 6^2 =  36
+\end{align*}
+
+Sei $A_k$ das Ereignis "Augensumme ist $k$".
+Dann gilt:
+
+$$P(A_k) = \frac{6 - |k - 7|}{36}\quad\mbox{für}\quad k=2,...,12$$
+
+\note[item]{Frage: warum nicht $\Omega =  \{(1, 1), (1, 2), ..., (1, 6), (2, 2), ..., (5, 5), (5, 6), (6,6)$ aus geordneten Tupeln mit $|\Omega| = \sum^6_{i=1} i = 15$ ? keine gleichw. Elementareignisse.}
+\note[item]{
+P(A_1)  & = & 0            \\
+P(A_2)  & = & \frac{1}{36} \\
+P(A_3)  & = & \frac{2}{36} \\
+\vdots  &   & \vdots       \\
+P(A_7)  & = & \frac{6}{36} \\
+P(A_8)  & = & \frac{5}{36} \\
+\vdots  &   & \vdots       \\
+P(A_{12}) & = & \frac{1}{36}
+}
+
+### Interlude: Kombinatorik auf 1er Folie
+
+*Wie viele unterschiedliche Möglichkeiten, $k$ Elemente aus $n$ auszuwählen?*
+
+\begin{itemize}
+\item \textbf{Auswahl mit Zurücklegen, Ergebnis mit Reihenfolgen:} $$n^k$$  
+   $\to$ \emph{je $n$ Möglichkeiten für alle $k$ Ziehungen}
+\item \textbf{Auswahl ohne Zurücklegen, Ergebnis mit Reihenfolge:}
+        $$\frac{n!}{(n-k)!} = n \cdot (n-1) \cdot \ldots \cdot (n-k+1)$$
+   $\to$ \emph{zuerst $n$ Möglichkeiten, dann je $n-1$, dann je $n-2$, \dots}
+\item \textbf{Auswahl ohne Zurücklegen, Ergebnis ohne Reihenfolge:}
+     $$\binom{n}{k} := \frac{n!}{(n-k)!k!} = \frac{\frac{n!}{(n-k)!}}{k!}$$
+   $\to$ \emph{Anzahl unterschiedlicher Auswahlen / Anzahl möglicher Reihenfolgen}
+\item (\textbf{mit Zurücklegen, ohne Reihenfolge:} $\binom{n+k-1}{k}$) 
+\end{itemize}
+
+
+### Beispiel: Skatspiel 
+
+Beim Skatspiel werden $32$ verschiedene Karten, darunter $4$ Buben, an $3$ Personen verteilt.  
+Jede:r erhält $10$ Karten.  
+$2$ Karten kommen in den Skat.  
+Wie groß sind die Laplace-Wahrscheinlichkeiten der Ereignisse:  
+
+- $A_1  \simeq$ "Person 1 erhält alle Buben"
+- $A_2 \simeq$ "Alle 3 erhalten genau einen Buben"
+
+\note[item]{
+Anzahl günstige durch Anzahl mögliche: \\
+günstig für A1: 4 aus 4 Buben, 6 aus den restlichen 28:\\
+möglich: 10 aus 32\\
+$P(A_1) = \frac{\binom{4}{4}\binom{28}{6}}{\binom{32}{10}}  =\frac{376 740}{64 512 240} = \approx 0.0058$\\
+günstig für A2: Spieler 1 1 aus 4 Buben, 9 aus den restlichen 28, Spieler 2 1 aus 3 und 9 aus 19,
+Spieler 3 1 aus 2 und 9 aus 10\\
+möglich für A2: Spieler 1 10 aus 32, Spieler 2 10 aus 22, Spieler 3 10 aus 12.\\
+$P(A_2) = \frac{\binom{4}{1}\binom{28}{9}\cdot \binom{3}{1}\binom{19}{9} \cdot \binom{2}{1}\binom{10}{9}}{\binom{32}{10}\cdot\binom{22}{10}\cdot\binom{12}{10}}  = \approx 0.056$\\
+}
+
+### Laplace-Wahrscheinlichkeiten sind zu speziell: 
+
+\vspace{-1cm}
+Gegenbeispiele:
+
+- Unfairer Würfel
+- Seltene Ereignisse, z.B. hard disk failures, Mutationen, ...
+
+$\leadsto$ Elementarereignisse hier nicht gleichwahrscheinlich!
+
+- Außerdem: Was wenn $|\Omega|$ unendlich?
+
+### Beispiel für unendliche Grundgesamtheiten 
+
+Man interessiere sich für die Anzahl der Würfe einer fairen Münze bis zum ersten Mal Zahl eintritt.
+$$\Omega = \{\omega_1, \omega_2,\omega_3, \omega_4, ...  \} = \{1, 2, 3, 4, ...\} = \mathbb{N} \implies |\Omega| = \infty!$$
+
+Allgemein mit $\omega_i := {i}$:
+\begin{align*}
+P(\{\omega_i\}) &= \frac{1}{2^i} \qquad i = 1, 2, 3, ...\\
+\sum\limits_{i=1}^{\infty} P(\{\omega_i\}) & =  \sum\limits_{i=1}^{\infty}  \frac{1}{2^i}   \; = \;  1 \qquad
+\end{align*}
+\footnotesize Beweis s. [geom. Reihe](https://de.wikipedia.org/wiki/Geometrische_Reihe)
+\note[item]{  $P(\{\omega_i\}) = \frac{1}{2^i}$ erklären !}
+
+
+<!-- ##  Diskrete Wahrscheinlichkeitsräume  -->
+
+<!-- ### Definition: Diskreter Wahrscheinlichkeitsraum  -->
+
+<!-- \note[item]{Motivation: brauchen also zusätzlich zur Definition der Elementarereignisse noch Information wie wahrscheinlich welches E.ereignis ist $\leadsto$ W.raum} -->
+
+<!-- :::{.block} -->
+<!-- #### Def.: **Diskreter Wahrscheinlichkeitsraum**   -->
+<!-- Ein *diskreter W.keitsraum* ist ein Paar $(\Omega, P)$ wobei -->
+
+<!-- - $\Omega$ eine abzählbare stochastische Grundgesamtheit ist und -->
+<!-- - $P$ ein *diskretes Wahrscheinlichkeitsmaß*, welches jeder Teilmenge $A \subseteq \Omega$ eine Wahrscheinlichkeit $P(A)$ zuordnet. -->
+<!-- ::: -->
+
+<!-- ### Definition: Diskretes Wahrscheinlichkeitsmaß -->
+
+<!-- :::{.block} -->
+<!-- #### Def.: **Diskretes Wahrscheinlichkeitsmaß**   -->
+<!-- Für das *diskrete Wahrscheinlichkeitsmaß* $P: \mathcal{P}(\Omega) \to [0, 1]$ einer abzählbaren stochastischen Grundgesamtheit $\Omega$ muss gelten: -->
+<!-- \begin{align*} -->
+<!-- P(A) &= \sum_{\omega \in A} P(\{\omega\}) \;\forall\; A \subseteq \Omega \\ -->
+<!-- 0 \leq P(\{\omega\}) &\leq 1	\;\forall\; \omega \in \Omega \\ -->
+<!-- \sum_{\omega \in \Omega} P(\{\omega\}) &= 1 \\ -->
+<!-- \end{align*} -->
+<!-- ::: -->
+
+

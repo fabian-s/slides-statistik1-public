@@ -1,0 +1,214 @@
+## Kerndichteschätzung
+
+### Dichtefunktion I
+
+**Histogramm:**
+
+- Relative Häufigkeit in einer Histogramm-Klasse $=$ Fläche der Histogramm-Säule $=$ Fläche "unter der Kurve"
+- Aber: Histogramm ist stückweise konstante Funktion
+- Sehr problematisch: Abhängigkeit von Wahl der Klassengrenzen 
+```{r, 2-problem-hist, echo = FALSE, fig.height=3.2, fig.width=6, out.width="0.6\\textwidth"}
+par(mar = c(2, 4, 1, 0.1), mfrow = c(1,2))
+col = c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#CC79A7")
+
+x = c(0.25, 1.75, 2.95, 3.25, 4.5)
+hist(x, main = "Histogram", freq = FALSE, ylim = c(0, 0.4), xlim = c(-0.5, 5.5),
+     breaks = 0:5)
+points(x = x, y = rep(0, length(x)), pch = 21, bg = col)
+
+x = c(0.25, 1.75, 3.05, 3.25, 4.5)
+hist(x, main = "Histogram", freq = FALSE, ylim = c(0, 0.4), xlim = c(-0.5, 5.5),
+     breaks = 0:5)
+points(x = x, y = rep(0, length(x)), pch = 21, bg = col)
+```
+- $\implies$ Ersetze Histogramm durch glatte Funktion $f$
+
+### Dichtefunktion II
+
+
+Wiederholung: Für eine **Dichte**(-funktion) (*density*) gilt:
+
+- $f(x) \geq 0  \;\forall\,x$ und 
+- $\int\limits_{-\infty}^{\infty} f(x)dx = 1.$
+  
+Die Fläche unter der Dichte über beliebige Intervalle soll in etwa den relativen 
+Häufigkeiten in diesen Intervallen entsprechen, d.h.
+\begin{equation*}
+    \int\limits_a^b f(x)dx \approx \frac{1}{n} \left| \left\{x_i : a<x_i\leq b\right\}\right|
+\end{equation*}
+
+$|\{\ldots\}|$: *Mächtigkeit* der Menge, also Anzahl der Elemente der Menge
+
+### Beispiele Histogramm und Dichte
+
+```{r, 2-density-hist-1, echo=FALSE}
+set.seed(11212)
+data_kde <- data.frame(x = rnorm(1e3))
+densplot <- ggplot(data_kde, aes(x=x)) + geom_density(col="blue") 
+densplot + geom_histogram(aes(y = after_stat(density)), bins=20, fill=NA, col="black")
+```
+
+### Beispiele Histogramm und Dichte
+
+```{r, 2-density-hist-2, echo=FALSE}
+densplot + geom_histogram(aes(y = ..density..), bins=50, fill=NA, col="black")
+```
+
+### Beispiele Histogramm und Dichte
+
+```{r, 2-density-hist-3, echo=FALSE}
+densplot + geom_histogram(aes(y = ..density..), bins=100, fill=NA, col="black")
+```
+
+### Berechnung von Dichte-Kurven
+
+\begin{align*} 
+\hat f(x) &= \frac{\frac{1}{n} \left|\{x_i : x_i \in [x-h,x+h)\}\right|}{2h}\\ 
+\intertext{$\implies$ Gleitendes Histogramm}
+          &= \frac{1}{n} \sum_{i=1}^n \frac{1}{h} k \left(\frac{x - x_i}{h}\right)\\
+\intertext{mit ``Rechteck''-\textbf{Kernfunktion}}
+k(u) &= \begin{cases}
+  \frac{1}{2} \text{ für} -1 \leq u < 1 \\
+            0 \text{ sonst} \end{cases}
+\end{align*}
+
+### Kerndichteschätzer
+
+$k(u)$ sei **Kernfunktion**, d.h.
+$k(u) \geq 0  \;\forall\, u$ und $\int\limits_{-\infty}^{\infty} k(u) du =1$  
+
+Dann ist der **Kerndichteschätzer** (auch: KDE - *kernel density estimator*)
+\begin{equation*}
+    \hat f (x) = \frac{1}{nh} \sum_{i=1}^n k\left(\frac{x-x_i}{h}\right)
+\end{equation*}
+
+<!-- 
+s.a. kerndichte-1.gif von http://varianceexplained.org/files/bandwidth.html
+Kernel_density_estimation.gif von http://qingkaikong.blogspot.com/2018/05/kernel-density-estimation-animation.html
+-->
+
+*Beispiele für Kernfunktionen:* \vspace{0.8em}
+
+\begin{tabular}{ll}
+Gauß-Kern & $k(u) = \frac{1}{\sqrt{2\pi}} \exp\left(-\frac{1}{2}u^2\right)$\\
+Epanechnikov-Kern & $k(u) =  \max\left(0, \frac{3}{4}(1-u^2)\right)$\\
+Dreieck-Kern & $k(u) = \max\left(0, 1 - |u|\right)$
+\end{tabular}
+
+### Kerndichteschätzer
+
+```{r, 2-kernelexamples, echo = FALSE, fig.height=3.2, fig.width=6, out.width="0.6\\textwidth"}
+par(mar = c(4,4,1,0.1))
+kernels = eval(formals(density.default)$kernel)
+kernels = kernels[c(1,2,3,4)]
+kernel_colors <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442")
+## show the kernels in the S parametrization
+plot(density(0, from = -1.7, to = 1.7, width = 2, kernel = "gaussian"),
+     type = "l", ylim = c(0, 1), xlim = c(-1.5, 1.5), xlab = "u", ylab = "k(u)",
+     main = "Beispiele: Kernfunktionen", col = kernel_colors[1])
+points(0,0, pch = 19)
+abline(v = 0, lty = 2, col = "gray")
+for (i in 2:length(kernels))
+  lines(density(0, width = 2, kernel =  kernels[i]), col = kernel_colors[i])
+legend("topleft", legend = kernels, col = kernel_colors, lty = 1, bty = "n")
+```
+
+### Kerndichteschätzer
+
+- Histogramme berücksichtigen nicht ob Beobachtungen zentral oder am Rand der Klasse liegen, zählen nur die *Anzahl der Beobachtungen* innerhalb der Klassengrenzen
+- Kerndichteschätzungen berücksichtigen die *Entfernung der benachbarten Punkte*, mit abnehmender Gewichtung über die Distanz:
+
+```{r, 2-kdehist1, echo = FALSE, fig.height=4, fig.width=9, out.width="\\textwidth"}
+par(mar = c(2, 4, 1, 0.1), mfrow = c(1,2))
+x = c(0.25, 1.75, 2.95, 3.25, 4.5)
+#col = c("#332288", "#44AA99", "#88CCEE", "#DDCC77", "#AA4499")
+col = c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#CC79A7")
+hist(x, main = "Histogram", freq = FALSE, ylim = c(0, 0.4), xlim = c(-2, 6),
+     breaks = 0:5)
+points(x = x, y = rep(0, length(x)), pch = 21, bg = col)
+
+
+
+kde = function(x, perc = 1, kernel = "gaussian", main = NULL, col = rep("red", length(x)), ...) {
+  dens = density(x, kernel = kernel)
+  dens = density(x, bw = dens$bw*perc, kernel = kernel)
+  if (is.null(main))
+    main = paste0("Bandwidth = ", round(dens$bw, 3))
+  plot(dens, xlab = "", main = main, ...)
+  kernels = vector("list", length = length(x))
+  for (i in seq_along(x)) {
+    d = density(x[i], bw = dens$bw, kernel = kernel)
+    d$y = d$y/length(x)
+    kernels[[i]] = d
+    lines(x = rep(x[i], 2), y = range(d$y), lty = 3, col = col[i])
+    lines(d, col = col[i], lty = 1, lwd = 1)
+  }
+  points(x = x, y = rep(0, length(x)), pch = 21, bg = col)
+  invisible(list(density = dens, kernels = kernels))
+}
+k = kde(x, main = "Kerndichteschätzung mit Gauss-Kern", col = col, ylim = c(0, 0.4))
+y.dens = k$density$y[which(k$density$x <= 0.26 & k$density$x >= 0.24)]
+y1 = k$kernels[[1]]$y[which(k$kernels[[1]]$x <= 0.255 & k$kernels[[1]]$x >= 0.2475)]
+y2 = k$kernels[[2]]$y[which(k$kernels[[2]]$x <= 0.255 & k$kernels[[2]]$x >= 0.2475)]
+lines(x = c(x[1], x[1]) + 0.03, y = c(y1, y1 + y2), col = col[2], lwd = 2, lty = 1)
+lines(x = c(x[1], x[1]) + 0.03, y = c(0, y2), col = col[2], lwd = 2, lty = 1)
+```
+
+### Kerndichteschätzer
+
+- Histogramme berücksichtigen nicht ob Beobachtungen zentral oder am Rand der Klasse liegen, zählen nur die *Anzahl der Beobachtungen* innerhalb der Klassengrenzen
+- Kerndichteschätzungen berücksichtigen die *Entfernung der benachbarten Punkte*, mit abnehmender Gewichtung über die Distanz:
+
+```{r, 2-kdehist2, echo = FALSE, fig.height=4, fig.width=9, out.width="\\textwidth"}
+par(mar = c(2, 4, 1, 0.1), mfrow = c(1,2))
+x = c(0.25, 1.75, 3.05, 3.25, 4.5)
+#col = c("#332288", "#44AA99", "#88CCEE", "#DDCC77", "#AA4499")
+col = c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#CC79A7")
+hist(x, main = "Histogram", freq = FALSE, ylim = c(0, 0.4), xlim = c(-2, 6),
+     breaks = 0:5)
+points(x = x, y = rep(0, length(x)), pch = 21, bg = col)
+
+k = kde(x, main = "Kerndichteschätzung mit Gauss-Kern", col = col, ylim = c(0, 0.4))
+```
+
+$\implies$ KDE
+
+### Kerndichteschätzer: Bandbreite
+
+
+```{r, 2-kde-bw1, echo = FALSE, fig.height=4, fig.width=9, out.width="\\textwidth"}
+par(mar = c(2, 4, 1, 0.1), mfrow = c(2, 3))
+kde(x, perc = 0.6, col = col, ylim = c(0, 0.4), xlim = c(-3, 7))
+kde(x, perc = 1,  col = col, ylim = c(0, 0.4), xlim = c(-3, 7))
+kde(x, perc = 1.4,  col = col, ylim = c(0, 0.4), xlim = c(-3, 7))
+
+kde(x, perc = 0.6, kernel = "triangular",  col = col, ylim = c(0, 0.4), xlim = c(-3, 7))
+kde(x, perc = 1, kernel = "triangular",  col = col, ylim = c(0, 0.4), xlim = c(-3, 7))
+kde(x, perc = 1.4, kernel = "triangular",  col = col, ylim = c(0, 0.4), xlim = c(-3, 7))
+```
+Obere Reihe: Gauss-Kern, untere Reihe: Dreiecks-Kern
+
+
+### Kern-Dichteschätzer
+
+```{r, 2-kde-bw2, echo=FALSE, out.height = ".7\\textheight"}
+ggplot(data_kde, aes(x = x)) +  
+  geom_rug(alpha = .05) +
+  geom_density(col = "blue", lwd = 1) +
+  geom_density(col = "orange", bw = .05, lwd = 1) +
+  geom_density(col = "purple", bw = 2, lwd = 1) 
+```
+
+Kerndichteschätzer mit "optimaler" Bandbreite $h$ (blau), zu kleiner (orange) und zu 
+großer (lila) Bandbreite $h$.
+
+### Bemerkungen zur Dichteschätzung
+
+- Abhängigkeit von der Bandbreite $h$ $\rightarrow$ Verfahren zur Bestimmung von $h$ aus den Daten
+- Abhängigkeit von der Wahl des Kerns eher unbedeutend
+- Kerndichteschätzungen sind insbesondere bei größeren Datenmengen und (quasi-)stetigen Merkmalen Histogrammen vorzuziehen.
+- Kerndichteschätzungen sind immer Histogrammen mit unterschiedlichen Klassenbreiten vorzuziehen.
+
+\vspace{4em}
+\scriptsize
+[Animation 1](http://varianceexplained.org/files/bandwidth.html), [Animation 2](http://qingkaikong.blogspot.com/2018/05/kernel-density-estimation-animation.html) 

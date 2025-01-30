@@ -1,0 +1,80 @@
+## Varianz einer Zufallsvariable
+
+### Varianz
+
+::: {.block}
+#### Def.: **Varianz einer ZV**  
+Die *Varianz* $\Var(X)$ einer ZV $X$ ist definiert als:
+\begin{align*}
+\Var(X) &:= E\left[(X -E(X))^2\right] \\
+        &\phantom{:}= \begin{cases} 
+             \sum_{x \in T_X} (x - E(X))^2 f_X(x) & X \text{ diskret} \\
+              \int_{-\infty}^\infty (x - E(X))^2 f_X(x) \,dx & X \text{ stetig}
+            \end{cases}
+\end{align*}
+:::
+
+$\implies$ "erwartete quadratische Abweichung vom Erwartungswert"
+
+*Beachte:* 
+
+- Varianz nicht immer endlich! ($\Var(X) = \infty \iff$ "Varianz existiert nicht.")
+- Existiert der Erwartungswert nicht, so existiert auch die Varianz nicht.
+
+### Eigenschaften der Varianz
+
+-	Zur einfacheren Berechnung kann man häufig den **Verschiebungssatz** verwenden:
+$$\Var(X) = E(X^2) -(E(X))^2$$
+\note{
+\begin{align*}
+\Var(X) & =  E\left[(X - E X)^2\right]\\
+& = & E\left[X^2 - 2XE (X) + (E X)^2\right]\\
+& = & E X^2 - E(2XE X) + E((E X)^2)\\
+& = & E X^2 - 2E XE (X) + (E X)^2 = E X^2 - (E X)^2
+\end{align*}
+}
+- $\Var(aX + b) = a^2 \Var(X) \;\forall\, a,b\in \mathbb{R}$
+- für unabhängige Zufallsvariablen $X, Y$ gilt: $\Var(X + Y) = \Var(X) + \Var(Y)$
+
+### Ungleichung von Tschebyscheff 
+
+:::{.block}
+#### Tschebyscheff-Ungleichung
+Sei $X$ eine beliebige ZV. Dann gilt:
+$$
+P(|X - E(X)| \geq c) \leq \frac{\Var(X)}{c^2}
+$$
+:::
+
+Beispiel: 
+
+Für $\Var(X)=1$ und beliebiges $E(X)$ gilt also
+\begin{align*}
+P(|X - E(X)| \geq 1) &\leq  1 \\
+P(|X - E(X)| \geq 2) &\leq  \frac{1}{4} \\
+P(|X - E(X)| \geq 3) &\leq  \frac{1}{9}
+\end{align*}
+
+### Standardabweichung 
+
+::: {.block}
+#### Def.: **Standardabweichung** einer ZV  
+Die *Standardabweichung* $\sigma(X)$ einer ZV $X$ ist die positive Wurzel ihrer Varianz:
+$$
+\sigma(X) = + \sqrt{\Var(X)}
+$$
+:::
+
+Es gilt:  
+$\sigma(aX + b) = |a| \cdot \sigma(X)$
+\  
+\  
+
+Die *erwartete absolute Abweichung* $E(|X - E(X)|)$ wäre zwar das intuitivere Streuungsmaß, 
+ist aber mathematisch deutlich schwieriger zu handhaben.
+
+\note{
+Als Streuungsparameter sind Varianzen noch nicht auf der richtigen Skala, denn sie
+geben ja die mittlere *quadratische* Abweichung wieder! Daher
+definiert man die **Standardabweichung**
+}

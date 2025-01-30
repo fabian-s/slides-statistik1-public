@@ -1,0 +1,328 @@
+## Bedingte Verteilungen und Dichten
+
+### Bedingte Verteilungen von diskreten ZVn 
+
+##### Def: Bedingte Verteilungs- & Dichtefunktion diskreter ZV
+
+Die *bedingte Verteilungsfunktion* $F_{X|Y}(x|y)$ und die  
+*bedingte Wahrscheinlichkeits- oder Dichtefunktion* $f_{X|Y}(x|y)$ einer
+diskreten ZV $X$ gegeben $Y = y$, sind definiert für alle $y$ mit $P(Y = y) > 0$:
+\begin{align*}
+F_{X|Y}(x|y)  & =  P(X \leq x|Y = y) \; = \;
+\frac{P(X \leq x, Y = y)}{P(Y = y)}\\
+f_{X|Y}(x|y) & =  P(X = x|Y = y) = \frac{P(X = x, Y = y)}{P(Y = y)}\\
+& =  \frac{f_{X,Y}(x,y)}{f_Y(y)}
+\end{align*}
+
+
+### Folgerungen 
+Es gilt immer:
+\begin{align*}
+f_{X,Y}(x,y) & =  f_{X|Y}(x|y) \cdot f_Y(y)\\
+& =  f_{Y|X}(y|x) \cdot f_X(x)
+\end{align*}
+Daraus folgt:  
+$X$ und $Y$ sind genau dann unabhängig wenn
+\begin{align*}
+f_{X|Y}(x|y) & =  f_X(x) \\
+\mbox{ oder }\quad
+f_{Y|X}(y|x) & =  f_Y(y)
+\end{align*}
+für alle $x$ und $y$ gilt.
+
+### Beispiel
+
+Betrachte zwei unabhängige ZV $X\sim\mathcal P(\lambda_1)$ und $Y \sim \mathcal P(\lambda_2)$.
+Sei $Z=X+Y$. Dann gilt
+$$
+X|Z = z \sim {\mathcal B}\left(z, \pi=\tfrac{\lambda_1}{\lambda_1+\lambda_2}\right) 
+$$
+
+*Beweis:*
+
+\begin{align*}
+P(X=x|Z=z) &= \frac{P(X=x \cap Y = z-x)}{P(Z=z)} \\
+&= \frac{ \frac{\lambda_1^x}{x!}\exp(-\lambda_1)  \frac{\lambda_2^{z-x}}{(z-x)!}\exp(-\lambda_2)}{  \frac{(\lambda_1+\lambda_2)^z}{z!}\exp(-(\lambda_1+\lambda_2)) } \\
+&= \frac{z!}{x!(z-x)!}  \frac{\lambda_1^x \lambda_2^{z-x}}{(\lambda_1 + \lambda_2)^{z}} = \binom{z}{x} \left(\frac{\lambda_1}{\lambda_1+\lambda_2}\right)^x
+{\underbrace{\left(\frac{\lambda_2}{\lambda_1+\lambda_2}\right)}_{= \left(1-\tfrac{\lambda_1}{\lambda_1+\lambda_2}\right)}}^{z-x}
+\end{align*}
+
+
+### Bedingte Verteilungen von stetigen ZVn 
+
+
+Betrachte die Zufallsvariablen $X$ und $Y$ mit gemeinsamer Dichte
+$f_{X,Y}(x,y)$. Wir interessieren uns für die bedingte Verteilung von 
+$X$ gegeben $Y = y$.
+
+"Problem": 
+
+Es gilt $P(Y = y) = 0$ für alle $y$. Daher ist
+$$
+P(X \leq x | Y = y) \; = \; \frac{P(X \leq x \quad \land
+\quad Y = y)}{P(Y = y)}
+$$
+nicht definiert.
+
+
+
+### Bedingte Verteilungen von stetige ZVn 
+
+"Lösung:" 
+
+Betrachte W.keit bedingt auf sehr kleine Intervalle mit Länge $\delta$ -- es gilt näherungsweise: 
+$P(y-\tfrac{\delta}{2} \leq Y \leq y + \tfrac{\delta}{2}) = \int^{y + \delta/2}_{y-\delta/2} f_Y(u)du \approx f_Y(y) \, \delta$
+\begin{small}
+\begin{align*}
+\implies P(X \leq x| Y = y) \approx P(X \leq x| y-\tfrac{\delta}{2} \leq Y \leq y + \tfrac{\delta}{2}) &=  \frac{P\left((X \leq x) \land (y-\tfrac{\delta}{2} \leq Y \leq y + \tfrac{\delta}{2})\right)}
+{P(y-\tfrac{\delta}{2} \leq Y \leq y + \tfrac{\delta}{2})} \\
+  &=  \frac{\int_{-\infty}^x \left(\int^{y + \delta/2}_{y-\delta/2} f_{X,Y}(u, v) dv\right) du}{\int^{y + \delta/2}_{y-\delta/2} f_Y(u)du}\\
+& \approx  \frac{\int_{-\infty}^x f_{X,Y}(u,y) \, \delta \, du} {f_Y(y) \, \delta} \\
+& =  \int_{-\infty}^x \,\underbrace{\frac{f_{X,Y}(u,y)}{f_Y(y)}}_{\substack{\text{Dichte von $X | Y = y$}\\}} \,du
+\end{align*}
+\end{small}
+\note{$\int^{y+\delta}_y f(u) du \approx f(y) \delta$}
+
+### Bedingte Verteilungen von stetigen ZVn 
+
+#### Def: Bedingte Verteilungs- & Dichtefunktion stetiger ZV
+Die *bedingte Verteilungsfunktion* einer stetigen ZV $X$, gegeben $Y = y$ ist
+$$
+F_{X|Y}(x|y) := \int_{-\infty}^x \tfrac{f_{X,Y}(u,y)}{f_Y(y)} \, du
+$$
+für alle $y$ mit $f_Y(y) > 0$.  
+Die *bedingte Dichte* von $X$ gegeben $Y = y$ ist somit
+$$
+f_{X|Y}(x|y) := \frac{f_{X,Y}(x,y)}{f_Y(y)}
+$$
+
+<!--
+### Beispiel: Standardnormalverteilung 
+
+Angenommen $X$ und $Y$ sind bivariat standardnormalverteilt. Dann ist
+\begin{align*}
+f_{X|Y}(x|y) & = & \frac{ \frac{1}{2 \pi} \,\frac{1}{\sqrt{1 - \rho ^2}} \,
+\exp \left( -\frac{1}{2} \, \frac{1}{(1 - \rho^2)}
+(x^2 - 2 \rho x y + y^2)
+\right)}
+{\frac{1}{\sqrt{2 \pi}} \, \exp
+\left( -\frac{1}{2} y^2
+\right)} \
+& = & \frac{1}{\sqrt{2 \pi}} \, \frac{1}{\sqrt{1 - \rho^2}}
+\, \exp \left( - \frac{1}{2} \,
+\frac{(x - \rho y)^2}{(1 - \rho^2)} \right)
+\end{align*}
+also $X|Y = y \sim N(\rho \cdot y, 1 - \rho^2)$\
+
+Analog erhält man $Y|X = x \sim N(\rho \cdot x, 1 - \rho^2)$
+-->
+### Beispiel: Gemeinsame, bedingte und Rand-Dichten
+<!--Meier S. 98  -->
+Sei $(X, Y) \in [0, 1] \times [0, 1]$ ein stetiger Zufallsvektor mit gemeinsamer Dichte 
+$$f_{X,Y}(x, y) = (1 + x - y - 2 x^2 + 4x^2 y)\cdot  I(x \in [0, 1]) \cdot I(y \in [0, 1]):$$
+
+```{r, fig.height = 4, echo = FALSE}
+# source("setup.R")
+grid <- seq(0, 1, l = 100)
+grid2 <- seq(0, 1, l = 20)
+fxy <- function(x,y) 1 + x - y - 2*x^2 + 4*x^2*y
+d <- expand_grid(x = grid, y = grid) |> mutate(f = fxy(x, y)) 
+
+ggplot(d, aes(x= x, y=y)) + scale_fill_viridis_c("f(x,y)") +
+  coord_equal() + geom_raster(aes(fill = f)) + geom_contour(aes(z = f), colour = rgb(1, 1, 1, .2), bins = 40) + 
+  ~ {par(mar = rep(.8, 4), oma =rep(0.1, 4)); persp(x = grid2, y= grid2, z = outer(grid2, grid2, FUN = fxy), cex.axis = .8,
+       ticktype= "detailed", xlab = "x", ylab = "y", zlab = "f(x,y)", 
+       border = rgb(1, 1, 1, .6), col = rgb(0, .4, 1, .8), shade = 0.6, zlim = c(0, 4),
+      theta = 30, phi = 25)}
+```
+
+- Was ist die Rand-Dichte von $X$?
+- Was ist die bedingte Dichte von $Y|X = x$?
+
+### Verteilung einer diskreten und einer stetigen ZV 
+
+
+Das Konzept von gemeinsamer und bedingter Verteilung lässt sich
+problemlos auch auf zwei Zufallsvariablen verallgemeinern, von denen
+eine diskret und eine stetig ist.  
+
+*Bsp:*  
+Bedingt binomialverteilte Zufallsvariable $Y$,
+deren Erfolgswahrscheinlichkeit $\pi$ selbst eine Zufallsvariable $X$ ist:
+
+\begin{align*}
+\text{Sei } X &\sim {\mathcal Be}(\alpha, \beta)\\
+\text{und } Y|X &\sim {\mathcal B}(n, \pi = X)
+\end{align*}
+
+
+
+### Beispiel: Die gemeinsame Verteilung 
+
+
+Die gemeinsame Verteilung von $X$ und $Y$ ist
+\begin{align*}
+f(x,y) & =  f(y|x) \cdot f(x)\\
+      & =  {n \choose y} \, x^y \, (1 - x)^{n - y} \cdot \frac{1}{B(\alpha, \beta)} \, x^{\alpha - 1} \, (1 - x)^{\beta - 1}\\
+      & =  \frac{1}{B(\alpha, \beta)}{n \choose y} \, x^{y + \alpha -1} \, (1 - x)^{n - y + \beta -1}
+\end{align*}
+für $x \in [0,1]$ und $y \in \{0, 1, ..., n \}$.
+
+### Beispiel: Die bedingte Verteilung von $X|Y=y$ 
+
+Für die bedingte Dichte $f(x|y)$ folgt:
+$$
+f(x|y) \; = \; \frac{f(x,y)}{f(y)} \; \stackrel{(*)}{\propto} \;
+x^{y + \alpha - 1} (1 - x)^{n - y + \beta -1}
+$$
+also: $X|Y=y \sim {\mathcal Be}(\alpha + y, \beta + n -y)$  
+
+Bei $(*)$ haben wir ausgenützt, dass der Nenner $f(y)$ in
+$$
+f(x|y) = \frac{f(x,y)}{f(y)}
+$$
+nicht von $x$ abhängt, also für $Y = y$ konstant ist.
+<!-- %Wegen der Form -->
+<!-- %	der Betaverteilung muss also -->
+<!-- %	$$ -->
+<!-- %		f(x|y) = \frac{1}{B(y + \alpha, n - y + \beta)} \, -->
+<!-- %		x^{y + \alpha -1} \, (1 - x)^{n - y + \beta -1} -->
+<!-- %	$$ -->
+<!-- %	sein.\ -->
+
+\note{vorher Dichte der Beta-Verteilung anschreiben}
+
+
+### Beispiel: Die Randverteilung von $Y$ 
+
+
+Damit folgt für $f(y) = {f(x,y)}/{f(x|y)}$:
+\begin{align*}
+f(y) & =  {n \choose y} \, \frac{B(y + \alpha, n - y + \beta)}{B(\alpha, \beta)}\\
+& =   \underbrace{\frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha) \, \Gamma(\beta) \, \Gamma(\alpha + \beta +n)}}_{\mbox{hängt nicht von y ab}} \,
+{n \choose y} \, \Gamma(\alpha + y) \, \Gamma(\beta + n - y)
+\end{align*}
+für $y = 0, ..., n$.  
+
+Diese Verteilung heißt "**Beta-Binomialverteilung**" mit 
+Parameter $n \in \mathbb N$, $\alpha, \beta \in \mathbb R^+$: $$Y \sim {\mathcal B}{\mathcal B}(n, \alpha, \beta)$$
+
+Inhaltlich: Verteilung der Anzahl Erfolge in $n$ Versuchen bei unabhängigen Bernoulliexperimenten mit variierender Erfolgswahrscheinlichkeit (genauer: Beta-verteilter Erfolgsw.keit).
+<!-- %; sie hat wegen -->
+<!-- %	$$ -->
+<!-- %		B(\alpha, \beta) = \frac{\Gamma(\alpha) \, \Gamma(\beta)}{\Gamma -->
+<!-- %				(\alpha + \beta)} -->
+<!-- %	$$ -->
+<!-- %	die Dichtefunktion -->
+<!-- %	$$ -->
+<!-- %		f(y) = \underbrace{\frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha) -->
+<!-- %			\, \Gamma(\beta) \, \Gamma(\alpha + -->
+<!-- %			\beta +n)}}_{\mbox{hängt nicht von y ab}} \, -->
+<!-- %			{n \choose y} \, \Gamma(\alpha + y) \, -->
+<!-- %				\Gamma(\beta + n - y) \mbox{.} -->
+<!-- %	$$ -->
+<!-- % -->
+<!-- %	Für $\alpha = \beta = 1$ ergibt sich interessanterweise die diskrete -->
+<!-- %	Gleichverteilung auf $\{0, ..., n\}$. -->
+<!-- %	\begin{align*} -->
+<!-- %		f(y) & = & \frac{\Gamma(2)}{\Gamma(1) \, \Gamma(1) \, -->
+<!-- %			\Gamma(2 + n)} \, {n \choose y} \, \Gamma(1 + y) \, -->
+<!-- %			\Gamma(1 + n - y) \ -->
+
+<!-- %			  & = & \frac{1}{(n + 1)!} \, \frac{n!}{y! \, (n - y)!} -->
+<!-- %			  	\cdot y! \, (n - y)!\ -->
+
+<!-- %				& = &  \frac{1}{n + 1} -->
+<!-- %	\end{align*} -->
+<!-- %	für $y \in \{0, ..., n\}$ und unter Verwendung von $\Gamma(n) = (n - 1)!$\\ -->
+<!-- %	Randverteilung von $X$ gleichverteilt $\leadsto$ die Randverteilung -->
+<!-- %	von $Y$ ist auch gleichverteilt. -->
+<!-- %\end{beispiel} -->
+
+### Beta-Binomial-Verteilung
+
+```{r vis-betabinom, echo = FALSE, message = FALSE}
+p1 <- distplot("betabinom.ab", seq(0, 30, l = 31),  
+                params = list(list(size = 30, shape1 = .5, shape2 = .5), 
+                              list(size = 30, shape1 = 5, shape2 = 5), 
+                              list(size = 30, shape1 = 50, shape2 = 50)))
+p2 <- distplot("binom", seq(0, 30, l = 31), params = list(list(size = 30, prob = 0.5)))
+
+p2[[1]] + scale_colour_manual(values = "black") + ylim(c(0, .15)) +
+p1[[1]] + ylim(c(0, .15))  + 
+  plot_annotation(title = "B(n = 30, p = 0.5) und Beta-Binomial-Verteilungen", 
+                  caption = expression(alpha~","~beta==0.5 ~"in rot; " ~ alpha~","~beta==5 ~ "in grün; "~ alpha~","~beta==50 ~ "in blau"))
+
+```
+
+
+## Bedingte Momente
+
+### Bedingte Momente
+
+:::.{block}
+#### Def: Bedingte Momente von Zufallsvariablen
+Völlig analoge Definitionen basierend auf den bedingten Dichten -- es gilt:
+\begin{align*}
+E(X|Z = z) &:= \begin{cases} 
+             \sum_{x \in T_X} x P(X = x|Z = z) & X \text{ diskret} \\
+              \int_{-\infty}^\infty x f_{X|Z}(x|Z = z) \,dx & X \text{ stetig}
+            \end{cases}\\
+\Var(X|Z = z) &:= E[(X -E(X|Z = z))^2|Z = z] \\
+        &\phantom{:}= \begin{cases} 
+             \sum_{x \in T_X} (x - E(X|Z = z))^2 P(X = x|Z = z)  & X \text{ diskret} \\
+              \int_{-\infty}^\infty (x - E(X |Z = z))^2 f_{X|Z}(x|Z = z) \,dx & X \text{ stetig}
+            \end{cases}
+\end{align*}
+:::
+
+Beachte:  
+
+- $E(X|Z = z)$ ist ein *konkreter Zahlenwert*, der eine Eigenschaft der bedingten Verteilung von $X$ für eine feste Bedingung $Z = z$ beschreibt.  
+- $E(X|Z)$ ist als Funktion der Werte von $Z$ selbst wieder eine *Zufallsvariable*.
+
+
+### Satz vom iterierten Erwartungswert
+
+:::.{block}
+#### Satz vom iterierten Erwartungswert
+Für beliebige Funktionen $g$ und Zufallsvariablen $X, Z$ gilt:
+$$E(E(g(X)|Z)) = E(g(X))$$
+:::
+
+Es gilt also auch: $E(E(X|Z)) = E(X)$
+
+Beweis (diskreter Fall):
+\begin{align*}
+E_Z(E_{X|Z}(g(X)|Z)) &= \sum_{z \in T_z} E_{X|Z}(g(X)|Z = z) P(Z = z) =  \sum_{z \in T_z} \sum_{x \in T_x} g(x) P(X = x|Z = z) P(Z = z) \\
+              &= \sum_{x \in T_x} \sum_{z \in T_z} g(x) P(X = x, Z = z) = \sum_{x \in T_x} g(x) P(X = x)\\
+              &= E(g(X))
+\end{align*}
+
+
+
+### Satz von der totalen Varianz
+
+:::.{block}
+#### Satz von der totalen Varianz
+
+Für beliebige Zufallsvariablen $X, Z$ gilt:  
+
+Die Varianz von $X$ ist die Summe der erwarteten bedingten Varianz von $X$ gegeben $Z$ und der Varianz der bedingten Erwartung von $X$ gegeben $Z$:
+$$\Var(X) = E(\Var(X|Z)) + \Var(E(X|Z))$$
+:::
+
+- Analog zur *Streuungszerlegung* in geschichteten Stichproben mit schichtweisen Mittelwerten $\bar x_j$ und schichtweisen Varianzen $s_{xj}^2, \; j=1,\dots,r$ --  
+"Gesamtvarianz = Varianz innerhalb der Schichten +  Varianz zwischen den Schichten": $$\widetilde s_x^2 = \frac{1}{n} \sum_{j=1}^r n_j \widetilde s_{xj}^2 + \frac{1}{n} \sum_{j=1}^r n_j(\bar x_j - \bar x)^2$$ 
+
+### Satz von der totalen Varianz - Beweis
+
+Es gilt: $\Var(X|Z) = E(X^2|Z) - (E(X|Z))^2$, also auch
+\begin{align*}
+E_Z\left(\Var_{X|Z}\left(X|Z\right)\right) &= E_Z\left(E_{X|Z}\left(X^2|Z\right)\right) - E_Z\left(\left(E_{X|Z}\left(X|Z\right)\right)^2\right) \\ 
+  &= E_X\left(X^2\right) - E_Z\left(\left(E_{X|Z}\left(X|Z\right)\right)^2\right) \\
+  &=  E_X\left(X^2\right) - E_X\left(X\right)^2 + E_X\left(X\right)^2 - E_Z\left(\left(E_{X|Z}\left(X|Z\right)\right)^2\right) \\
+  &= \Var_X\left(X\right) - \Bigl(E_Z\left(\left(E_{X|Z}\left(X|Z\right)\right)^2\right) - \underbrace{E_X\left(X\right)^2}_{= E_Z\left(E_{X|Z}\left(X|Z\right)\right)^2}\Bigr) \\
+  &= \Var_X\left(X\right) - \Var_Z\left(E_{X|Z}\left(X|Z\right)\right) \\
+\implies \Var\left(X\right) &= E\left(\Var\left(X|Z\right)\right) + \Var\left(E\left(X|Z\right)\right)
+\end{align*}

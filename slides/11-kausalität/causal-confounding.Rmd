@@ -1,0 +1,120 @@
+## (Schein)Assoziation über Drittvariablen
+
+### Confounding
+
+- Gemeinsame Ursache $X$ für interessierende Variablen $Y$, $Z$  
+(Kausale Struktur: *Fork*)
+
+- erzeugt oft marginale Abhängigkeiten zwischen nicht kausal verbundenen $Y$ und $Z$:  
+"Scheinkorrelation", *spurious correlation*
+
+- kann auch evtl. vorhandene (bedingte) Assoziationen zwischen $Y$ und $Z$ gegeben $X$ abschwächen oder sogar umkehren:  
+*Simpson's "Paradox"*
+
+### Confounding: Schein-Assoziationen
+
+Drittvariablen erzeugen oft Assoziationen ohne kausale Entsprechung:
+
+Beispiele:
+\begin{small}
+\begin{displaymath}
+\xymatrix@R-2pc{
+                         &  \text{Storchenpopulation}\ar@{~}[dd]\\
+       {\phantom{XX}}  &  \\
+                         & \text{Geburtenrate}\\
+                         & \\
+                         &  \text{Ertrunkene/Monat}\ar@{~}[dd]\\
+         {\phantom{XX}} &  \\
+                         & \text{Eiscremeabsatz/Monat}\\
+                         & \\
+                         &  \text{Schuhgröße}\ar@{~}[dd]\\
+         {\phantom{XX}} &  \\
+                         & \text{Wortschatz}}
+\end{displaymath}
+\end{small}
+
+### Confounding: Schein-Assoziationen
+
+Drittvariablen erzeugen oft Assoziationen ohne kausale Entsprechung:
+
+Beispiele:
+\begin{small}
+\begin{displaymath}
+\xymatrix@R-2pc{
+                         &  \text{Storchenpopulation}\ar@{~}[dd]\\
+        \text{Modernisierung} \ar[dr]\ar[ur] &  \\
+                         & \text{Geburtenrate}\\
+                         & \\
+                         &  \text{Ertrunkene/Monat}\ar@{~}[dd]\\
+        \text{Sonnentage/Monat} \ar[dr]\ar[ur] &  \\
+                         & \text{Eiscremeabsatz/Monat}\\
+                         &  \\
+                         &  \text{Schuhgröße}\ar@{~}[dd]\\
+        \text{Alter} \ar[dr]\ar[ur] &  \\
+                         & \text{Wortschatz}}
+\end{displaymath}
+\end{small}
+
+###  Confounding: Noten & Nachhilfe
+
+Zusammenhang Abschlußnote - Nachhilfestunden/Woche (fiktiv):
+
+```{r 05-sp-math-prep, echo = FALSE, message = FALSE, warning = FALSE}
+# https://simplystatistics.org/2017/08/08/code-for-my-educational-gifs/
+library(tidyverse)
+library(purrr)
+
+set.seed(1131)
+## simulate data 
+N <- 150
+Sigma <-  purrr::map(rev(list(.4, .6, .8, .8, .9)), 
+                     ~ matrix(c(1,.x,.x, 1), 2, 2)*1.5)
+means <- list(c(11,3), c(9,5), c(7,7), c(5,9), c(3,11))
+dat <- purrr::pmap(list(means, Sigma), 
+                  ~ MASS::mvrnorm(N, mu= .x, Sigma = .y)) %>% 
+  reduce(rbind)
+
+dat <- as_tibble(dat) %>% 
+  mutate_all(function(x) pmin(15, pmax(0.5, round(x, 1)))) %>% 
+  mutate(Z = paste("etwa", as.character(rep(rev(seq_along(means)), each = N)))) 
+
+means <- as_tibble(Reduce(rbind, means)) %>% setNames(c("x","y")) %>%
+  mutate(Z = paste("etwa", as.character(rev(seq_along(means)))))
+  
+corrs <- dat %>% group_by(Z) %>% 
+  summarise(cor = cor(V1,V2), V1 = max(V1), V2 = max(V2)) %>% 
+  mutate(label = paste("r[xy] ==", round(cor, 2)))
+
+p <- dat %>% ggplot(aes(V1,V2)) +  
+  xlab("Nachhilfe/Woche [h]") + ylab("Abi-Schnitt")
+```
+
+```{r 05-sp-math1, echo = FALSE}
+p + geom_point(alpha = .5) + 
+  annotate(x = 10, y = 12, 
+           label = deparse(bquote(r[xy] == .(round(cor(dat$V1, dat$V2), 2)))), 
+           geom = "text", parse = TRUE) 
+```
+
+###  Confounding: Noten & Nachhilfe
+
+Zusammenhang Abschlußnote - Nachhilfestunden/Woche  (fiktiv):
+
+```{r 05-sp-math2, echo = FALSE, fig.height = 5}
+p +  geom_point(aes(col = Z), show.legend = FALSE, alpha = 0.5) +
+ geom_label(data = corrs, aes(x = V1, y = V2, col = Z, label = label), 
+   show.legend = FALSE, parse = TRUE) + scale_color_brewer(palette = "Set1")
+```
+
+###  Confounding: Noten & Nachhilfe
+
+Zusammenhang Abschlußnote - Nachhilfestunden/Woche  (fiktiv):
+
+```{r 05-sp-math3, echo = FALSE, fig.height = 5}
+p +  geom_point(aes(col = Z), alpha = 0.5) +
+ geom_label(data = corrs, aes(x = V1, y = V2, col = Z, label = label), 
+   show.legend = FALSE, parse = TRUE) + 
+   scale_color_brewer("Notenschnitt in \nder 11. Klasse", palette = "Set1")
+```
+
+$\implies$ kausal interpretierbarer Fall von *Simpson's Paradox*

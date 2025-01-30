@@ -1,0 +1,235 @@
+## Dichtetransformationssatz
+
+### Transformationssatz für Dichten: Idee
+
+Was ist die Dichte von $Y = g(X)$?
+
+```{r, dens-trafo-1, echo = FALSE, warning= FALSE, message = FALSE, results='hide'}
+a <- 3; b <- 4; p <- 3
+d <- tibble(x = seq(0, 1, l = 501),
+            fx = 0.5 * dbeta(x, a, b) + 0.5,
+            gx = exp(p*x)/exp(p) ,  
+            fy = fx * 1/(exp(p * x) * p/exp(p)))
+#with(d, plot(x, gx))
+#with(d, plot(x, fx))
+#with(d, plot(gx, fy))
+
+lower <- .25
+upper <- .75
+
+pg <- ggplot(d) + geom_line(aes(x = x, y = gx)) + ylab(expression(y == e^{-3}*e^{3 * x})) + xlab(expression(x)) +
+  geom_segment(data = filter(d, x %in% c(0, lower)), 
+               aes(x = x, xend=x, y = 0, yend = gx), col = "blue") +
+  geom_segment(data = filter(d, x %in% c(0, lower)), 
+               aes(x = 0, xend=x, y = gx, yend = gx), col = "blue") + 
+  geom_rug(data = filter(d, x %in% c(0, lower)), aes(y = gx), col = "blue") +
+  geom_segment(data = filter(d, x %in% c(upper, 1)), 
+               aes(x = x, xend=x, y = 0, yend = gx), col = "red") +
+  geom_segment(data = filter(d, x %in% c(upper, 1)), 
+               aes(x = 0, xend=x, y = gx, yend = gx), col = "red") +
+  geom_rug(data = filter(d, x %in% c(upper, 1)), aes(y = gx), col = "red") +
+  coord_equal() + 
+  labs(title = expression("Transformation:"~g(x) == e^{-3}*e^{3 * x} ))
+
+
+px <- ggplot(d) + geom_line(aes(x = x, y = fx)) + 
+         ylab(expression(f[X](x))) + xlab(expression(x)) + 
+  scale_y_reverse(position = "right") + 
+  theme(axis.title.x = element_blank(), axis.text.x = element_blank()) + 
+  geom_area(data = filter(d, x <= lower), 
+               aes(x = x, y = fx), fill = scales::alpha("blue", .1)) +
+  geom_area(data = filter(d, x >= upper),  
+               aes(x = x, y = fx), fill = scales::alpha("red", .1)) +
+  geom_rug(data = filter(d, x %in% c(0, lower)), 
+           aes(x = x), col = "blue", sides = "t") +
+  geom_rug(data = filter(d, x %in% c(upper, 1)), 
+           aes(x = x), col = "red", sides = "t")
+  labs(caption = expression("Dichte der ursprünglichen ZV X")) + 
+  theme(plot.caption = element_text(hjust=0.5, size=rel(1.2)))
+  
+py <- ggplot(d) + geom_path(aes(y = fy, x = gx)) + ylab(expression(f[Y](y))) + 
+  scale_y_reverse() + xlim(c(0, 1)) +
+  theme(axis.title.y = element_blank(), axis.text.y = element_blank()) +
+  geom_area(data = filter(d, x <= lower), 
+               aes(x = gx, y = fy), fill = scales::alpha("blue", .1)) +
+  geom_area(data = filter(d, x >= upper), 
+               aes(x = gx, y = fy), fill = scales::alpha("red", .1)) +
+  geom_rug(data = filter(d, x %in% c(0, lower)), 
+           aes(x = gx), col = "blue", sides = "t") +
+  geom_rug(data = filter(d, x %in% c(upper, 1)), 
+           aes(x = gx), col = "red", sides = "t") +
+  labs(title = expression("Dichte der transformierten ZV Y = g(X)"))
+layout <- 
+"AB
+ #C"  
+
+py + coord_flip() + pg + px + plot_layout(design = layout)
+```
+
+
+### Der Transformationssatz für Dichten 
+
+:::{.block}
+#### Transformationssatz für Dichten:
+Sei $X$ eine stetige Zufallsvariable mit Dichte $f_X(x)$ und sei $Y$ die transformierte Zufallsvariable $Y = g(X)$ mit Träger $T_Y = g(T_X) = \{y: (\exists x \in T_X: g(x) = y)\}.$  
+Für eine *streng monotone und differenzierbare* Funktion $g$ gilt:
+$$
+f_Y(y) = f_X\left(g^{-1}(y)\right) \left|\left(g^{-1}\right)'(y)\right|
+$$
+:::
+
+$\rightarrow$ berechne Dichten von $Y = \exp(X)$, $Y = \sqrt{X}$, etc....
+
+Formal:  
+Zufallsvariable $Y$ ist die Verkettung der Abbildungen $X:\Omega \to T_X$ und $g: T_X \to T_Y$: $$Y(\omega) = (g \bigcirc X)(\omega) = g(X(\omega))$$
+
+
+
+<!-- \note{${g^{-1}}'(y) >> 1$ -> viel Steigung in $g^-1(y)$ -> kleines Intervall in $T_y$ wird auf großes Intervall in $T_x$ abgebildet -> Dichte von X wird für Y zusammengestaucht.\\ -->
+<!-- ${g^{-1}}'(y) "`{r  1$ -> wenig Steigung in $g^-1(y)$ -> großes Intervall in $T_y$ wird auf kleines Intervall in $T_x$ abgebildet -> Dichte von X wird für Y gedehnt.} -->
+
+### Transformationssatz für Dichten: Idee
+
+Intuition für $f_Y(y) = f_X\left(g^{-1}(y)\right) \left|\left(g^{-1}\right)'(y)\right|$: 
+
+- Es muss gelten: $P\left(X \in [a, b]\right) = P\left(Y = g(X) \in \left[g(a), g(b)\right]\right)$, also $\int^b_a f_X(x) dx = \int^{g(b)}_{g(a)} f_Y(y) dy$.
+- Außerdem gilt $\left(g^{-1}\right)'(y) = \frac{1}{g'(g^{-1}(y))}$, also:
+
+- Flache Steigung von $g(x)$: $|g'(x)| \ll 1 \iff |\left(g^{-1}\right)'(y)| \gg 1$  
+   $\implies$ lange Intervalle in $T_X$ werden zu kurzen Intervallen in $T_Y$  
+   $\implies$ Dichte muss dort größer werden damit die selbe Wahrscheinlichkeit in das kleinere Intervall passt.
+- Steile Steigung von $g(x)$: $|g'(x)| \gg 1 \iff |\left(g^{-1}\right)'(y)| \ll 1$  
+   $\implies$  kurze Intervalle in $T_X$ werden zu langen Intervallen in $T_Y$  
+   $\implies$ Dichte muss dort kleiner werden damit die selbe Wahrscheinlichkeit über ein längeres Intervall verteilt wird.
+
+
+
+### Beispiel: Lineare Transformation
+
+Wie lautet die Dichte von $Y = g(X) = aX + b$ ($a \neq 0$)?   
+
+\begin{align*}
+g^{-1}(y) &= \tfrac{y-b}{a} \\
+\left|\left(g^{-1}\right)'(y)\right| &= \left|\tfrac{1}{a}\right| \\
+\implies f_Y(y) & =  \tfrac{1}{|a|} f_X\left(\tfrac{y-b}{a}\right)
+\end{align*}
+
+<!-- bsp zeichnen  -->
+
+
+
+### Beispiel: Das Quadrat einer Standardnormalverteilung 
+
+Wie lautet die Dichte von $Y = X^2$, falls $X \sim {\mathcal N}(0,1)$?  
+Betrachte zunächst $Z = |X|$, dann hat $Z$ offensichtlich die Dichte
+\begin{align*}
+f(z) &= \frac{2}{\sqrt{2 \pi}} \exp\left(- \, \frac{1}{2}\, z^2\right)
+\quad \mbox{für $z \geq 0$ und $0$ sonst}\\
+\intertext{Nun ist $X^2 = Y = Z^2 = g(Z)$ und $g$ monoton wachsend auf dem Wertebereich
+$\mathbb{R}^+$ von $Z$. Es ergibt sich wegen $y = z^2 \iff z = \sqrt{y}$:}
+\left(g^{-1}\right)'(y) &=  \frac{1}{2} y^{-\frac{1}{2}} \\
+\implies f(y) & =  \frac{1}{\sqrt{2 \pi}}\, y^{-\frac{1}{2}}  \cdot \exp\left(- \, \frac{1}{2}\, y\right) \quad \mbox{für $y \geq 0$ und $0$ sonst}
+\end{align*}
+Das ist die Dichte einer ${\mathcal G}(0.5, 0.5)$,  
+also einer $\chi^2$-Verteilung mit Freiheitsgrad $1$:  
+$$X^2 = Y \sim \chi^2(1)$$
+
+### Beispiel: Erzeugung exponentialverteilter Zufallsvariablen 
+
+
+Betrachte $X \sim \mathcal{U}[0, 1]$ und $Y = -\log(X)$, also $g(x) = -\log(x)$.  
+Die Umkehrfunktion und deren Ableitung lauten:
+\begin{align*}
+g^{-1}(y) &= \exp(-y) \qquad\quad \left(g^{-1}\right)'(y) = -\exp(-y) \\
+\intertext{
+Durch Anwendung des Transformationssatzes für Dichten erhält man}
+f_Y(y) &= 1 \cdot \left| -\exp(-y) \right| = \exp(-y)
+\end{align*}
+Es gilt: $Y \sim {\mathcal E}(\lambda = 1)$!  
+Dies ist also eine einfache Art, exponentialverteilte Zufallsvariablen zu erzeugen,
+und allgemeiner liefert $Y = -\frac{1}{\lambda} \log(X)$ Zufallszahlen
+$Y \sim {\mathcal E}(\lambda)$.
+
+\note{
+Explizit sagen dass immer im Folgenden\\
+$\log := ln := \log_{e}$ , NICHT $\log_{10}$ oder $\log_2$!\\
+Obacht, Taschenrechner!
+}
+
+### Anwendung: Inversions-Methode 
+
+Allgemeiner kann man die **Inversions-Methode** zur
+Erzeugung von Realisationen $x_i$ aus einer beliebigen stetigen
+Verteilung mit Verteilungsfunktion $F_X(x)$ verwenden:
+
+1. Erzeuge Realisationen $u_1, \dots, u_n$ mit $U_i \stackrel{\text{iid}}{\sim}\mathcal{U}[0,1]$.  
+2. Berechne $x_i = F_X^{-1}(u_i), \; i=1, \dots, n$ 
+
+Die $x_i$ sind dann Zufallszahlen aus der gewünschten Verteilung mit CDF $F(x)$.
+
+*Beweis:*  
+
+
+$g() := F_X^{-1}()$, also ist $g^{-1}() = F_X()$.  
+Ausserdem ist $f_U(x) = 1 \;\forall\, x \in [0, 1].$  
+Damit ist die Dichte der $X_i$: 
+$$
+f(x) = \underbrace{f_U(F_X(x))}_{=1} \cdot
+\underbrace{F'_X(x)}_{f_X(x)} = f_X(x)
+$$
+
+### Intuition: Inversions-Methode 
+
+```{r inversion-method-prep, echo = FALSE}
+plot_inversion <- function(g = 50, dist = "exp", title = "") {
+  dfun <- get(paste0("d",dist), mode = "function")
+  pfun <- get(paste0("p",dist), mode = "function")
+  qfun <- get(paste0("q",dist), mode = "function")
+  
+  d <- tibble(
+    u = seq(1e-5, 1-1e-5, l = g),
+    q = qfun(u)
+  )
+  (ggplot(d) + geom_function(aes(x = q), fun = dfun) + 
+      ylab("f(x)") + xlab("x") + 
+      labs(title = title)) /
+    (ggplot(d) + 
+       geom_function(aes(x = q), fun = pfun) + 
+       ylab(expression(F(x)~"&"~U[i])) + xlab(expression(x~"&"~{F^{-1}}(U[i]))) + 
+       geom_rug(aes(x = q), col = "red") +
+       geom_segment(aes(x = min(q), xend = q, y = u, yend = u), col = "red", alpha= .5) +
+       geom_segment(aes(x = q, xend = q, y = 0, yend = u), col = "red", alpha= .5))
+}
+dbimod <- function(x) .5 * dnorm(x, -1, .25) + .5 * dnorm(x, 0.5, .1)
+pbimod <- function(x) .5 * pnorm(x, -1, .25) + .5 * pnorm(x, 0.5, .1)
+qbimod <- Vectorize(function(p) {
+  fx <- function(x) p - pbimod(x)
+  uniroot(fx, interval = c(-15, 15))$root
+})  
+```
+```{r inversion-exp, echo = FALSE} 
+plot_inversion(dist = "exp", title = "Inversionsverfahren für eine Exponentialverteilung") 
+```
+### Intuition: Inversions-Methode 
+```{r inversion-norm, echo = FALSE} 
+plot_inversion(dist = "norm", title = "Inversionsverfahren für eine Normalverteilung") 
+```
+### Intuition: Inversions-Methode 
+```{r inversion-bimod, echo = FALSE} 
+plot_inversion(dist = "bimod", title = "Inversionsverfahren für eine bimodale Dichte")
+```
+
+### Beispiel: Zufallszahlen aus der Cauchy-Verteilung 
+
+Dichte- und Verteilungsfunktion der Cauchy-Verteilung sind:
+\begin{align*}
+f(x)  &=  \frac{1}{\pi} \cdot \frac{1}{1 + x^2} \\
+F(x)  &=  \frac{1}{2} + \frac{\arctan(x)}{\pi}
+\intertext {Die inverse Verteilungsfunktion ist somit:}
+F^{-1}(y) &= \tan \left[ \pi \left(y - \frac{1}{2}\right)\right]
+\end{align*}
+Zufallszahlen aus der Cauchy-Verteilung lassen sich also leicht erzeugen, indem
+man $U_1, ..., U_n$ aus $\sim \mathcal{U}[0,1]$ erzeugt und
+$\tan \left[ \pi \left(U_i -\frac{1}{2}\right)\right]$ 
+berechnet.
+

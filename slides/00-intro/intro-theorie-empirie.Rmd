@@ -1,0 +1,42 @@
+## Theorie-Empirie-Statistik
+
+### Theorie & Empirie
+
+![](pics/reality-math-data-1.png)
+
+### Theorie & Empirie
+
+![](pics/reality-math-data-2.png)
+
+### Theorie & Empirie
+
+- Modellbildung aus mathemat. Formalisierung liefert vereinfachte, grobe Abbildung eines Ausschnitts der Realität in Symbolen. 
+- Daten aus Messung liefern vereinfachte, grobe Abbildung eines Ausschnitts der Realität in Zahlen. 
+
+- Deskriptive Statistik fasst Aspekte der gemessenen Daten in Kennzahlen, Grafiken, Tabellen für Menschen lesbar zusammen.
+- Statistische Inferenz (Schätzungen & Tests) liefert auf Basis von Daten quantitative Aussagen über Modell(komponenten).  
+**Obacht: Modell $\neq$ Realität!**
+
+- Messung selbst bzw. Definition von Messverfahren oft "modellbasiert".
+- Expertise für substantielle Fragestellung *und* Mathe nötig um Realitätsnähe & Tauglichkeit einer mathematischen Formalisierung beurteilen zu können.  
+$\implies$ sinnvolle angewandte Statistik ist **immer interdisziplinär**!
+
+<!-- bsp:  covid-risiko & alter -->
+
+### Theorie & Empirie {.smaller}
+
+**Mathematischer Formalismus**  | | **Empirie / Daten**  
+--|--|-- 
+Wahrscheinlichkeit | $\xrightarrow{\textsf{verursacht(?)}}$ | Beobachtete Häufigkeit  
+Wahrscheinlichkeit | $\xleftarrow{\textsf{repräsentiert(?)}}$ | Beobachtete Häufigkeit  
+| |  
+Zufallsvariable | $\stackrel{\textsf{entspricht}}{\longleftrightarrow}$ | Statistisches Merkmal 
+| |  
+Erwartungswert | $\xleftarrow{\textsf{Schätzung für}}$ | Arithmetisches Mittel  
+| |  
+Stochastische Grundgesamtheit $\Omega$  | $\stackrel{\textsf{?}}{\longleftrightarrow}$ | Statistische Grundgesamtheit  
+| |
+
+usw.
+
+

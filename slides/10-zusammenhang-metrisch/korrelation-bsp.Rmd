@@ -1,0 +1,128 @@
+```{r, 04-corrplots-prep, echo=FALSE}
+library(energy)
+library(ggplot2)
+set.seed(1221)
+x <- seq(-1, 1, l = 101)
+data_corr <- data.frame(x = x,
+  f1 = .8 * x + 2,
+  f2 = -.8 * x + 1.8,
+  f3 = 0.1 * x + 1,
+  f4 = sin(pi * x),
+  f45 = sin(pi * (x+.45)),
+  f5 = cos(3 * pi * x),
+  f6 = x^2 + 2.0,
+  f7 = -x^3 + 1.5,
+  f67 = 3*x^3 - x^2 - 2*x + 1,
+  f8 = ifelse((x > .5 | x < -.5), cos(3 * pi * x), NA),
+  f9 = 0.8 * x + 2.0 + 0.1 * scale(rnorm(length(x))),
+  f10 = 0.8 * x + 2.0 + 0.5 * scale(rnorm(length(x))),
+  f11 = 0.8 * x + 2.0 + scale(rnorm(length(x))),
+  f12 = {
+    tmp <- 0*x
+    tmp[c(1, length(x))] <- c(10, -10)
+    tmp
+  })
+corrplot <- ggplot(data_corr, aes(x = x)) + ylab("y")
+add_stats <- function(target,
+  labelposvar = target, 
+  labelpos_x = NULL,
+  labelpos_y = NULL,
+  col = "black", ...) {
+  x <- data_corr$x
+  y <- data_corr[[target]]
+  complete <- !is.na(x) & !is.na(y)
+  x <- x[complete]; y <- y[complete]
+  if (is.null(labelpos_x)) labelpos_x <- max(x) - .05 * diff(range(x))
+  stats <- c(bp = cor(x, y), sp = cor(x,y, method = "spearman"),
+    k = cor(x, y, method = "kendall"), dist = dcor(x, y))
+  label <- paste(c("r[xy]", "r[xy]^{SP}", "tau[xy]", "dr[xy]"),
+    sprintf("%2.2f", stats), sep = "==")
+  label <- paste("atop(", paste("atop(", label[1], ", ",label[2], ")"),
+                          ", ", paste("atop(", label[3], ", ",label[4], ")"), ")")
+  if (is.null(labelpos_y)) labelpos_y <- 
+    max(data_corr[[labelposvar]][complete]) - .2 * diff(range(data_corr[[labelposvar]][complete]))
+  annotate(geom = "text", x = labelpos_x, parse = TRUE,
+    y = labelpos_y, label = label, col = col, size = theme_get()$text$size * .66, 
+    ...)
+}
+```
+## Beispiele: Zusammenhänge metrischer Variablen
+
+###  Beispiele: Deterministische Zusammenhänge
+
+Lineare (unverrauschte) Funktion, $Y = a + b \cdot X$, 101 equidistante Stützstellen im Intervall [-1,1]
+```{r, 04-corrplots-1, echo=FALSE, fig.height=5}
+corrplot + scale_x_continuous(labels = NULL) + scale_y_continuous(labels = NULL) +
+  geom_point(aes(y = f1), col = "red") + add_stats("f1", col = "red", labelpos_x = 1) + 
+  geom_point(aes(y = f2), col = "blue") +  add_stats("f2", col = "blue", labelpos_x = -1) +
+  geom_point(aes(y = f3), col = "purple") + add_stats("f3", col = "purple", labelpos_x = -0.3, 
+                                                    labelpos_y = 1.25)
+```
+###  Beispiele: Deterministische Zusammenhänge
+
+Periodische (unverrauschte) Funktionen, 101 equidistante Stützstellen im Intervall $[-1, 1]$
+
+```{r, 04-corrplots-4, echo=FALSE, fig.height=5}
+corrplot + scale_x_continuous(labels = NULL) + scale_y_continuous(labels = NULL) +
+  geom_point(aes(y = f4), col = "red") + add_stats("f4", col = "red") +
+  geom_point(aes(y = f5), col = "blue") + 
+    add_stats("f5", col = "blue", labelpos_x = -0.95) +
+  geom_point(aes(y = f45), col = "purple") + 
+    add_stats("f45", col = "purple", labelpos_x = 0, labelpos_y = -.75)
+```
+
+###  Beispiele: Deterministische Zusammenhänge
+
+Quadratische und kubische (unverrauschte) Funktionen, 101 equidistante Stützstellen im Intervall $[-1,1]$
+
+```{r, 04-corrplots-6, echo=FALSE, fig.height=5}
+corrplot + scale_x_continuous(labels = NULL) + scale_y_continuous(labels = NULL) +
+  geom_point(aes(y = f6), col = "blue") + 
+    add_stats("f6", col = "blue", labelpos_x = 0, labelpos_y = 2.6) +
+  geom_point(aes(y = f7), col = "red") + 
+    add_stats("f7", col = "red", labelpos_x = .9, labelpos_y = 2) +
+  geom_point(aes(y = f67), col = "purple") + 
+    add_stats("f67", col = "purple", labelpos_x = -.3, labelpos_y = .8) 
+```
+
+###  Beispiele: Exakte & verrauschte Zusammenhänge
+
+Lineare, verrauschte Funktionen $Y = 2 + 0.8 X + U$ mit zufälligem Fehler $U$.  
+101 equidistante Stützstellen im Intervall [-1,1]
+
+```{r, 04-corrplots-9, echo=FALSE, fig.height=5}
+corrplot + 
+  geom_point(aes(y = f9)) + add_stats("f9", labelpos_y = 0, labelpos_x = 0.5) +
+  labs(title = expression(S[U] == 0.1)) + ylim(limits = range(data_corr$f11)) +
+corrplot + 
+  geom_point(aes(y = f10)) + add_stats("f10", labelpos_y = 0, labelpos_x = 0.5) +
+  labs(title = expression(S[U] == 0.5)) + ylim(limits = range(data_corr$f11)) +
+corrplot + 
+  geom_point(aes(y = f11)) + add_stats("f11", labelpos_y = 0, labelpos_x = 0.5) +
+  labs(title = expression(S[U] == 1))
+```
+
+###  Noch mehr Beispiele
+
+```{r, 04-datasaurus2, echo = FALSE, message=FALSE}
+cortable <- datasaurus_dozen %>% filter(dataset != "slant_down") |> group_by(dataset) %>%
+  summarize(pearson = cor(x, y), spearman = cor(x,y, method = "spearman"),
+    kendall = cor(x, y, method = "kendall"), distance = dcor(x, y),
+    minx = min(x), miny=median(y), maxy= max(y)) %>%
+  gather(key = "method", value = "value", -dataset, -minx, -miny, -maxy) %>%
+  mutate(label = recode(method, pearson = "r[xy]", spearman = "r^{SP}[xy]",
+    kendall = "tau[xy]", distance =  "dr[xy]"),
+    label = paste(label, round(value, 2), sep = "==")) %>%
+  group_by(dataset) %>%
+  summarize(label = paste("atop(", paste("atop(", label[1], ", ",label[2], ")"),
+                          ", ", paste("atop(", label[3], ", ",label[4], ")"), ")"),
+            minx = min(minx), maxy = min(maxy), miny = min(miny))
+ggplot(datasaurus_dozen %>% filter(dataset != "slant_down"), aes(x = x, y = y)) +
+    geom_point(alpha = .3) +
+    theme(legend.position = "none") +
+    facet_wrap( ~ dataset, ncol = 4, labeller = function(...) "") +
+  geom_label(data = cortable, aes(x = 25, y = 50,
+    label = label), alpha = .7, col = "red", label.size = NA, nudge_x = 5, 
+    parse = TRUE, size = 4)
+```
+

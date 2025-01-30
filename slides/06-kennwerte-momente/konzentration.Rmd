@@ -1,0 +1,242 @@
+## Statistische Kennzahlen: Konzentrationsmaße
+
+### Konzentrationsmaße
+Motivation:
+
+Existiert eine Menge, die auf viele Individuen verteilt ist, kann es hilfreich sein zu wissen, wie diese
+Menge verteilt ist.
+
+Beispiele:
+
+- Vermögensverteilung in einem Staat
+- Marktanteile von Firmen in einem Marktsegment
+
+
+### Lorenzkurve
+
+Grundidee:
+
+Es sollen folgende Aussagen grafisch dargestellt werden:
+
+-    Die "Ärmsten"/"Kleinsten" x\% besitzen einen Anteil von y\% der gesamten Merkmalssumme.
+-    Die "Reichsten"/"Größten" x\% besitzen einen Anteil von y\% der gesamten Merkmalssumme.
+
+
+### Lorenzkurve
+
+Definition:
+
+-  Das Merkmal darf nur *positive* Ausprägungen annehmen.
+-  Die Gesamtsumme aller Merkmalswerte ist $\sum_{i=1}^n x_i=\sum_{i=1}^n x_{(i)}$.
+-    Die Lorenzkurve verbindet Punktepaare bestehend aus den *Teilsummen*
+      der *nach Größe geordneten* Beobachtungswerte $0 \leq
+      x_{(1)} \leq \ldots \leq x_{(n)}$ und dem
+      *relativen Anteil* der Individuen, die diese
+      Teilsumme besitzen.
+
+### Lorenzkurve
+
+-    Es wird festgelegt: $u_{0} = 0$ und $v_{0} = 0$.
+-    Die horizontale Achse wird in *gleiche Längen* aufgeteilt, deren Anzahl der der Individuen
+      (Merkmalsausprägungen) entspricht:
+                  \[
+                      u_{j} = \frac{j}{n}, \quad j = 1, ..., n.
+                  \]
+-    Die Werte auf der vertikalen Achse werden wie folgt berechnet:
+                  \[
+                      v_{j} = \frac{\sum_{i=1}^{j} x_{(i)}}{\sum_{i=1}^{n} x_{(i)}}, \quad j = 1, ..., n,
+                  \]
+                  also: Quotienten aus der Teilsumme und der Gesamtsumme.
+-    Die so errechneten Koordinatenpunkte $(u_j,v_j)$ werden in den Graphen eingetragen und mit Linien verbunden.
+
+
+### Lorenzkurve
+
+Beispiel: 5 Bauern teilen sich eine Ackerfläche von 100ha zu je 20ha.
+
+\columnsbegin
+\column{5cm}
+          \renewcommand{\arraystretch}{1.35}
+          \begin{tabular}{cccc}
+              $j$ &  $x_{(j)}$  &   $u_{j}$   &  $v_{j}$ \\
+              \hline
+              0       &   -                   &   0   &   0\\
+              1       &   20              &   $\frac{1}{5}$    &   $\frac{20}{100}$ \\
+              2       &   20              &   $\frac{2}{5}$    &   $\frac{40}{100}$ \\
+              3       &   20              &   $\frac{3}{5}$    &   $\frac{60}{100}$ \\
+              4       &   20              &   $\frac{4}{5}$    &   $\frac{80}{100}$ \\
+              5       &   20              &   $\frac{5}{5}$    &   $\frac{100}{100}$ \\
+          \end{tabular}
+\column{6cm}
+```{r, 2-lorenz-1, echo=FALSE}
+lor1 <- data.frame(u = seq(0,1,l=6), v=seq(0, 1, l=6))
+ggplot(lor1, aes(x=u, y=v)) + geom_line() + geom_point() + 
+  ylab("Kumulativer Anteil an Ackerfläche") + 
+  xlab("Kumulativer Anteil an Grundgesamtheit")
+```
+\columnsend
+
+
+### Lorenzkurve
+
+Beispiel: 4 Bauern besitzen nichts, 1 besitzt alles:
+\columnsbegin
+\column{5cm}
+          \renewcommand{\arraystretch}{1.35}
+          \begin{tabular}{cccc}
+              $j$ &  $x_{(j)}$  &   $u_{j}$   &  $v_{j}$ \\
+              \hline
+              0       &   -                   &   0   &   0\\
+              1       &   0              &   $\frac{1}{5}$    &   $\frac{0}{100}$ \\
+              2       &   0              &   $\frac{2}{5}$    &   $\frac{0}{100}$ \\
+              3       &   0              &   $\frac{3}{5}$    &   $\frac{0}{100}$ \\
+              4       &   0              &   $\frac{4}{5}$    &   $\frac{0}{100}$ \\
+              5       &   100              &   $\frac{5}{5}$    &   $\frac{100}{100}$ \\
+          \end{tabular}
+\column{6cm}
+```{r, 2-lorenz-2, echo=FALSE}
+lor2 <- data.frame(u = seq(0,1,l=6), v=c(rep(0, 5), 1))
+ggplot(lor2, aes(x=u, y=v)) + geom_line() + geom_point() + 
+  ylab("Kumulativer Anteil an Ackerfläche") + 
+  xlab("Kumulativer Anteil an Grundgesamtheit")
+```
+\columnsend
+
+
+### Lorenzkurve
+
+Erscheinungsbild von Lorenzkurven:
+
+-    Die Koordinate $(u_{0}; v_{0})$ ist \textit{immer} $(0; 0)$.
+-    Die Koordinate $(u_{n}; v_{n})$ ist \textit{immer} $(1; 1)$.
+-    Der konstruierte Polygonzug verläuft \textit{immer unterhalb} (im Grenzfall auf) der Winkelhalbierenden.
+-    Der konstruierte Polygonzug ist \textit{(streng) monoton steigend}.
+-    Die Steigung des nächsten Polygonsegments ist entweder \textit{gleich groß} oder \textit{größer} als die Steigung des vorherigen Polygonsegments.
+
+
+### Gini-Koeffizient
+
+\columnsbegin
+\column{5cm}
+Der **Gini-Koeffizient** bzw. das **Lorenz'sche Konzentrationsmaß** ist eine Maßzahl, die das \textit{Ausmaß} der Konzentration beschreibt. Er ist definiert als
+\[
+G = 2 \cdot F,
+\]
+wobei $F$ die Fläche zwischen der Diagonalen und der Lorenzkurve ist.
+\column{5cm}
+\includegraphics[width = 5cm]{pics/2-gini.pdf}
+\columnsend
+
+
+### Gini-Koeffizient
+
+Berechnung:  
+
+Für die praktische Berechnung von $G$ aus den Wertepaaren $(u_{i}; v_{i})$ stehen folgende alternative Formeln zur Verfügung:
+\[
+      G = \frac{2 \sum_{i=1}^{n}i \cdot x_{(i)} - (n + 1) \sum_{i=1}^{n}x_{(i)}}{n \sum_{i=1}^{n}x_{(i)}}
+\]
+oder alternativ
+\[
+      G = 1 - \frac{1}{n} \sum_{i=1}^{n}(v_{i-1} + v_{i}).
+\]
+
+Wertebereich des Gini-Koeffizienten:  
+  \[
+      0 \leq G \leq \frac{n - 1}{n}
+  \]
+
+
+### Gini-Koeffizient
+
+Normierter Gini-Koeffizient $G^{+}$:
+
+Der Gini-Koeffizient wird auf folgende Weise normiert:
+  \[
+      G^{+} = \frac{n}{n - 1} G.
+  \]
+  Er hat somit den Wertebereich
+  \[
+      0 \leq G^{+} \leq 1,
+  \]
+  wobei 0 für \textit{keine Konzentration} (Gleichverteilung) und 1 für \textit{vollständige Konzentration} (Monopol) steht.
+
+
+### Eigenschaften des Gini-Koeffizient
+
+- Sehr unterschiedliche Lorenzkurven führen zum selben Gini-Wert,  
+z.B: $G^{+} = 0.5$ für
+   - Verteilung 1: 50% ohne Anteile, restliche 50% haben gleiche Anteile an Gesamtsumme 
+   - Verteilung 2: untere 75% teilen sich gleichmäßig 25% der Gesamtsumme, obere 25% gleichmäßig 75% 
+- Unempfindlich gegen relatives Wachstum: $G^{+}$-Wert bleibt unverändert falls alle $x$-Werte um den selben Faktor wachsen/schrumpfen
+- "Empfindlich" gegen Ausreißer am oberen Ende  
+ $\implies$ niedrige Gini-Werte für große Grundgesamtheiten unwahrscheinlicher selbst wenn Verteilung ähnlich zu der in kleinerer Grundgesamtheit,
+ da größere Grundgesamtheiten häufiger extremere Ausreißer enthalten  
+ (z.B. US-Amerikaner $\ni$ Jeff Bezos $\gg$ Susanne Klatten $\in$ Deutsche)
+
+- Häufig Anwendung von verallgemeinerten Lorenzkurven bzw. Ginikoeffizienten auch auf Merkmale mit teils negativen Ausprägungen (z.B. Schulden als negatives Vermögen, s. übernächste Folie) - dann keine Monotonie etc mehr. 
+
+### Herfindahl-Index
+
+$x_1,\ldots x_n$ seien die Daten mit $x_i \ge 0$. 
+
+Die Anteile der Einheiten $i$ sind wie folgt definiert:
+$$ p_i := \frac{x_i}{\sum_{j=1}^n x_j} $$
+Der Herfindahl-Index ist
+$$ H := \sum_{i=1}^n p_i^2 $$
+
+Der Wertebereich ist von $\frac{1}{n}$ (identische $x_i$) bis 1 (Monopol)
+
+### Konzentrationsmessung: Deutsche Vermögensverteilung
+
+```{r, lorenzkurve-de-prep, echo = FALSE, eval = FALSE}
+# data dl'ed @ 21/10/04  
+# https://www.armuts-und-reichtumsbericht.de/DE/Indikatoren/Gesellschaft/Vermoegensverteilung/G02-Indikator-Vermoegensverwaltung.html
+lorenz_netto_indiv <- 
+  rio::import("pics/G02-Excel-Vermoegensverteilung.xlsx", 
+              range = "B12:F21", 
+              col_names = c("decile", 2002, 2007, 2012, 2017)) |> 
+  mutate(decile = ordered(decile, levels = paste0("D", 1:10))) |> 
+  pivot_longer(-decile, names_to = "year") |>  
+  arrange(decile) |> 
+  nest(-year) |> 
+  mutate(
+    year = ordered(year),
+    data = purrr::map(data, ~ cbind(.x, sum = cumsum(.x$value)))) |> 
+  unnest(cols = c(data)) |> 
+  mutate(decile_num = as.numeric(decile)/10) |> 
+  bind_rows(expand.grid(year = ordered(seq(2002, 2017, by = 5)), 
+                        decile_num = 0,
+                        sum = 0))
+saveRDS(lorenz_netto_indiv, "lorenz-netto-indiv-2017.rds")   
+```
+
+```{r, lorenzkurve-de, echo = FALSE}
+lorenz_netto_indiv <- readRDS("lorenz-netto-indiv-2017.rds")
+ggplot(lorenz_netto_indiv, aes(x = decile_num, y = sum, group = year, col = year)) +  
+  geom_abline(slope = 1, intercept = 0, col = "darkgray") +
+  geom_line(alpha= .6) + geom_point(alpha= .6) + 
+  scale_color_viridis_d("") +
+  scale_x_continuous(labels = scales::label_percent(), expand = expansion(0, 0.02)) +
+  scale_y_continuous(labels = scales::label_percent(), expand = expansion(0, 0.02)) +
+  ylab("Anteil am Gesamtnettovermögen") + xlab("Bevölkerungsanteil") + 
+  labs(title = "Lorenzkurve der individuellen Nettovermögen in Deutschland", 
+       subtitle = "Gini-Koeffizienten: ca. 0.77 - 0.80",
+       caption = "Daten: www.armuts-und-reichtumsbericht.de / BM Arbeit & Soziales, 4.10.2021 (nur Dezile)")
+```
+
+###  Gini-Index Vermögen Deutschland
+
+\includegraphics[width = \textwidth]{pics/gini-vermoegen-de-zeitreihe.png}  
+
+\scriptsize
+[Armuts- & Reichtumsbericht](https://www.armuts-und-reichtumsbericht.de/DE/Indikatoren/Gesellschaft/Vermoegensverteilung/G02-Indikator-Vermoegensverwaltung.html), BM Arbeit & Soziales
+
+
+###  Gini-Index Einkommen Deutschland
+
+\includegraphics[width = \textwidth]{pics/gini-einkommen-de-zeitreihe.png}  
+
+\scriptsize
+[Armuts- & Reichtumsbericht](https://www.armuts-und-reichtumsbericht.de/DE/Indikatoren/Gesellschaft/Einkommensverteilung/G01-Indikator-Einkommensverteilung.html), BM Arbeit & Soziales
+

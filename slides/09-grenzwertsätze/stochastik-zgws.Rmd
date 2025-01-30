@@ -1,0 +1,309 @@
+## Der zentrale Grenzwertsatz
+
+### Der zentrale Grenzwertsatz 
+
+- "Die Verteilung des arithmetischen Mittels von $n$ *iid* Zufallsvariablen aus einer *beliebigen(!)* Verteilung konvergiert für wachsendes $n$ gegen eine Normalverteilung." (... unter nicht besonders strengen Bedingungen)
+
+- Begründet die zentrale Rolle der Normalverteilung in der Stochastik und Statistik.
+
+Zunächst müssen wir noch *standardisierte* Zufallsvariablen definieren.
+
+
+### Standardisierte Zufallsvariablen 
+
+#### Def.: Standardisierte Zufallsvariable
+Jede Zufallsvariable $X$ mit endlichem Erwartungswert $\mu_X = E(X)$ und
+endlicher Varianz $\sigma_X^2 = \Var(X)$ kann man derart linear transformieren,
+dass sie Erwartungswert $0$ und Varianz $1$ besitzt:
+$$
+\tilde{X} = \frac{X - \mu_X}{\sigma_X}
+$$
+Dann gilt:
+\begin{align*}
+E(\tilde{X}) & =  \frac{1}{\sigma} \left(E(X) - \mu_X\right) = 0   \\
+\Var(\tilde{X}) & =  \frac{1}{\sigma_X^2}\, \Var(X) \;\,= 1
+\end{align*}
+
+
+### Standardisierung von summierten iid ZVn
+
+Betrachte *iid* Zufallsvariablen $X_1, X_2, ..., X_n$ mit
+endlichem Erwartungswert $\mu_X = E(X_i)$ und endlicher Varianz
+$\sigma_X^2 = \Var(X_i)$.  
+\  
+
+Für die Summe $Y_n = X_1 + X_2 + ... + X_n$ gilt also
+\begin{align*}
+E(Y_n) & =  n \cdot \mu_X,	\\
+\Var(Y_n) & = n \cdot \sigma_X^2.
+\intertext{Für die \textit{standardisierte Summe}}
+Z_n &= \frac{Y_n - n \mu_X}{\sqrt{n} \sigma_X} =
+\frac{1}{\sqrt{n}} \sum_{i = 1}^n \frac{X_i - \mu_X}{\sigma_X}
+\intertext{gilt somit $E(Z_n) = 0$ und $\Var(Z_n) = 1$.}
+\end{align*}
+
+### Der zentrale Grenzwertsatz (ZGWS) 
+
+:::{.block}
+#### **Zentraler Grenzwertsatz**
+Die Verteilungsfunktion $F_n(z)$ der standardisierten Summe $Z_n$ von i.i.d. Zufallsvariablen mit
+existierendem Erwartungswert und endlicher Varianz konvergiert für
+$n \to \infty$ an jeder Stelle $z \in \mathbb{R}$ gegen die Verteilungsfunktion $F_{N(0, 1)}(z)$ der Standardnormalverteilung:
+\begin{align*}
+F_n(z) &\stackrel{n \to \infty}{\longrightarrow} F_{N(0,1)}(z)\quad \forall\, z \in \mathbb{R}\\
+\text{also } Z_n &\;\stackrel{a}{\sim}\; \mathcal{N}(\mu = 0, \sigma^2 = 1) 
+\end{align*}
+:::
+
+In der Praxis kann man also die Verteilung von $Z_n$ für große $n$
+oft gut durch eine Standardnormalverteilung approximieren.  
+\  
+
+\scriptsize 
+"$\stackrel{a}{\sim}$" :$\cong$ "asymptotisch/approximativ verteilt wie"  
+Englisch: *c*entral *l*imit *t*heorem *CLT*
+
+### Bemerkungen 
+- Solange Erwartungswert und Varianz existieren, gilt der ZGWS auch für 
+  - diskrete $X_i$,
+  - $X_i$ mit anderem Träger $T_X \neq \mathbb R$ als die Normalverteilung,
+  - und $X_i$ mit schiefen oder multimodalen Verteilungen!  
+
+- Unter zusätzlichen Bedingungen an höhere Momente von $|X_i|$ (Lyapunov-/Lindeberg-ZGWS)
+ gilt der ZGWS sogar auch für *unabhängige, aber nicht identisch verteilte $X_i$*.
+
+- Die Standardisierung ist nicht zwingend notwendig zur Formulierung
+des ZGWS. Alternativ kann man auch direkt die Summe
+$Y_n = X_1 + ... + X_n$ betrachten. Dann gilt
+$$
+Y_n \stackrel{a}{\sim} {\mathcal N}(\mu = n\mu_X, \sigma^2 = n\sigma_X^2)
+$$
+
+- Damit dann im speziellen auch (vgl. GGZ): $$\bar X_n  \stackrel{a}{\sim} {\mathcal N}\left(\mu = \mu_X, \sigma^2 = \frac{\sigma_X^2}{n}\right)$$ 
+  
+
+
+### Bemerkungen 
+
+- GGZ liefert asymptotische Aussage über EW und Varianz des arithmetischen Mittels.
+- ZGWS liefert Aussage über die *komplette (asymptotische) Verteilung* des arithmetischen Mittels
+- der ZGWS gilt sowohl für stetige als auch für diskrete ZV $X_i$. 
+
+- Anwendung: Die Verteilung der Summe/des Mittelwerts vieler (in etwa) *iid* Zufallsvariablen kann gut durch ein Normalverteilungsmodell approximiert werden. 
+
+
+### Veranschaulichung ZGWS und GGZ 
+
+```{r zgws-ggz-vis-1, echo = FALSE, out.height='.55\\textheight'}
+par(mgp = c(2,1,0), mfrow = c(1,2))
+set.seed(864413)
+n <- 2e2
+reps <- 5e1
+exp_rate <- 0.25
+x <- matrix(rexp(n*reps, rate = exp_rate), nrow = n)
+means <- apply(x, 2, cumsum) / (1:n)
+
+for (use in c(10, 30)) {
+  matplot(means[1:use, ], lty = 1, col = rgb(0,0,0,.2), type = "l", lwd = .5,
+    xlim = c(0, use + use/2.5), xlab = "n",
+    ylab = expression("Arithmetisches Mittel "~bar(x)[n]))
+  lines(c(0, n + n/4), c((1/exp_rate), (1/exp_rate)), lty = "dashed", col = "gold")
+  f_hat <- {
+    tmp <- density(means[use, ])
+    tmp$y <- tmp$y * use/2
+    tmp
+  }
+  lines(x = use + f_hat$y, y=f_hat$x, col = rgb(0,0,0,.8))
+  grid_norm <- (1/exp_rate) + seq(-3, 3, l = 150)*((1/exp_rate)/sqrt(use))
+  lines(x = use + 
+          dnorm(grid_norm, mean = 1/exp_rate, sd = (1/exp_rate)/sqrt(use))  * use/2, 
+        y = grid_norm,
+    col = rgb(1,0,0,.8))
+  points(rep(use, reps), means[use, ], pch="-", cex = 1, col = rgb(0,0,0,.5))
+  title(main = paste0("n bis ", use))
+}
+```
+
+\small
+
+- Graue Linien: 50 Verläufe des arithmetischen Mittelwerts von jeweils $n$ $\mathcal{E}(\lambda= 0.25)$ Zufallsvariablen ($E(X_i) = 4$, $\Var(X_i) = 16$) für wachsendes $n$. 
+- Kleine Querstriche zeigen die Ergebnisse für das maximale $n$ an, goldene Linie den wahren Erwartungswert.
+- Schwarze Kurve ist beobachtete Dichte dieser 50 Mittelwerte, rote die vom ZGWS "vorhergesagte" $\mathcal{N}(\mu = 4, \sigma^2 = 16/n)$.
+
+
+### Veranschaulichung ZGWS und GGZ 
+
+```{r zgws-ggz-vis-2, echo = FALSE, out.height='.8\\textheight'}
+par(mgp = c(2,1,0), mfrow = c(2,2))
+set.seed(864413)
+n <- 2e2
+reps <- 5e1
+exp_rate <- 0.25
+x <- matrix(rexp(n*reps, rate = exp_rate), nrow = n)
+means <- apply(x, 2, cumsum) / (1:n)
+for (use in c(10, 30, 50, 100)) {
+  matplot(means[1:use, ], lty = 1, col = rgb(0,0,0,.2), type = "l", lwd = .5,
+    xlim = c(0, use + use/2), xlab = "n",
+    ylab = expression("Arithmetisches Mittel"~
+        scriptstyle(frac(1, n))~Sigma[i==1]^n~x[i]))
+  lines(c(0, n + n/4), c((1/exp_rate), (1/exp_rate)), lty = "dashed", col = "gold")
+  f_hat <- {
+    tmp <- density(means[use, ])
+    tmp$y <- tmp$y * use/2.5
+    tmp
+  }
+  lines(x = use + f_hat$y, y=f_hat$x, col = rgb(0,0,0,.8))
+  grid_norm <- 4 + seq(-3, 3, l = 150)*(4/sqrt(use))
+  lines(x = use + 
+          dnorm(grid_norm, mean = (1/exp_rate), sd = (1/exp_rate)/sqrt(use))  * use/3, 
+        y = grid_norm,
+    col = rgb(1,0,0,.8))
+  points(rep(use, reps), means[use, ], pch="-", cex = 1, col = rgb(0,0,0,.5))
+  title(main = paste0("n bis ", use))
+}
+```
+
+### Diskreter Fall: Approximation der Binomialv.
+
+Seien $X_i \stackrel{\text{iid}}{\sim} {\mathcal B}(\pi)$, $i=1,..., n$. Dann ist $Y_n = \sum_{i=1}^n X_i \sim  {\mathcal B}(n, \pi)$ und 
+$$
+\frac{Y_n - n \pi}{\sqrt{ n \pi (1 -
+\pi)}} \stackrel{a}{\sim}  {\mathcal N}(0,1)
+\iff 
+Y_n  \stackrel{a}{\sim}  {\mathcal N}\left(\mu = n \pi, \sigma^2 = n \pi(1 - \pi)\right).
+$$
+
+```{r, vis-dist-norm-bin, echo=FALSE, warning = FALSE, message = FALSE, fig.height = 4.4}
+bin_params <- rev(list(list(size = 100, p = 0.5), 
+                   list(size = 50, p = 0.5),
+                   list(size = 20, p = 0.5),
+                   list(size = 5, p = 0.5)))
+n_params <- purrr::map(bin_params, ~ list(m = .x$size * .x$p, 
+                                         sd = sqrt(.x$size * .x$p * (1 - .x$p))))
+d_bin <- make_dist_data("binom", -2:80, 
+                 params = bin_params)
+d_norm <- make_dist_data("norm", seq(-2, 80, l = 500), 
+                 params = n_params)
+
+d_bin$label <- case_when(
+  d_bin$param == "4" ~ "n == 100~','~pi == 0.5",
+  d_bin$param == "3" ~ "n == 50~','~pi == 0.5",
+  d_bin$param == "2" ~ "n == 20~','~pi == 0.5",
+  d_bin$param == "1" ~ "n == 5~','~pi == 0.5") |> forcats::fct_inorder()
+
+d_norm <- filter(d_norm, !(`F(x)` > .999 | `f(x)` < 1e-6))
+d_bin <- filter(d_bin, x >= 0 & x <= map_dbl(param_value, "size") & `f(x)` > 1e-6)
+#d_bin <- filter(d_bin, `f(x)`> 1e-10)
+
+d_norm$label <- case_when(
+  d_norm$param == "4" ~ "n == 100~','~pi == 0.5",
+  d_norm$param == "3" ~ "n == 50~','~pi == 0.5",
+  d_norm$param == "2" ~ "n == 20~','~pi == 0.5",
+  d_norm$param == "1" ~ "n == 5~','~pi == 0.5") |> forcats::fct_inorder()
+
+clr_scale <- qualitative_hcl(palette = "Harmonic", n = 2)
+
+ggplot(d_bin) + 
+  geom_step(aes(x = x, y = `F(x)`), col = clr_scale[1], size = .5) +
+  # geom_segment(aes(x = x, xend = x, y = 0, yend =`f(x)`), col = clr_scale[1], alpha = .5, lwd = .2) + 
+  theme(legend.position = "none") + 
+  geom_line(data = d_norm, aes(x = x, y = `F(x)`), col = clr_scale[2], lty = 2) +
+  facet_wrap(~label, nrow = 2, labeller = label_parsed, scales = "free") + 
+  xlab(expression(y[n])) + ylab(expression(F(y[n]))) +
+  labs(caption = expression(N~(m == n*pi~","~ sigma^2 == n*pi*(1-pi))~" in blau (gestrichelt);"~B(n ==100 ~ ","~pi == pi)~"in gold."))
+```
+
+
+### Diskreter Fall: Approximation der Poissonv.
+
+Seien $X_i \stackrel{\text{iid}}{\sim} {\mathcal P}(\lambda = \tau)$, $i=1,..., n$. 
+Dann ist $Y_n = \sum_{i=1}^n X_i \sim {\mathcal P}(\lambda = n \tau)$ und 
+$$
+\frac{Y_n - n \tau}{\sqrt{n \tau}} \stackrel{a}{\sim}  {\mathcal N}(0,1)
+\iff 
+Y_n  \stackrel{a}{\sim}  {\mathcal N}\left(n \tau,  n \tau\right).
+$$
+
+```{r, vis-dist-norm-pois, echo=FALSE, warning = FALSE, message = FALSE, fig.height = 4.4}
+pois_params <- rev(list(list(lambda = 50),
+                 list(lambda = 20),
+                 list(lambda = 5),
+                 list(lambda = 1)))
+n_params <- purrr::map(pois_params, ~ list(m = .x$lambda, 
+                                         sd = sqrt(.x$lambda)))
+d_pois <- make_dist_data("pois", (-2):120, 
+                 params = pois_params)
+d_norm2 <- make_dist_data("norm", seq(-2, 120, l = 500), 
+                 params = n_params)
+d_pois$label <- case_when(
+  d_pois$param == "4" ~ "n*tau == 50",
+  d_pois$param == "3" ~ "n*tau == 20",
+  d_pois$param == "2" ~ "n*tau == 5",
+  d_pois$param == "1" ~ "n*tau == 1") |> forcats::fct_inorder()
+
+d_norm2$label <- case_when(
+  d_norm2$param == "4" ~ "n*tau == 50",
+  d_norm2$param == "3" ~ "n*tau == 20",
+  d_norm2$param == "2" ~ "n*tau == 5",
+  d_norm2$param == "1" ~ "n*tau == 1") |> forcats::fct_inorder()
+
+clr_scale <- qualitative_hcl(palette = "Harmonic", n = 2)
+
+d_norm2 <- filter(d_norm2, , `F(x)` < .999 & `f(x)`> 1e-6)
+d_pois <- filter(d_pois, , `F(x)` < .999)
+
+ggplot(d_pois) + 
+  geom_step(aes(x = x, y = `F(x)`), col = clr_scale[1], size = .5) +
+  theme(legend.position = "none") + 
+  geom_line(data = d_norm2, aes(x = x, y = `F(x)`), col = clr_scale[2], lty = 2) +
+  facet_wrap(~label, nrow = 2, labeller = label_parsed, scales = "free") + 
+  xlab(expression(y[n])) + ylab(expression(F(y[n]))) +
+  labs(caption = expression(N~(m == n*tau~","~ sigma^2 == n*tau)~" in blau (gestrichelt);"~P(lambda == n*tau)~"in gold."))
+```
+
+### Stetiger Fall: Approximation der $\chi^2$-Verteilung
+
+Seien $X_i \stackrel{\text{iid}}{\sim} {\mathcal N}(0, 1)$, $i=1,..., n$. 
+Dann ist $Y_n = \sum_{i=1}^n X_i^2 \sim \chi^2(d = n)$ und 
+$$
+\frac{Y_n - n}{\sqrt{2n}} \stackrel{a}{\sim}  {\mathcal N}(0,1)
+\iff 
+Y_n  \stackrel{a}{\sim}  {\mathcal N}\left(n,  2n\right).
+$$
+
+
+```{r, vis-dist-norm-chi, echo=FALSE, warning = FALSE, message = FALSE, fig.height = 4.7}
+chi_params <- rev(list(list(df = 50), list(df = 20), list(df = 10), list(df = 5)))
+n_params <- purrr::map(chi_params, ~ list(m = .x$df, 
+                                         sd = sqrt(2 * .x$df)))
+d_chi <- make_dist_data("chisq", seq(-2, 150, l = 500), 
+                 params = chi_params)
+d_norm3 <- make_dist_data("norm", seq(-2, 150, l = 500), 
+                 params = n_params)
+d_chi$label <- case_when(
+  d_chi$param == "4" ~ "n == 50",
+  d_chi$param == "3" ~ "n == 20",
+  d_chi$param == "2" ~ "n == 10",
+  d_chi$param == "1" ~ "n == 5") |> forcats::fct_inorder()
+
+d_norm3$label <- case_when(
+  d_norm3$param == "4" ~ "n == 50",
+  d_norm3$param == "3" ~ "n == 20",
+  d_norm3$param == "2" ~ "n == 10",
+  d_norm3$param == "1" ~ "n == 5") |> forcats::fct_inorder()
+
+clr_scale <- qualitative_hcl(palette = "Harmonic", n = 2)
+
+d_norm3 <- filter(d_norm3, `F(x)` < .999)
+d_chi <- filter(d_chi, `F(x)` < .999)
+
+ggplot(d_chi) + 
+  geom_line(aes(x = x, y = `F(x)`), col = clr_scale[1], size = .5) +
+  theme(legend.position = "none") + 
+  geom_line(data = d_norm3, aes(x = x, y = `F(x)`), col = clr_scale[2], lty = 2) +
+  facet_wrap(~label, nrow = 2, labeller = label_parsed, scales = "free") + 
+  xlab(expression(y[n])) + ylab(expression(F(y[n]))) +
+  labs(caption = expression(N(m == n~","~sigma^2 == 2*n)~"in blau (gestrichelt);"~chi^2*(n)~"in gold."))
+```
+
+

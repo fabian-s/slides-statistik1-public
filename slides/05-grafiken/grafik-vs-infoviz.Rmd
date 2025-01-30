@@ -1,0 +1,73 @@
+## Grafiken: Infoviz vs Statistische Grafiken
+
+###  "Infoviz" vs Statistische Grafiken I
+
+\includegraphics[width = \textwidth]{pics/2-bier.jpg}
+
+###  "Infoviz" vs Statistische Grafiken I
+
+```{r, bier, echo = FALSE}
+bier <- data.frame(Jahr = c(1980, 1985, 1990, 1995, 2000, 2005, 2007), 
+  Menge = c(38438, 54541, 54300, 50162, 64591, 61012, 69406))
+ggplot(data = bier, aes(x = Jahr, y = Menge)) + geom_point(size=6) + 
+    ylab("Bierkonsum [hl]") + ylim(c(0, 70000)) + 
+    scale_x_continuous(breaks = unique(bier$Jahr))
+```
+
+### "Infoviz" vs Statistische Grafiken I
+
+```{r, bier2, echo = FALSE}
+ggplot(data = bier, aes(x = Jahr, y = Menge)) + geom_point(size = 6) + 
+    ylab("Bierkonsum [hl]") + scale_x_continuous(breaks = unique(bier$Jahr))
+```
+
+### "Infoviz" vs Statistische Grafiken II
+
+\includegraphics[width = \textwidth]{pics/2-studenten.jpg}
+
+### "Infoviz" vs Statistische Grafiken II
+
+```{r, studis, echo = FALSE}
+library(dplyr)
+unis <- data.frame(Uni = ordered(c("LMU", "TUM", "FHM", "Uni BW", "KSFH"), 
+  levels = c("LMU", "TUM", "FHM", "Uni BW", "KSFH")),
+  Anzahl = c(41776, 23186, 13865, 3961, 1750),
+  Männlich = c(.373, .684, .654, .894, .216))
+unis <- unis %>% 
+  mutate(Männer = Anzahl * Männlich, Frauen = Anzahl * (1- Männlich)) %>% 
+  reshape2::melt(id.vars = "Uni", measure.vars = c("Männer", "Frauen"))
+
+ggplot(data = unis) + geom_bar(aes(x=Uni, y = value, fill = variable), 
+  stat = "identity", position = "stack") + xlab("") +
+  scale_fill_manual(values = c("blue", "red")) + 
+  ylab("Studentenzahl") + guides(fill = guide_legend(title = ""))
+```
+
+### "Infoviz" vs Statistische Grafiken II
+
+```{r, studis2, echo = FALSE}
+ggplot(data = unis) + geom_bar(aes(x=Uni, y = value, fill = variable, group = variable), 
+  stat = "identity", position = "dodge") + xlab("") +
+  scale_fill_manual(values = c("blue", "red")) + 
+  ylab("Studentenzahl") + guides(fill = guide_legend(title = ""))
+```
+
+### "Infoviz" vs Statistische Grafiken IV
+
+\includegraphics[width = \textwidth]{pics/2-freibad.jpg}
+
+### "Infoviz" vs Statistische Grafiken IV
+
+```{r, freibad, echo = FALSE}
+freibad <- data.frame(
+  Bad = ordered(c("Georgenschwaige", "MariaEinsiedel", "Schyren",
+    "Prinzregenten", "West", "Ungerer", "Michaeli", "Dante"),
+    levels = c("Georgenschwaige", "MariaEinsiedel", "Schyren",
+    "Prinzregenten", "West", "Ungerer", "Michaeli", "Dante")),
+  Fläche = c(2.76, 4.41, 4.13, 1.8, 8.56, 6.76, 8.01, 5.37),
+  Besucher = c(77143, 80369, 111630, 114041, 151157, 152361, 161322, 431121)/1e3)
+ggplot(freibad, aes(x = Fläche, y = Besucher, label = Bad)) + 
+  geom_point(alpha = .5, col="blue", size = 10) + geom_text() +
+  xlim(c(1, 9)) + ylim(c(0, 500)) + xlab("Fläche [ha]") + 
+  ylab("Besucher [ Tausend, pro Jahr]")
+```

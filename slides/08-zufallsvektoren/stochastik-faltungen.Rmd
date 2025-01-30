@@ -1,0 +1,88 @@
+## Faltungen 
+
+### Faltungen
+
+Sind $X$ und $Y$ diskrete ZV mit Wahrscheinlichkeitsfunktionen
+$f_X(x)$ und $f_Y(y)$, so gilt für die Summe $Z = X + Y$:
+\begin{align*}
+P(X + Y = z) & =  \sum_x P(X = x, x + Y = z)\\
+& =  \sum_x P(X = x, Y = z - x)\\
+\intertext{falls $X \perp Y$ gilt außerdem:}
+&=  \sum_x P(X = x) \cdot P(Y = z - x)\\
+& =  \sum_x f_X(x) \cdot f_Y(z - x)
+\end{align*}
+
+### Faltungen
+
+::: {.block}
+#### Def: Faltung
+Die *Faltung* der stochastisch unabhängigen, diskreten Zufallsvariablen $X$ und $Y$ 
+bezeichnet die Wahrscheinlichkeitsverteilung ihrer Summe $Z = X + Y$: 
+\begin{align*}
+P(X + Y = z) = f_Z(z) & =  \sum_x f_X(x) \cdot f_Y(z - x) \\
+& = \sum_y f_X(z-y) \cdot f_Y(y)
+\end{align*}
+:::
+
+Für *stetige* unabhängige ZVn $X, Y$ mit $Z = X + Y$ gilt analog die **Faltung**
+$$f_Z(z) = \int f_X(x) f_Y(z-x) dx = \int f_X(z-y) f_Y(y) dy$$
+
+  
+
+
+### Bsp: Faltung zweier geometrischen ZV 
+
+Seien $X \sim {\mathcal G}(\pi)$ und $Y \sim {\mathcal G}(\pi)$
+unabhängig.
+
+Berechne Träger und Wahrscheinlichkeitsfunktion der Summe $Z=X+Y$.
+
+Wie kann man $Z$ interpretieren?
+\note{
+Interpretation: Anzahl Versuche bis zum 2. Erfolg.\\
+Träger: $\mathbb{N}\setminus{1}$\\
+W.keitsfunktion:
+\begin{align*}
+P(X+Y=z) &= \sum^{z-1}_{x=1} f_X(x) \cdot f_Y(z - x) \\
+&= \sum^{z-1}_{x=1} \pi(1-\pi)^{x-1}\pi(1-\pi)^{z-x-1}
+&= (z-1)\pi^2(1-\pi)^{z-2}
+\end{align*}
+Intuition über Elementareignisse Bernoulli-Ketten:
+2 Erfolge, $z-2$ Misserfolge, $z-1$ Stellen an denen 1. Erfolg  passieren kann.
+}
+
+
+### Negative Binomialverteilung 
+
+Die Verteilung der Faltung $X = X_1 + ... + X_n$ mit $X_i \stackrel{\text{iid}}{\sim} \mathcal{G}(\pi);\, i= 1, \dots, n$ ist eine **Negative Binomialverteilung** auf $T_X = \{n, n+1, n+2, \ldots\}$ mit Parametern 
+$n \in \mathbb{N}^+$ und $\pi \in (0,1)$ und Wahrscheinlichkeitsfunktion
+$$
+f(x) = \binom{x - 1}{n - 1} \pi^n (1-\pi)^{x-n} I(x \geq n)
+$$
+
+Wir schreiben: $X\sim \mathcal{NB}(n, \pi)$  
+\  
+
+Funktionen in R: `[dpqr]nbinom(size, prob)`  
+Beachte: Abweichende Definition in R -- Träger ist $\mathbb{N}^+_0$!
+
+
+### Bsp: Faltung zweier Poisson-ZV
+
+Sind $X \sim {\mathcal P}(\lambda_1)$ und $Y \sim {\mathcal P}(\lambda_2)$ unabhängig,
+so ist die *Faltung* von $X$ und $Y$ wieder Poisson-verteilt mit
+Parameter $\lambda_1 + \lambda_2$:
+$$
+(X + Y) \sim {\mathcal P}(\lambda_1 + \lambda_2)
+$$
+\begin{align*}
+\text{Beweis: }P(X+Y=z) &= \sum^z_{x=0} f_X(x) \cdot f_Y(z - x) \\
+&= \sum^z_{x=0} \frac{\lambda_1^x}{x!} \exp(-\lambda_1)\frac{\lambda_2^{z-x}}{(z-x)!} \exp(-\lambda_2) \\
+&= \sum^z_{x=0} \frac{\lambda_1^x \lambda_2^{z-x}}{x!(z-x)!}\exp(-(\lambda_1 + \lambda_2)) \\
+&= \left(\sum^z_{x=0} \frac{z!}{x!(z-x)!}\lambda_1^x \lambda_2^{z-x}\right)\frac{\exp(-(\lambda_1 + \lambda_2))}{z!} \\
+&= \underbrace{(\lambda_1 + \lambda_2)^z}_{\sum^n_{k=0} \binom{n}{k} a^{n-k} b^k = (a+b)^n} \frac{\exp(-(\lambda_1 + \lambda_2))}{z!}.
+\end{align*}
+
+
+
+

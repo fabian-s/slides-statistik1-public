@@ -1,0 +1,89 @@
+%\usepackage{etex} % avoid "! No room for a new \dimen" error
+
+\usepackage[ngerman]{babel}
+%\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage{amsmath,amsfonts,amssymb,bm}
+
+
+\usepackage{eurosym}
+\usepackage{fancyhdr}
+\usepackage[all]{xy}
+%\usepackage{attachfile}
+
+\usepackage{booktabs}
+\usepackage{hyperref}
+%\usepackage{epic}
+%\usepackage{eepic}
+\usepackage{multicol} %2-column table of contents
+
+\newcommand{\tr}{^\prime}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\Ra}{\Rightarrow}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\columnsbegin}{\begin{columns}}
+\newcommand{\columnsend}{\end{columns}}
+
+\parindent0pt
+\newcommand{\logit}{\operatorname{logit}}
+\newcommand{\Var}{\operatorname{Var}}
+\newcommand{\Cov}{\operatorname{Cov}}
+\newcommand{\RR}{\textsf{R}}
+
+
+\usetheme{simplefs}
+% so notes on second screen work properly...
+\makeatletter
+\def\beamer@framenotesbegin{% at beginning of slide
+\usebeamercolor[fg]{normal text}
+\gdef\beamer@noteitems{}%
+\gdef\beamer@notes{}%
+}
+\makeatother
+
+%\hypersetup{colorlinks,linkcolor=gray,urlcolor=gray}
+\definecolor{darkbrown}{HTML}{654321}
+
+
+\numberwithin{equation}{section}
+
+%\renewenvironment{Shaded}{\begin{snugshade}\begin{scriptsize}}{\end{scriptsize}\end{snugshade}}
+% add missing glyphs for Fira Math from XITS
+\setmathfont[range={\vdots,\ddots,\star,\checkmark,\succeq, \succ, \widehat,\bigcup, \bigcap, \setminus, \mathcal, \underbrace, \Bbbone}]{XITS Math}
+
+\AtBeginSubsection[]
+{
+\mode<beamer>{
+\begin{frame}[plain]
+\frametitle{}
+\tableofcontents[
+  currentsection,
+  sectionstyle=show/hide,
+  subsectionstyle=show/shaded/hide
+]
+\end{frame}
+}
+}
+
+\AtBeginSection[]
+{
+%https://tex.stackexchange.com/a/178803/2781
+% \begin{frame}
+%   \vfill
+%   \centering
+%   \begin{beamercolorbox}[sep=8pt,center]{title}
+%     \usebeamerfont{title}\insertsectionhead\par%
+%   \end{beamercolorbox}
+%   \vfill
+% \end{frame}
+\begin{frame}
+\frametitle{}
+\tableofcontents[
+  currentsection,
+  sectionstyle=show/hide,
+  subsectionstyle=show/show/hide
+]
+\end{frame}
+}
+

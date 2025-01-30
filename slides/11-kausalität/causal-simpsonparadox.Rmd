@@ -1,0 +1,365 @@
+##  (Schein)Assoziation durch Aggregation
+
+### Simpson's Paradox
+
+- Kein echtes Paradox
+- Beschreibt häufig auftretendes Phänomen:  
+    Durch Bedingen auf Drittvariable(n) können Assoziationen 
+    - entstehen (s. Titanic),
+    - verschwinden (s. Berkeley),
+    - oder ihre Richtung ändern.  (s. Nachhilfe)  
+  (Autsch.) 
+- Synonyme: *omitted variable bias*
+
+###  Simpson's Paradox: Titanic
+
+Überleben von erwachsenen Titanicpassagieren 3. Klasse und Crew:
+
+\scriptsize
+
+\begin{tabular}{l|r|r||r}
+
+  & Died & Saved & Rate\\
+\hline
+3rd & 476 & 151 & 0.24\\
+\hline
+Crew & 673 & 212 & 0.24\\
+\end{tabular}
+```{r 05-sp-titanic1, echo = FALSE, out.height= '.5\\textheight', out.width= '.5\\textheight'}
+sp <- Titanic[3:4, , 2,]
+dimnames(sp)$Survived <- c("Died", "Saved")
+#knitr::kable(cbind(apply(sp, c(1, 3), sum), Rate = prop.table(apply(sp, c(1, 3), sum), margin = 1)[,2]), "latex", digits = 3)
+mosaicplot(aperm(apply(sp, c(1, 3), sum), c(2,1)), main = "", off = 3, cex.axis = .9)
+```
+
+\normalsize
+
+$\implies$ gleiche Überlebensraten für Passagiere 3. Klasse und Crew (?)
+
+###  Simpson's Paradox: Titanic
+
+Bedingt auf Geschlecht:
+
+\scriptsize
+
+\begin{table}
+\centering
+Males:
+\begin{tabular}[t]{l|r|r||r}
+  & Died & Saved & Rate\\
+\hline
+3rd & 387 & 75 & 0.16\\
+\hline
+Crew & 670 & 192 & 0.22\\
+\end{tabular}
+Females:
+\begin{tabular}[t]{l|r|r||r}
+  & Died & Saved & Rate\\
+\hline
+3rd & 89 & 76 & 0.46\\
+\hline
+Crew & 3 & 20 & 0.87\\
+\end{tabular}
+\end{table}
+
+```{r 05-sp-titanic2, echo = FALSE, out.height= '.5\\textheight', out.width= '.8\\textheight'}
+sp2 <- apply(sp, c(1, 3, 2), sum)
+#knitr::kable(cbind(sp2[,,1], Rate = prop.table(sp2[,,1], margin = 1)[,2]), "latex", digits = 3, caption = "Male")
+#knitr::kable(cbind(sp2[,,2], Rate = prop.table(sp2[,,2], margin = 1)[,2]), "latex", digits = 3, caption = "Female")
+mosaicplot(aperm(sp2, c(3, 1, 2)), main = "", off = 3, cex.axis = .9)
+```
+
+$\implies$ (deutlich) schlechtere Überlebensraten für Passagiere 3. Klasse, für beide Geschlechter. 
+
+###  Simpson's Paradox: Berkeley Admissions
+
+Aufnahmequoten der Uni Berkeley im Jahr 1973:
+
+\scriptsize
+
+\begin{tabular}{l|r|r||r}
+  & Admitted & Rejected & Admission Rate\\
+\hline
+Male & 1198 & 1493 & 0.45\\
+\hline
+Female & 557 & 1278 & 0.30\\
+\end{tabular}
+
+```{r 05-sp-ucb1,  echo = FALSE, out.height= '.5\\textheight', out.width= '.5\\textheight'}
+#knitr::kable(cbind(apply(UCBAdmissions, c(2, 1), sum), 
+#  `Admission Rate` = 1 - prop.table(apply(UCBAdmissions, c(2, 1), sum), margin = 1)[,2]), "latex", digits = 3)
+or <- female <- size <- accepted <- rep(0, 6)
+for (i in 1:6) {
+  or[i] <- round(prod(diag(UCBAdmissions[,,i]))/(UCBAdmissions[2,1,i]  * UCBAdmissions[1,2,i]),2)
+  female[i] <- sum(UCBAdmissions[,2,i])/sum(UCBAdmissions[,,i])
+  size[i] <- sum(UCBAdmissions[,,i])
+  accepted[i] <- sum(UCBAdmissions[1,,i])/sum(UCBAdmissions[,,i])
+}
+
+dimnames(UCBAdmissions)[["Dept"]] <- paste0(LETTERS[1:6], " - OR : ", or)
+dimnames(UCBAdmissions)[["Gender"]] <- c("Male", "Female")
+mosaicplot(apply(UCBAdmissions, c(2, 1), sum), main = "",  xlab = "", ylab = "", off = 3, cex.axis = .9)
+```
+
+\normalsize
+
+$\implies$ Benachteiligung von Bewerberinnen ...?  
+
+Odds Ratio: $\gamma(\text{Admitted, Rejected} | \text{Male, Female}) =  1.83$! 
+
+###  Simpson's Paradox: Berkeley Admissions
+
+Bedingt auf Departments (A-F; absteigend nach Aufnahmequote):
+
+```{r 05-sp-ucb2,  echo = FALSE, fig.height= 4}
+opar <- par(mfrow = c(2, 3), oma = c(0, 0, 0, 0), mar = par()$mar/2)
+for (i in 1:6) {
+   mosaicplot(aperm(UCBAdmissions[,,i], c(2,1)),
+     xlab = "", ylab = "", off = 3, cex.axis = .9,
+     main = paste0("Department ", LETTERS[i], " - Odds Ratio : ", or[i]))
+}
+ par(opar)
+```
+
+###  Simpson's Paradox: Berkeley Admissions
+
+```{r 05-sp-ucb3,  echo = FALSE, fig.height= 4}
+ggplot(data.frame(f = female, accepted = accepted, Applications = size)) +
+  geom_point(aes(x = 100 * f, y = 100 * accepted, size = Applications, alpha = Applications)) +
+  scale_alpha_continuous(range = c(.5, 1)) +
+  xlab("Applications by Female Students [%]") +
+  ylab("Accepted Applications [%]") + 
+  ggtitle("Application Success by Department and Gender")
+```
+
+
+###  Simpson's Paradox: Berkeley Admissions
+
+Kausalität hier eher:
+
+$$\xymatrix@R-2pc{
+                         &  \text{Geschlecht}\ar[dl]\ar[dd]^?\\
+        \text{Fach} \ar[dr] &  \\
+                         & \text{Aufnahme}}$$
+
+- hier kein "Confounding" mit *Fork*-Struktur im klassischen Sinn 
+- Stattdessen *Pipe*-Struktur:  Durch Bedingen auf *Mediator* "Fach" wird Assoziation zwischen 
+  "Geschlecht" und "Aufnahme" komplexer, hier insgesamt schwächer.
+<!-- - bessere Visualisierung: [vudlab.com/simpsons/](https://htmlpreview.github.io/?https://github.com/vicapow/vudlab-website/blob/master/simpsons/index.html) -->
+
+### Ökologischer Fehlschluss
+
+Allgemeinere Art von "omitted variable bias":  
+Unzulässige / falsche Schlüsse von aggregierten Daten auf Individualdaten.
+
+Aus einem bestehenden Zusammenhang auf Aggregatebene folgt nicht zwangsläufig ein 
+entsprechender Zusammenhang auf Individualebene.
+
+
+<!-- ### Ökologischer Fehlschluss: Einkommen & Migrationshintergrund -->
+
+<!-- DIESES BSP NICHT MEHR NUTZEN: 
+  - sehr zweifelhafte Daten da Ausländeranteil != Migrationshintergrund
+    Studierende mit Migrationshintergrund kritisierten dies deutlich.
+
+<!-- ```{r, 05-eco-migranetto1, echo = FALSE, fig.height = 5} -->
+<!-- # einkommen <- readxl::read_xlsx(path = "~/lehre/statistic_id5758_verfuegbares-nettoeinkommen-nach-bundeslaendern.xlsx", sheet = 2)[,c(1,3)] %>%  rename(Land = "X__1") -->
+<!-- # auslaender <- read_csv2("~/lehre/auslaender_brd.csv")[,1:2] -->
+<!-- # migranetto <- inner_join(einkommen, auslaender) %>% -->
+<!-- #  rename(netto = `Verfügbares Nettoeinkommen`, migra = `\tAusländeranteil`) -->
+<!-- # saveRDS(migranetto, "~/lehre/stat1/slides/migranetto.rds") -->
+<!-- # # daten von -->
+<!-- # https://de.statista.com/statistik/daten/studie/5758/umfrage/verfuegbares-nettoeinkommen-nach-bundeslaendern/, -->
+<!-- # http://www.laenderdaten.de/europa/deutschland/bundeslaender/auslaenderanteil.aspx -->
+<!-- # migranetto_ind <- readxl::read_xlsx(path = "~/lehre/statistic_id150623_monatliches-persoenliches-einkommen-nach-migrationshintergrund.xlsx", -->
+<!-- #   sheet = 2)[,-1] %>% -->
+<!-- #  rename("ohne\nMigrationshintergrund" = "Personen ohne Migrationshintergrund", -->
+<!-- #    "mit\nMigrationshintergrund" = "Personen mit Migrationshintergrund") %>% -->
+<!-- #   mutate_if(is.numeric, funs({./sum(.) * 100})) %>%  -->
+<!-- #  gather(key = migra, value = Anteil, -Einkommen) %>% -->
+<!-- #  mutate(migra= factor(migra), -->
+<!-- #    Einkommen = factor(Einkommen), -->
+<!-- #    Einkommen = factor(Einkommen, labels = gsub("Mehr als", ">", gsub("Weniger als", "<", gsub(" bis ", "-", gsub("Euro", "", levels(Einkommen)))))), -->
+<!-- #    Einkommen = ordered(Einkommen, -->
+<!-- #      levels = rev(c("< 500 ", "500-900 ", "900-1.300 ", "1.300-2.600 ", "2.600-4.500 ", "> 4.500 ")))) -->
+<!-- #  -->
+<!-- # saveRDS(migranetto_ind, "~/lehre/stat1/slides/migranetto_ind.rds") -->
+<!-- # Quelle: https://de.statista.com/statistik/daten/studie/150623/umfrage/monatliches-persoenliches-einkommen-nach-jeweiligem-migrationshintergrund/ -->
+
+<!-- migranetto <- readRDS("~/lehre/stat1/slides/migranetto.rds")  -->
+<!-- migranetto_ind <- readRDS("~/lehre/stat1/slides/migranetto_ind.rds")  -->
+
+<!-- ggplot(filter(migranetto, !(Land %in% c("Berlin", "Bremen", "Hamburg"))),  -->
+<!--   aes(x = migra, y = netto, label = "")) + geom_point() +  -->
+<!--   geom_text_repel(aes(label = Land), size = 3) +  -->
+<!--   labs(x = "Anteil nicht-deutsche Wohnbevölkerung [%]",  -->
+<!--     y = "(verfügbares) Nettoeinkommen [EUR/Monat]") + -->
+<!--   theme(axis.title.y = element_text(size = 10)) -->
+<!-- ``` -->
+
+
+<!-- ### Ökologischer Fehlschluss: Einkommen & Migrationshintergrund -->
+
+<!-- ```{r, 05-eco-migranetto2, echo = FALSE, fig.height = 5} -->
+<!-- grid.arrange( -->
+<!-- ggplot(filter(migranetto, !(Land %in% c("Berlin", "Bremen", "Hamburg"))),  -->
+<!--   aes(x = migra, y = netto, label = "")) + geom_point() +  -->
+<!--   geom_text_repel(aes(label = Land), size = 2) +  -->
+<!--   labs(x = "Anteil nicht-deutsche Wohnbevölkerung [%]",  -->
+<!--     y = "(verfügbares) Nettoeinkommen [EUR/Monat]",  -->
+<!--     title = "Aggregierte Daten") + theme(axis.title.y = element_text(size = 10)),  -->
+<!--   ggplot(migranetto_ind) +  -->
+<!--     geom_col(aes(x = migra, y = Anteil, fill = Einkommen), position = "stack") +  -->
+<!--     scale_x_discrete(limits = rev(levels(migranetto_ind$migra))) + -->
+<!--     scale_fill_discrete("[EUR/Monat]") + theme(legend.position = "bottom", -->
+<!--       legend.margin = margin(0, 0, 0, 0, unit = "pt"),  -->
+<!--       legend.key.size = unit(.5, "lines")) +  -->
+<!--     labs(y = "Anteil [%]", x = "", title = "Individualdaten"),  -->
+<!--   nrow = 1) -->
+<!-- ``` -->
+
+<!-- ### Ökologischer Fehlschluss: Einkommen & Migrationshintergrund -->
+
+
+<!-- \vskip -.5em -->
+<!-- "In Bundesländern mit höherem Durchschnittseinkommen gibt es einen höheren Anteil von nicht-deutschen Menschen" -->
+
+<!-- $\nRightarrow$ -->
+
+<!-- "Ausländer sind reicher als Deutsche" -->
+
+### Einkommen & Politische Einstellung
+
+\begin{center}
+\includegraphics[height=.7\textheight]{pics/5-presidential2004-state.png}
+\end{center}
+
+"Republikaner gewinnen in *ärmeren Bundesstaaten* $\implies$ 
+höhere Zustimmung zu Republikanern bei *Menschen mit niedrigerem Einkommen*" ?
+
+### Einkommen & Politische Einstellung
+
+\begin{center}
+\includegraphics[height=.6\textheight]{pics/5-presidential2004-income.png}
+\end{center}
+
+$\implies$ Aus "Republikaner gewinnen in *ärmeren Bundesstaaten*" folgt **nicht**
+"Höhere Zustimmung zu Republikanern bei *Menschen mit niedrigerem Einkommen*"!
+<!-- auflösung: "in poor states, rich people are much more likely than poor people to vote for the Republican presidential candidate. in rich states, income has a very low correlation with vote preference."  -->
+
+\scriptsize 
+Quelle: Gelman, A. et al. (2007) "Rich State, Poor State, Red State, Blue State: What’s the Matter with Connecticut?" *Quarterly Journal of Political Science* 2: 345-367.
+\normalsize
+
+###  Einkommensniveau & Kindersterblichkeit
+
+```{r 05-eco-gapminder-prep, echo = FALSE, fig.height = 5, message=FALSE, warning=FALSE}
+# https://simplystatistics.org/2017/08/08/code-for-my-educational-gifs/
+data(gapminder, package = "dslabs")
+
+west <- c("Western Europe","Northern Europe","Southern Europe",
+          "Northern America","Australia and New Zealand")
+present_year <- 2010
+
+## wrangle data and summarize 
+gapminder <- gapminder %>%
+  filter(year %in% present_year & !is.na(gdp) & !is.na(infant_mortality)) %>%
+  mutate(income = gdp/population/365)
+
+gapminder <- gapminder %>%
+  mutate(group = case_when(
+    .$region %in% west ~ "'Westen'",
+    .$region %in% "Northern Africa" ~ "Nordafrika",
+    .$region %in% c("Eastern Asia", "South-Eastern Asia") ~ "Ostasien",
+    .$region == "Southern Asia"~ "Südasien",
+    .$region %in% c("Central America", "South America", "Caribbean") ~ "Lateinamerika",
+    .$continent == "Africa" & .$region != "Northern Africa" ~ "Afrika (Sub-Sahara)",
+    .$region %in% c("Melanesia", "Micronesia", "Polynesia") ~ "Pazifik")) %>%
+  filter(!is.na(group))
+
+color_blind_friendly_cols <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+
+gapminder_group <- gapminder %>% group_by(group) %>%
+  summarize(income = sum(gdp)/sum(population)/365,
+            infant_mortality = sum(infant_mortality*population)/sum(population))
+
+highlight <- c("Sierra Leone", "Seychelles", "Equatorial Guinea",  "Sudan", "Botswana", "Tunisia",
+  "Cambodia","Singapore","Chile", "Haiti", "Bolivia",
+  "United States","Sweden", "Angola", "Serbia")
+
+gap_scale1 <- scale_x_continuous(trans = "log2", limits = c(0.25, 150),
+    breaks = c(2^(-2:6), 150)) 
+gap_scale1_coarse <- scale_x_continuous(trans = "log2", limits = c(0.25, 150),
+    breaks = c(2^(seq(-2, 8, by = 3)))) 
+gap_scale2 <- scale_y_continuous(trans = "log2", limits = c(1, 110),
+    breaks = c(2^(0:6), 110))
+xlabel <- xlab(expression("Einkommensniveau [BSP/Person/Tag in $] ("~log[2]~")")) 
+ylabel <- ylab(expression("Kindersterblichkeit (pro 1000, "~log[2]~")")) 
+
+
+afrika <- gapminder %>%  filter(group %in% "Afrika (Sub-Sahara)")
+
+cors <- gapminder %>% filter(group != "Pazifik") %>% group_by(group) %>% 
+  summarize(cor = paste0("r[xy]^{SP} ==", round(cor(income, infant_mortality, m = "sp"), 2)))
+```
+
+```{r 05-eco-gapminder-1, echo = FALSE, fig.height = 5}
+gapminder_group %>% ggplot(aes(income, infant_mortality, label = group, color = group)) +
+  gap_scale1 + gap_scale2 + xlabel + ylabel +
+  geom_text_repel(size = 4, show.legend = FALSE) +
+  geom_point(size=5, show.legend = FALSE) +
+  ggtitle(bquote(r[xy]^{SP} ==~.(round(with(gapminder_group,cor(income, infant_mortality, m = "sp")),2)))) +
+  scale_color_manual(values=color_blind_friendly_cols)
+```
+
+### Einkommensniveau & Kindersterblichkeit
+
+```{r 05-eco-gapminder-2, echo = FALSE, fig.height = 5}
+gapminder_group %>%
+  filter(!group %in% "Afrika (Sub-Sahara)") %>%
+    ggplot(aes(income, infant_mortality, label = group, color = group)) +
+  gap_scale1 + gap_scale2 + xlabel + ylabel +
+  geom_text_repel(size = 4, show.legend = FALSE, alpha= .5) +
+  geom_point(size=4, show.legend = FALSE) +
+  scale_color_manual(values=color_blind_friendly_cols) +
+  geom_point(mapping = aes(income, infant_mortality, col = group), 
+    data = afrika, alpha = 0.5, size = 3, show.legend = FALSE) +
+  geom_text_repel(mapping=aes(income, infant_mortality, col = group, label = country),
+                  size = 4, show.legend = FALSE,
+                  data = afrika %>% filter(country %in% highlight))+
+    ggtitle(" ")
+```
+
+
+### Einkommensniveau & Kindersterblichkeit
+
+```{r, 05-eco-gapminder-3, echo = FALSE, fig.height = 5}
+gapminder %>%
+  ggplot(aes(income, infant_mortality, col = group, label = country)) +
+  gap_scale1 + gap_scale2 + xlabel + ylabel +
+  geom_point(alpha = 0.5, size = 3, show.legend = FALSE) +
+  geom_text_repel(size = 4, show.legend = FALSE,
+                   data = gapminder %>% filter(country %in% highlight)) +
+   ggtitle(bquote(r[xy]^{SP} ==~.(round(with(gapminder, cor(income, infant_mortality, m = "sp")),2)))) +
+  scale_alpha_manual(values=c(1,1)) +
+  scale_color_manual(values=color_blind_friendly_cols) +
+  guides(colour = guide_legend(override.aes = list(alpha = 1)))
+```
+
+### Einkommensniveau & Kindersterblichkeit
+
+```{r, 05-eco-gapminder-4, echo = FALSE, fig.height = 5}
+gapminder %>% 
+  filter(group != "Pazifik") %>% 
+  ggplot(aes(income, infant_mortality, col = group)) +
+  scale_color_manual(values=color_blind_friendly_cols[-5]) +
+  gap_scale1_coarse + gap_scale2 + xlabel + ylabel +
+  facet_wrap(~group) +
+  geom_point(alpha = 0.5, size = 3, show.legend = FALSE) +
+  geom_label(data = cors, x = .4, y = 1, col = "black", aes(label = cor), parse = TRUE) +
+  theme(legend.position = "none") + theme(strip.text = element_text(size = 12))
+```
+
+\begin{scriptsize}
+Quelle: WHO/OECD, Stand 2010 (\texttt{dslabs::gapminder})
+\end{scriptsize}

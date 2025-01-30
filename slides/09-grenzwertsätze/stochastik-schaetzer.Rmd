@@ -1,0 +1,64 @@
+## Ausblick: Parameterschätzung
+
+### Schätzung
+
+*Bisher kennengelernt:* 
+
+- Kennwerte und Methoden zur Beschreibung von Daten
+- Theoretische Eigenschaften von Zufallsvariablen
+
+*Offensichtlich:*  
+Enger Zusammenhang -- Beobachtete Kennwerte haben theoretische Entsprechungen (z.B. $\bar x \leftrightarrow E(X)$) 
+
+*Verbindung:*  
+Daten als Realisierungen von Zufallsvariablen
+
+*Nächster Schritt:*  
+Rückschluss von Daten auf *Verteilungsparameter* der zugrundeliegenden Zufallsvariablen  
+$\; \implies$ **Schätzung**
+
+
+### Ausblick: Schätzung
+
+*Daten:* $x_1, \dots, x_n$  
+*Modellannahme:* Daten sind Realisierungen einer ZV $X$ mit unbekannten Verteilungsparametern $\symbf{\theta} = (\theta_1, \dots, \theta_p)$. 
+
+3 Fragestellungen
+
+1. Welcher Wert von $\symbf{\theta}$ "passt" am besten zu den beobachteten Daten?  
+$\implies$ *Punktschätzung* der Parameter 
+2. Wie präzise wird dieser "beste" Wert durch die Daten bestimmt?  
+Welcher Bereich von Parameterwerten ist mit den beobachteten Daten "ähnlich gut verträglich"?  
+$\implies$ *Intervallschätzung*, Quantifizierung von Unsicherheit
+3. Ist ein bestimmter vorgebener Wert von $\symbf{\theta}$ "kompatibel" mit den beobachteten Daten?  
+$\implies$ *statistische Tests*
+
+$\rightarrow$ Stoff spätererer Vorlesungen 
+
+### Ausblick: Schätzung
+
+- Ein **Schätzer** (= *estimator*) definiert eine *neue Zufallsvariable* als Funktion von anderen Zufallsvariablen .  
+  *Theoretische Perspektive:* $\bar X_n(\omega) = \tfrac{1}{n} \sum^n_{i=1} X_i(\omega)$  
+
+- Ein Schätzer ist eine *Rechenvorschrift* um aus beobachteten Daten einen konkreten numerischen Wert (= **Schätzung**, *estimate*) zu bestimmen.  
+  *Empirische Perspektive:* $\bar x = \tfrac{1}{n} \sum^n_{i=1} x_i$
+
+- Die Rechenvorschrift wird so konstruiert, dass die Verteilung der resultierenden Zufallsvariable möglichst 
+ präzise und/oder unverzerrte Schlüsse auf die **zu schätzende** Verteilungseigenschaft/-parameter (= *estimand*) zulässt.  
+ z.B. $\bar x \approx E(X)$ für großes $n$
+
+Im Folgenden:  
+Eigenschaften des *arithmetischen Mittels* und der *ECDF* eines beobachteten Merkmals als Schätzer für den *Erwartungswert* bzw. für die *Verteilungsfunktion* der zugrundeliegenden Verteilung.
+
+### Ausblick: Schätzung
+
+\centering
+![](pics/estimate-estimator.jpeg){height=80%}
+
+\raggedright
+\tiny
+Abb.: Simon Grund (`@simongrund89`)
+<!-- https://twitter.com/simongrund89/status/1085929122860359680?ref_src=twsrc%5Etfw-->
+
+
+

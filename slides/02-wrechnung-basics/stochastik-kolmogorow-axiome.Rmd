@@ -1,0 +1,86 @@
+## Axiome von Kolmogorov 
+
+### Definitionen
+
+:::{.block}
+#### Def.: **Disjunkte Ereignisse**  
+ $A,B \subseteq \Omega$ sind *disjunkte Ereignisse* wenn gilt: $$A \cap B = \emptyset$$.
+:::
+
+:::{.block}
+#### Def.: **Komplement/Gegenereignis**  
+Das *Gegenereignis* oder *Komplement* $\bar A$ von $A \subseteq \Omega$ ist 
+$$\bar A := \Omega \setminus A = \{\omega \in \Omega: \omega \notin A\}$$
+:::
+
+- Ereignis und Gegenereignis sind disjunkt.
+- Disjunkte Ereignisse können also nie gleichzeitig bzw. gemeinsam eintreten  
+  $\implies$ *Elementarereignisse* in $\Omega$ bilden eine Menge von *disjunkten* Ereignissen.
+  
+
+\note{setbuilder notation einführen}
+
+### Kolmogorov-Axiome
+
+Wir betrachten 
+
+- eine beliebige (abzählbare) Grundgesamtheit $\Omega$ 
+- und eine Funktion $P$ auf der Potenzmenge ${\mathcal P}(\Omega)$, die jedem Ereignis $A \subseteq \Omega$ eine
+Wahrscheinlichkeit zuordnet. 
+
+:::{.block}
+#### Def.: **Wahrscheinlichkeitsverteilung**  
+$P$ ist eine *Wahrscheinlichkeitsverteilung auf $\Omega$*, wenn sie folgende
+Eigenschaften erfüllt:
+
+- **A1:** $P(A)\geq 0$ \quad für beliebige $A \subseteq \Omega$  (*Positivität*)  
+- **A2:** $P(\Omega) = 1$ (*Sicheres Ereignis*)  
+- **A3:** $P(A \cup B) = P(A) + P(B)$ für *disjunkte* Ereignisse $A,B \subseteq \Omega$ (*Additivität*)
+:::
+
+### Folgerungen 
+
+- $P(\cup_{i=1}^n\: A_i) = \sum\limits_{i=1}^n P(A_i)$ 
+für *paarweise disjunkte* Ereignisse $A_1, A_2, ..., A_n \subset \Omega$
+- $A \subseteq B \implies P(A) \leq P(B)$ 
+- $P(\bar{A}) = 1 - P(A)$
+- $P(A \cup B) = P(A) + P(B) - P(A \cap B)$ für beliebige $A, B \subset \Omega$
+
+\note[item]{
+{\em Beweis $P(A) \leq P(B)$ falls $A \subseteq B$:}\\[0,3cm]
+$B = B \setminus A \:\cup A $ \\
+und daher \\
+$P(B) \stackrel{\rm A3}{=} P(B \setminus A)
++ P(A) \stackrel{\rm A1}{\geq} P(A)$\\
+}
+\note[item]{mit Venn-Diagrammen grafisch zeigen!}
+\note[item]{Frage: $P(\emptyset)$? }
+
+
+### Anwendung: Siebformel von Sylvester-Poincaré 
+
+James Sylvester [1814-1897], Jules Henri Poincaré [1854-1912]  
+
+Für beliebiges $n \in \mathbb{N}$ und Ereignisse $A_1, A_2,..., A_n \subseteq \Omega$ gilt:
+
+\begin{align*}
+P(A_1 \cup A_2 \cup \dots \cup A_n) & = \sum_i P(A_i) - \sum_{i < j} P(A_i \cap A_j)\\
+& \qquad + \sum_{i < j < k} P(A_i \cap A_j \cap A_k)\\
+& \qquad \qquad - \dots \pm \dots \pm \dots + (-1)^{n+1} \cdot P(A_1 \cap A_2 \cap ... \cap A_n)
+\end{align*}
+
+Bsp.:  
+\begin{align*}
+P(A \cup B \cup C)  =& (P(A) + P(B) + P(C))  \\
+                     &  - (P(A \cap B) + P(A \cap C) + P(B \cap C)) \\
+                     &    + P(A \cap B \cap C)
+\end{align*}
+
+### Anwendung: Bonferroni Ungleichungen 
+
+$\implies$ Abschätzung von $P(A_1 \cup A_2 \cup ... \cup A_n)$  
+
+Für beliebige Ereignisse $A_1, A_2, ... A_n$ gilt
+$$\sum_i P(A_i) \geq P\left(\bigcup_{i=1}^n A_i\right) \geq\sum_i P(A_i) - \sum_{i<j} P(A_i \cap A_j)$$
+
+\note[item]{mit Venn-Diagrammen grafisch zeigen: summe 2er schnitte muss größer als summe 3erschnitte sein, etc.}

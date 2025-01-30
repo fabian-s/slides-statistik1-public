@@ -1,0 +1,196 @@
+## Zufallsvektoren
+
+### Gemeinsame Verteilungsfunktion
+
+:::{.block}
+#### Def.:  **Gemeinsame Verteilungsfunktion**
+Die *gemeinsame Verteilungsfunktion* zweier Zufallsvariablen $X$ und $Y$ auf dem Wahrscheinlichkeitsraum $(\Omega, P)$ ist die Funktion
+\begin{align*}
+F_{X,Y}(x,y) &:=  P(X \leq x \land Y \leq y) \\
+      &\phantom{}= P(\{\omega \in \Omega: X(\omega) \leq x \land Y(\omega) \leq y\})
+\end{align*}
+:::
+
+Beachte: 
+
+- $F_{X,Y}(x, y)$ ist eine Funktion von $\mathbb{R} \times \mathbb{R}$ nach $[0, 1]$
+- Definition gilt für stetige und diskrete ZV
+
+### Gemeinsame Wahrscheinlichkeitsfunktion 
+
+:::{.block}
+#### Def.:  **Gemeinsame Wahrscheinlichkeitsfunktion**
+Für *diskrete* ZVn $X$ und $Y$ mit Trägern $T_X,  T_Y$ ist die *gemeinsame Wahrscheinlichkeitsfunktion* von $X$ und $Y$
+\begin{align*}
+f_{X,Y}(x,y) &= P(X = x \land Y = y) \\
+             &= P(X = x, Y = y) \qquad \forall\; x \in T_X, y \in T_Y
+\end{align*}
+:::
+
+Für solche *diskreten* ZVn $X$ und $Y$ gilt dann auch:
+$$
+F_{X,Y}(x,y) = \sum_{ \{u: u \leq x \} } \sum_{\{v: v \leq y \} } f_{X,Y}(u,v) 
+$$
+
+
+### Gemeinsame Dichtefunktion
+
+#### Def.: Gemeinsame Dichtefunktion
+Die *gemeinsame Dichtefunktion* $f_{X,Y}(x,y)$ von *stetigen* $X$ und $Y$ wird über ihre *gemeinsame Verteilungsfunktion* $F_{X,Y}(x,y)$ definiert:
+$$
+F_{X,Y}(x,y) = \int_{v = -\infty}^y \int_{u = -\infty}^x f_{X,Y}(u,v)\,du\,dv \qquad\forall\; x,y \in \mathbb{R}
+$$
+
+
+### Eigenschaften von $f(x,y)$ und $F(x,y)$ 
+
+- Im Folgenden meist $f(x,y)$ statt $f_{X,Y}(x,y)$, $F(x,y)$ statt $F_{X,Y}(x,y)$
+- Für die gemeinsame Dichte stetiger ZV gilt überall dort wo $f(x,y)$ stetig ist:
+$$
+\frac{\partial^2 F(x,y)}{\partial x \, \partial y} = f(x,y)
+$$
+- Genau wie univariate Dichtefunktionen ist die gemeinsame Dichtefunktion $f(x,y)$ normiert:
+$$
+\int_{-\infty}^{+\infty} \int_{-\infty}^{+\infty} f(x,y) \, dx \, dy = 1
+$$
+- ... und ihr Integral ergibt Wahrscheinlichkeiten für beliebige Teilmengen $A \subseteq (\mathbb{R} \times \mathbb{R})$:
+$$
+P((X, Y) \in A) = \int_{A} f(x, y)\, d (x, y)
+$$
+
+\note[item]{Wdh. diskrete Größen. Alles analog!}
+\note[item]{Def. Randverteilung? Erwartungswert?}
+
+
+### Transformationsregel für $E(g(X, Y))$ 
+
+Seien $X$ und $Y$ zwei ZVn mit gemeinsamer Wahrscheinlichkeits-/Dichtefunktion $f_{X,Y}(x,y)$.  
+Sei $g(x, y)$ eine reellwertige Funktion.  
+Dann gilt für $Z = g(X, Y)$
+$$
+E(Z)=E(g(X, Y)) = \begin{cases} \sum_x \sum_y g(x,y) \: f_{X,Y}(x,y) & X, Y \text{ diskret}\\
+\int_{-\infty}^{\infty} \int_{-\infty}^{\infty} g(x,y) \: f_{X,Y}(x,y) dx dy & X, Y \text{ stetig}
+\end{cases}
+$$
+Beispiel: für $Z = X \cdot Y$ gilt daher
+$$
+E(X \cdot Y) = \sum_x \sum_y x \cdot y \cdot  f_{X,Y}(x,y)
+$$
+bzw.
+$$
+E(X \cdot Y) =  \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} x \cdot y \cdot  f_{X,Y}(x,y)dx dy  \mbox{.}
+$$
+
+### Randverteilungen 
+
+Die Dichten der *Randverteilungen* von $X$ und $Y$ sind gegeben durch:
+
+\begin{align*}
+f_X(x) &= \begin{cases} \sum_{y \in T_Y} f_{X,Y}(x,y) & \text{ $X, Y$ diskret} \\
+                      \int_{-\infty}^{+\infty} f_{X,Y}(x,y)\,dy & \text{ $X, Y$ stetig} 
+                      \end{cases} \\
+\intertext{bzw.}
+f_Y(y) &= \begin{cases} \sum_{x \in T_X} f_{X,Y}(x,y) & \text{ $X, Y$ diskret} \\
+                      \int_{-\infty}^{+\infty} f_{X,Y}(x,y)\,dx & \text{ $X, Y$ stetig} 
+                      \end{cases}
+\end{align*}
+
+Die **gemeinsame Verteilung** von $X$ und $Y$ enthält
+i. A. mehr Information als in den **Randverteilungen** von $X$ und
+$Y$ steckt  
+$\leadsto$ stochastische (Un-)Abhängigkeit
+
+<!-- bsp von dichten zeigen! -->
+
+### Allgemeine Zufallsvektoren 
+
+Allgemeiner kann man mehr als 2 *Zufallsvariablen* $X_1, \dots, X_n$ zu einem **Zufallsvektor**
+$\symbf{X}=(X_1, ..., X_n)$ der Dimension $n$ zusammenfassen.
+
+Dieser hat dann Wahrscheinlichkeits-/Dichtefunktion
+$$
+f_{\symbf{X}}(\symbf{x}) = f_{X_1,..., X_n}(x_1, ..., x_n)
+$$
+und Verteilungsfunktion
+$$
+F_{\symbf{X}}(\symbf{x}) = P(X_1 \leq x_1 \land \dots \land X_n \leq x_n) .
+$$
+Die Randverteilungen der einzelnen Komponenten sind entsprechend
+\begin{small}
+$$
+f_{X_i}(x_i)  =  \begin{cases} \sum_{\symbf{x}: \symbf{x}_i = x_i} f_{\symbf{X}}(\symbf{x}) & \text{diskretes } \symbf{X} \\
+ \int_{-\infty}^{+\infty}\dots\int_{-\infty}^{+\infty}f_{\symbf{X}}(u_1, \dots, u_{i-1}, x_i, u_{i+1}, \dots, u_n) \,du_1  \dots d u_{i-1} d u_{i+1} \dots du_n & \text{stetiges } \symbf{X}
+ \end{cases} .
+$$
+\end{small}
+
+### Beispiel: Betrug beim Münzwurf 
+
+Ein Lehrer bittet seine Schüler, eine (faire) Münze
+zweimal zu werfen, und das Ergebnis ("Kopf" = 0, "Zahl" = 1) für
+jeden Wurf zu notieren. Sei $X$ das Ergebnis des ersten Wurfes und $Y$
+das Ergebnis des zweiten Wurfes.
+
+- Ein gewissenhafter Schüler folgt genau den Anweisungen
+des Lehrers und notiert das Ergebnis $X_G$ und $Y_G$.
+Ein fauler Schüler wirft nur eine Münze und notiert das erzielte
+Ergebnis zweimal: $X_F$ und $Y_F$.\
+- Berechne die gemeinsame Wahrscheinlichkeitsfunktion von
+$(X_G, Y_G)$ und von $(X_F, Y_F)$.
+
+
+\note{
+Randverteilungen aufstellen, gemeinsame Verteilung über Unabh.
+}
+
+### Beispiel: Trinomialverteilung 
+
+
+Ein Experiment, bei dem ein von drei möglichen
+Ereignissen mit Wahrscheinlichkeit $\pi_1$, $\pi_2$ und $\pi_3$
+($\pi_1+\pi_2+\pi_3=1$) auftritt, wird unabhängig voneinander $n$-mal
+wiederholt. Sei $\symbf{X}$ ein drei-dimensionaler Zufallsvektor, dessen
+$i$-te Komponente angibt, wie oft das $i$-te Ereignis eingetreten ist.  
+
+Beispiel:  
+
+In einer Population mit Häufigkeiten $\pi_1$, $\pi_2$ und
+$\pi_3$ der Genotypen $aa$, $ab$ und $bb$ wird eine Stichprobe vom
+Umfang $n$ gezogen. Die Anzahlen $X_1$, $X_2$ und $X_3$ der drei
+Genotypen ist dann **trinomialverteilt**.
+
+### Beispiel: Trinomialverteilung 
+
+
+Ein drei-dimensionaler diskreter Zufallsvektor $\symbf{X}$
+heißt **trinomialverteilt**, falls er Träger
+$$T_X = \{ \symbf{x}=(x_1,x_2,x_3): x_i \in \{0,1,..., n\} \;\land\;
+x_1+x_2+x_3=n\}$$
+und Wahrscheinlichkeitsfunktion
+$$
+f_{\symbf{X}}(\symbf{x}) = f_{X_1, X_2, X_3}(x_1, x_2, x_3) = \frac{n!}{x_1!x_2!x_3!}
+\pi_1^{x_1} \, \pi_2^{x_2} \, \pi_3^{x_3}
+$$
+besitzt.  
+\ 
+
+### Multinomialverteilung
+
+Man schreibt kurz: $\symbf{X} \sim {\mathcal M}_3(n ,\symbf{\pi}=(\pi_1,\pi_2,\pi_3))$  
+Hierbei steht ${\mathcal M}_3$ für die **Multinomialverteilung** der Dimension 3.  
+
+Allgemein:  
+
+Ein ${\mathcal M}_d(n, \symbf\pi)$-verteilter Zufallsvektor $\symbf{X}$ hat 
+
+- Träger $T_X = \{(x_1, x_2, \dots, x_d): x_j \in \{0, 1, \dots, n\} \;\forall\, j  \;\land\; \sum^d_{j=1} x_j = n\}$ 
+- und Parameter $\symbf\pi = (\pi_1, \dots, \pi_d)$ mit $\pi_j \in [0, 1] \;\forall\, j$ und $\sum^d_{j=1} \pi_j = 1$.  
+
+Die Multinomialverteilung ist eine Verallgemeinerung der Binomialverteilung auf unabhängige Wiederholungen von identischen Zufallsexperimenten mit mehr als zwei möglichen Ergebnissen.  
+\  
+
+Für ihre Randverteilungen gilt:  $X_i \sim {\mathcal B}(n, \pi_i)$.  
+
+
+
+

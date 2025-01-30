@@ -1,0 +1,54 @@
+## Lagemaße für Zufallsvariablen
+
+### Einleitung 
+
+Bereits kennengelernt:  
+
+- *Empirische* Lage- und Streuungsmaße   
+  (Mittelwerte, Median, Modus, Stichprobenvarianz, MAD, ...)  
+  die Verteilung der *Beobachtungen eines Merkmals in einer Stichprobe* beschreiben.
+
+Jetzt:  
+
+- *Theoretische* Entsprechungen für *Verteilungen von Zufallsvariablen*.
+
+
+
+(Spätere Veranstaltungen: Schätztheorie -- welche empirischen Maße sind wie gut geeignet um bestimmte theoretische Größen aus Daten zu schätzen?)
+
+
+### Modus einer Zufallsvariablen 
+
+::: {.block}
+#### Definition: **Modus** einer Zufallsvariable  
+Der *Modus* einer Zufallsvariable $X$ ist ein Wert $x_{Mod}$, für den
+gilt:
+$$
+f(x_{Mod}) \geq f(x)\;\forall\, x \in T_X 
+$$
+:::
+
+$\implies$ Modi (auch: Modalwerte) sind die globalen Maximumsstellen der Dichte-/Wahrscheinlichkeitsfunktion von $X$.
+
+- Genau wie der empirische Modus eines beobachteten Merkmals ist der Modus einer ZV weder notwendigerweise eindeutig noch muss er existieren.
+
+
+### Median und Quantile einer Zufallsvariablen 
+
+Mediane und andere Quantile einer Zufallsvariable $X$ sind inhaltlich analog zu ihren empirischen Analoga definiert -- es gilt:
+
+::: {.block}
+#### Definition: **Quantil** einer Zufallsvariable
+Das *$p$-Quantil* $\tilde x_p$ einer ZV $X$, mit $p \in [0, 1]$, ist 
+$$\tilde x_p := {\arg\min}_{x \in T_X}\{x: F_X(x) \geq p\}.$$
+:::
+
+Also: 
+
+- der kleinste Wert für den die Verteilungsfunktion mindestens den Wert $p$ annimmt.
+- der kleinste Wert der mindestens mit Wahrscheinlichkeit $p$ unterschritten wird
+- für stetige ZV mit strikt positiver Dichte bzw. streng monotoner Verteilungsfunktion gilt: $$\tilde x_p = F_X^{-1}(p)$$
+- $F_X^{-1}(p)$ heißt auch *Quantilfunktion* von $X$.
+
+<!-- TODO: bsp mit Quantilfunktion? -->
+

@@ -1,0 +1,291 @@
+## Univariate statistische Kennwerte
+
+### Statistische Kennwerte
+
+**Lagemaßzahlen**
+
+-  Wo liegt die "Mitte" der beobachteten Werte?
+-  Welche Merkmalsausprägung ist "typisch" für dieses Merkmal?
+-  Wo liegen die meisten beobachteten Daten?
+
+\vskip 3em
+
+**Streuungsmaßzahlen**
+
+-  Wie groß ist die Schwankung der beobachteten Werte? 
+-  Über welchen Bereich erstrecken sich die Merkmalsausprägungen?
+-  Wie nah zusammen/weit entfernt voneinander liegen die beobachteten Werte?
+
+
+## Statistische Kennwerte: Lagemaße
+
+### Lagemaß: Modus
+
+Definition: **Häufigster Wert**
+
+Eigenschaften:
+
+- oft nicht eindeutig
+- nur bei gruppierten Daten oder bei Merkmalen mit wenigen Ausprägungen sinnvoll
+- direkt übertragbar bei allen *eindeutigen* Transformationen
+- geeignet für alle Skalenniveaus
+
+
+### Lagemaß: Median
+
+Definition: Der **Median** ($\tilde x_{\text{med}}$) ist der Wert für den gilt
+
+- mindestens 50\% der Daten sind kleiner oder gleich $\tilde x_{\text{med}}$,
+- mindestens 50\% der Daten sind größer oder gleich $\tilde x_{\text{med}}$.
+
+\begin{equation*}
+ \tilde x_{\text{med}} = \left\{ \begin{array}{ll}
+                                  x_{(k)} & \text{falls } k=\frac{n+1}{2}
+\text{ ganze Zahl} \\
+                                  \frac{1}{2} \left(x_{(k)} + x_{(k+1)}\right) &
+\text{falls } k=\frac{n}{2} \text{ ganze Zahl}
+                              \end{array}\right.
+\end{equation*}
+
+- $x_{(1)},\ldots,x_{(n)}$ sind **geordnete Werte**
+- Alternative Definition: $\tilde x_{\text{med}} \in [x_{(k)}, x_{(k+1)}]$ 
+falls $k = \frac{n}{2}$ ganze Zahl.
+
+### Eigenschaften des Medians
+
+-  anschaulich
+-  geeignet für mindestens ordinale Daten
+-  robust gegenüber extremen Werten
+-  direkt übertragbar bei monotonen Transformationen
+
+Formal:  
+
+- Wert, der die Summe der *absoluten* Differenzen zu den beobachteten Werten minimiert:
+$$\tilde x_{\text{med}} = \arg\min_x \sum^n_{i=1} |x_i - x|$$
+
+### Lagemaß: Quantil
+
+Definition: Das $p$-**Quantil** ist der Wert $\tilde x_p$ für den gilt
+
+- mindestens Anteil $p$ der Daten sind kleiner oder gleich $\tilde x_p$,
+- mindestens Anteil $1-p$ der Daten sind größer oder gleich $\tilde x_p$.
+
+\begin{equation*}
+ \tilde x_{p} = \left\{ \begin{array}{ll}
+                      x_{(k)} & \text{falls $np$ keine ganze Zahl und $k$
+kleinste Zahl $>$ $np$} \\
+                      \in \left[x_{(k)} ; x_{(k+1)}\right] & \text{falls
+$k=np$ ganze Zahl}
+                  \end{array}\right.
+\end{equation*}
+
+- Viele alternative Definitionen von Quantilen (in `R` 9 Typen!), die sich aber meist nur für extreme Quantile relevant unterscheiden.
+- $p$-Quantil $\equiv (100\cdot p)$-Perzentil
+- Der Median ist das 0.5-Quantil bzw. 50-Perzentil 
+
+```{r, child="boxplots.Rmd"}
+```
+
+### Der Mittelwert (arithmetisches Mittel)
+
+\begin{equation*}
+      \bar x = \frac{1}{n} \sum_{i=1}^n x_i
+\end{equation*}
+
+- bekanntestes Lagemaß
+- stark beeinflusst von extremen Werten
+- geeignet für intervallskalierte Daten
+- "Durchschnitt" oder "Schwerpunkt" der Daten 
+
+Formal:  
+
+- Wert, der die Summe der *quadrierten* Differenzen zu den beobachteten Werten minimiert:
+$$\bar x = \arg\min_x \sum^n_{i=1} (x_i - x)^2$$
+
+### Mittelwert bei gruppierten Daten
+
+\begin{eqnarray*}
+  \bar x &=& \frac{1}{n} \sum_{i=1}^n x_i \\
+             &=& \frac{1}{n}(x_1 + x_2 + \ldots + x_n) \\
+             &=& \frac{1}{n} \sum_{j=1}^k h_j a_j \\
+             &=& \sum_{j=1}^k f_j a_j
+\end{eqnarray*}
+
+$h_j:$ Häufigkeit von $a_j$
+
+### Gewichteter Mittelwert
+
+Allgemeiner gilt:
+
+Der *gewichtete Mittelwert* mit Gewichten $w_i \geq 0, i= 1, \dots, n$
+ist 
+$$\bar x_W = \frac{1}{\sum^n_{i=1} w_i} \sum^n_{i=1} w_i x_i$$
+
+### Das geometrische Mittel
+
+\begin{equation*}
+      \bar x_G = \sqrt[\leftroot{2}\uproot{2} \text{\scriptsize $n$}]{\prod_{i=1}^n x_i}
+\end{equation*}
+
+-  rücktransformiertes arithmetisches Mittel auf der $\log$-Skala:
+  \begin{displaymath}
+  \bar x_G = \exp \left(\frac{1}{n}\sum_{i=1}^{n} \log (x_{i})\right)
+  \end{displaymath}
+-  nur geeignet für positive, mindestens intervallskalierte Merkmale
+- Anwendung: Durchschnitt von Änderungsraten, z.B. durchschnittliche Verzinsung
+
+Allgemein: Das geometrische Mittel ist der richtige Mittelwert für Merkmale, 
+deren Ausprägungen als multiplikative Faktoren zu interpretieren sind. 
+
+### Das geometrische Mittel: Beispiel
+
+Anfangskapital 100 €, Entwicklung über 3 Quartale 
+
+- Q1: 20% Gewinn (Faktor 1.2)
+- Q2: 50% Gewinn (Faktor 1.5)
+- Q3: 40% Verlust (Faktor 0.6)
+  \
+  
+\scriptsize
+```r
+r <- c(1.2, 1.5, 0.6)
+cumprod(c(100, r)) # Kapital nach jedem Quartal
+## [1] 100 120 180 108
+
+mean(r) # arithmetisches Mittel der Renditen
+## [1] 1.1 # --> "durchschnittlich" 10% Gewinn pro Quartal ?
+
+exp(mean(log(r))) # geom. Mittel der Renditen
+## [1] 1.026 # --> "durchschnittlich" 2.6% Gewinn pro Quartal !
+
+100 * mean(r)^3 # "effektive" Verzinsung pro Quartal in%??
+## [1] 133.1
+# 10% pro Quartal entspräche 100 -> 133 über 3 Quartale, also falsch
+
+100 * exp(mean(log(r)))^3  # effektive Verzinsung pro Periode in %!! 
+## [1] 108
+# 2.6% pro Quartal ergibt 100 -> 108 über 3 Quartale, also korrekt
+```
+
+### Das harmonische Mittel
+
+\begin{displaymath}
+    \bar x_H = \frac{1}{\frac{1}{n} \sum_{i=1}^{n} \frac{1}{x_i}}
+\end{displaymath}
+
+Das harmonische Mittel entspricht dem inversen Mittelwert der inversen Werte:
+\begin{displaymath}
+   \bar x_H = \left(\frac{1}{n} \sum_{i=1}^n   \frac{1}{x_i}\right)^{-1}
+\end{displaymath}
+
+- Anwendung für Mittelwerte von Quotienten/Verhältnissen unterschiedlicher Skalen, z.B. 
+   - Geschwindigkeiten (in $\tfrac{km}{h}, \tfrac{m}{s}$ etc) 
+   - Kurs-Gewinn-Verhältnisse (PE ratios, in $\tfrac{\text{Aktienkurs in }€}{\text{Gewinn in }€}$)
+
+### Bsp: harmonisches Mittel
+
+Sie fahren die ersten 100 km mit 30km/h und die zweiten 100km mit 100 km/h.  
+Was ist Ihre Durchschnittsgeschwindigkeit?
+
+Gesamtstrecke: $200$ km  
+Gesamtzeit: $3.33 h +  1h = 4.33h$  
+$\implies \frac{200 km}{4.33 h} = 46.2$km/h.
+
+Arithm. Mittel:  
+$\bar x = \frac{30 + 100}{2} = 65$, wäre also 65 km/h und offensichtlich falsch.
+
+Harmonisches Mittel:  
+$\bar x_H = \frac{1}{\tfrac{1}{2}\left(\tfrac{1}{30}+ \tfrac{1}{100}\right)} = \tfrac{600}{13} = 46.2$, also 46.2 km/h!
+  
+
+### Allgemeine Transformation des Arithm. Mittels
+
+Lineare Transformation:
+
+\begin{eqnarray*}
+  g(x) &=& a + bx \\
+  y_i &=& a + bx_i \;\Rightarrow\; \bar y = a + b \bar x
+\end{eqnarray*}
+
+d.h.
+\begin{eqnarray*}
+  \overline{a + bx} &=& a + b \bar x \\
+  \overline{g(x)} &=& g(\bar x)
+\end{eqnarray*}
+
+
+**Generell ist $\overline{g(x)} \neq g(\bar x)$!**
+
+
+
+<!-- ### Allgemeine Transformation des Mittelwerts II -->
+
+<!-- Für **konvexe** Funktionen $g$ gilt: -->
+
+<!-- \begin{eqnarray*} -->
+<!--   g(\bar x) &\leq& \overline{g(x)}  \\ -->
+<!--   g\left(\frac{1}{n} \sum_{i=1}^n x_i\right) &\leq& \frac{1}{n} -->
+<!-- \sum_{i=1}^n g(x_i) \\ -->
+<!--   &&\qquad \text{(Jensen-Ungleichung)} -->
+<!-- \end{eqnarray*} -->
+
+<!-- \begin{tabular}{ll} -->
+<!--   $g$ konvex: $\Leftrightarrow$ & $g(\lambda x + (1 - \lambda) y) \leq -->
+<!-- \lambda g(x) + (1-\lambda) g(y)$ \\ -->
+<!--   & $\forall \lambda \in [0,1], \ \ x,y \in D_g$ -->
+<!-- \end{tabular} -->
+
+<!-- **Beispiel:**\ -->
+<!-- $\bar x^2 \leq \overline{x^2}$ -->
+
+
+
+<!-- ### Vergleich I -->
+
+<!-- Es gilt allgemein für positive $x_i$: -->
+<!--   \begin{equation*} -->
+<!--       \bar x_H \leq \bar x_G \leq \bar x -->
+<!--   \end{equation*} -->
+
+<!-- **Beweis:**   -->
+
+<!-- a)  Zeige $\bar x_G \leq \bar x$:   -->
+
+<!-- $g: t \rightarrow \log(t)$ konkav, da $g''(t) = - \frac{1}{t^2} < 0$   -->
+<!-- $\Rightarrow \log(\bar x) \geq \overline{\log(x)}$   -->
+<!-- $\Rightarrow \bar x \geq \exp\left(\overline{log(x)}\right) = \exp -->
+<!-- \left(\frac{1}{n} \sum_{i=1}^n \log(x_i)\right)$   -->
+<!-- $\phantom{\Rightarrow x}= \left(\prod_{i=1}^n  -->
+<!-- \exp\left(\log(x_i)\right)\right)^{\frac{1}{n}} = \bar x_G$ -->
+
+<!-- ### Vergleich II -->
+
+<!-- b)  Zeige $\bar x_H \leq \bar x_G$: -->
+
+<!-- $g_2: t \rightarrow \frac{1}{\exp(t)}$ ist konvex, da $g_2''(t) =  \frac{1}{\exp(t)} \geq 0$   -->
+<!-- Benutze transformierte Daten $\log(x_1), \ldots , \log(x_n)$   -->
+<!-- $g_2 \left(\frac{1}{n} \sum\limits_{i=1}^n \log(x_i)\right) \leq \frac{1}{n} \sum\limits_{i=1}^n \left(\exp (\log(x_i))^{-1}\right)$   -->
+<!-- $\Rightarrow \frac{1}{\sqrt[n]{\prod\limits_{i=1}^n x_i}} \leq -->
+<!-- \frac{1}{n} \sum\limits_{i=1}^n \frac{1}{x_i}$   -->
+<!-- $\Rightarrow \underbrace{\sqrt[n]{\prod\limits_{i=1}^n x_i}}_{\bar x_G} \geq -->
+<!--   \underbrace{\frac{1}{\frac{1}{n} \sum\limits_{i=1}^n \frac{1}{x_i}}}_{\bar x_H}$ -->
+  
+### Getrimmtes Mittel
+
+Um die Ausreißerempfindlichkeit von $\bar x$ abzuschwächen
+definiert man
+
+\begin{equation*}
+    \bar x_{\alpha} = \frac{1}{n-2r} \sum_{i=r+1}^{n-r} x_{(i)}
+\end{equation*}
+
+- $x_{(i)}:$ geordnete $x$-Werte  
+- $r$ ist die größte ganze Zahl mit $r \leq n \alpha$
+
+Es wird also "unten" und "oben" jeweils der Anteil $\alpha$ der extremsten Werte abgeschnitten:  
+**$\alpha$-getrimmtes Mittel**
+
+Alternative:
+
+**Winsorisiertes** Mittel (**gestutztes** Mittel):  
+Der Anteil $\alpha$ der extremsten Werte wird **durch die entsprechenden oberen/unteren Quantile ersetzt**. 

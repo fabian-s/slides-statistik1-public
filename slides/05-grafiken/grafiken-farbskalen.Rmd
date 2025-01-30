@@ -1,0 +1,335 @@
+```{r, setup-colorscales, echo = FALSE}
+library(colorspace)  
+wheel <- function(col, radius = 1, border = NA, lty = 0, label = NA, ...) {
+  ggplot(data.frame(y = 1, x = 1:length(col), cols = factor(1:length(col)))) + 
+    geom_tile(aes(x = x, y = y, color = cols, fill = cols)) +
+    scale_colour_manual(values = col) + scale_fill_manual(values = col) + theme_nothing() + 
+    theme(legend.position = "none") + ylim(c(0,1.5)) + coord_polar()
+}  
+#pie(rep(1, length(col)), col = col, radius = radius, border = border, lty= lty, label = label, ...) 
+
+pal <- function(col, border = NA) 
+{
+  ggplot(data.frame(y = 1, x = 1:length(col), cols = factor(1:length(col)))) + 
+    geom_raster(aes(x = x, y = y, fill = cols)) +
+    scale_colour_manual(values = col) + scale_fill_manual(values = col) + theme_nothing() + 
+    theme(legend.position = "none") + ylim(c(0,1.5))
+  # n <- length(col)
+  # plot(0, 0, type="n", xlim = c(0, 1), ylim = c(0, 1), axes = FALSE, xlab = "", ylab = "")
+  # rect(0:(n-1)/n, 0, 1:n/n, 1, col = col, border = border)
+}
+```
+
+## Farbskalen
+
+### Wahrnehmung Ästhetischer Zuordnungen
+
+Kodieren von Information durch:
+
+- **Position, Längen & Abstände**: am einfachsten zu erkennen, v.a. für gemeinsame/parallele Skalen
+- **Winkel & Steigung**: visueller Eindruck abhängig von Richtung & vom Seitenverhältnis der Darstellung
+- **Flächen**:  
+   - lang/dünn erscheint größer als kompakt/konvex
+   - abhängig von Farbe: hellere Flächen wirken größer
+
+- **Farbe**: oft schwierig präzise Vergleiche abzulesen
+    - dennoch allgegenwärtig da *kombinierbar* mit anderen grafischen Elementen.
+
+### Farbwahrnehmung
+
+- Farbwahrnehmung ist komplex
+- Farben für Grafiken so wählen dass **Wahrnehmungseinheitlichkeit** berücksichtigt wird:
+  - Grün-/Gelbtöne werden bei gleicher Sättigung intensiver wahrgenommen als andere Farben
+  - Sehschwächen mitbedenken
+
+### Farbwahrnehmung
+
+Rot-Grün-Sehschwäche  
+(Protanopia: Prävalenz 6%, Deuteranopia: Prävalenz 2%)
+
+
+\includegraphics[height=.7\textheight]{pics/5-colorblind.png}
+
+\begin{scriptsize} 
+aus  Wong, B. \textit{Nature Methods} \textbf{8}(6), p. 441 (2011).
+\end{scriptsize}
+
+
+
+
+### Wahrnehmungseinheitlichkeit: Veranschaulichung
+
+```{r, echo = FALSE, scale = .85}
+par(mar = c(1,1,1,1), bty= "n", xaxt = "n", yaxt = "n")
+layout(matrix(1:6, 2))
+contour(volcano)
+image(volcano, col = grey.colors(40), useRaster = TRUE)
+image(volcano, col = rainbow(50)[1:45], useRaster = TRUE)
+image(volcano, col = hcl.colors(40, palette = "viridis"), useRaster = TRUE)
+image(volcano, col = hcl.colors(40, palette = "Terrain"), useRaster = TRUE)
+image(volcano, col = hcl.colors(40, palette = "Purples"), useRaster = TRUE)
+```
+
+
+
+### Farbräume
+
+- repräsentieren Farben als (Vektoren von) Zahlen
+- "technische" Farbräume: RGB (Rot-Grün-Blau, für Bildschirme)  oder CMYK (Cyan-Magenta-Yellow-Black, für Druck)
+- Additive Farbräume wie RGB / CMYK entsprechen nicht Funktionsweise der menschlichen Wahrnehmung, deswegen:
+- Farbräume: 
+    - HCL: hue-chroma-luminance
+    - HSV: hue-saturation-value
+    - Lab: Lightness-a (grün-rot Achse) - b (blau-gelb Achse)
+
+### HCL - Farbraum
+
+- **Farbton**: dominante Wellenlänge (*hue*) 
+    - kreisförmige Dimension (grün - gelb - rot - lila - blau - grün)
+```{r, echo = FALSE, out.height = ".3\\textheight", out.width = ".3\\textheight", fig.width = 6}
+wheel(hcl(h = seq(0, 360, l = 101), c = 100, l = 60))
+```
+- **Farbsättigung** (*chroma*)  
+- **Helligkeit** (*luminance*) 
+
+### HCL - Farbraum
+
+- **Farbton**: dominante Wellenlänge (*hue*) 
+    - kreisförmige Dimension (rot - gelb - grün - blau - lila - rot)
+- **Farbsättigung** (*saturation*, *chroma*)  
+```{r, echo = FALSE, out.height = ".45\\textheight"}
+#layout(t(1:3))
+pal(hcl(h = 50, c = seq(0, 100, l = 21), l = 70)) +
+pal(hcl(h = 150, c = seq(0, 100, l = 61), l = 70)) +
+pal(hcl(h = 300, c = seq(0, 100, l = 61), l = 70))
+```
+- **Helligkeit** (*brightness*, *luminance*) 
+
+### HCL - Farbraum
+
+- **Farbton**: dominante Wellenlänge (*hue*) 
+    - kreisförmige Dimension (rot - gelb - grün - blau - lila - rot)
+- **Farbsättigung** (*saturation*, *chroma*)  
+- **Helligkeit** (*brightness*, *luminance*) 
+```{r, echo = FALSE, out.height = ".5\\textheight"}
+#layout(t(1:3))
+pal(hcl(h = 20, l = seq(0, 100, l = 101), c = 100)) +
+pal(hcl(h = 100, l = seq(0, 100, l = 101), c = 100)) +
+pal(hcl(h = 200, l = seq(20, 100, l = 101), c = 100))
+```
+
+
+### HCL - Farbraum
+
+- **Farbton**: dominante Wellenlänge (*hue*) 
+    - kreisförmige Dimension (rot - gelb - grün - blau - lila - rot)
+- **Farbsättigung** (*saturation*, *chroma*)
+- **Helligkeit** (*brightness*, *luminance*) 
+```{r, echo = FALSE, out.height = ".7\\textheight", out.width = ".7\\textheight", fig.width = 6}
+plist <- list()
+for (c in (3:1)/3 * 100) 
+  for (l in (1:3)/3 * 100) {
+    p <- wheel(hcl(h = seq(0, 360, l = 51), c = c, l = l))
+    plist <- c(plist, list(p))
+  }
+do.call(gridExtra::grid.arrange, c(plist, ncol = 3, nrow = 3))
+```
+
+### Farbskalentypen
+
+- **Qualitativ**: (eher) nur für nominales Skalenniveau.
+- **Sequentiell**: mindestens ordinales Skalenniveau
+- **Divergierend**: mindestens ordinales Skalenniveau, mit "neutralem" mittleren Wert.
+
+### Farbskalen für nominales Skalenniveau
+
+**Qualitative Farbskalen** für nominale Variablen: 
+
+- Fokus auf **Unterscheidbarkeit** bei gleichbleibender "Prägnanz" 
+- Variierender *Farbton* bei konstanter Sättigung & Helligkeit (korrigiert für menschliche Wahrnehmung)
+```{r, echo = FALSE, out.height = ".5\\textheight"}
+layout(matrix(1:4, 2))
+(pal(qualitative_hcl(6)) +
+pal(viridis(6))) / (
+pal(RColorBrewer::brewer.pal(6, "Set3")) +
+pal(ggthemes::colorblind_pal()(6)) + 
+  theme_void() + theme(legend.position = "none") +
+  labs(subtitle = "barrierefrei - lesbar auch bei Sehschwächen"))
+```
+
+### Beispiel
+
+```{r, maps-setup, echo = FALSE, results = "hide", message = FALSE}
+library(maps)
+library(socviz)
+library(tidyverse)
+library(patchwork)
+data("organdata")
+data("election")
+
+us_states <- map_data("state")
+world <- map_data("world")
+
+election$ev <- with(election, ev_dem + ev_rep)
+election$region <- tolower(election$state)
+election <- mutate(election,
+                   vowel = str_extract(region, "[aeiou]"))
+us_states_elec <- left_join(us_states, election)
+
+theme_map <- function(base_size=9, base_family="") {
+    require(grid)
+    theme_bw(base_size=base_size, base_family=base_family) %+replace%
+        theme(axis.line=element_blank(),
+              axis.text=element_blank(),
+              axis.ticks=element_blank(),
+              axis.title=element_blank(),
+              panel.background=element_blank(),
+              panel.border=element_blank(),
+              panel.grid=element_blank(),
+              panel.spacing=unit(0, "lines"),
+              plot.background=element_blank(),
+              legend.position = "bottom",
+              plot.caption = element_text(hjust = 0)
+              )
+}
+```
+
+
+```{r, vowels-setup, echo = FALSE, message = FALSE}
+vowels <- ggplot(data = us_states_elec,
+            mapping = aes(x = long, y = lat,
+                          group = region, fill = vowel)) + 
+  geom_polygon(color = "gray90", size = 0.1) +
+  coord_map(projection = "albers", lat0 = 39, lat1 = 45) + 
+  theme_map() + guides(fill = 
+        guide_legend("Erster Vokal im Namen", 
+          nrow = 1, label.position = "bottom", 
+          title.position = "top"))
+```
+
+```{r, vowels-map, echo = FALSE, message = FALSE}
+vowels_default <- vowels + scale_fill_discrete_qualitative() +
+  labs(caption = "Sinnvoll, aber viel rot-grün Kontrast")
+vowels_harmonic <- vowels + scale_fill_discrete_qualitative("Harmonic") +
+  labs(caption = "Bessere Balance, weniger rot-grün")
+vowels_viridis <- vowels + scale_fill_manual(values = viridis::viridis(7)) + 
+      labs(caption = "Ok, aber Farben implizieren Ordnung")
+vowels_bad <- vowels + scale_fill_manual(values = palette()[2:6]) + 
+      labs(caption = "Schlechte Farbskala! Zu viel (rot-grün) Kontrast & Sättigung.")
+(vowels_default + vowels_harmonic) / 
+(vowels_viridis + vowels_bad)
+```
+
+### Sequentielle Farbskalen
+
+- konstanter Farbton und Sättigung, variiere nur Helligkeit
+```{r, echo = FALSE, out.height = ".25\\textheight", echo = FALSE}
+pal(hcl.colors(50, palette = "Grays")) +
+pal(rev(hcl.colors(50, palette = "Oslo"))) +
+pal(hcl.colors(50, palette = "Purples 2"))
+```
+
+- mehrere Farbtöne, mit variierender Sättigung und abnehmender Helligkeit
+```{r, echo = FALSE, out.height = ".25\\textheight", echo = FALSE, message = FALSE}
+pal(hcl.colors(50, palette = "BuPu")) +
+pal(hcl.colors(50, palette = "YlGnBu")) +
+pal(hcl.colors(50, palette = "Terrain"))
+```
+- Höchste Prägnanz für Werte die mit niedriger Helligkeit kodiert werden.
+
+### Beispiel
+
+```{r, ev-prep, echo = FALSE, message = FALSE}
+ev_white <- ggplot(data = us_states_elec,
+            mapping = aes(x = long, y = lat,
+                          group = region, fill = ev, color = ev)) + 
+  geom_polygon(size = 0.1) +
+  geom_polygon(fill = NA, color = scales::alpha("black", .3), size = 0.1) +
+  coord_map(projection = "albers", lat0 = 39, lat1 = 45) + 
+  theme_map() + guides(fill = 
+        guide_colorbar("Electoral College Votes", 
+          nrow = 1, label.position = "bottom", 
+          title.position = "top"), color = guide_none())
+```
+
+```{r, ev-map, echo = FALSE, message = FALSE}
+ev_grey <- ev_white + 
+  scale_fill_continuous_sequential(c1 = 0, c2 = 0, l1 = 0, l2 = 90) +
+  scale_color_continuous_sequential(c1 = 0, c2 = 0, l1 = 0, l2 = 90) +
+  labs(caption = "Sinnvoll, aber evtl. kleine Unterschiede verwischt")
+ev_purple <- ev_white + 
+  scale_fill_continuous_sequential(palette = "Purples 2") +
+  scale_color_continuous_sequential(palette = "Purples 2") +
+   labs(caption = "Sinnvoll, aber evtl. kleine Unterschiede verwischt")
+ev_magma <- ev_white + 
+  scale_fill_viridis_c(option = "plasma", direction = 1) +
+  scale_color_viridis_c(option = "plasma", direction = 1) +
+  labs(caption = "Sinnvoll, aber besser dunklere Farben für 'wichtigere' Werte") #+
+  #geom_polygon(color = "gray80", size = 0.1)
+ev_cividis <- ev_white + 
+  scale_fill_viridis_c(direction = -1) + 
+  scale_color_viridis_c(direction = -1) + 
+   labs(caption = "Sinnvoll, überbetont evtl. kleine Unterschiede durch Farbübergänge") #+
+   
+(ev_grey + ev_purple) / 
+(ev_magma + ev_cividis)
+```
+
+
+### Divergierende Farbskalen
+
+- 2 sequentielle Skalen mit je konstantem Farbton werden kombiniert
+```{r, echo = FALSE, out.height = ".25\\textheight", echo = FALSE, message = FALSE}
+pal(hcl.colors(50, palette = "Blue-Red")) +
+pal(hcl.colors(50, palette = "Tropic")) +
+pal(hcl.colors(50, palette = "Broc"))
+```
+- "neutrale" Mitte: höchste Prägnanz für obere und untere Enden der Skala
+
+
+### Beispiel: Divergierende Farbskalen
+
+```{r, trump-prep, echo = FALSE, message = FALSE, results = "hide"}
+trump <- ggplot(data = us_states_elec,
+            mapping = aes(x = long, y = lat,
+                          group = region, 
+                          fill = pct_trump - 50,
+                          col = pct_trump - 50)) + 
+  geom_polygon(size = 0.1) +
+  geom_polygon(fill = NA, color = scales::alpha("black", .3), size = 0.1) +
+  coord_map(projection = "albers", lat0 = 39, lat1 = 45) + 
+  theme_map() + guides(fill = 
+        guide_colorbar("Minority / Majority for Trump [2016, %]", 
+          nrow = 1, label.position = "bottom", 
+          title.position = "top"), 
+        color = guide_none())
+```
+
+```{r, trump-map, echo = FALSE, message = FALSE}
+trump_rb <- trump + 
+  scale_fill_continuous_diverging(breaks = c(-40, -20, 0, 20), limits = c(-45, 20)) + 
+  scale_color_continuous_diverging(breaks = c(-40, -20, 0, 20), limits = c(-45, 20)) 
+trump_rb2 <- trump + 
+  scale_fill_gradient2(breaks = c(-40, -20, 0, 20), limits = c(-45, 20), 
+                                       low = scales::muted("blue"), high = scales::muted("red")) +
+  scale_color_gradient2(breaks = c(-40, -20, 0, 20), limits = c(-45, 20), 
+                                       low = scales::muted("blue"), high = scales::muted("red"))
+trump_cividis <- trump + 
+  scale_fill_viridis_c(option = "cividis", end = .85) +
+  scale_color_viridis_c(option = "cividis", end = .85) +
+  labs(caption = "Mitte nicht viel weniger prägnant als Enden.")
+trump_magma <- trump + 
+  scale_fill_viridis_c(option = "plasma") +
+  scale_color_viridis_c(option = "plasma") +
+  labs(caption = "Nicht divergierend: Mitte nicht viel weniger prägnant als Enden, zu bunt")
+
+(trump_rb + trump_rb2) / 
+(trump_cividis + trump_magma)
+```
+
+### Beispiel: Divergierende Farbskalen
+Differenz der Änderungsraten von Median-Bruttolöhnen und Neuvertragsmieten 2014 - 2018:  
+
+\includegraphics[height=.7\textheight]{pics/5-mietenlöhne.png}
+
+Quelle: IW, [Berliner Morgenpost (17.01.2020)](https://interaktiv.morgenpost.de/gehalt-miete-studie/)

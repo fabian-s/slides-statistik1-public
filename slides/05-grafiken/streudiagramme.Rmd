@@ -1,0 +1,186 @@
+```{r, 04-mietspiegel-prep, echo=FALSE}
+url <- "http://chris.userweb.mwn.de/statistikbuch/mietspiegel2015.txt"
+mietspiegel <- read.table(file = url, header = TRUE) %>% 
+  filter(rooms < 8 & nm < 4000) %>% 
+  mutate(`Beste Lage` = factor(wohnbest, labels = c("nein", "ja")),
+    `# Zimmer` = ordered(rooms), 
+    `Baujahr (gruppiert)` = cut(bj, 
+      c(1918, 1945, 1960, 1980, 2013), dig.lab = 4, include.lowest = TRUE))
+```
+
+
+## Metrische Merkmale: Visualisierung gemeinsamer Verteilungen
+
+
+### Bivariate metrische Daten
+
+Daten liegen zu zwei metrischen Merkmalen vor:  
+Datenpaare $(x_i,y_i),\; i=1,\ldots,n$  
+
+**Fragen:**  
+Gibt es einen Zusammenhang zwischen diesen Merkmalen?  
+Wie lässt sich dieser Zusammenhang beschreiben?  
+Was ist die *gemeinsame* Verteilung dieser Merkmale?
+\ 
+
+Einfachste grafische Darstellung: **Streudiagramm.**  
+Die Datenpaare entsprechen Punkten in der Ebene ("Punktwolke")
+
+**Beispiele:**  
+$X$: Wohnfläche [$m^2$]  
+$Y$: Nettomiete [€] oder Quadratmetermiete [€/$m^2$]
+
+
+### Streudiagramm
+
+```{r, 04-scatter-1, echo=FALSE}
+ggplot(mietspiegel, aes(x = wfl, y = nm)) + 
+  geom_point(alpha = .3) + ylab("Nettomiete [EUR]") + 
+  xlab(expression("Wohnfläche ["~m^2~"]"))
+```
+
+
+### Streudiagramm
+
+```{r, 04-scatter-2, echo=FALSE}
+ggplot(mietspiegel, aes(x = wfl, y = nmqm)) + 
+  geom_point(alpha = .3) + ylab(expression("Quadratmetermiete [EUR/"~m^2~"]")) + 
+  xlab(expression("Wohnfläche ["~m^2~"]"))
+```
+
+### Darstellung für größere Datenmengen:
+
+Besser mit halbdurchsichtigen & kleineren Symbolen - Overplotting vermeiden:
+```{r, 04-scatter-3, echo=FALSE}
+ggplot(mietspiegel, aes(x = wfl, y = nmqm)) + 
+    geom_point(alpha = .15, size = 1) + ylab(expression("Quadratmetermiete [EUR/"~m^2~"]")) + 
+    labs(x = expression("Wohnfläche ["~m^2~"]"), subtitle = ".. so ist es lesbar") +
+ggplot(mietspiegel, aes(x = wfl, y = nmqm)) + 
+    geom_point(size = 2.5) + ylab(expression("Quadratmetermiete [EUR/"~m^2~"]")) + 
+    labs(x = expression("Wohnfläche ["~m^2~"]"), subtitle = ".. so nicht")
+```
+
+### Darstellung für größere Datenmengen
+
+Alternativen: Anzahlen/Dichte direkt über Farbe codieren (`hexbin`-Plots, 2D-Kerndichte):
+```{r, 04-hexbin, echo=FALSE}
+miet_hex <- ggplot(mietspiegel, aes(x = wfl, y = nmqm)) + 
+  geom_hex(bins = 40) +
+  viridis::scale_fill_viridis("Anzahl", option = "magma", direction = -1) +
+  ylab(expression("Quadratmetermiete [EUR/"~m^2~"]")) + 
+  xlab(expression("Wohnfläche ["~m^2~"]")) +
+  theme_gray() + 
+  theme(legend.position = "top") 
+
+miet_kde <- ggplot(
+  bind_rows(replicate(3, mietspiegel, simplify = FALSE)), #sonst Skala zu klein
+  aes(x = wfl, y = nmqm)) + 
+  stat_density2d(aes(fill = ..density..), alpha = .8, geom = "raster", contour = FALSE) +
+  viridis::scale_fill_viridis("2D-Dichte (Schätzung)", option="magma", direction = -1) +
+  ylab(expression("Quadratmetermiete [EUR/"~m^2~"]")) + 
+  xlab(expression("Wohnfläche ["~m^2~"]")) +
+  theme_gray() + theme(legend.position = "top")
+grid.arrange(
+  miet_hex,
+  miet_kde,
+  ncol = 2, widths = c(1, 1.1))
+```
+
+### Darstellung für größere Datenmengen
+
+in 3D:
+![](pics/04-miethex-3d.png)
+
+\scriptsize
+R-Pakete: `{rayshader}`, `{plotly}`, `{ggrgl}`
+
+```{r, 04-hexbin-3d, eval=FALSE, echo = FALSE}
+# rendering too slow -- precompute & save as .png
+plot_gg(miet_hex)
+render_camera(zoom=0.8,theta=-30,phi=40)
+render_movie("miethex-3d.mp4")
+render_snapshot(filename = "miethex-3d.png")
+```
+
+###  Streudiagramme mit diskreter Drittvariable
+
+```{r, 04-scatter3-disc1, echo=FALSE}
+ggplot(mietspiegel, aes(x = wfl, y = nmqm)) + 
+  geom_point(alpha = .5, aes(colour =`# Zimmer`), size = 1) +
+  ylab(expression("Quadratmetermiete [EUR/"~m^2~"]")) + 
+  xlab(expression("Wohnfläche ["~m^2~"]")) + 
+  scale_colour_discrete("# Zimmer", direction = -1)  
+```
+
+###  Streudiagramme mit diskreter Drittvariable
+
+```{r, 04-scatter3-disc2, echo=FALSE, fig.height=4, scale = .85}
+ggplot(mietspiegel, aes(x = wfl, y = nmqm)) + 
+  geom_point(alpha = .2, size = 1) +
+  scale_fill_distiller("Anzahl", palette = "Greys", direction = 1) +
+  ylab(expression("Quadratmetermiete [EUR/"~m^2~"]")) + 
+  xlab(expression("Wohnfläche ["~m^2~"]")) + 
+  facet_grid(~`# Zimmer`, labeller = label_both) +
+  theme(legend.position = "bottom")
+```
+
+###  Streudiagramme mit diskreter Drittvariable
+
+```{r, 04-scatter3-disc3, echo=FALSE, fig.height=4, scale = .85}
+ggplot(mietspiegel, aes(x = wfl, y = nmqm)) + 
+  geom_hex(bins = 40) +
+  viridis::scale_fill_viridis("Anzahl", option = "magma", direction = -1)  +
+  ylab(expression("Quadratmetermiete [EUR/"~m^2~"]")) + 
+  xlab(expression("Wohnfläche ["~m^2~"]")) + 
+  facet_grid(~`# Zimmer`, labeller = label_both) +
+  theme(legend.position = "bottom") + 
+  theme_gray()
+```
+
+###  Streudiagramme mit stetiger Drittvariable
+
+```{r, 04-scatter3-cont, echo=FALSE}
+ggplot(mietspiegel, aes(x = wfl, y = nmqm)) + 
+  geom_point(alpha = .4, aes(colour = bj)) +
+  ylab(expression("Quadratmetermiete [EUR/"~m^2~"]")) + 
+  xlab(expression("Wohnfläche ["~m^2~"]")) + 
+  scale_color_gradientn("Baujahr", 
+    colours = c(scales::muted("red"), "gray80", scales::muted("blue"))) + 
+  theme_minimal()
+```
+
+###  Streudiagramme mit stetiger Drittvariable
+
+```{r, 04-scatter3-cont2b, echo=FALSE}
+ggplot(mietspiegel, aes(x = wfl, y = nmqm)) + 
+  geom_point(alpha = .4, aes(colour = `bj`)) +
+  ylab(expression("Quadratmetermiete [EUR/"~m^2~"]")) + 
+  xlab(expression("Wohnfläche ["~m^2~"]")) + 
+  scale_colour_continuous()  
+```
+
+###  Streudiagramme mit gruppierter Drittvariable
+
+```{r, 04-scatter3-cont3a, echo=FALSE, fig.height=4, scale = .85}
+ggplot(mietspiegel, aes(x = wfl, y = nmqm)) + 
+  geom_hex(bins = 30) +
+  viridis::scale_fill_viridis("Anzahl", option = "magma", direction = -1) +
+  ylab(expression("Quadratmetermiete [EUR/"~m^2~"]")) + 
+  xlab(expression("Wohnfläche ["~m^2~"]")) + 
+  facet_grid(~ `Baujahr (gruppiert)`) +
+  theme(legend.position = "bottom") + 
+  theme_gray()
+```
+
+###  Streudiagramme mit gruppierter Drittvariable
+
+```{r, 04-scatter3-cont3b, echo=FALSE, fig.width = 5, fig.height = 7, scale = .85}
+ggplot(mietspiegel, aes(x = wfl, y = nmqm)) + 
+  geom_hex(bins = 30) +
+  viridis::scale_fill_viridis("Anzahl", option = "magma", direction = -1) +
+  ylab(expression("Quadratmetermiete [EUR/"~m^2~"]")) + 
+  xlab(expression("Wohnfläche ["~m^2~"]")) + 
+  facet_grid(`Baujahr (gruppiert)` ~ .) +
+  theme(legend.position = "right") + 
+  theme_gray()
+```

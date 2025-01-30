@@ -1,0 +1,471 @@
+---
+title: "Connections between Inner Products, Vector Norms, Angles, and Sample Covariance and Correlation"
+format: html
+self-contained-math: true
+---
+
+
+This doc revisits some fundamental concepts in linear algebra and statistics: **inner products**, **vector norms**, **angles between vectors**, and how these relate to **sample covariance** and **correlation**. By the end, we’ll see how the correlation between two data vectors is simply the cosine of the angle between them. 
+
+---
+
+### 1. Inner Products (Scalar Products)
+
+The **inner product** (also called the **scalar product** or **dot product**) is a way to multiply two vectors and get a single number (a scalar). For two vectors $\mathbf{u}$ and $\mathbf{v}$ in $\mathbb{R}^n$, the inner product is defined as:
+
+$$
+\mathbf{u} \cdot \mathbf{v} = \mathbf{u}^T \mathbf{v} = \sum_{i=1}^n u_i v_i
+$$
+
+This means you multiply corresponding components of the vectors and add up the results. For example, if $\mathbf{u} = [1, 2, 3]$ and $\mathbf{v} = [4, 5, 6]$, their inner product is:
+
+$$
+\mathbf{u} \cdot \mathbf{v} = (1 \cdot 4) + (2 \cdot 5) + (3 \cdot 6) = 4 + 10 + 18 = 32
+$$
+
+The inner product^[often written as $\langle u ,v \rangle$ instead of $u \cdot v$ ] has two key properties:
+
+1. It measures to what extent the two vectors "point in the same direction" [(Detailed explanation)](https://www.3blue1brown.com/lessons/dot-products#geometric-interpretation)
+2. So it is closely related to the **angle** between the two vectors.
+
+---
+
+### 2. Vector Norms
+
+The **norm** of a vector $\mathbf{u}$, denoted $\|\mathbf{u}\|$, is a measure of its length. For a vector in $\mathbb{R}^n$, the norm is defined as:
+
+$$
+\|\mathbf{u}\| = \sqrt{\sum_{i=1}^n u_i^2}
+$$
+
+This is essentially the Euclidean distance from the origin to the point represented by $\mathbf{u}$. For example, if $\mathbf{u} = [3, 4]$, its norm is:
+
+$$
+\|\mathbf{u}\| = \sqrt{3^2 + 4^2} = \sqrt{9 + 16} = 5
+$$
+
+The norm is related to the inner product because:
+
+$$
+\|\mathbf{u}\| = \sqrt{\mathbf{u} \cdot \mathbf{u}}
+$$
+
+---
+
+### 3. Angles Between Vectors
+
+The inner product and norm are used to define the **angle** between two vectors. For vectors $\mathbf{u}$ and $\mathbf{v}$, the cosine of the angle $\theta$ between them is given by:
+
+$$
+\cos \theta = \frac{\mathbf{u} \cdot \mathbf{v}}{\|\mathbf{u}\| \|\mathbf{v}\|}
+$$
+
+This formula connects geometry (angles) with algebra (inner products and norms). Let’s break it down:
+- The numerator $\mathbf{u} \cdot \mathbf{v}$ measures how aligned the vectors are.
+- The denominator $\|\mathbf{u}\| \|\mathbf{v}\|$ scales the result by the lengths of the vectors.
+
+If $\mathbf{u}$ and $\mathbf{v}$ point in exactly the same direction, $\cos \theta = 1$. If they are perpendicular, $\cos \theta = 0$. If they point in exactly opposite directions, $\cos \theta = -1$.
+
+---
+
+### 4. Sample Standard Deviation
+
+Now, let’s connect these ideas to statistics. Suppose we have two sets of data represented as vectors $\mathbf{x} = [x_1, x_2, \dots, x_n]$ and $\mathbf{y} = [y_1, y_2, \dots, y_n]$.
+
+
+Define $\bar{x}$ and $\bar{y}$ as the means of $\mathbf{x}$ and $\mathbf{y}$, respectively.
+If we center the data by subtracting the means:
+
+$$
+\mathbf{x}_c = [x_1 - \bar{x}, x_2 - \bar{x}, \dots, x_n - \bar{x}]
+$$
+
+$$
+\mathbf{y}_c = [y_1 - \bar{y}, y_2 - \bar{y}, \dots, y_n - \bar{y}]
+$$
+
+The standard deviations are defined as:
+
+$$S_x = \sqrt{\frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^2} = \frac{\|\mathbf{x}_c\|}{\sqrt{n-1}}$$
+
+and
+
+$$S_y = \sqrt{\frac{1}{n-1} \sum_{i=1}^n (y_i - \bar{y})^2} = \frac{\|\mathbf{y}_c\|}{\sqrt{n-1}}$$
+
+We can see that they are equal to the norms of the centered data vectors, divided by the square root of their number of entries minus one.
+
+### 5. Sample Covariance and Correlation
+
+The **sample covariance** measures how much $\mathbf{x}$ and $\mathbf{y}$ change together:
+
+$$
+S_{xy} = \frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})
+$$
+
+
+The **correlation** $\rho$ between $\mathbf{x}$ and $\mathbf{y}$ is a normalized version of covariance, scaled to lie between -1 and 1:
+
+$$
+\rho = \frac{S_{xy}}{S_x S_y}
+$$
+
+where $S_x$ and $S_y$ are the standard deviations of $\mathbf{x}$ and $\mathbf{y}$.
+
+---
+
+### 6. Correlation as the Cosine of the Angle
+
+Here’s the key insight: **The correlation $\rho$ is exactly the cosine of the angle between the centered versions of $\mathbf{x}$ and $\mathbf{y}$.**
+
+The correlation $\rho$ can be rewritten as:
+
+$$
+\rho = \frac{S_{xy}}{S_x S_y} =  \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^n (x_i - \bar{x})^2}\sqrt{\sum_{i=1}^n (y_i - \bar{y})^2}} = \frac{\mathbf{x}_c \cdot \mathbf{y}_c}{\|\mathbf{x}_c\| \|\mathbf{y}_c\|}
+$$
+
+This is exactly the formula for $\cos \theta\,$! So:
+
+$$
+\rho = \cos \theta
+$$
+
+The correlation is negative if the data vectors point in (roughly) opposite directions (their angle is between 180° and 90°, with a maximum of -1 if they are exactly opposite with an angle of 180°),
+zero if they are orthogonal (their angle is 90°), and positive if the point in similar directions (their angle is betwen 90° and 0°, with a maximum of 1 if they are exactly parallel with an angle of 0°).
+
+---
+
+### Summary
+
+1. The **inner product** measures alignment between vectors.
+2. The **norm** measures the length of a vector.
+3. The **angle** between vectors is determined by their inner product and norms.
+4. The **standard deviation** of a data vector is simply the **norm of the centered data vector**, divided by the square root of their dimension.
+5. **Sample covariance** measures how two data vectors vary together and is simply the **inner product of the centered data vectors** divided by their dimension.
+6. **Correlation** is the cosine of the angle between the centered data vectors: their inner product divided by the product of their norms.
+
+By understanding these relationships, you can see how linear algebra (vector norms and products), geometry (angles) and statistics (correlation) are deeply connected. A lot of the maths we need for data analysis is just applied linear algebra, so it's well worth getting a good intuitive grasp of core concepts -- I strongly recommend 3blue1brown's [Linear Algebra](https://www.3blue1brown.com/topics/linear-algebra) videos for that.
+
+--------------------------------------------------------------
+
+*(adapted from DeepSeek R1 output)*
+
+::: {.content-hidden}
+
+Great! Let’s work through numerical examples with **3 data points in 2 dimensions** to illustrate **negative**, **zero**, and **positive correlations**. We’ll use simple numbers to make the calculations easy to follow.
+Geometrically, we essentially change our perspective: instead of looking at the row space of the data matrix (3 observations/points in 2 dimensions) we look at the column space of the data matrix (2 data vectors with 3 entries each). 
+
+---
+
+### Setup
+We’ll define two vectors $\mathbf{x} $and $\mathbf{y} $with 3 data points each:
+
+$$
+\mathbf{x} = [x_1, x_2, x_3], \quad \mathbf{y} = [y_1, y_2, y_3]
+$$
+
+```{r}
+library(plot3D)  # For 3D arrows and lines
+library(gridExtra) # For arranging plots side by side
+
+plot_vectors <- function(data_matrix) {
+  # Extract x and y vectors
+  x <- data_matrix[, 1]
+  y <- data_matrix[, 2]
+  
+  # Center the data
+  x_centered <- x - mean(x)
+  y_centered <- y - mean(y)
+  d_centered <- cbind(x_centered, y_centered)
+  
+  # Create a data frame for the 2D scatterplot
+  df <- data.frame(
+    x = x,
+    y = y,
+    label = c("i", "j", "k")
+  )
+  
+  layout(t(1:2))
+
+  # 2D Scatterplot
+  plot(df$x, df$y, pch = c("i", "j", "k"),
+       main = "Data Points & Centered Data Vectors",
+       xlab = "x", ylab = "y", bty = "n")
+  axis(1, col = "red", lwd = 2)
+  axis(2, col = "blue", lwd = 2)
+  
+  opar <- par(no.readonly = TRUE)
+  par(mar = .1*opar$mar, xpd = NA)
+  
+  # 3D Plot of Centered Vectors using base R graphics
+  # plot coordinate axes
+  arrows3D(
+    x0 = 0, y0 = 0, z0 = 0,
+    x1 = 1, y1 = 0, z1 = 0,
+    col =  "black", 
+    main = "Centered Data Vectors",
+    theta = 50, phi = 30, expand = 0.8,
+    xlim = range(c(d_centered[1,], 0, 2, -2)),
+    ylim = range(c(d_centered[2,], 0, 2, -2)),
+    zlim = range(c(d_centered[3,], 0, 2, -2)),
+    scale = FALSE, box = FALSE, length = 0.1, lwd = .5 
+  )
+  segments3D(
+    x0 = max(d_centered[1,], 0), y0 = 0, z0 = 0,
+    x1 = min(d_centered[1,], 0), y1 = 0, z1 = 0,
+    col =  "black", lwd = 0.1, add = TRUE
+  )
+  arrows3D(
+    x0 = 0, y0 = 0, z0 = 0,
+    x1 = 0, y1 = 1, z1 = 0,
+    col =  "black", length = 0.1, lwd = .5, 
+    add = TRUE 
+  )
+  segments3D(
+    y0 = max(d_centered[2,], 0), x0 = 0, z0 = 0,
+    y1 = min(d_centered[2,], 0), x1 = 0, z1 = 0,
+    col =  "black", lwd = 0.1, add = TRUE
+  )
+  arrows3D(
+    x0 = 0, y0 = 0, z0 = 0,
+    x1 = 0, y1 = 0, z1 = 1,
+    col =  "black", length = 0.1, lwd = .5, 
+    add = TRUE
+  )
+  segments3D(
+    z0 = max(d_centered[3,], 0), x0 = 0, y0 = 0,
+    z1 = min(d_centered[3,], 0), x1 = 0, y1 = 0,
+    col =  "black", lwd = 0.1, add = TRUE
+  )
+  points3D(x = c(1.1,0,0), y = c(0,1.1,0), z = c(0,0,1.1), 
+           pch = c("i", "j", "k"), add = TRUE, 
+           col = "darkgray", colvar = NULL)
+  
+  # Plot the centered vectors
+  arrows3D(
+    x0 = 0, y0 = 0, z0 = 0,
+    x1 = x_centered[1], y1 = x_centered[2], z1 = x_centered[3],
+    col = scales::alpha("red", .5), lwd = 2, length = 0.1, 
+    add = TRUE
+  )
+  arrows3D(
+    x0 = 0, y0 = 0, z0 = 0,
+    x1 = y_centered[1], y1 = y_centered[2], z1 = y_centered[3],
+    col = scales::alpha("blue", .5), lwd = 2, length = 0.1, 
+    add = TRUE
+  )
+  points3D(x = d_centered[1,]*1.1, y = d_centered[2,]*1.1, z = d_centered[3,]*1.1, 
+           pch = c("x", "y"), add = TRUE, 
+           col = c("red", "blue"), colvar = NULL)
+  
+  
+  # Add perpendicular lines to the planes
+  # For x vector
+  segments3D(
+    x0 = x_centered[1], y0 = x_centered[2], z0 = x_centered[3],
+    x1 = x_centered[1], y1 = x_centered[2], z1 = 0,
+    col = "red", lwd = .3, lty = 2, add = TRUE
+  )
+  segments3D(
+    x0 = x_centered[1], y0 = x_centered[2], z0 = x_centered[3],
+    x1 = x_centered[1], y1 = 0, z1 = x_centered[3],
+    col = "red", lwd = .3, lty = 2, add = TRUE
+  )
+  segments3D(
+    x0 = x_centered[1], y0 = x_centered[2], z0 = x_centered[3],
+    x1 = 0, y1 = x_centered[2], z1 = x_centered[3],
+    col = "red", lwd = .3, lty = 2, add = TRUE
+  )
+  
+  # For y vector
+  segments3D(
+    x0 = y_centered[1], y0 = y_centered[2], z0 = y_centered[3],
+    x1 = y_centered[1], y1 = y_centered[2], z1 = 0,
+    col = "blue", lwd = .3, lty = 2, add = TRUE
+  )
+  segments3D(
+    x0 = y_centered[1], y0 = y_centered[2], z0 = y_centered[3],
+    x1 = y_centered[1], y1 = 0, z1 = y_centered[3],
+    col = "blue", lwd = .3, lty = 2, add = TRUE
+  )
+  segments3D(
+    x0 = y_centered[1], y0 = y_centered[2], z0 = y_centered[3],
+    x1 = 0, y1 = y_centered[2], z1 = y_centered[3],
+    col = "blue", lwd = .3, lty = 2, add = TRUE
+  )
+  par(opar)
+}
+
+# Example usage
+data_matrix <- matrix(c(1, 2, 3, 2, 4, 6), nrow = 3, ncol = 2)
+plot_vectors(data_matrix)
+
+data_matrix <- matrix(c(1, 2, 3, 1, -2, 1), nrow = 3, ncol = 2)
+plot_vectors(data_matrix)
+
+data_matrix <- matrix(c(1, 2, 3, 3, 1, -1), nrow = 3, ncol = 2)
+plot_vectors(data_matrix)
+
+data_matrix <- matrix(c(3, 1, 2, 1, 4, 1), nrow = 3, ncol = 2)
+plot_vectors(data_matrix)
+
+```
+
+We’ll compute:
+1. The **centered vectors** $\mathbf{x}' $and $\mathbf{y}' $(by subtracting their means).
+2. The **inner product** $\mathbf{x}' \cdot \mathbf{y}' \).
+3. The **norms** $\|\mathbf{x}'\| $and $\|\mathbf{y}'\| \).
+4. The **correlation** $r = \frac{\mathbf{x}' \cdot \mathbf{y}'}{\|\mathbf{x}'\| \|\mathbf{y}'\|} \).
+5. The **angle** $\theta = \cos^{-1}(r) \).
+
+Let’s go through each case!
+
+---
+
+### 1. Positive Correlation
+
+#### Data:
+
+$$
+\mathbf{x} = [1, 2, 3], \quad \mathbf{y} = [2, 4, 6]
+$$
+
+#### Step 1: Center the Data
+Compute the means:
+
+$$
+\bar{x} = \frac{1 + 2 + 3}{3} = 2, \quad \bar{y} = \frac{2 + 4 + 6}{3} = 4
+$$
+
+Subtract the means to center the data:
+$$
+\mathbf{x}' = [1 - 2, 2 - 2, 3 - 2] = [-1, 0, 1]
+$$
+$$
+\mathbf{y}' = [2 - 4, 4 - 4, 6 - 4] = [-2, 0, 2]
+$$
+
+#### Step 2: Compute the Inner Product
+$$
+\mathbf{x}' \cdot \mathbf{y}' = (-1)(-2) + (0)(0) + (1)(2) = 2 + 0 + 2 = 4
+$$
+
+#### Step 3: Compute the Norms
+$$
+\|\mathbf{x}'\| = \sqrt{(-1)^2 + 0^2 + 1^2} = \sqrt{1 + 0 + 1} = \sqrt{2}
+$$
+$$
+\|\mathbf{y}'\| = \sqrt{(-2)^2 + 0^2 + 2^2} = \sqrt{4 + 0 + 4} = \sqrt{8} = 2\sqrt{2}
+$$
+
+#### Step 4: Compute the Correlation
+$$
+r = \frac{\mathbf{x}' \cdot \mathbf{y}'}{\|\mathbf{x}'\| \|\mathbf{y}'\|} = \frac{4}{\sqrt{2} \cdot 2\sqrt{2}} = \frac{4}{4} = 1
+$$
+
+#### Step 5: Compute the Angle
+$$
+\theta = \cos^{-1}(r) = \cos^{-1}(1) = 0^\circ
+$$
+
+#### Interpretation:
+The vectors $\mathbf{x}$ and $\mathbf{y}$ are perfectly aligned ($\theta = 0^\circ$), indicating a **perfect positive correlation**.
+
+---
+
+### 2. Zero Correlation
+
+#### Data:
+$$
+\mathbf{x} = [1, 2, 3], \quad \mathbf{y} = [1, -2, 1]
+$$
+
+#### Step 1: Center the Data
+Compute the means:
+$$
+\bar{x} = 2, \quad \bar{y} = \frac{1 + (-2) + 1}{3} = 0
+$$
+
+Subtract the means:
+$$
+\mathbf{x}' = [-1, 0, 1], \quad \mathbf{y}' = [1, -2, 1]
+$$
+
+#### Step 2: Compute the Inner Product
+$$
+\mathbf{x}' \cdot \mathbf{y}' = (-1)(1) + (0)(-2) + (1)(1) = -1 + 0 + 1 = 0
+$$
+
+#### Step 3: Compute the Norms
+$$
+\|\mathbf{x}'\| = \sqrt{2}, \quad \|\mathbf{y}'\| = \sqrt{1^2 + (-2)^2 + 1^2} = \sqrt{6}
+$$
+
+#### Step 4: Compute the Correlation
+$$
+r = \frac{0}{\sqrt{2} \cdot \sqrt{6}} = 0
+$$
+
+#### Step 5: Compute the Angle
+$$
+\theta = \cos^{-1}(0) = 90^\circ
+$$
+
+#### Interpretation:
+The vectors $\mathbf{x}$ and $\mathbf{y}$ are perpendicular ($\theta = 90^\circ$), indicating **zero correlation**.
+
+---
+
+### 3. Negative Correlation
+
+#### Data:
+$$
+\mathbf{x} = [1, 2, 3], \quad \mathbf{y} = [3, 1, -1]
+$$
+
+#### Step 1: Center the Data
+Compute the means:
+$$
+\bar{x} = 2, \quad \bar{y} = \frac{3 + 1 + (-1)}{3} = 1
+$$
+
+Subtract the means:
+$$
+\mathbf{x}' = [-1, 0, 1], \quad \mathbf{y}' = [2, 0, -2]
+$$
+
+#### Step 2: Compute the Inner Product
+$$
+\mathbf{x}' \cdot \mathbf{y}' = (-1)(2) + (0)(0) + (1)(-2) = -2 + 0 - 2 = -4
+$$
+
+#### Step 3: Compute the Norms
+$$
+\|\mathbf{x}'\| = \sqrt{2}, \quad \|\mathbf{y}'\| = \sqrt{2^2 + 0^2 + (-2)^2} = \sqrt{8} = 2\sqrt{2}
+$$
+
+#### Step 4: Compute the Correlation
+$$
+r = \frac{-4}{\sqrt{2} \cdot 2\sqrt{2}} = \frac{-4}{4} = -1
+$$
+
+#### Step 5: Compute the Angle
+$$
+\theta = \cos^{-1}(-1) = 180^\circ
+$$
+
+#### Interpretation:
+The vectors $\mathbf{x} $and $\mathbf{y}$ point in opposite directions ($\theta = 180^\circ$), indicating a **perfect negative correlation**.
+
+---
+
+### Summary of Results
+
+| Correlation Type | $\mathbf{x}$| $\mathbf{y}$| $r$| $\theta$|
+|------------------|------------------|------------------|---------|--------------|
+| Positive         | [1, 2, 3]        | [2, 4, 6]        | 1       | $0^\circ$|
+| Zero             | [1, 2, 3]        | [1, -2, 1]       | 0       | $90^\circ$|
+| Negative         | [1, 2, 3]        | [3, 1, -1]       | -1      | $180^\circ$|
+
+These examples show how the correlation $r$and the angle $\theta$between vectors are deeply connected!
+
+:::

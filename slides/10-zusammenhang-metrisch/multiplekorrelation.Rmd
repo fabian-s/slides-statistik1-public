@@ -1,0 +1,67 @@
+## Darstellung multivariater Zusammenhänge
+
+### Kovarianz- und Korrelationsmatrix
+
+Bei mehr als zwei Merkmalen werden Kovarianzen und Korrelationen häufig in Form
+einer Matrix dargestellt.
+
+Auf der Hauptdiagonalen stehen die Stichprobenkovarianzen bzw. die Korrelationen jedes Merkmals mit sich selbst, 
+also die jeweilige Stichprobenvarianz bzw 1.
+
+Die Matrix ist symmetrisch da $S_{XY} = S_{YX}$.
+
+Bsp: Korrelationsmatrix der Merkmale X, Y, Z:
+
+\begin{center}
+$\left( \begin{array}{ccc}
+  1 & r_{xy} & r_{xz} \\
+  r_{xy} & 1 & r_{yz} \\
+  r_{xz} & r_{yz} & 1
+\end{array} \right)$
+\end{center}
+
+Analog für Zufallsvektoren mit entsprechenden *Erwartungswertvektoren* und *Kovarianzmatrizen*!
+
+
+### (Scatter)plotmatrix I
+
+```{r, 04-pairs, echo = FALSE}
+## with size proportional to the correlations.
+panel.cor <- function(x, y, digits = 2, cex.cor, ...)
+{
+    usr <- par("usr"); on.exit(par("usr" = usr))
+    par(usr = c(0, 1, 0, 1))
+    r <- cor(x, y)
+    txt <- format(c(r, 0.123456789), digits = digits)[1]
+    txt <- bquote(r[xy] == ~ .(txt))
+    if(missing(cex.cor)) cex.cor <- 0.8/strwidth(txt)
+    text(0.5, 0.5, txt, cex = cex.cor * sqrt(abs(r) + .1))
+}
+pairs(mietspiegel[,c(1:3, 5, 4)],
+  labels = c("Nettomiete", "qm-Miete", "Wohnfläche", "Baujahr", "Zimmer"),
+  col = rgb(0,0,0,.2), pch = ".", upper.panel = panel.cor)
+```
+
+### (Scatter)plotmatrix II
+
+```{r, 04-ggpairs, echo = FALSE, results= "hide", message= FALSE, warning= FALSE, error = FALSE}
+colnames(mietspiegel)[1:5] <- c("Nettomiete", "qm-Miete", "Wohnfläche", "Zimmer", "Baujahr")
+mietspiegel$Zimmer <- ordered(mietspiegel$Zimmer)#, levels = 1:6)
+
+hex_hex <- function(data, mapping, ...) {
+  suppressMessages(ggplot(data = data, mapping = mapping) +
+  geom_hex() +
+  viridis::scale_fill_viridis(option = "magma", direction = -1))
+}
+denstrip <- function(data, mapping, ...) {
+  suppressMessages(GGally::ggally_denstrip(data, mapping, bins = 30) +
+  viridis::scale_fill_viridis(option = "magma", direction = -1) +
+  viridis::scale_color_viridis(option = "magma", direction = -1))
+}
+
+capture.output(
+  suppressMessages(suppressWarnings(GGally::ggpairs(mietspiegel[,c(1:3, 5, 4)],
+                upper = list(combo = GGally::wrap("box_no_facet", outlier.size = .1)),
+                lower = list(continuous = hex_hex, combo = denstrip),
+                progress = FALSE))))
+```

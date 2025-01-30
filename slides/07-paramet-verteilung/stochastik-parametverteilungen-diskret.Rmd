@@ -1,0 +1,454 @@
+## Diskrete parametrische Verteilungen
+
+###  Parametrische Verteilungen  
+
+Statistik benutzt viele "gängige" Klassen von Verteilungen, 
+
+- die bestimmte Arten von häufigen, idealtypischen Zufallsvorgängen (zB "Alles gleich wahrscheinlich", "Ziehen mit/ohne Zurücklegen") formalisieren und
+- die meist von weiteren Parametern, die das konkrete Setting beschreiben, abhängen.
+
+### Bernoulli-Verteilung
+
+Das einfachste Beispiel ist die **Bernoulli-Verteilung**.  
+
+Eine Bernoulli-verteilte ZV kann nur die Werte $0$ und $1$ annehmen:
+\begin{align*}
+P(X = 1) & = f(1)  = \pi\\
+P(X = 0) & = f(0)  = 1 - \pi \\
+f_X(x) & = \pi^x (1^-\pi)^{1-x} \cdot I(x \in \{0, 1\})
+\end{align*}
+
+
+$\pi \in [0, 1]$ ist der einzige Parameter der Bernoulli-Verteilung.\  
+
+Notation: $$X \sim {\mathcal B}(\pi)$$\  
+
+Beispiel: Ergebnis eines Münzwurfs ist ${\mathcal B}(\pi = 0.5)$-verteilt.
+
+\note{
+$$
+F(x) = \left\{ \begin{array}{r"`{\quad : \quad}r}
+0 & x < 0\\
+1 - \pi & 0 \leq x < 1\\
+1 & x \geq 1
+\end{array}
+\right.
+$$
+}
+
+
+### Diskrete Gleichverteilung 
+
+Die allgemeine **diskrete Gleichverteilung** hat einen endlichen Träger ${T} = \{x_1, x_2, ..., x_k\}$, 
+wobei $$ P(X = x) = f(x) = \frac{1}{k} \cdot I(x \in T)$$\  
+
+Häufig sind alle natürlichen Zahlen zwischen $a \in \mathbb{N}$ und $b\in \mathbb{N}$ Element des Trägers ${T}$. Die Grenzen $a$ und $b$ sind dann die Parameter der **diskreten Gleichverteilung**.\  
+
+Notation: $$X \sim {\mathcal U}_D(a, b)$$\  
+
+Beispiel: Augenzahl beim fairen Würfelwurf ist ${\mathcal U}_D(a=1, b=6)$-verteilt.
+
+In R: `sample()`
+
+### Geometrische Verteilung 
+
+Ein Zufallsvorgang, bei dem mit Wahrscheinlichkeit $\pi$ ein Ereignis $A$ eintritt, wird *unabhängig* voneinander so oft wiederholt, bis zum ersten Mal $A$ eintritt.
+
+Sei $X$ die ZV "Anzahl der Versuche bis zum ersten Mal $A$ eintritt".  
+Dann ist ${T} = \mathbb{N}^+$ und die Wahrscheinlichkeitsfunktion von $X$ lautet:
+$$
+f(x) =\underbrace{(1 - \pi)^{x-1}}_{\mbox{\footnotesize  (x-1)-mal $\bar{A}$}}\cdot \underbrace{\pi}_{\mbox{\footnotesize  1-mal $A$}} \cdot I(x \in T)
+$$
+$\pi \in (0,1)$ ist der Parameter der geometrischen Verteilung.  
+\  
+  
+Notation:  $$X \sim {\mathcal G}(\pi)$$\
+
+\note{Dichte herleiten/erklären.\\
+Verteilungsfunktion:\\
+über geometrische Reihe  ($S_n=\sum^n r^k = \frac{1-r^{n+1}}{1-r}$)  :\\
+$F(x) =  \sum^x_{i=0}\pi(1-\pi)^{i-1} = \frac{\pi(1-(1-\pi)^x)}{1-(1-\pi)} = 1 - (1-\pi)^x \;\forall\, x \in T$\\
+inhaltlich: $F(x)=P(\mbox{mindestens ein Erfolg in den ersten x Versuchen})= 1 - P(\mbox{kein Erfolg in den ersten x Versuchen}) = 1 - (1-\pi)^x$
+}
+
+
+### Alternative Definition
+
+Sei $Y:=$ "Anzahl der Versuche *bevor* das erste mal $A$
+eintritt", d.h. $Y=X-1$. Dann ist 
+\begin{align*}
+T & =  \{0, 1, 2, ... \} = \mathbb{N}_0^+\\
+f(y) & =  (1 - \pi)^y  \pi \cdot I(y \in T)
+\end{align*}\
+
+Für diese Definition gibt es folgende Implementationen in R:
+
+- `dgeom(x, prob=`$\pi$`)` berechnet Wahrscheinlichkeitsfunktion $f_Y(x)$
+- `pgeom(q, prob=`$\pi$`)` wertet Verteilungsfunktion für `q` aus: $F_Y(q)$
+- `rgeom(n, prob=`$\pi$`)` generiert `n` Zufallszahlen aus der Verteilung
+- `qgeom(p, prob=`$\pi$`)` berechnet Quantile der geom. Verteilung: $\approx F_Y^{-1}(p)$ 
+
+
+### Visualisierung ${\mathcal G}(\pi)$
+
+```{r, vis-dist-geom, echo=FALSE, warning = FALSE, message = FALSE}
+p_geom <- distplot("geom", 0:20, 
+                   params = list(list(prob = 0.2), list(prob = 0.5)), TRUE)
+p_geom[[1]] + p_geom[[2]] + 
+  plot_annotation(title = "Geometrische Verteilung", 
+                  caption = expression(pi == 0.2 ~"in rot; " ~ pi == 0.5 ~ "in grün"))
+```
+
+<!-- ### Erwartungswert von ZVn mit Träger $\mathbb{N}$ -->
+
+<!-- Hat $X$ den Träger $T = \mathbb{N}$, so gilt: -->
+<!-- $$ -->
+<!-- E(X) = \sum_{k=1}^\infty P(X \geq k) -->
+<!-- $$ -->
+<!-- \begin{tabular}{lp{9.5cm}} -->
+<!-- Anwendung:& Erwartungswert der geometrischen Verteilung:\\ -->
+<!-- & Ist  $X \sim G(\pi)$ so gilt: -->
+<!-- \end{tabular} -->
+<!-- $$ -->
+<!-- E(X) = \frac{1}{\pi} -->
+<!-- $$ -->
+<!-- \note{ -->
+<!-- \begin{align*} -->
+<!-- \sum_{k=1}^\infty P(X \geq k) & = &\sum_{k=1}^\infty -->
+<!-- \sum_{t = k}^\infty P(X = t)\ -->
+
+<!-- & = & \sum_{t=1}^\infty\sum_{k=1}^t P(X = t)\ -->
+
+<!-- & = & \sum_{t=1}^\infty t \cdot P(X = t)\ -->
+
+<!-- & = & E X -->
+<!-- \end{align*} -->
+<!-- $f(x) = \pi \cdot (1-\pi)^{x-1}$ für $x \in \mathbb{N}$, -->
+<!-- also $P(X \geq k) = (1-\pi)^{k-1}$\\ -->
+<!-- Wg.eben bewiesenem Satz: -->
+<!-- \begin{align*} -->
+<!-- E (X) & = & \sum_{k=1}^\infty P(X \geq k)=\sum_{k=1}^\infty (1 - \pi)^{k - 1}\\ -->
+<!-- & = & \sum_{k=0}^\infty ( 1 - \pi)^k\stackrel{\text{geom.Re.}}{=}  \frac{1}{1 - (1 -\pi)} = \frac{1}{\pi} -->
+<!-- \end{align*} -->
+<!-- } -->
+
+
+
+### Binomialverteilung 
+
+Bei einer Folge von unabhängigen Bernoulli-Experimenten $X_i,\, i = 1, \dots, n$  interessiert man sich häufig nur für die **Anzahl** $X := \sum_{i=1}^n X_i$, wie oft $X_i =1$ aufgetreten ist.\  
+
+Diese ZV $X$ heißt **binomialverteilt**  mit Parametern $n \in \mathbb{N}$, $\pi \in [0, 1]$. Sie hat Träger ${T} = \{0, 1, ..., n\}$ sowie die Wahrscheinlichkeitsfunktion:
+$$P(X = x) = f(x) = {n \choose x} \cdot \pi^x (1-\pi)^{n - x} \cdot I(x \in T)$$
+
+Notation: $$X \sim {\mathcal B}(n, \pi)$$
+
+Es gilt ${\mathcal B}(1, \pi) = {\mathcal B}(\pi)$.  
+\ 
+
+in R: `[dpqr]binom(size=`$n$`, prob=`$\pi$`,...)`
+
+\note{Intuition für Formel:\\
+Jede Folge der Länge $n$ mit $x$ 1-ern hat W.keit $\pi^x(1-pi)^{n-x}$
+%wg. Unabhängigkeit der Bernoulli-Experimente.
+Binomialkoeffizienten: alle Bernoulli Folgen mit x 1-ern und $(n-x)$ O-ern führen zu $X=x$, davon gibt es $\binom{n}{x}$ der Länge $n$. (verteile x 1-er auf n Stellen).\\
+}
+
+### Visualisierung ${\mathcal B}(n, \pi)$
+
+```{r, vis-dist-bin, echo=FALSE, warning = FALSE, message = FALSE}
+p_bin10 <- distplot("binom", 0:10, 
+                    params = list(list(size = 10, p = 0.25), list(size = 10, p = 0.6)), TRUE)
+p_bin100 <- distplot("binom", 0:100, 
+                     params = list(list(size = 100, p = 0.25), list(size = 100, p = 0.6)), TRUE)
+scale_n10 <- scale_x_continuous(breaks = seq(0, 10, by = 2), minor_breaks = 0:10)
+
+(p_bin10[[1]] + scale_n10 + p_bin10[[2]] + scale_n10) /  (p_bin100[[1]] + p_bin100[[2]]) +
+  plot_annotation(title = "Binomial Verteilung", caption = expression("oben:"~ n == 10 ~"; unten:"~ n == 100 ~ ". " ~   pi == 0.25 ~"in rot; " ~ pi == 0.6 ~ "in grün"))
+```
+
+
+### Beispiele 
+
+Das **Urnenmodell**:  
+Zufälliges **Ziehen mit Zurücklegen** einer Stichprobe von $n$ Kugeln aus einer Urne mit $N$ Kugeln, darunter $M$
+markierte.   
+
+Sei $X$: "Anzahl der markierten Kugeln in der Stichprobe".  
+Dann gilt $$ X \sim {\mathcal B}(n, M/N).$$
+
+### Hypergeometrische Verteilung 
+
+Häufig wird jedoch **ohne Zurücklegen** gezogen, d.h. "Auswahlwahrscheinlichkeiten" ändern sich von
+Ziehung zu Ziehung (Beispiel: Kartenspiele).\
+
+Die Verteilung von $X$ (Anzahl der markierten Kugeln) nennt man dann **hypergeometrisch**.
+Die *hypergeometrische Verteilung* hat den Träger
+$$
+{T} = \left\{\max\left(0, n - (N - M)\right), ..., \min\left(n, M\right)\right\}
+$$
+und die Wahrscheinlichkeitsfunktion
+$$
+f(x) = \frac{\binom{M}{x}\binom{N - M}{n - x}}{\binom{N}{n}} \cdot I(x \in T)
+$$
+Notation: $$X \sim {\mathcal H}(n, N, M)$$\
+\  
+
+Funktionen in R: `[dpqr]hyper(m =` $M$`, n = ` $N-M$`, k=` $n$`, ...)`
+
+\note{Intuition für Formel:\\
+Simple Laplace-W.keiten / Kombinatorik: Anzahl günstige durch Anzahl mögliche Fälle
+}
+
+### Ziehen mit und ohne Zurücklegen I 
+
+```{r, vis-dist-bin-hyper1, echo=FALSE, warning = FALSE, message = FALSE}
+bin_hyper <- bind_rows(
+  make_dist_data("hyper", 0:30, 
+                 params = list(list(m = 20, n = 80, k = 10), 
+                               list(m = 20, n = 80, k = 20),
+                               list(m = 20, n = 80, k = 40),
+                               list(m = 20, n = 80, k = 80))),
+  make_dist_data("binom", 0:30, 
+                 params = list(list(size = 10, p = 0.2), 
+                               list(size = 20, p = 0.2),
+                               list(size = 40, p = 0.2),
+                               list(size = 80, p = 0.2))))
+bin_hyper$label <- ordered(bin_hyper$param, 
+                           labels = c("n = 10, M = 20, N  = 100", 
+                                      "n = 20, M = 20, N  = 100",
+                                      "n = 40, M = 20, N  = 100",
+                                      "n = 80, M = 20, N  = 100"))
+
+clr_scale <- colorspace::scale_color_discrete_qualitative("Dark 3")
+
+ggplot(bin_hyper) + 
+  geom_point(aes(x = x, y = `f(x)`, col = name)) +
+  geom_segment(aes(x = x, xend = x, y = 0, yend =`f(x)`, col = name), alpha = .5, lwd = .2) + 
+  theme(legend.position = "none") + clr_scale + 
+  facet_wrap(~label, nrow = 2) + 
+  labs(caption = "H(n, M, N) in grün; B(n, M/N) in rot")
+```
+
+
+### Ziehen mit und ohne Zurücklegen II 
+
+```{r, vis-dist-bin-hyper2, echo=FALSE, warning = FALSE, message = FALSE}
+bin_hyper <- bind_rows(
+  make_dist_data("hyper", 0:30, 
+                 params = list(list(m = 20, n = 20, k = 20), 
+                               list(m = 20, n = 60, k = 20),
+                               list(m = 20, n = 140, k = 20),
+                               list(m = 20, n = 300, k = 20))),
+  make_dist_data("binom", 0:30, 
+                 params = list(list(size = 20, p = 0.5), 
+                               list(size = 20, p = 0.25),
+                               list(size = 20, p = 0.12),
+                               list(size = 20, p = 0.062))))
+
+bin_hyper$label <- ordered(bin_hyper$param, 
+                           labels = c("n = 20, M = 20, N  = 40",
+                                      "n = 20, M = 20, N  = 80",
+                                      "n = 20, M = 20, N  = 160",
+                                      "n = 20, M = 20, N  = 320")
+                           )
+
+clr_scale <- colorspace::scale_color_discrete_qualitative("Dark 3")
+
+ggplot(bin_hyper) + 
+  geom_point(aes(x = x, y = `f(x)`, col = name)) +
+  geom_segment(aes(x = x, xend = x, y = 0, yend =`f(x)`, col = name), alpha = .5, lwd = .2) + 
+  theme(legend.position = "none") + clr_scale + 
+  facet_wrap(~label, nrow = 2) + 
+  labs(caption = "H(n, M, N) in grün; B(n, M/N) in rot")  
+```
+
+
+### Approximation der hypergeometrischen Verteilung 
+
+Für $N$ "groß" und $n$ "klein" läßt sich die
+hypergeometrische Verteilung also gut durch die Binomialverteilung approximieren: \
+
+$${\mathcal H}(n, N, M)\quad \stackrel{d}{\approx} \quad {\mathcal B}\left(n, \pi = \frac{M}{N}\right)$$
+
+### Poisson-Verteilung 
+
+Häufig gibt es zufällige Vorgänge, bei denen es (... zumindest theoretisch ...) keine natürliche obere
+Grenze für die interessierende Anzahl an Ereignissen in einem gegebenen Zeitintervall gibt, z.B.:
+
+- Anzahl an Telefonanrufen in einem "Call-Center" pro Stunde\
+- Anzahl an Blitzschlägen pro Woche in Oberbayern
+
+Die einfachste Verteilung für solche Phänomene ist die
+Poisson-Verteilung (nach Siméon Denis Poisson [1781-1840]).
+
+
+### Poisson-Verteilung
+
+Eine Zufallsvariable $X$ mit Träger 
+${T} = \mathbb{N}^+_0$ 
+und Wahrscheinlichkeitsfunktion 
+$$f(x) =\exp(-\lambda) \frac{\lambda^x}{x!} \cdot I(x \in {T})$$
+folgt einer **Poisson-Verteilung**.
+
+Der Parameter $\lambda \in \mathbb{R}^+$ ist die durchschnittliche **Rate** oder die
+**Intensität**, mit der die interessierenden Ereignisse in dem zugrundeliegenden
+Zeitintervall auftreten.\  
+
+Notation: $$X \sim {\mathcal P}(\lambda)$$\
+\  
+
+Beachte: Wartezeiten zwischen Ereignissen, deren Gesamtzahl $\mathcal P(\lambda)$-verteilt ist, sind $\mathcal{E}(\lambda)$-verteilt!  
+\  
+
+Funktionen in R: `[dpqr]pois()`
+
+### Visualisierung ${\mathcal P}(\lambda)$
+
+
+```{r, vis-dist-pois, echo=FALSE, warning = FALSE, message = FALSE}
+p_pois <- distplot("pois", 0:20, 
+                    params = list(list(lambda = 0.2), list(lambda = 1), list(lambda = 4)), TRUE)
+scale_n20 <- scale_x_continuous(breaks = seq(0, 20, by = 5), minor_breaks = 0:20)
+p_pois[[1]] + scale_n20 + p_pois[[2]] + scale_n20 + 
+  plot_annotation(title = "Poisson Verteilung") +
+  colorspace::scale_color_discrete_qualitative("Dark 3", labels = expression(lambda == 0.2, lambda == 1, lambda == 4)) + 
+  theme(legend.position = "bottom", legend.title = element_blank())
+```
+
+
+
+### Approximation der Binomialverteilung 
+
+Die Binomialverteilung $B(n, \pi)$ kann für "großes n" und "kleines $\pi$"
+gut durch die Poisson-Verteilung mit $\lambda = n \pi$
+approximiert werden.
+$$
+{\mathcal B}(n, \pi) \quad \stackrel{d}{\approx} \quad {\mathcal P}(\lambda = n \pi)
+$$
+Je größer $n$ ist und vor allem je kleiner $\pi$, desto besser ist die
+Approximation.
+
+### Vergleich Binomial/Poissonverteilung (n = 10) 
+
+```{r, vis-dist-pois-bin-1, echo=FALSE, warning = FALSE, message = FALSE}
+bin_pois <- bind_rows(
+  make_dist_data("pois", 0:15, 
+                 params = list(list(lambda = 8), list(lambda = 5), list(lambda = 3), list(lambda = 1))),
+  make_dist_data("binom", 0:15, 
+                 params = list(list(size = 10, p = 0.8), 
+                               list(size = 10, p = 0.5),
+                               list(size = 10, p = 0.3),
+                               list(size = 10, p = 0.1))))
+bin_pois$label <- case_when(
+  bin_pois$param == "1" ~ "pi == 0.8",
+  bin_pois$param == "2" ~ "pi == 0.5",
+  bin_pois$param == "3" ~ "pi == 0.3",
+  bin_pois$param == "4" ~ "pi == 0.1")
+
+clr_scale <- colorspace::scale_color_discrete_qualitative("Dark 3")
+
+ggplot(bin_pois) + 
+  geom_point(aes(x = x, y = `f(x)`, col = name)) +
+  geom_segment(aes(x = x, xend = x, y = 0, yend =`f(x)`, col = name), alpha = .5, lwd = .2) + 
+  theme(legend.position = "none") + clr_scale + 
+  facet_wrap(~label, nrow = 2, labeller = label_parsed) + 
+  scale_x_continuous(breaks = seq(0, 15, by = 3), minor_breaks = 0:15) +
+  labs(caption = expression("P"~(n*pi)~"in grün; B("~n ==10 ~ ","~pi~") in rot"))  
+```
+
+
+### Vergleich Binomial/Poissonverteilung (n = 100) 
+
+```{r, vis-dist-pois-bin-2, echo=FALSE, warning = FALSE, message = FALSE}
+bin_pois <- bind_rows(
+  make_dist_data("pois", 0:110, 
+                 params = list(list(lambda = 80), list(lambda = 50), list(lambda = 30), list(lambda = 10))),
+  make_dist_data("binom", 0:110, 
+                 params = list(list(size = 100, p = 0.8), 
+                               list(size = 100, p = 0.5),
+                               list(size = 100, p = 0.3),
+                               list(size = 100, p = 0.1))))
+bin_pois$label <- case_when(
+  bin_pois$param == "1" ~ "pi == 0.8",
+  bin_pois$param == "2" ~ "pi == 0.5",
+  bin_pois$param == "3" ~ "pi == 0.3",
+  bin_pois$param == "4" ~ "pi == 0.1")
+
+clr_scale <- colorspace::scale_color_discrete_qualitative("Dark 3")
+
+ggplot(bin_pois) + 
+  geom_point(aes(x = x, y = `f(x)`, col = name)) +
+  geom_segment(aes(x = x, xend = x, y = 0, yend =`f(x)`, col = name), alpha = .5, lwd = .2) + 
+  theme(legend.position = "none") + clr_scale + 
+  facet_wrap(~label, nrow = 2, labeller = label_parsed) + 
+  labs(caption = expression("P"~(n*pi)~"in grün; B("~n ==100 ~ ","~pi~") in rot"))  
+```
+
+###  Vergleich Binomial/Poissonverteilung (n = 100) 
+
+```{r, vis-dist-pois-bin-3, echo=FALSE, warning = FALSE, message = FALSE}
+bin_pois <- bind_rows(
+  make_dist_data("pois", 0:15, 
+                 params = list(list(lambda = 1), list(lambda = 5), list(lambda = 2.5))),
+  make_dist_data("binom", 0:15, 
+                 params = list(list(size = 100, p = 0.01), 
+                               list(size = 100, p = 0.05),
+                               list(size = 100, p = 0.025))))
+bin_pois$label <- case_when(
+  bin_pois$param == "1" ~ "pi == 0.01",
+  bin_pois$param == "2" ~ "pi == 0.05",
+  bin_pois$param == "3" ~ "pi == 0.025")
+
+clr_scale <- colorspace::scale_color_discrete_qualitative("Dark 3")
+
+ggplot(bin_pois) + 
+  geom_point(aes(x = x, y = `f(x)`, col = name)) +
+  geom_segment(aes(x = x, xend = x, y = 0, yend =`f(x)`, col = name), alpha = .5, lwd = .2) + 
+  theme(legend.position = "none") + clr_scale + 
+  facet_wrap(~label, labeller = label_parsed) + 
+  labs(caption = expression("P"~(n*pi)~"in grün; B("~n ==100 ~ ","~pi~") in rot"))  
+```
+
+
+### Einige diskrete Verteilungen 
+\small
+\begin{center}
+\begin{tabular}{l|c c c c}
+Name \& Symbol 
+& Parameter
+& Träger
+& $E(X)$
+& $\Var(X)$ \\
+\hline
+\\
+Binomialverteilung\\
+$ {\mathcal B}(n, \pi)$
+& $n \in \mathbb N^+; \pi \in [0,1]$
+& $\{0, 1, \dots, n\}$
+& $n \pi$
+& $n \pi (1 - \pi)$\\[1.5em]
+
+Geometrische Verteilung\\
+$ \mathcal{G}(\pi) $
+& $\pi \in (0,1]$
+& $\mathbb N^+$ 
+& $\frac{1}{\pi}$
+& $\frac{1 - \pi}{\pi^2}$\\[1.5em]
+
+Poissonverteilung\\
+$\mathcal{P}(\lambda)$
+& $\lambda \in \mathbb R^+$
+& $\mathbb N^+_0$ 
+& $\lambda$
+& $\lambda$\\[1.5em]
+
+Hypergeometrische V. \\
+$\mathcal{H}(n, N, M)$
+& { ${n, N, M \in N^+;}\atop{M \leq N; n \leq N}$}
+& { ${\left\{\max\left(0, n - (N - M)\right),\right.}\atop{\qquad\left. ..., \min\left(n, M\right)\right\}}$}
+& $n\tfrac{M}{N}$
+& $n\tfrac{M}{N}\tfrac{N-M}{N}\tfrac{N-n}{N-1}$\\[1.5em]
+
+\end{tabular}
+\end{center}

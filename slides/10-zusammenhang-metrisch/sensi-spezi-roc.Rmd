@@ -1,0 +1,419 @@
+## Zusammenhangsmaße für dichotome und ordinale/metrische Merkmale
+
+### Dichotome und ordinale/metrische Merkmale
+
+Wichtiger Spezialfall:  
+Dichotomes Merkmal $Y$ und ein mindestens ordinalskaliertes $X$.
+
+**Beispiele:**
+
+- Medizin: Diagnostische Tests  
+$X$: Biomarker (Stoffkonzentration in Blut o.ä.) oder diagnostischer Score  
+$Y$: krank vs. gesund; genesen vs. verstorben; etc...  
+
+- Marketing:  
+$X$: Kundeneigenschaften (z.B. bisher erzielter Umsatz mit diesem Kunden)  
+$Y$: Kaufentscheidung ja/nein; Vertragsverlängerung ja/nein; etc...
+
+-  Kredit-Score o.ä.  
+$Y$: Schufa-Eintrag (Kreditausfall) binnen 1.5 Jahre oder nicht
+
+<!-- ### Punktbiseriale Korrelation -->
+
+<!-- Korrelations-Koeffizient zwischen binärem und metrischem Merkmal: -->
+
+<!-- $Y \in \{0,1\}; \quad X \text{ metrisch}$ -->
+
+<!-- \begin{equation*} -->
+<!-- r_{XY} = \frac{\bar X_1 - \bar X_0}{\widetilde S_X} \cdot -->
+<!-- \sqrt{\frac{n_0 n_1}{n^2}} -->
+<!-- \end{equation*} -->
+
+<!-- $\bar X_1$ Mittelwert bei $Y=1$, $n_1$: Anzahl mit $Y = 1$,   -->
+<!-- $\bar X_0$ Mittelwert bei $Y=0$, $n_0$: Anzahl mit $Y = 0$. -->
+
+<!-- Entspricht normiertem Abstand der Gruppenmittelwerte. -->
+
+
+### Sensitivität und Spezifität
+
+*Setting:*  
+
+- $Y \in \{0, 1\}$ dichotom (Zielgröße) 
+- $X$ mindestens ordinalskaliert (Einflussgröße)
+
+$Y=1 \iff$ **"positiver"** Fall (z.B. "krank", "Kreditausfall", "Kündigung", ...)  
+$Y=0 \iff$ **"negativer"** Fall (z.B. "gesund", "Rückzahlung", "Verlängerung", ...)  
+\  
+
+*Ziel:*  
+Vorhersage/Diagnose $\hat{y}_{i}$ nur auf Basis von 
+$x_i$ und Schwellenwert $c$:
+$$\hat{y}_{i} = 1\iff x_{i}\geq c$$
+
+*Fragestellung:*  
+Wie kann ein geeigneter Schwellenwert $c$ bestimmt werden?  
+Wie gut oder schlecht eignet sich Merkmal $X$ insgesamt zur Einschätzung von $Y$?
+
+### Sensitivität und Spezifität
+
+\begin{small}
+\begin{tabular}{l|ll|l}
+& $y_i = 0$ & $y_i = 1$ & \\
+\hline
+Vorhersage $\hat y_i = 0$ &  ``wahr negativ'' &  ``falsch
+negativ'' & \# negative Vorhersagen\\
+Vorhersage $\hat y_i = 1$ &  ``falsch positiv'' &  ``wahr
+positiv''& \# positive Vorhersagen\\
+\hline
+& \# negative & \# positive \\
+\end{tabular}
+\end{small}
+
+**Dilemma:**
+
+- Je größer $c$
+  - desto weniger "positive" Vorhersagen insgesamt
+  - tendenziell: desto weniger falsch positive aber auch weniger wahr positive 
+- Je kleiner $c$
+  - desto weniger "negative" Vorhersagen insgesamt
+  - tendenziell:  desto weniger falsch negative aber auch weniger wahr negative
+
+
+### Sensitivität und Spezifität
+
+**Anteil wahr positiver Prognosen für echt positive = Sensitivität**
+$TPR(c) = f(\hat{Y}=1 | Y = 1) = f(X \geq c | Y=1)$  
+"Welcher Anteil der Kranken wurde entdeckt?": *"Empfindlichkeit" des Tests*  
+\begin{footnotesize} \textit{true positive rate TPR} \end{footnotesize}
+\  
+\  
+  
+**Anteil falsch positiver Prognosen für echt negative**  
+$FPR(c) = f(\hat{Y}=1 | Y=0) = f(X \geq c | Y=0)$  
+"Welcher Anteil der Gesunden wurde falsch diagnostiziert?"  
+\begin{footnotesize} \textit{false positive rate FPR} \end{footnotesize}
+
+**Anteil wahr negativer Prognosen für echt negative = Spezifität**
+$TNR(c) = f(\hat{Y}=0 | Y=0) = 1 - f(X \geq c | Y=0) = 1 - FPR(c)$  
+"Welcher Anteil der Gesunden wurde korrekt diagnostiziert?"  
+\begin{footnotesize} \textit{true negative rate TNR} \end{footnotesize}
+\  
+
+
+
+### ROC-Kurve
+
+Die **ROC-Kurve**
+
+- verbindet die Punkte $(FPR(c),TPR(c))$, also (1-Spezifität, Sensitivität)   
+bzw ("falsch positiv"-Rate, "wahr positiv"-Rate)  
+- für *alle* möglichen Schwellenwerte $c \in [x_{(1)}, x_{(n)}]$
+
+Sie zeigt die Zuverlässigkeit der Vorhersagen für alle möglichen Schwellenwerte $c$ an. 
+
+Es gilt: 
+
+- Für $c < x_{(1)}$: Test immer "positiv", also  
+  $\hat y_i = 1\; \forall\; i \implies (FPR(c), TPR(c)) = (1, 1)$ 
+- Für $c > x_{(n)}$: Test immer "negativ", also  
+  $\hat y_i = 0\; \forall\; i \implies (FPR(c), TPR(c)) = (0, 0)$
+
+
+```{r, 04-roc-prep, echo = FALSE, warning = FALSE, code = readLines("./shiny-sensi-spezi-roc/utils.R")}
+```
+
+### Beispiel 1: Mittelmäßig starker Zusammenhang
+
+```{r, 04-roc-ex1, echo = FALSE, warning = FALSE}
+print(roc_plot(data = make_roc_data(n_pos = 10,
+                                    n_neg = 30,
+                                    mean_diff = 2.2,
+                                    cutoff = 1.2,
+                                    seed = 1213),
+               cutoff = 1.2,
+               roclabels = 3.5, th_label_size = 2))
+```
+\tiny
+s.a. [shinyapps.io/sensi-spezi-roc](https://fabian-s.shinyapps.io/sensi-spezi-roc/)
+
+### Beispiel 2: Mittelmäßig starker Zusammenhang
+
+```{r, 04-roc-ex2a, echo = FALSE, warning = FALSE}
+print(roc_plot(data = make_roc_data(cutoff = 1.5,
+                                    seed = 1212),
+               cutoff = 1.5,
+               roclabels = 3.5, th_label_size = 2))
+```
+\tiny
+s.a. [shinyapps.io/sensi-spezi-roc](https://fabian-s.shinyapps.io/sensi-spezi-roc/)
+
+
+### Beispiel 2: Mittelmäßig starker Zusammenhang
+
+```{r, 04-roc-ex2b, echo = FALSE, warning = FALSE}
+print(roc_plot(data = make_roc_data(cutoff = 2.2,
+                                    seed = 1212),
+               cutoff = 2.2,
+               roclabels = 3.5, th_label_size = 2))
+```
+\tiny
+s.a. [shinyapps.io/sensi-spezi-roc](https://fabian-s.shinyapps.io/sensi-spezi-roc/)
+
+
+### Beispiel 2: Mittelmäßig starker Zusammenhang
+
+```{r 04-roc-ex2c, echo = FALSE, warning = FALSE}
+print(roc_plot(data = make_roc_data(cutoff = 0,
+                                    seed = 1212),
+               cutoff = 0,
+               roclabels = 3.5, th_label_size = 2))
+```
+\tiny
+s.a. [shinyapps.io/sensi-spezi-roc](https://fabian-s.shinyapps.io/sensi-spezi-roc/)
+
+### Beispiel 3: Kein Zusammenhang
+
+```{r 04-roc-ex3a, echo = FALSE, warning = FALSE}
+print(roc_plot(data = make_roc_data(cutoff = 0, mean_diff = 0,
+                                    seed = 1213),
+               cutoff = 0,
+               roclabels = 0, th_label_size = 2))
+```
+\tiny
+s.a. [shinyapps.io/sensi-spezi-roc](https://fabian-s.shinyapps.io/sensi-spezi-roc/)
+
+### Beispiel 3: Kein Zusammenhang
+
+```{r 04-roc-ex3b, echo = FALSE, warning = FALSE}
+print(roc_plot(data = make_roc_data(cutoff = 1, mean_diff = 0 ,
+                                    seed = 1213),
+               cutoff = 1,
+               roclabels = 0, th_label_size = 2))
+```
+\tiny
+s.a. [shinyapps.io/sensi-spezi-roc](https://fabian-s.shinyapps.io/sensi-spezi-roc/)
+
+### Beispiel 3: Kein Zusammenhang
+
+```{r 04-roc-ex3c, echo = FALSE, warning = FALSE}
+print(roc_plot(data = make_roc_data(cutoff = -1, mean_diff = 0,
+                                    seed = 1213),
+               cutoff = -1,
+               roclabels = 0, th_label_size = 2))
+```
+\tiny
+s.a. [shinyapps.io/sensi-spezi-roc](https://fabian-s.shinyapps.io/sensi-spezi-roc/)
+
+### Beispiel 4: Sehr starker Zusammenhang
+
+```{r 04-roc-ex4, echo = FALSE, warning = FALSE}
+print(roc_plot(data = make_roc_data(cutoff = 2.5, mean_diff = 4,
+                                    seed = 1212),
+               cutoff = 2.5,
+               roclabels = 0, th_label_size = 2))
+```
+\tiny
+s.a. [shinyapps.io/sensi-spezi-roc](https://fabian-s.shinyapps.io/sensi-spezi-roc/)
+
+### Beispiel für ROC-Kurve mit Bindung
+
+```{r 04-roc-ties, echo = FALSE, fig.height = 4, out.height = ".7\\textheight", warning = FALSE}
+tiedata <- tibble(X = c(rep(1:4, each = 2), 5, 6),
+                  Y =  c(rep(0, 7), 1, 0, 1))  %>%
+  arrange(desc(-X))
+plot_grid(ggplot(tiedata) + geom_blank() + theme_void() +
+            annotation_custom(tableGrob(tiedata, 
+                                        theme = ttheme_minimal(base_size = 10))),
+          ggplot(tiedata, aes(d = Y, m = X)) +
+            geom_roc(n.cuts = 9, labelsize = 3.5) +
+            labs(x = "1-Spezifität (falsch positiv)", 
+                 y = "Sensitivität (wahr positiv)"),
+          ncol = 2)
+```
+
+
+### Maß zur Bewertung der Kurve: AUC
+
+Das $AUC$ entspricht der Fläche unter der ROC-Kurve.  
+
+$$AUC :=\frac{N_C + N_E/2}{N}$$
+
+- Anzahl konkordante Paare  
+  $N_C =  |\{(i,j): (x_i > x_j \,\land\, y_i > y_j) \,\lor\, (x_i < x_j \,\land\, y_i < y_j)\} |$
+- Anzahl Paare mit Bindungen in $X$  
+  $N_E =  |\{(i,j): x_i = x_j \,\land\, y_i \neq y_j\} |$
+- Anzahl aller Paare mit unterschiedlichem $Y$  
+ $N = |\{(i,j): y_i \neq y_j\} | = h_Y(0)h_Y(1)$
+
+### Interpretation AUC
+
+
+- perfekte Trennbarkeit der $Y$-Gruppen durch den Scorewert $X$ würde 
+einen AUC-Wert von $1$ ergeben
+- Unabhängigkeit zwischen $X$ und $Y$ einen AUC-Wert von ca. $0.5$. 
+
+$\implies$ AUC ist ein Maß dafür wie gut man $Y$ auf Basis einer einfachen Schwellenwertregel für $X$ vorhersagen kann.
+
+AUC entspricht (in etwa) der **relativen Häufigkeit mit der, in einem beliebigen Paar von Untersuchungseinheiten mit unterschiedlichem $Y$, die Beobachtung mit $Y = 1$ den höheren $X$-Wert hat.**
+
+
+
+
+### Beispiel: Pima Indian Diabetes-Daten
+
+```{r, 04-pima-prep, echo = FALSE, message = FALSE, warning = FALSE}
+pima_wide <- rbind(MASS::Pima.tr, MASS::Pima.te) %>%
+  mutate(diabetes = ordered(type, levels = c("No", "Yes")))
+
+pima_m <- mgcv::gam(I(type == "Yes") ~ as.factor(npreg) + s(glu) + s(bp) + s(age),
+                    data = pima_wide, family = "binomial")
+pima_wide$score <- predict(pima_m, newdata = pima_wide, type = "response")
+
+pima <- pima_wide %>%
+  gather(key = "Variable", value = "value", -diabetes, -type) %>%
+  mutate(
+    type = as.numeric(type) - 1,
+    Variable = ordered(recode(Variable,
+                              npreg = "pregnancies", glu = "plasma glucose", bp = "blood pressure",
+                              score = "score (model-based)"))) %>%
+  filter(Variable %in% c("pregnancies", "plasma glucose",
+                         "blood pressure", "age", "score (model-based)"))
+
+auctable <- pima %>% group_by(Variable) %>%
+  summarise(AUC = round(glmnet:::auc(y = type, prob = value),2),
+            r = round(cor(type, value), 2)) %>%
+  arrange(AUC)# %>% rename(predictor = "Variable")
+ 
+pima <- left_join(pima, auctable) %>%
+  mutate(Predictor = ordered(paste0(Variable, " (AUC:", AUC, "; r:", r,")")))
+```
+
+- 532 Frauen über 21
+- vom Volk der Pima bei Phoenix, AZ
+- sehr hohe Prävalenz von *Diabetes mellitus*: `r round(mean(pima_wide$diabetes == "Yes"), 2)*100`%
+- viele zusätzlich erhobene Stoffwechselparameter (Blutplasmaglukose, Blutdruck, ...), Alter, Anzahl Schwangerschaften, etc
+- was sind Risikofaktoren bzw was ist prognostisch verwendbar für Diabetes?
+
+Datenquelle: US National Institute of Diabetes and Digestive and Kidney Diseases
+
+### Beispiel: Pima Indian Diabetes-Daten
+
+```{r, 04-pima-plot-desc, echo = FALSE, results = "hide", warning = FALSE}
+colnames(pima_wide)[1:3] <- c("pregnancies", "plasma glucose", "blood presssure")
+
+hex_hex <- function(data, mapping, ...) {
+  suppressMessages(ggplot(data = data, mapping = mapping) +
+  geom_hex(colour = NA, alpha = 1) +
+  viridis::scale_fill_viridis(option = "magma", direction = -1))
+}
+scatter_diab <- function(data, mapping, ...) {
+  suppressMessages(
+    ggplot(data = data, mapping = mapping) +
+  geom_point(alpha= .4, size = .8))
+}
+
+null <- capture.output(
+  suppressMessages(suppressWarnings(GGally::ggpairs(
+    pima_wide,
+    columns = c(7, 1:3),
+    upper = list(continuous = scatter_diab),
+    lower = list(continuous = hex_hex, combo = denstrip), 
+    mapping = ggplot2::aes(colour = diabetes, alpha = .3),
+    progress = FALSE))) + 
+    labs(caption = "Diabetikerinnen in gelb")) 
+```
+
+### Beispiel: Pima Indian Diabetes-Daten
+
+```{r, 04-pima-plot-1, echo = FALSE, warning = FALSE}
+grid.arrange(
+  ggplot(filter(pima, Variable != "score (model-based)"))  + 
+    geom_boxplot(aes(x = diabetes, y = value, fill = Variable),
+                 outlier.alpha = .3, outlier.size = .5) +
+    facet_wrap(~ Variable, scales = "free_y", dir = "v") +
+    ylab("") +
+    scale_fill_brewer("predictor", type = "qual", palette = 2, guide = "none"),
+  ggplot(filter(pima, Variable != "score (model-based)"))  +
+    geom_roc(aes(d = type, m = value, colour = Predictor), alpha = .5, labelsize = 3.5) +
+    labs(x = "1-specificity (false positive rate)", y = "sensitivity (true positive rate)") +
+    scale_colour_brewer("", type = "qual",
+                        palette = 2, guide = guide_legend(ncol = 2, direction = "horizontal")) +
+    theme(legend.position = "bottom", legend.text = element_text(size = rel(.7))) +
+    geom_abline(slope = 1, intercept = 0), ncol = 2, widths = c(1, 1.6))
+```
+
+### Beispiel: Pima Indian Diabetes-Daten
+
+```{r, 04-pima-plot-2, echo = FALSE, results = "hide", warning = FALSE}
+grid.arrange(
+  ggplot(filter(pima, Variable != "score (model-based)"))  + geom_boxplot(aes(x = diabetes, y = value, fill = Variable),
+                                                                          outlier.alpha = .3, outlier.size = .5) +
+    facet_wrap(~ Variable, scales = "free_y", dir = "v") +
+    scale_fill_brewer("predictor", type = "qual", palette = 2, guide = "none"),
+  ggplot(pima)  +
+    geom_roc(aes(d = type, m = value, colour = Predictor), alpha = .5, labelsize = 3.5) +
+    labs(x = "1-specificity (false positive rate)", y = "sensitivity (true positive rate)") +
+    scale_colour_brewer("", type = "qual",
+                        palette = 2, guide = guide_legend(ncol = 2, direction = "horizontal", )) +
+    theme(legend.position = "bottom", legend.text = element_text(size = rel(.65))) +
+    geom_abline(slope = 1, intercept = 0), ncol = 2, widths = c(1, 1.5))
+```
+
+### Kritik AUC
+
+AUC basierend auf Sensitivität $f(\hat Y = 1| Y = 1)$: 
+*"Welcher Anteil der Kranken wurde korrekt diagnostiziert?"*;  
+Spezifität $f(\hat Y = 0| Y = 0)$: *"Welcher Anteil der Gesunden wurde korrekt diagnostiziert?"*  
+
+AUC behandelt Spezifität & Sensitivität gleichwertig --  
+oft aber dramatisch (!!) unterschiedlich wichtige Konsequenzen für
+*"falschen Alarm ausgelöst"* (falsch positiv)  
+oder *"keine Therapie eingeleitet da Krankheit nicht entdeckt"*, *"Bauteil nicht gewartet/ersetzt da Defekt nicht gefunden"*, etc. (falsch negativ)
+
+$\implies$ auch sehr wichtig:
+
+- **positiv prädiktiver Wert (ppV)** des Diagnoseverfahrens: $f(Y = 1| \hat Y = 1)$  
+*Wie groß ist der Anteil* echter *Alarme an den* ausgelösten *Alarmen?*
+-  **negativ prädiktiver Wert (npV)** des Diagnoseverfahrens: $f(Y = 0| \hat Y = 0)$  
+*Wie viele der als "gesund" Diagnostizierten sind* tatsächlich *gesund?*
+
+### Positiv/negativ prädiktiver Wert: ppV & npV
+
+Bsp: Nicht-invasive Pränataldiagnostik (NIPT) für Trisomie-21
+
+- Prävalenz Trisomie-21 bei 22-jährigen Müttern:  
+ca. 8 von 10 000 Kindern (0.008%)  
+- NIPT: Sensitivität $99.2\%$, Spezifität $99.9\%$
+
+Erwartete Häufigkeiten dementsprechend bei 1 000 000 
+getesteten 22-jährigen Schwangeren:
+
+\begin{tabular}{l|r r|r}
+&  Kind krank & Kind gesund &\\
+\hline
+NIPT: "Kind krank" & 794 & 999 & 1793\\
+NIPT: "Kind gesund" & 6 & 998 201  & 998207\\
+\hline
+& 800 & 999 200 & 1 000 000
+\end{tabular}
+
+npV $:= \frac{\text{``wahr negativ''}}{\text{``wahr negativ''} + \text{``falsch negativ''}}= 998201/998207 = 0.99994$  
+ppV $:= \frac{\text{``wahr positiv''}}{\text{``wahr positiv''} + \text{``falsch positiv''}}= 794/1793 \approx 0.443$  
+
+\  
+Also: Negative NIPT Diagnosen sind nahezu sicher korrekt, aber **nur $44\%$ der positiven NIPT Diagnosen sind zutreffend.** 
+
+\tiny 
+Zahlen aus Gießelmann, Kathrin: "Nichtinvasive Pränataltests: Risiko für Fehlinterpretationen." *Dtsch Arztebl* 2020; 117(7): A-320
+\tiny
+
+### But wait, there's more.....
+
+Babylonische terminologische Zustände:
+
+![](pics/04-confusion-matrix-wikipedia.png)
+
+\scriptsize
+
+[Quelle: Wikipedia](https://en.wikipedia.org/wiki/Confusion_matrix)

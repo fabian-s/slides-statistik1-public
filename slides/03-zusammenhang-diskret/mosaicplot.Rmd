@@ -1,0 +1,84 @@
+## Multivariate Kontingenztafeln & Mosaikplots
+
+### Mehrdimensionale Kontingenztabellen
+
+Beispiel: Überleben beim Titanic-Untergang
+
+  -  Mehrere diskrete Merkmale: Geschlecht, Klasse, Kind/ Erwachsene, Überleben (Ja/Nein)
+  -  Darstellung durch geeignete bedingte und marginale Verteilungen
+  -  Berechnung von Odds-Ratio zweier Merkmale bedingt auf ein drittes Merkmal
+  -  grafische Darstellung durch Mosaik-Plot
+
+### Beispiel: Titanic
+
+```{r, 03-titanic-1a, echo=TRUE}
+str(Titanic)
+```
+$\implies$ echt multivariate Kontingenztafeln sind hochdimensionale Arrays
+
+\vskip 1em
+
+```{r, 03-titanic-1b, echo=TRUE}
+apply(Titanic, MAR = c(4, 1), FUN = sum)
+```
+$\implies$ (Gemeinsame) Randhäufigkeiten durch Akkumulation über restliche Merkmale/Dimensionen
+
+
+### Beispiel: Titanic
+
+Randverteilung von "Klasse":
+```{r, 03-titanic-2a, echo=TRUE}
+apply(Titanic, FUN = sum, MAR = 1)
+```
+
+Bedingte Verteilungen von "Überleben" gegeben "Klasse":
+```{r, 03-titanic-2b, echo=TRUE}
+apply(Titanic, FUN = sum, MAR = c(1, 4)) / apply(Titanic, FUN = sum, MAR = 1)
+```
+
+### Beispiel: Titanic
+
+```{r, 03-titanic-or1, echo = TRUE}
+apply(Titanic, FUN = sum, MAR = c(2, 4))
+```
+Bedingte Verteilung:
+```{r, 03-titanic-or2, echo = TRUE}
+apply(Titanic, FUN = sum, MAR = c(2, 4))/apply(Titanic, FUN = sum, MAR = c(2))
+```
+
+Überlebens-Chance Frauen: $\frac{344}{126} \approx 2.7 \approx 3:1$  
+Überlebens-Chance Männer: $\frac{367}{1364} \approx 0.27 \approx 1:3$  
+Chancenverhältnis: $10$
+
+\note{erkläre unterschied zu bed. rel. hfgk!}
+
+### Mosaik-Plot
+
+-  *Flächentreue* Darstellung von gemeinsamen Häufigkeiten
+-  Aufteilung schrittweise:  
+  Zuerst nach *Einfluss*größen, dann nach *Ziel*größe aufteilen
+-  Gut geeignet für mehrkategoriale ordinale Daten
+-  Auch für höhere Dimensionen geeignet (... angeblich)
+- für 2 Dimensionen: entspricht gestapeltem Balkendiagramm mit variabler Balkenbreite
+
+\note{2 bsp für einfache daten demonstrieren (unabhängige daten!)}
+
+### Beispiel: Überlebende bei Titanic
+
+```{r, 03-titanic-mosaic1, echo=FALSE}
+mosaicplot(~ Class + Survived, data = Titanic, main = "Titanic")
+```
+
+### Beispiel: Titanic
+
+Zellen eingefärbt nach $\frac{\left(h_{ij}-\tilde h_{ij}\right)}
+{\sqrt{\tilde h_{ij}}}$ (*standardized pearson residuals*):
+```{r, 03-titanic-mosaic1-col, echo=FALSE}
+mosaicplot(~ Class + Survived , data = Titanic, main = "Titanic", shade = TRUE)
+```
+
+### Beispiel: Titanic
+
+```{r, 03-titanic-mosaic2, echo=FALSE}
+mosaicplot(~ Class + Survived + Sex , data = Titanic, main = "Titanic", color = TRUE)
+```

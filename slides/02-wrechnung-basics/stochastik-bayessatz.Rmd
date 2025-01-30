@@ -1,0 +1,213 @@
+## Der Satz von Bayes
+
+### Der Satz von Bayes
+
+Thomas Bayes [1701-1761]  
+
+Dieser Satz beruht auf der Asymmetrie der Definition von bedingten
+Wahrscheinlichkeiten:
+
+\begin{align*}
+P(A|B) & = \frac{P(A \cap B)}{P(B)} \qquad \implies \quad
+P(A \cap B) = P(A|B)P(B)\\
+P(B|A) & =  \frac{P(A \cap B)}{P(A)} \qquad \implies \quad
+P(A \cap B) = P(B|A)P(A)\\
+& \implies P(A|B)P(B) = P(B|A)P(A)
+\end{align*}
+
+### Der Satz von Bayes II 
+
+:::{.block}
+#### Satz von Bayes
+\begin{align*}
+P(B|A)&= \frac{P(A|B)P(B)}{P(A)} \\
+      &= \frac{P(A|B)P(B)}{P(A|B)P(B) + P(A|\bar{B})P(\bar{B})}
+\end{align*}
+:::
+
+Allgemeiner gilt für eine disjunkte Zerlegung $B_1, ..., B_n$:  
+$$P(B_i|A) = \frac{P(A|B_i)P(B_i)}{\sum_{j=1}^n P(A|B_j)P(B_j)}$$
+
+### Interpretation 
+
+$P(B_i)$ als *a-priori*-Wahrscheinlichkeiten:  
+
+- $\approx$ Vorwissen über bzw. Plausibilität der Annahmen/Hypothesen $B_i$ 
+
+$P(A|B_i)$ als *Likelihood* von A: 
+
+- wie plausibel ist die Beobachtung A *unter der Annahme dass $B_i$ der Fall ist*
+
+$P(B_i|A)$ *a-posteriori*-Wahrscheinlichkeiten:  
+
+- Auf Basis der Beobachtung von $A$ ändert sich die Wahrscheinlichkeit der Hypothese $B_i$ von $P(B_i)$ zu $P(B_i|A).$  
+
+  $\implies$ Bayes liefert "Update-Regel":  
+  Wie verändert sich durch die Beobachtung von Daten $A$ die Plausibilität der Vorannahme $B_i$?  
+
+### Bedeutung 
+
+$\implies$ Satz von Bayes liefert ein extrem mächtiges Verfahren zur  
+*Umkehr der Bedingungsreihenfolge*:
+
+- von $P(A|B_i)$:  
+"Wie wahrscheinlich wäre es, Daten $A$ zu beobachten *falls $B_i$ der Fall wäre*?"
+- zu $P(B_i|A)$:  
+"Wie plausibel/wahrscheinlich ist $B_i$ *wenn ich Daten $A$ beobachtet habe*?"  
+
+**Ermöglicht Rückschluss auf Plausibilität nicht direkt beobachtbarer Phänomene/Modellannahmen $B_i$, gegeben beobachtete Daten $A$ und Wahrscheinlichkeitsmodell $P(A|B_i)$** 
+
+\note[item]{anders:
+$P(B_i)$ ist Vorwissen, repräsentiert Annahmen. Bayes liefert Update-Regel wie neue Information durch die Beobachtung von A unser Wissen über die $B_i$ verändert.\\}
+\note[item]{Intuition: `wie wahrscheinlich ist die Kombination von A und Bi' normiert mit `wie wahrscheinlich ist A überhaupt'\\}
+
+### Beispiel: Diagnostischer Test
+
+$K:=$ "Person ist krank"  
+$T:=$ "Test auf Krankheit ist positiv"
+
+Gegeben:  
+
+- **Sensitivität** $P(T|K)$ ("wahr-positiv"-Rate) des Tests
+- **Spezifität** $P(\bar{T}|\bar{K})$ ("wahr-negativ"-Rate) des Tests 
+- **Prävalenz** $P(K)$ der Krankheit in der Population.
+
+Für Therapieentscheidungen relevant:  
+
+- $P(K|T)$ ("positiv prädiktiver Wert")
+- $P(\bar K|\bar T)$ ("negativ prädiktiver Wert")
+
+
+### Beispiel: Diagnostischer Test II
+
+Gegeben:
+\begin{align*}
+\text{Sensitivität / wahr-positiv-Rate:} \;\;P(T|K) &= 0.8 \\
+\text{Spezifität / wahr-negativ-Rate:}\;\; P(\bar{T}|\bar{K}) &= 0.99 \\
+\text{Prävalenz:} \;\; P(K) &= 0.001
+\end{align*}
+
+\begin{align*}
+\implies P(T)  & =  P(T|K)P(K) + P(T|\bar{K})P(\bar{K})  =  \\
+      & = P(T|K)P(K) + (1-P(\bar{T}|\bar{K}))(1-P(K)) \approx  0.011 \\
+P(K|T) & =  \frac{P(T|K)P(K)}{P(T)} \approx  0.073 \; (!!)	\\
+P(\bar{K}|\bar{T}) &\approx  0.989
+\end{align*}
+
+<!-- ### Beispiel: Creutzfeldt-Jakob -->
+
+<!-- \begin{center} -->
+<!-- \begin{tabular}{l | l l l l} -->
+<!-- & \multicolumn{2}{c}{CJD} & \\ -->
+<!-- ```{r cjd-tab, echo = FALSE, results = 'asis'} -->
+<!-- cjd <- matrix(c(126, 8, 7, 97), nrow = 2, -->
+<!-- dimnames = list("14-3-3" = c("+", "-"), -->
+<!-- "CJD" = c("+", "-"))) -->
+<!-- me <- as.table(cjd) -->
+<!-- metab <- cbind(me, Total = rowSums(me)) -->
+<!-- metab <- rbind(metab, Total = colSums(metab)) -->
+<!-- cat("14-3-3 & ", paste(colnames(metab), collapse = " & "), "\\\\ \ \n") -->
+<!-- tmp <- sapply(1:nrow(metab), function(i) -->
+<!-- cat(rownames(metab)[i], " & ", paste(metab[i,], collapse = " & "), -->
+<!-- " \\\\ \n")) -->
+<!-- ``` -->
+<!-- \end{tabular} -->
+<!-- \end{center} -->
+
+<!-- Sensitivität $P(\text{14-3-3} = +| \text{CJD} = +) = 126 / 134 = 0.94$ -->
+<!-- Spezifität   $P(\text{14-3-3} = -| \text{CJD} = -) = 97 / 104 = 0.93$ -->
+
+<!-- \note[item]{14-3-3 proteine: erhöhte konzentration in rückenmarksflüssigkeit als biomarker für CJD } -->
+
+### Odds / "Chancen"
+
+Alternative Darstellung von W.keit als (Wett-)Chance  
+(z.B. 1:10 ("1 zu 10") oder 3:1, engl. *"odds"*):  
+
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{block}{Def.: \textbf{Odds} (``Chance")} 
+Die Odds $\gamma(A)$ für ein Ereignis $A$ sind
+$$\gamma(A) := \frac{P(A)}{1 - P(A)} \in [0, \infty]$$
+\end{block}
+$\implies P(A) = \frac{\gamma(A)}{1 + \gamma(A)}$
+\end{column}
+\begin{column}{0.5\textwidth}
+```{r prob-odds, echo = FALSE, fig.height = 10, message= FALSE, warning = FALSE}
+odds <- tibble(p = seq(1e-5, .999, l = 301)) |> 
+  mutate(odds = p/(1-p))
+ggplot(odds, aes(x = p, y = odds)) + 
+  geom_hline(yintercept = 1, col = "black", lty = 3) +
+  geom_vline(xintercept = .5, col = "black", lty = 3) +
+  geom_line() +
+  ylab(expression(gamma(A) == P(A)/(1-P(A))~" [log2-Skala]")) +
+  xlab("P(A)") +
+  scale_y_continuous(breaks = c(0, .1, .5, 1, 2, 5, 10, 20), minor = NULL, trans = "log2") + 
+  scale_x_continuous(breaks = round(c(0, .1, .5, 1, 2, 5, 10, 20)/(1 + c(0, .1, .5, 1, 2, 5, 10, 20)), 1), minor = NULL) + 
+  coord_cartesian(ylim = c(1e-2, 25)) +
+  # scale_y_continuous(breaks = c(0, .5,   1,   2, 5, 10, 20), minor = NULL, limits = c(0, 21)) + 
+  # scale_x_continuous(breaks = c(0, .25, .5, .75, 0.95), minor = NULL) + 
+  theme_bw(base_size = 17)
+```
+\end{column}
+\end{columns}
+\note[item]{
+In manchen Quellen wird statt "Chance" auch "Risiko" verwendet.}
+\note[item]{
+Chance/Odds/Risiko: $\gamma = 1 = 1:1$ heisst $\pi=.5$;  $\gamma = 9 = 9:1$ heisst $\pi=.9$, $\gamma = .11 = 1:9$ heisst $\pi=.1$ etc.\\
+Für $\pi \rightarrow 0$, $\pi \approx \gamma$}
+
+
+### Satz von Bayes in Odds-Notation
+
+\begin{alignat*}{3}
+\frac{P(B|A)}{P(\bar{B}|A)} & = \frac{P(B)}{P(\bar{B})} &&\cdot \frac{P(A|B)}{P(A|\bar{B})}\\
+\text{also:\;\;\;} \gamma(B|A) &= \gamma(B) &&\cdot \frac{P(A|B)}{P(A|\bar{B})}\\
+\mbox{\em Posterior Odds} &=  \mbox{\em Prior Odds} &&\cdot \mbox{\em Likelihood Ratio}
+\end{alignat*}
+
+Je weiter der *Likelihood Quotient* von 1 weg ist, desto aussagekräftiger ist die Beobachtung von $A$ bezüglich der Plausibilität der Annahme $B$.
+
+### Bsp: Bayesianisches Update mit Odds
+
+Mit $$P(T|K) = 0.8; \quad P(\bar{T}|\bar{K}) = 0.99; \quad
+P(K) = 0.001$$ ergibt sich:
+\begin{align*}
+\text{Prior Odds: } \gamma(K) &= \frac{0.001}{0.999} = 0.\overline{001} = 1:999 \\
+\text{Likelihood Ratio: } \frac{P(T|K)}{P(T|\bar K)} &= \frac{0.8}{0.01} = 80 = 80:1  \\
+\implies\text{ Posterior Odds: } \gamma(K|T) &= \tfrac{1}{999} \cdot \tfrac{80}{1} = 0.\overline{080} \approx 1:12 !!
+\end{align*}
+Also: Nur bei 1 von 13 positiven Test liegt tatsächlich eine Krankheit vor....
+
+Obacht, sehr häufiger Fehlschluss **``base-rate fallacy''** --  
+verwechselt Likelihood(-Ratio) (hier: positiver Test 80-mal wahrscheinlicher bei Kranken)  
+mit Posteriori (hier: *wahr* positive Tests sind viel seltener als falsch positive)  
+und vergisst/ignoriert Einfluss der Priori/*base-rate* (hier: 1000-mal mehr Gesunde als Kranke)...
+**_remember your priors!_**
+
+
+\note[item]{
+intuition für LQ: wieviel wahrscheinlicher/weniger wahrscheinlich ist A zu beobachten unter Annahme B als unter Annahme $\bar B$.\\
+s.a. https://www.youtube.com/watch?v=BrK7X_XlGB8
+}
+\note[item]{$P(K) = 0.0264$; $P(T|K) = .222$; $P(T|\bar K) = 0.007$}
+
+### Bsp 2: Bayes
+
+
+75% der Mathestudierenden können Python.  
+15% der anderen Studierenden können Python.
+
+Von 1100 Studierenden studieren 100 Mathe.  
+
+Sei $M:=$"Tom studiert Mathe."  
+Sei $P:=$"Tom kann Python"
+
+Berechnen Sie $\gamma(M|P)$ bzw $P(M|P)$.
+
+<!--
+priori:     1 : 10
+LR:         75: 15
+--------------------
+posterior:  75:150  = 1:2 
+--->  

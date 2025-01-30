@@ -1,0 +1,190 @@
+## Kontingenztafeln für diskrete und gruppierte Merkmale
+
+### Einführung
+
+Zurück zur Empirie --  
+
+Wie können wir in beobachteten Daten Aussagen über die (Un-)Abhängigkeit von
+Merkmalen machen?
+
+$\Rightarrow$ **mehrdimensionale** oder **multivariate** Daten
+
+### Multivariate Daten
+
+- Stichprobe mit Untersuchungseinheiten $i = 1, \dots, n$
+- **Beobachtungen** $(x_i,y_i,z_i)$ der **Merkmale** $(X,Y,Z)$
+-  Daten  $(x_1,y_1,z_1),\ldots,(x_i,y_i,z_i),\ldots,(x_n,y_n,z_n)$  
+  (Im weiteren: Meistens nur 2 Merkmale $X, Y$)
+-  Fragestellungen:  
+     - $X \leftrightarrow Y$: (Wie) hängen $X$ und $Y$ zusammen?  
+        **Assoziation**, **Korrelation**  
+        ("Sind X und Y *unabhängig*?")
+     - $X \rightarrow Y$: (Wie) beeinflusst $X$ das (Ziel-)Merkmal $Y$?  
+        **Regression**, **Kausalität** (... nicht Teil dieses Kurses)
+
+### Diskrete und gruppierte Merkmale
+
+-  Darstellung, Präsentation von diskreten Merkmalen $X$ und $Y$ mit den Ausprägungen
+
+\begin{equation*}
+\begin{array}{c}
+a_1,\ldots,a_k \qquad \mbox{für }\,X\\
+b_1,\ldots,b_m \qquad \mbox{für }\,Y
+\end{array}
+\end{equation*}
+
+- Skalenniveau von $X, Y$ hier beliebig; $X, Y$ können auch gruppierte metrische Merkmale sein.
+- *benutzt* wird hier allerdings nur das *Nominal*skalenniveau der Merkmale.
+
+
+### Kontingenztabellen
+
+Nachwahlbefragung Bundestag 2021:   
+
+\vskip 3em
+\small
+\begin{center}
+      \begin{tabular}{r | ccccccc | c}
+          & \text{SPD} & \text{CDU/CSU} & \text{Grüne} & \text{FDP} & \text{AfD} & \text{Linke} &  \text{Rest} & $\sum$ \\ \hline
+          Männer & 626 & 601 & 352 & 325 & 300 & 125 & 175 & 2504\\
+          Frauen & 567 & 504 & 335 & 211 & 167 & 104 & 210 & 2098 \\ \hline
+          \sum  & 1193 & 1105 & 687 & 536 & 467 & 229 & 385 & 4602  
+      \end{tabular}
+\end{center}
+
+\vskip 5em
+\scriptsize 
+Quelle: Nachwahlbefragung ARD via [statista.com](https://de.statista.com/statistik/daten/studie/1257090/umfrage/wahlverhalten-bei-der-bundestagswahl-nach-geschlecht/)
+
+###  Beispiel: Arbeitslosigkeit
+
+Zwei Merkmale:
+
+-  $X$ Ausbildungsniveau mit den Kategorien
+    -  ``keine Ausbildung''
+    -  ``Lehre''
+    -  ``fachspezifische Ausbildung''
+    -  ``Hochschulabschluss''
+
+-  $Y$ Dauer der Arbeitslosigkeit mit den Kategorien
+    -  ``Kurzzeitarbeitslosigkeit'' ($\leq$ $6$ Monate)
+    -  ``mittelfristige Arbeitslosigkeit'' ($7$--$12$ Monate)
+    -  ``Langzeitarbeitslosigkeit'' ($\geq$ $12$ Monate)
+
+### Arbeitslosigkeit
+\small
+
+\begin{table}[hbt]
+  \begin{center}
+    \leavevmode\small
+    \begin{tabular}{l|ccc|c}
+\multicolumn{1}{c}{}
+& \multicolumn{1}{c}{Kurzzeit-}
+  & \multicolumn{1}{c}{mittelfristige}
+    & \multicolumn{1}{c}{Langzeit-}
+    & \multicolumn{1}{c}{$\sum$}\\
+\multicolumn{1}{c}{}
+& \multicolumn{1}{c}{arbeitslosigkeit}
+  & \multicolumn{1}{c}{Arbeitslosigkeit}
+    & \multicolumn{1}{c}{arbeitslosigkeit}\\\cline{2-4}
+k.A.  & 86 & 19 & 18 & 123 \\
+Lehre & 170 & 43 & 20 & 233 \\
+Fachspez. & 40 & 11 & 5 & 56\\
+Hochschule & 28 & 4 & 3 & 35\\\cline{2-4}
+\multicolumn{1}{c}{$\sum$}
+& \multicolumn{1}{c}{$324$}
+  & \multicolumn{1}{c}{$77$}
+    & \multicolumn{1}{c}{$46$}
+      & \multicolumn{1}{c}{$447$}
+    \end{tabular}
+    \vspace{3mm}
+    \\{Ausbildungsspezifische Dauer der Arbeitslosigkeit für männliche Deutsche}
+\end{center}
+\end{table}
+
+
+
+
+
+### Allgemeine Darstellung
+
+**Kontingenztafel der absoluten Häufigkeiten:**
+
+Eine **$(k \times m)$-Kontingenztafel der absoluten Häufigkeiten** besitzt die Form
+
+\begin{displaymath}
+\begin{large}
+\begin{array}{c|ccc|c}
+      \multicolumn{1}{c}{}
+        & \multicolumn{1}{c}{b_1}
+          & \dots
+            & \multicolumn{1}{c}{b_m}\\\cline{2-4}
+      a_1 & h_{11} & \dots & h_{1m} & h_{1\cdot}\\
+      a_2 & h_{21} & \dots & h_{2m} & h_{2\cdot}\\
+       \cdot & \cdot & & \cdot & \cdot \\
+      a_k & h_{k1} & \dots & h_{km} & h_{k\cdot}\\\cline{2-4}
+      \multicolumn{1}{c}{}
+          & \multicolumn{1}{c}{h_{\cdot 1} }
+            & \dots
+              & \multicolumn{1}{c}{h_{\cdot m} }
+                & \multicolumn{1}{c}{n}
+\end{array}
+\end{large}
+\end{displaymath}
+
+### Notation
+
+\begin{center}
+  \begin{tabular}{ll}
+  $h_{ij} = h(a_i,b_j)$           & die absolute Häufigkeit der Kombination $(a_i,b_j)$,\\*[0.5cm]
+  $h_{1\cdot},\dots,h_{k\cdot}$   & die Randhäufigkeiten von $X$ \\
+  $h_{\cdot 1},\dots,h_{\cdot m}$ & die Randhäufigkeiten von $Y$ \\
+  \end{tabular}
+\end{center}
+
+mit $$h_{i\cdot} = \sum^m_{j=1} h_{ij},\qquad h_{\cdot j} = \sum^k_{i=1} h_{ij}$$
+
+Die Kontingenztabelle gibt die gemeinsame Verteilung der Merkmale
+$X$ und $Y$ in absoluten Häufigkeiten wieder.
+
+
+###  Kontingenztafel der relativen Häufigkeiten
+
+Die **$(k\times m)$-Kontingenztafel der relativen Häufigkeiten** hat die Form
+
+\vspace*{1cm}
+
+\begin{displaymath}
+\begin{large}
+\begin{array}{c|ccc|c}
+\multicolumn{1}{c}{}
+& \multicolumn{1}{c}{b_1}
+  & \dots
+    & \multicolumn{1}{c}{b_m}\\\cline{2-4}
+a_1 & f_{11} & \dots & f_{1m} & f_{1\cdot}\\
+\cdot & \cdot & & \cdot & \cdot \\
+a_k & f_{k1} & \dots & f_{km} & f_{k\cdot}\\\cline{2-4}
+\multicolumn{1}{c}{}
+  & \multicolumn{1}{c}{f_{\cdot 1} }
+    & \dots
+      & \multicolumn{1}{c}{f_{\cdot m} }
+        & \multicolumn{1}{c}{1}
+\end{array}
+\end{large}
+\end{displaymath}
+
+
+### Notation
+
+\begin{center}
+\begin{tabular}{lp{9cm}}
+$f_{ij} = h_{ij}/n$ & die relative Häufigkeit der Kombination $(a_i,b_j)$, \\*[0.5cm]
+$f_{i\cdot}=\sum\limits_{j=1}^m f_{ij} = h_{i\cdot}/n,$
+                 & $i=1,\dots,k,$ die relativen Randhäufigkeiten zu $X$,\\*[0.5cm]
+$f_{\cdot j}=\sum\limits_{i=1}^k f_{ij} = h_{\cdot j}/n,$
+                 & $j=1,\dots,m$, die relativen Randhäufigkeiten zu $Y$.
+\end{tabular}
+\end{center}
+
+Die Kontingenztabelle gibt die gemeinsame Verteilung von $X$ und $Y$
+wieder.

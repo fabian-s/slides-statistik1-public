@@ -1,0 +1,127 @@
+% Copyright 2015 by Facundo Muñoz
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+% modified by Fabian Scheipl
+
+
+\ProvidesPackage{beamerthemesimplefs}
+
+%\def\beamer@simplecolor{gris}
+%\DeclareOptionBeamer{color}{\beamer@simplecolor=#1}
+%\ExecuteOptionsBeamer{gris}
+%\ProcessOptionsBeamer
+
+\input xkeyval
+
+% % These define macros \KV@setwatermark@hoffset that take one argument
+% % which is processed by the last piece of codes into braces
+% \def\@hos{}
+% \def\@vos{}
+% \def\@alpha{} % This one does not work. Why?
+% \define@key{setwatermark}{hoffset}[\def\@hos{.}]{\def\@hos{\hspace*{#1}}}
+% \define@key{setwatermark}{voffset}[\def\@vos{.}]{\def\@vos{\vspace*{#1}}}
+% \define@key{setwatermark}{alpha}[\def\@alpha{0.7}]{\def\@alpha{#1}}
+%
+% \def\setwatermark{\@ifnextchar[\@setwatermark{\@setwatermark[]}}
+% \def\@setwatermark[#1]#2{%
+%   \setkeys{setwatermark}{#1}%
+%   \def\@watermark{#2}
+% }
+% % \newcommand{\setwatermark}[1]{\def\@watermark{#1}}
+% \setwatermark{}   % Empty initialization
+
+
+\mode<presentation>
+
+  % http://www.colorcombos.com/color-scheme-275.html
+  \definecolor{destacado}{HTML}{202020}%{515151} % gris oscuro
+  \definecolor{normal}{HTML}{484848}%{797979}  % gris medio
+  \definecolor{fondo}{HTML}{E8E8E8}%{e6e6e6}  % gris claro
+
+  \setbeamercolor{normal text}{bg=white,fg=normal}
+  \setbeamercolor*{block title}{bg=fondo,fg=destacado}
+  \setbeamercolor*{block body}{bg=fondo,fg=normal}
+  \setbeamercolor*{caption}{fg=normal}
+  \setbeamercolor*{item}{fg=normal}
+  \setbeamercolor*{itemize body}{fg=normal}
+  \setbeamercolor*{math text}{fg=normal}
+  \setbeamercolor*{alerted text}{fg=black}
+
+  \usetheme{default}
+%  \usecolortheme[named=gris]{structure}
+  \usecolortheme[named=destacado]{structure}
+  \usefonttheme{structurebold}
+
+  % overlays semitransparentes
+  \setbeamercovered{transparent}
+
+  % incluir el contador de diapos
+  %\setbeamertemplate{footline}[frame number]
+  \makeatletter
+
+% footline definition from https://tex.stackexchange.com/a/183350/2781
+\setbeamercolor{author in head/foot}{fg=normal}
+\setbeamercolor{title in head/foot}{fg=normal}
+\setbeamercolor{date in head/foot}{fg=normal}
+
+\setbeamertemplate{footline}
+{
+    \ifnum \theframenumber=1
+    \leavevmode%
+    \hbox{ \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{frame in head/foot}%
+       \usebeamerfont{date in head/foot}
+        Version: \today
+        \end{beamercolorbox}}
+    \else
+    \leavevmode%
+    \hbox{%
+    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
+      \usebeamerfont{author in head/foot} LMU München
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+      \usebeamerfont{title in head/foot} Statistik I
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{frame in head/foot}%
+       \usebeamerfont{date in head/foot}
+       \fontseries{l}\selectfont \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
+    \end{beamercolorbox}
+  }%
+  \vskip 0pt%
+   \fi
+}
+\makeatother
+
+
+  % eliminar íconos de nav.
+  \setbeamertemplate{navigation symbols}{}
+
+  % bloques
+  \setbeamertemplate{blocks}[rounded][shadow=false]
+
+  % especificación global para listas
+  %\beamerdefaultoverlayspecification{<+-| alert@+>}
+
+  % márgenes
+  \setbeamersize{text margin left=0.4cm,text margin right=0.4cm}
+
+%   \setbeamertemplate{background}{
+%   \parbox[c][\paperheight]{\paperwidth}{%
+%     \vfill \hfill
+%     \begin{tikzpicture}
+%       %\node[opacity=\@alpha]  % not working. why?
+%       \node[opacity=.07]
+%       {
+%         \@watermark
+%       };
+%     \end{tikzpicture}
+%     \@hos
+%
+%     \@vos
+%   }
+% }
+
+\mode
+<all>

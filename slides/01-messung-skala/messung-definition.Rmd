@@ -1,0 +1,88 @@
+### Grundbegriffe
+
+:::{.block}
+#### Def.: **Statistische Einheit, Untersuchungseinheit** (UE)  
+Objekte, an denen interessierende Größen erfasst werden. "Merkmalsträger".
+:::
+
+:::{.block}
+#### Def.: **Grundgesamtheit,  Population** (GG)  
+Menge aller für eine Fragestellung relevanten statistischen Einheiten
+:::
+
+:::{.block}
+#### Def.:  **Teilgesamtheit, Stichprobe**  
+Eine Teilmenge der GG, speziell: die Teilmenge an UE, für die Daten vorliegen.
+:::
+
+### Grundbegriffe
+
+:::{.block}
+#### Def.: **Merkmal, (Ko-)Variable**  
+Eine messbare Eigenschaft der Untersuchungseinheiten 
+:::
+
+:::{.block}
+#### Def.: **Merkmalsausprägung**
+Konkreter Wert eines Merkmals für eine bestimmte UE.
+:::
+
+:::{.block}
+#### Def.: **Merkmalsraum** (Zustandsraum)
+Menge aller *möglichen* Merkmalsausprägungen eines Merkmals
+:::
+Beachte: *beobachtete* Ausprägungen $\subseteq$ Merkmalsraum
+
+:::{.block}
+#### Def.: **Beobachtung**
+Die Gesamtheit der beobachteten Merkmalsausprägungen der gemessenen Merkmale einer Untersuchungseinheit zu einem bestimmten Messzeitpunkt.
+:::
+
+\note{s. kasten Fahrmeir S. 15}
+
+## Messung
+
+### Messen
+
+>- *Measurement is the contact of reason with nature.*  
+Henry Margenau (1959)
+
+>- *In its broadest sense, measurement is the assignment of numerals to objects or events according to rules.*  
+Stanley S. Stevens (1951)
+
+### Messen
+
+**Messen** bedeutet: Zuordnung von Zahlen/Symbolen zu Ausprägungen von Merkmalen an Untersuchungseinheiten.
+
+-  Physikalische Messungen:  
+   Länge, Blutdruck, Temperatur, ...  
+-  Psychometrische Beispiele:  
+   Gewaltbereitschaft, Schwere der Depression, ...
+-  Wirtschaftswissenschaftliche Beispiele:  
+   Inflation, Bruttosozialprodukt, Arbeitslosenquote, ...
+
+### Messen
+
+Amir $\longrightarrow$ 1.84  
+Liz $\longrightarrow$ 1.61  
+Feihong $\longrightarrow$ 1.72  
+
+Jedes Merkmal definiert bestimmte **Relationen** zwischen den UE  
+Hier z.B.: "Amir größer als Feihong größer als Liz"  
+\ 
+
+Jede gültige Messung ist eine **strukturerhaltende Abbildung** (Homomorphismus) bezüglich dieser Relationen.  
+Hier z.B.: "Liz ist kleiner als Amir" $\iff$ "$1.61 < 1.84$"
+
+
+### Typen von Messungen
+
+1.  Messung hat reales (physikalisches) Relativ;  
+    direkte Messung: ("*representational* measurement").  
+    z.B. Länge, Gewicht, Anzahl, Blutzuckerkonzentration
+2.  Messung besitzt durch *Operationalisierung* definiertes Relativ;  
+    indirekte/operationale Messung  ("*pragmatic* measurement").  
+    z.B. Intelligenz, Schweregrad einer Krankheit, Arbeitslosenquote
+
+*Operationalisierung* bedeutet "Messbarmachung", definiert genaue Messvorschrift, Messinstrumente, etc.
+

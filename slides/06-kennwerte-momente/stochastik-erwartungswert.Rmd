@@ -1,0 +1,172 @@
+## Erwartungswert einer Zufallsvariablen
+
+### Erwartungswert einer ZV 
+
+::: {.block}
+#### Definition: Diskreter Erwartungswert
+Der *Erwartungswert* (EW) $E(X)$ einer *diskreten* ZV $X$
+mit Träger $T_X$ ist definiert als
+\begin{align*}
+E(X) &:= \sum_{x \in T_X} x \cdot P_{X}(X = x) = \sum_{\omega \in \Omega} P(\{\omega\}) \, X(\omega)\\
+      &\phantom{:}=\sum_{x \in T_X} x \cdot f_X(x)
+\end{align*}
+:::
+
+::: {.block}
+#### Definition: Stetiger Erwartungswert
+Der *Erwartungswert* $E(X)$ einer stetigen ZV $X$ mit Dichtefunktion $f_X(x)$
+ist definiert als
+\begin{align*}
+E(X) &:= \int_{-\infty}^\infty x \cdot f_X(x) \,dx
+\end{align*}
+:::
+
+### Erwartungswert einer  ZV 
+
+**Intuition:**  
+Der Erwartungswert ist *gewichtetes arithmetisches Mittel* der möglichen Werte einer ZV, wobei die Gewichte den Wahrscheinlichkeiten entsprechen, einen 
+bestimmten Wert zu beobachten.  
+\  
+
+- Der Erwartungswert existiert bzw. ist endlich, wenn gilt:
+
+  - für diskrete ZV: $\sum_{x \in T_X} |x| \cdot f(x) < \infty$ (absolut konvergente Summe),
+  - für stetige ZV: $\int_{-\infty}^\infty |x f(x)| \,dx = \int_{-\infty}^\infty |x| f(x) \,dx< \infty$ (absolut integrierbar).
+  
+\  
+
+- Beachte:  $\sum_{x \in T_X} x \cdot P(X = x) = \sum_{x \in \mathbb{R}} x \cdot P(X = x)$, da $P(X = x) = 0 \;\forall\, x \notin T_X$
+
+### Eigenschaften des Erwartungswertes 
+
+- Sei $X = a$ mit Wahrscheinlichkeit 1 ("*deterministische* ZV").
+Dann gilt: $$E(X) = a$$
+\  
+
+- **Linearität des Erwartungswertes**:  
+Sei $a, b \in \mathbb{R}$ und $X, Y$ beliebige ZV. Dann gilt:
+$$E(a \cdot X + b \cdot Y) = a \cdot E (X) + b \cdot E (Y)$$  
+$\implies$ Für beliebige $a, b \in \mathbb{R}$ gilt daher $$E(aX + b) = a \cdot E(X) + b$$
+
+- Ist $f(x)$ symmetrisch um einen Punkt $c$, d.h. $f(c-x) = f(c+x) \;\forall\, x \in T_X$,  
+dann ist $E(X) = c$.
+\  
+
+\note{
+$E(aX + b) = aE(X) + b = aE(X) + bE(Y) $, mit $Y$ als deterministische Zufallsvariable mit Träger $T_Y = \{1\}$
+}
+
+### Eigenschaften des Erwartungswertes II 
+
+Allgemeiner auch für beliebige
+$a_1, ..., a_n \in \mathbb{R}$ und beliebige ZV $X_1, ..., X_n$:
+
+$$E\left( \sum_{i=1}^n a_iX_i \right) = \sum_{i=1}^n a_i \cdot E(X_i)$$
+
+<!-- Daher gilt für $X \sim {\mathcal B}(n, \pi)$: $E(X)=n \pi$-->
+
+
+### Transformationsregel für Erwartungswerte 
+
+Sei $X$ eine ZV und $g:\mathbb{R} \to \mathbb{R}$ eine reelle Funktion. Dann gilt für $Y = g(X)$:
+
+$$
+E(Y) = E[g(X)] = \begin{cases} \sum_{x \in {\cal T}} g(x)\, f(x) & X \text{ diskret} \\
+  \int_{-\infty}^\infty g(x) f(x) \,dx & X \text{ stetig} \end{cases}
+$$
+
+- Im Allgemeinen gilt **nicht**: $\quad E(g(X)) = g(E(X))\,$!
+
+\note{
+für lineare $g()$ : $E(g(X)) = g(E(X))$
+}
+
+### Beispiel 
+
+Sei $X$ eine ZV mit folgender Wahrscheinlichkeitsfunktion
+$$
+f(x) = \left\{
+\begin{array}{lll}
+1/4 & \mbox{ für } & x=-2\\
+1/8 & \mbox{ für } & x=-1\\
+1/4 & \mbox{ für } & x=1\\
+3/8 & \mbox{ für } & x=3\\
+\end{array}
+\right.
+$$
+
+Berechne den Erwartungswert von $E(X^2)$
+
+\note{
+\begin{align*}
+E(X^2) & = & \sum_{x \in {\mathcal T}_x} x^2 \cdot f(x) \\
+& = & (-2)^2 \cdot \frac{1}{4} +(-1)^2 \cdot \frac{1}{8}
++1^2 \cdot \frac{1}{4} +3^2 \cdot \frac{3}{8}\\
+& = & 4 \frac{3}{4}
+\end{align*}
+Alternativ W.keitsfunktion von $Y=X^2$ berechnen:
+$$
+f(y) = \left\{
+\begin{array}{lll}
+(1/4 + 1/8) = 3/8 & \mbox{ für } & y=1\\
+1/4 & \mbox{ für } & y=4\\
+3/8 & \mbox{ für } & y=9\\
+\end{array}
+\right.
+$$
+dann $EY$ direkt bestimmen:
+\begin{align*}
+E(Y) & = & \sum_{y \in {\mathcal T}_y} y \cdot f(y) \\
+& = & 1 \cdot \frac{3}{8} +4 \cdot \frac{1}{4} +9 \cdot \frac{3}{8}\
+
+& = & 4 \frac{3}{4}
+\end{align*}
+Obacht: $$4 \frac{3}{4} = E(X^2) \neq E(X)^2 =
+\left(\frac{3}{4}\right)^2 = \frac{9}{16}$$
+}
+
+
+### Erwartungswert von ZVn mit Träger $\mathbb{N}^+$
+
+Für ZV $X$ mit Träger $\cal{T}_X = \mathbb{N}^+$ gilt: 
+$E(X) = \sum_{k=1}^\infty P(X \geq k)$
+
+Beweis:
+\begin{align*}
+\sum_{k=1}^\infty P(X \geq k) &= \sum_{k=1}^\infty \sum_{t = k}^\infty P(X = t)\\
+                              &= P(X = 1) + P(X = 2) + P (X = 3) + P(X = 4) + \ldots \\
+                              &\phantom{=}\phantom{P(X = 1)\;\;}+ P(X = 2) + P(X = 3) + P(X = 4) + \ldots \\ 
+                              &\phantom{=}\phantom{P(X = 1) + P(X = 2)\;\;}+ P(X = 3) + P(X = 4) + \ldots \\
+                              &\phantom{=}\phantom{P(X = 1) + P(X = 2) + P(X = 3)\;\;} + P(X = 4) + \ldots\\
+                              &\phantom{=}\;\;\; + \ldots \ldots \ldots \\
+                              & = \sum_{t=1}^\infty t \cdot P(X = t) \\
+                              & = E(X)
+\end{align*}
+
+\note{
+\begin{tabular}{lp{9.5cm}}
+Anwendung:& Erwartungswert der geometrischen Verteilung:\\
+& Ist  $X \sim G(\pi)$ so gilt:
+\end{tabular}
+$$
+E(X) = \frac{1}{\pi}
+$$
+
+\begin{align*}
+\sum_{k=1}^\infty P(X \geq k) & = &\sum_{k=1}^\infty
+\sum_{t = k}^\infty P(X = t)\
+
+& = & \sum_{t=1}^\infty\sum_{k=1}^t P(X = t)\
+
+& = & \sum_{t=1}^\infty t \cdot P(X = t)\
+
+& = & E X
+\end{align*}
+$f(x) = \pi \cdot (1-\pi)^{x-1}$ für $x \in \mathbb{N}$,
+also $P(X \geq k) = (1-\pi)^{k-1}$\\
+Wg.eben bewiesenem Satz:
+\begin{align*}
+E (X) & = & \sum_{k=1}^\infty P(X \geq k)=\sum_{k=1}^\infty (1 - \pi)^{k - 1}\\
+& = & \sum_{k=0}^\infty ( 1 - \pi)^k\stackrel{\text{geom.Re.}}{=}  \frac{1}{1 - (1 -\pi)} = \frac{1}{\pi}
+\end{align*}
+}

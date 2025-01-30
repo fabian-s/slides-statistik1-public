@@ -1,0 +1,56 @@
+## Messung: Gütekriterien
+
+### Gütekriterien
+
+Aspekte:
+
+  -  Validität = Gültigkeit
+  -  Reliabilität = Zuverlässigkeit
+
+Formalisierung über *Messfehlermodelle* für beobachtete Messwerte $X^*$: 
+
+z.B.
+\begin{equation*}
+  X^* = X + \LaTeXunderbrace{U}_{\text{Messfehler}}
+\end{equation*}
+$U$ im Mittel = 0 (unsystematischer Fehler, unverzerrte Vermessung)
+
+$\implies$ klassischer additiver Messfehler  
+(Modell der klassischen (psychologischen) Testtheorie)
+
+
+### Validität
+
+*Wird das gemessen, was gemessen werden soll?*
+
+\vspace{0.5cm}
+
+Extrem wichtige, komplexe Frage in den **Sozialwissenschaften**:
+
+- Konstruktvalidität: "Bildet das Messverfahren das theoretische Konstrukt vollständig, präzise, nachvollziehbar ab?" 
+- Kriteriumsvalidität: "Hängen Ergebnisse des Messverfahrens sinnvoll mit anderen empirischen Kriterien zusammen?" 
+
+**Statistik:**   
+
+Valide Messung falls kein "systematischer" Messfehler, also $U$ im Mittel $= 0$.
+
+
+### Reliabilität
+
+*Ist die Messung zuverlässig?*
+
+Erhält man bei Wiederholung den gleichen Wert? $\rightarrow$ Retest-Reliabilität
+
+Erhält man unter verschiedenen Bedingungen den gleichen Wert?
+$\rightarrow$ z.B. Interrater-Reliabilität
+
+**Statistik:**
+
+Reliabilität quantifiziert durch Verhältnis von Streuung des Merkmals $\sigma_X^2$ zur Gesamtstreuung der fehlerbehafteten Messung
+\begin{equation*}
+  r = \frac{\sigma_X^2}{\sigma_{X^*}^2} = \frac{\sigma_X^2}{\sigma_X^2 + \sigma_U^2} \leq 1
+\end{equation*}
+
+$\sigma_X^2, \sigma_{X^*}^2$: *Varianz* von $X$ bzw. $X^*$
+
+

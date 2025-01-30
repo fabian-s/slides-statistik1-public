@@ -1,0 +1,81 @@
+## Datenerhebung
+
+### Erhebungsarten: Umfang
+
+:::{.block}
+#### Def.: **Vollerhebung**  
+Alle statistischen Einheiten einer Grundgesamtheit werden untersucht ("erhoben").
+:::
+
+:::{.block}
+#### Def.: **Stichprobe**
+Auch *Teilerhebung*. Ein Teil der Untersuchungseinheiten in einer Grundgesamtheit wird untersucht.
+Ist die Auswahl dieser UE zufällig, spricht man von einer **Zufallsstichprobe**. 
+:::
+
+Induktive Statistik ist in der Regel nur auf Basis geeigneter *Zufallsstichproben* zulässig!
+
+### Erhebungsarten: Datenform
+
+:::{.block}
+#### Def.: **Querschnittsdaten:**  
+Ein oder mehrere verschiedene *Merkmale* werden an mehreren *Untersuchungseinheit* einmal erhoben (zu einem bestimmten Zeitpunkt oder über einen bestimmten Zeitraum).  
+Also: **Eine** *Beobachtung* pro *Untersuchungseinheit.*
+:::
+
+:::{.block}
+#### Def.: **Zeitreihe:**  
+Ein bestimmtes *Merkmal* wird wiederholt für die selbe *Untersuchungseinheit* erhoben (üblicherweise in regelmäßigen Abständen).   
+Also: **Mehrere** *Beobachtungen* **einer** *Untersuchungseinheit.*  
+:::
+\vskip -.5em 
+z.B. Aktienkurs eines Unternehmens, Corona-Inzidenz in einem Landkreis
+
+
+:::{.block}
+#### Def.: **Längsschnittdaten** (auch: Longitudinal-, Paneldaten):  
+Die selben *Merkmale* werden mehrmals zu verschiedenen Zeitpunkten
+an mehreren *Untersuchungseinheiten* erhoben.  
+Also: Jeweils **mehrere** *Beobachtungen* **mehrerer** *Untersuchungseinheiten.*
+:::
+
+### Erhebungsarten: Methoden operationaler Messungen 
+
+- Beobachtung: 
+  - verdeckt oder teilnehmend
+  - systematisch mit Beobachtungsprotokoll
+
+- Befragung:
+   - (fern)mündlich mit/ohne Interviewer, oder schriftlich/online
+   - Fragebogen  
+
+- Experiment
+   - kontrollierte Situation, evtl. Erhebung durch Beobachtung oder Befragung
+
+### Experimente
+
+Es werden in der Regel verschiedene "Behandlungen" verglichen.
+
+Gemeinsamkeit: Experimenteller Eingriff ins Geschehen
+
+-  **Randomisierte klinische Studie** : Zuordnung von Behandlungen zu Personen erfolgt durch Losverfahren (Randomisierung)
+-  Randomisierte Experimente (Produktion, Landwirtschaft )  
+    Vorlesung: *Versuchplanung*
+- Experimente in Medizin und Biologie
+- Naturwissenschaftliche Experimente mit zufälligen Komponenten
+- "A-B-Testing" in Web Development oder UX Design
+
+
+### Epidemiologische Studien
+
+-  **Kohortenstudien:**  
+Synonym für Längsschnittdaten (*retrospektiv* oder *prospektiv*)  
+  Beispiel: EPIC Studie (European Prospective Investigation into Cancer)
+  400.000 Personen in neun europäischen Ländern
+
+- **Fall-Kontroll-Studien:**  
+Erhebung von Erkrankten (Fälle) und dann dazu "passenden" Gesunden (Kontrollen)  
+Beispiel: Deutsche Radon Studie
+
+
+

@@ -1,0 +1,94 @@
+<!-- begriffe: abzählbar, überabzählbar -->
+
+### Zufallsvariablen - Motivation 
+
+- Ergebnisse von Zufallsvorgängen sind nicht notwendigerweise Zahlen\
+- Oft ist es aber hilfreich diese durch Zahlen zu repräsentieren,
+um mit ihnen rechnen zu können \
+
+- Beispiel: 3-maliger Wurf einer Münze \
+  $\Omega = \{Z, K\} \times \{Z, K\} \times \{Z, K\}$  
+  $|\Omega| = 2^3 = 8$  
+  z.B. $\omega = ZKZ := (Z,K,Z)$
+
+Angenommen man interessiert sich für
+$$Y:=\text{``Anzahl Kopf''}$$
+Dann nennt man $Y$ eine **Zufallsvariable** (ZV) mit 
+reellwertigen **Ausprägungen** bzw. **Realisierungen** $y \in \cal{T} \subseteq \mathbb R$.  
+Man schreibt kurz $Y=y$, wenn die *Ausprägung* $y$ der ZV $Y$ eingetreten ist.
+
+### Zufallsvariable - Definition
+
+::: {.block}
+#### Def.: **Träger** einer ZV  
+Die Menge der möglichen Ausprägungen einer ZV X heißt *Träger* $\cal{T}_X$ der ZV $X$
+:::
+
+Im Bsp: $\cal{T}_Y = \{0,1,2,3\}$\
+
+::: {.block}
+#### Def.: **Zufallsvariable**  
+Eine *Zufallsvariable* $X$ ist eine **eindeutige Abbildung** von $\Omega$ nach $\cal{T}_X \subseteq \mathbb{R}$:
+$$X: \Omega \rightarrow \cal{T}_X$$
+:::
+
+- Eine Zufallsvariable $X$ ordnet also jedem Elementarereignis $\omega \in \Omega$ *genau einen* Zahlenwert $x \in \cal{T}_X$ zu:   $X(\omega) = x$
+- Mehrere Elementarereignisse können dem selben Zahlenwert zugeordnet werden.
+- Unterscheide: Zufallsvariable $X:\Omega \to \cal{T}_X$ vs. Ausprägungen/Realisierungen $x = X(\omega)$ von $X$.
+
+\note{Notation: GROSS: stochastische Größe, klein: Beobachtung, Realisierung!}
+
+### Zufallsvariable - Diagramm
+
+\includegraphics[height = 0.8\textheight]{pics/zv-diagramm.png}
+
+### Zufallsvariable - Motivation
+
+- Man kann mit $X$ "rechnen":
+  z.B $P(X \leq a)$ oder $P(X^2 > b)$,
+  oder "Welches Ergebnis erwarten wir 'im Mittel'?"
+
+
+- Ursprünglicher Wahrscheinlichkeitsraum $(\Omega, P)$ wird letztendlich
+nicht mehr benötigt, stattdessen nur Wahrscheinlichkeiten für die Werte der ZV  
+$\implies$ meist deutlich einfacher zu handhaben  
+-- im Bsp: Verteilung über $\{0,1,2,3\}$ statt über $\{KKK, KKZ, KZK, ...., ZZK, ZZZ\}$
+
+- Mathematische Formalisierung eines (quantitativen) Messvorgangs -- jeder möglichen Beobachtung (= Elementarereignis) wird genau ein Zahlenwert zugeordnet.  
+$\longrightarrow$ in vielen Anwendungen $\Omega$ kaum zugänglich oder mathematisch formalisierbar und nur Ergebnis des Messvorgangs überhaupt *beobachtbar*  
+$\implies$ ZV zentraler Begriff für statistische Anwendungen und Ansatzpunkt für mathematische Formalisierung empirischer Phänomene
+
+## Diskrete Zufallsvariablen 
+
+### Diskrete Zufallsvariable
+
+::: {.block}
+#### Def.: **Diskrete Zufallsvariable**  
+Eine ZV $X$ heißt **diskret**, falls sie nur endlich oder abzählbar unendlich viele Werte $x_1, x_2, ...$ annehmen kann,
+also: falls die Menge $\cal{T}=\{x_1, x_2, ...\}$ der möglichen Ausprägungen $x_i$ von $X$ mit $P(X = x_i)  > 0$ abzählbar ist.
+::::
+
+::: {.block}
+#### Def.: **Wahrscheinlichkeitsfunktion einer diskreten ZV**  
+Die *Wahrscheinlichkeitsfunktion* von $X$ ist durch
+$$f_X(x_i) := P(X = x_i) = P\left(\{\omega \in \Omega: X(\omega) = x_i\}\right)$$
+für $x_i \in \mathbb{R}$ gegeben.  
+:::
+
+- Alternativ: "Wahrscheinlichkeitsdichte"
+
+\note{Terminologie: Dichte, Dichtefunktion, density, pdf, pmf, abzählbar/überabzählbar}
+
+### Folgerungen
+
+Als Funktion von $B \subset \mathbb{R}$ ist also
+$$P(X \in B) = P(\{\omega \in \Omega: X(\omega) \in B\})$$
+eine Wahrscheinlichkeitsverteilung auf $\mathbb{R}$.  
+Man nennt diese die **Verteilung** der Zufallsvariable $X$.  
+
+Sie ist durch die
+Abbildung $X$ und die Wahrscheinlichkeitsverteilung $P$ über $\omega \in \Omega$ induziert.
+\ 
+\ 
+
+Für $x \not \in {\cal{T}_X}$ ist $f_X(x) = P(\emptyset) = 0$.

@@ -1,0 +1,197 @@
+## Diskrete Zusammenhangsanalyse: Unabhängigkeit & Kontingenz
+
+###  Kontingenz- und $\chi^2$-Koeffizient
+
+*Jetzt:* Definiere allgemein anwendbares Zusammenhangsmaß für diskrete Merkmale.
+
+**Idee:**  
+
+1. Was *wären* die gemeinsamen Häufigkeiten $\tilde{h}_{ij}$ bzw. $\tilde{f}_{ij}$, falls - bei vorgegebenen Randverteilungen - die Merkmale $X$ und $Y$ *empirisch unabhängig* wären?  
+
+2. Quantifiziere "Abstand" der *beobachteten* gemeinsamen Häufigkeiten $h_{ij}$ bzw. $f_{ij}$ von den *unter Unabhängigkeit erwarteten* gemeinsamen Häufigkeiten $\tilde{h}_{ij}$ bzw. $\tilde{f}_{ij}$.
+
+\vspace*{0.5cm}
+
+\begin{displaymath}
+\begin{array}{c|ccc|c}
+\multicolumn{1}{c}{}
+& \multicolumn{1}{c}{b_1}
+  & \dots
+    & \multicolumn{1}{c}{b_m}\\\cline{2-4}
+a_1    &  &   &  & h_{1\cdot}\\
+\cdot &  & ? &  & \cdot \\
+a_k    &  &   &  & h_{k\cdot}\\\cline{2-4}
+\multicolumn{1}{c}{}
+  & \multicolumn{1}{c}{h_{\cdot 1} }
+    & \dots
+      & \multicolumn{1}{c}{h_{\cdot m} }
+        & \multicolumn{1}{c}{n}
+\end{array}
+\end{displaymath}
+
+### Empirische Unabhängigkeit
+
+**Idee:**  
+
+$X$ und $Y$ "empirisch unabhängig" $\iff$  
+Verteilung von $Y$ nicht beeinflusst von $X$ (und umgekehrt) $\iff$  
+Bedingte relative Häufigkeiten von $Y$ sind in jeder Teilpopulation $X = a_i$ identisch, d.h. unbeeinflusst von $X$:  
+
+$$f_{Y|X}(b_j|a_1) = f_{Y|X}(b_j|a_2) = \ldots = f_{Y|X}(b_j|a_k), \;\forall j = 1,\ldots,m$$
+
+Vergleiche **stoch. Unabhängigkeit**: $A \perp B \iff P(A|B)= P(A)$
+
+### Bsp: Empirische Unabhängigkeit
+
+\begin{displaymath}
+\begin{array}{c|ccc|c}
+ &      b_1 & b_2 & b_3 & \\\hline
+ a_1 &  10 & 20 & 30 & 60 \\
+ a_2 &  20 & 40 & 60 & 120 \\
+ \hline
+  &     30 & 60 & 90 & 180
+\end{array}
+\end{displaymath}
+\begin{eqnarray*}
+f_{Y|X}(b_1|a_1) &=& f_{Y|X}(b_1|a_2) = f_Y(b_1) = \frac{1}{6} \\
+f_{Y|X}(b_2|a_1) &=& f_{Y|X}(b_2|a_2) = f_Y(b_2) = \frac{1}{3} \\
+f_{Y|X}(b_3|a_1) &=& f_{Y|X}(b_3|a_2) = f_Y(b_3) = \frac{1}{2}
+\end{eqnarray*}
+Bemerkung: Lokale Odds Ratios sind alle 1
+
+### Bsp: Empirische Unabhängigkeit
+
+Wie sehen also die **unter empirischer Unabhängigkeit erwarteten** (absoluten und relativen) Häufigkeiten $\tilde h_{ij}$ und $\tilde f_{ij}$  aus?
+\[
+\begin{array}{l}
+f_{Y|X}(b_1|a_i) = f_Y(b_1),\ldots, f_{Y|X}(b_m|a_i) = f_Y(b_m), ~i = 1,\ldots, k\\
+\iff  \frac{\tilde{h}_{ij}}{h_{i\cdot}} = \frac{h_{\cdot j}}{n} ;\forall, i = 1, \ldots,k; j = 1,\ldots,m\\
+\iff \tilde{h}_{ij} = \frac{h_{i\cdot}h_{\cdot j}}{n} ;\forall, i = 1, \ldots,k; j = 1,\ldots,m\\
+\iff \tilde{f}_{ij} = f_{i\cdot}f_{\cdot j} ;\forall, i = 1, \ldots,k; j = 1,\ldots,m
+\end{array}
+\]
+\vskip 2em
+($\tilde{h}_{ij}$ sind üblicherweise keine ganzen Zahlen...)
+
+###  Unabhängigkeitstabelle
+
+**Idee:**  
+Vergleiche für jede Zelle $(i,j)$ die *unter Unabh. erwarteten* $\tilde{h}_{ij}$ mit den *tatsächlich beobachteten* $h_{ij}$  
+
+$\chi^2$**-Koeffizient** ist bestimmt durch
+
+\begin{displaymath}
+\chi^2 := \sum_{i=1}^k\sum_{j=1}^m
+\frac{\left(h_{ij}-\tilde h_{ij}\right)^2}
+{\tilde h_{ij}} =
+\sum_{i=1}^k\sum_{j=1}^m
+\frac{\left(h_{ij}-\frac{h_{i\cdot}h_{\cdot j}}{n}\right)^2}
+{\frac{h_{i\cdot}h_{\cdot j}}{n}} = n\sum_{i}\sum_{j}\frac{(f_{ij}-f_{i\cdot}f_{\cdot j})^2}{f_{i\cdot}f_{\cdot j}}
+\end{displaymath}
+
+###  Eigenschaften des $\chi^2$-Koeffizienten
+
+-  $\chi^2 \in [0, n (\min(k, m) - 1)]$ 
+<!-- Beweis: https://stats.stackexchange.com/a/13728-->
+-  $\chi^2 = 0 \iff X$ und $Y$ **empirisch unabhängig**
+-  $\chi^2$ groß $\iff$ starker Zusammenhang
+-  $\chi^2$ klein $\iff$ schwacher Zusammenhang
+
+\vskip 2em
+
+**Schwachpunkt:**  
+
+Wertebereich von $\chi^2$ hängt vom Stichprobenumfang $n$ und von der Dimension der Tafel ab. Numerischer Wert deshalb schwierig direkt interpretierbar $\rightarrow$ Normierung
+
+
+###  Kontingenzkoeffizient und korrigierter Kontingenzkoeffizient
+
+Weitere Normierung $\implies$ **Kontingenzkoeffizient**
+
+Der Kontingenzkoeffizient ist bestimmt durch
+\begin{displaymath}
+K :=\sqrt{\frac{\chi^2}{n+\chi^2}}
+\end{displaymath}
+und besitzt den Wertebereich $K\in\left[0,\sqrt{\frac{M-1}{M}}\right],\;$ wobei $M=\min\{k,m\}.$  
+
+Der **korrigierte Kontingenzkoeffizient** ergibt sich durch 
+$$K^* := \frac{K}{\sqrt{(M-1)/M}}$$ mit dem Wertebereich $K^*\in[0,1]$.
+
+### Eigenschaften des (korrigierten) Kontingenzkoeffizienten
+
+-  Es wird nur die *Stärke* des Zusammenhangs gemessen, nicht die Richtung wie beim Odds Ratio.
+-  Vorsicht ist geboten bei einem Vergleich von Kontingenztafeln gleicher Zellenzahl mit stark unterschiedlichen Stichprobenumfängen, da $\chi^2$ mit wachsendem Stichprobenumfang wächst, beispielsweise führt eine Verzehnfachung von $h_{ij}$ und $\tilde h_{ij}$ zu zehnfachem $\chi^2$ 
+-  Sämtliche Maße benutzen nur das Nominalskalenniveau von $X$ und $Y$.
+
+
+### Beispiel: Nachwahlbefragung 2021
+
+Für die Kontingenztafel aus Geschlecht und Parteipräferenz für das Beispiel der Nachwahlbefragung erhält man die folgenden *zu erwartenden* Häufigkeiten $\tilde h_{ij}$.
+\vspace*{1cm}
+ \begin{table}[hbt]\small
+  \begin{center}
+    \begin{tabular}{r | ccccccc | c}
+          & \text{SPD} & \text{CDU/CSU} & \text{Grüne} & \text{FDP} & \text{AfD} & \text{Linke} &  \text{Rest} & $\sum$ \\ \hline
+Männer & 649.12 & 601.24 & 373.80 & 291.64 & 254.10 & 124.60 & 209.48 & 2504 \\[-1.5mm]
+     & (626) & (601) & (352) & (325) & (300) & (125) & (175) &     \\
+Frauen & 543.88 & 503.76 & 313.20 & 244.36 & 212.90 & 104.40 & 175.52 & 2098 \\[-1.5mm]
+     & (567) & (504) & (335) & (211) & (167) & (104) & (210) & \\ \hline
+ $\sum$ & 1193 & 1105 & 687 & 536 & 467 & 229 & 385 & 4602
+    \end{tabular}
+    \\*[0.3cm]{Unter Unabh. erwartete Häufigkeiten $\tilde{h}_{ij}$ und beobachtete
+    Häufigkeiten $h_{ij}$ (in Klammern)}
+\end{center}
+\end{table}
+Interpretation: Wären Geschlecht und Parteipräferenz unabhängig, dann wären $649.12$ SPD-wählende Männer in der Stichprobe zu erwarten gewesen, tatsächlich wurden aber nur $626$ beobachtet. 
+
+
+### Interpretation:
+
+Insgesamt hier 
+
+- $\chi^2 =  43.6$
+- $K = \sqrt{\frac{\chi^2}{\chi^2 + n}} =  0.097$ mit $n = 4602$
+- $K^*= \frac{K}{\sqrt{(M-1)/M}} = 0.14$ mit $M = \min(7, 2)$
+
+$\implies$ keine starke Abhängigkeit zwischen Geschlecht & Parteienpräferenz
+
+###  Spezialfall: $(2 \times 2)$-Tafel
+
+Für den Spezialfall einer $(2 \times 2)$-Tafel
+\begin{displaymath}
+\begin{array}{|cc|c}\cline{1-2}
+a & b & a+b\\
+c & d & c+d\\ \cline{1-2}
+\multicolumn{1}{c}{a+c}
+  & \multicolumn{1}{c}{b+d}
+\end{array}
+\end{displaymath}
+erhält man $\chi^2$ aus
+\begin{displaymath}
+\chi^2 = \frac{n(ad-bc)^2}{(a+b)(a+c)(b+d)(c+d)}.
+\end{displaymath}
+
+
+### Beispiel: Arbeitslosigkeit
+
+Aus der Kontingenztafel
+\begin{center}\small
+\begin{tabular}{l|cc|c}
+\multicolumn{1}{c}{}
+& \multicolumn{1}{c}{Mittelfristige}
+  & \multicolumn{1}{c}{Langfristige}\\
+\multicolumn{1}{c}{}
+& \multicolumn{1}{c}{Arbeitslosigkeit}
+  & \multicolumn{1}{c}{Arbeitslosigkeit}\\\cline{2-3}
+Keine Ausbildung  & $19$ & $18$ & $37$ \\
+Lehre             & $43$ & $20$ & $63$ \\\cline{2-3}
+\multicolumn{1}{c}{}
+& \multicolumn{1}{c}{$62$}
+  & \multicolumn{1}{c}{$38$} & $100$
+\end{tabular}
+\end{center}
+erhält man also unmittelbar
+\begin{displaymath}
+\chi^2 = \frac{100(19\cdot 20-18\cdot 43)^2}{37\cdot 63\cdot 62 \cdot38} = 2.8
+\end{displaymath}
+und $K = 0.17,\ K^* = 0.23$.

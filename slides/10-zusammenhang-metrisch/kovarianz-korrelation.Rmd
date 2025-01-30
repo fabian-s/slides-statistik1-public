@@ -1,0 +1,218 @@
+## Kovarianz und Korrelation beobachteter Merkmale
+
+### Kovarianz
+
+Kennzahl für Stärke und Richtung des linearen Zusammenhang zweier metrischer Merkmale:
+
+\vspace{0.3cm}
+
+Daten: $(x_i,y_i),\; i=1,\ldots,n$
+
+\begin{equation*}
+  S_{xy} = \frac{1}{n-1} \sum_{i=1}^n(x_i - \bar x)(y_i - \bar y)
+\end{equation*}
+
+Beachte:
+
+  -  Summand i positiv, falls Abweichungen von $x_i$ und $y_i$ zum jeweiligen Mittelwert
+das gleiche Vorzeichen haben, negativ falls unterschiedlich.
+  -  Für $S_{xx}$ ergibt sich die Varianz von $X$: $S_{xx} = S^2_{x}$
+  -  Der Wert der Kovarianz hängt sowohl von den **Streuungen** der beiden Merkmal als auch von der **Stärke und Richtung ihres Zusammenhangs** ab.
+
+### Kovarianz: Geometrische Intuition
+
+```{r, cov-intuition-prep,message=FALSE, warning=FALSE, echo = FALSE}
+klein_und_kalt <- subset(mietspiegel, zh0 == 1 & wfl < 60)
+nm_mean <- mean(klein_und_kalt$nm)
+wfl_mean <- mean(klein_und_kalt$wfl)
+klein_und_kaltneg = subset(klein_und_kalt, subset = (wfl > wfl_mean & nm < nm_mean) | (wfl < wfl_mean & nm > nm_mean) )
+close_neg = round(scale(klein_und_kaltneg[,c("wfl", "nm")], center = T), 1)
+klein_und_kaltneg = klein_und_kaltneg[row.names(unique(close_neg)),]
+# dneg = dist(scale(klein_und_kaltneg[,c("wfl", "rent")], center = FALSE))
+# ind = which(as.matrix(dneg) < median(dneg), arr.ind = TRUE)
+klein_und_kaltpos = subset(klein_und_kalt, subset = !((wfl > wfl_mean & nm < nm_mean) | (wfl < wfl_mean & nm > nm_mean)) )
+#klein_und_kaltpos = klein_und_kaltpos[sample(1:nrow(klein_und_kaltpos), wfl = 0.5*nrow(klein_und_kaltpos)),]
+close_pos = round(scale(klein_und_kaltpos[,c("wfl", "nm")], center = T), 1)
+klein_und_kaltpos = klein_und_kaltpos[row.names(unique(close_pos)),]
+
+p <-  ggplot(klein_und_kalt) + 
+  xlab("Wohnfläche [qm]") + ylab("Nettomiete [EUR]") + theme_gray(base_size = 13)
+
+p1 <- p +  geom_point(aes(x = wfl, y = nm), shape = 1) + #, alpha = .5) +
+  geom_hline(yintercept = nm_mean, linetype = "dashed") + 
+  scale_y_continuous(sec.axis = 
+                       sec_axis(~ ., breaks = nm_mean, label = expression(bar(Y)))) +
+  geom_vline(xintercept = wfl_mean, linetype = "dashed") +
+  scale_x_continuous(sec.axis = 
+                       sec_axis(~ ., breaks = wfl_mean, label = expression(bar(X))))
+
+show_four <- rbind(subset(klein_und_kaltneg, (wfl == min(wfl)) | nm == min(nm)), 
+              subset(klein_und_kaltpos, (wfl == 40) | nm == max(nm)))
+show_four <- cbind(show_four, neg = c("< 0", "< 0", "> 0", "> 0"))
+p2 <- p1 + 
+  geom_rect(data = show_four, 
+            aes(xmin = wfl_mean, ymin = nm_mean, xmax = wfl, ymax = nm, fill = neg), 
+            alpha = .25, color =  NA) +
+  geom_point(data = show_four, 
+            aes(x = wfl, y = nm, col = neg), size = 1, show.legend = FALSE) +
+  scale_fill_manual(values = c("blue", "red")) + 
+  scale_color_manual(values = c("blue", "red")) + 
+  guides(fill = guide_legend(title = expression((x[i]-bar(x))~(y[i]-bar(y))))) +
+  annotate("text", x = mean(c(wfl_mean, max(show_four$wfl))),
+      y = max(show_four$nm),
+      label = "x[i] - bar(x)", parse = T, vjust = -0.2) +
+  annotate("text", x = max(show_four$wfl),
+      y = mean(c(max(show_four$nm), nm_mean)),
+      label = "y[i] - bar(y)", parse = T, hjust = 0.2, vjust = -0.4, angle = -90)
+
+p3 <- p1 + 
+  geom_rect(data = klein_und_kaltpos, aes(xmin = wfl_mean, ymin = nm_mean, xmax = wfl, ymax = nm), alpha = .05, color = NA, fill = "red") +
+  geom_rect(data = klein_und_kaltneg, aes(xmin = wfl_mean, ymin = nm_mean, xmax = wfl, ymax = nm), alpha = .05, color = NA, fill = "blue") 
+```
+```{r, cov-intuition-1, warning = FALSE, message = FALSE, echo = FALSE}
+p1
+```
+
+### Kovarianz: Geometrische Intuition
+
+```{r, cov-intuition-2, warning = FALSE, message = FALSE, echo = FALSE}
+p2
+```
+
+### Kovarianz: Geometrische Intuition
+
+```{r, cov-intuition-3, warning = FALSE, message = FALSE, echo = FALSE}
+var_covs <- with(klein_und_kalt, c(var(wfl), var(nm), cov(wfl, nm), cor(wfl, nm))) |> 
+                  signif(3)
+p3 + labs(
+  caption = bquote(S[x]^2 == .(var_covs[1])~", "~S[y]^2 == .(var_covs[2])~", "~S[xy] == .(var_covs[3])~", "~r[xy] == .(var_covs[4]))
+)
+```
+
+\note{2 KOSY mit Punktewolken mit MW (0,0) (1x ohne/ 1x mit Korr) zeichnen, Quadranten markieren, daran grafisch erklären}
+
+
+### Bravais-Pearson-Korrelationskoeffizient
+\small
+Der Bravais-Pearson-Korrelationskoeffizient $r_{xy}$ ergibt sich aus den Daten
+$(x_i,y_i), i=1,\ldots,n$ durch
+
+\vspace{0.3cm}
+  \begin{align*}
+      r_{xy} &= \frac{1}{n-1} \sum_{i=1}^n \frac{(x_i - \bar x)}{S_x}\frac{(y_i - \bar y)}{S_y} \\
+             &= \frac{\sum_{i=1}^n(x_i - \bar x)(y_i - \bar y)}
+      {\sqrt{\sum_{i=1}^n(x_i - \bar x)^2 \sum_{i=1}^n(y_i - \bar y)^2}} = \frac{S_{xy}}{S_x S_y}
+  \end{align*}
+Wertebereich: $-1 \leq r_{xy} \leq 1$  
+
+- dimensionslose Größe, hängt nicht mehr von $S_x$ oder $S_y$ ab: 
+
+\vspace{0.3cm}
+
+\begin{tabular}{ll}
+  $r_{xy}>0$ & positive Korrelation, gleichsinniger linearer Zusammenhang, \\
+  &Tendenz: Werte ($x_i,y_i$) um eine Gerade positiver Steigung liegend\\
+  $r_{xy}<0$ & negative Korrelation, gegenläufiger linearer Zusammenhang, \\
+  &Tendenz: Werte ($x_i,y_i$) um eine Gerade negativer Steigung liegend\\
+  $r_{xy}=0$ & keine Korrelation, unkorreliert, kein linearer Zusammenhang
+\end{tabular}
+
+
+### Eigenschaften des Korrelationskoeffizienten
+
+
+-  Misst vor allem die Stärke des **linearen** Zusammenhangs
+-  Betrag der Korrelation unverändert bei linearen Transformationen
+-  Symmetrisch: $r_{xy} = r_{yx}$
+-  Positive Korrelation bedeutet:  
+   "Je größer X, desto größer im Durchschnitt Y"
+-  Korrelation = +1 [-1] falls die Punkte genau auf einer Geraden mit positiver [negativer] Steigung liegen -- **unabhängig von Steigung dieser Geraden** (außer sie ist 0 oder $\infty$).
+-  "Korrelation = 0" bedeutet "kein *linearer* Zusammenhang", aber **nicht Unabhängigkeit**! (s. Bsp. unten)
+-  Korrelation (und Kovarianz) sind empfindlich gegenüber Ausreißern
+
+
+### Eigenschaften von $r_{xy}$
+
+Misst nur Stärke des **linearen** Zusammenhangs:
+
+```{r, 04-rxy, echo =FALSE, warning = FALSE, message = FALSE, scale = .85}
+n <- 30
+set.seed(1121121)
+data_rxy <- data_frame(x = drop(scale(runif(n, -2, 2)))) %>% 
+  mutate(y1 = 1.8*x + rnorm(n),
+         y2 = -1.8*x + rnorm(n),
+         y3 = scale(rnorm(n)), 
+         y4 = rnorm(n),
+         y5 = x^2 + .3*scale(rnorm(n)), 
+         y6 = -x^2 + .3*scale(rnorm(n))) %>% 
+  gather(key = "dataset", value = "y", -x) %>% 
+  mutate(x = ifelse(dataset == "y4", .1*x, x))
+r_xy <- data_rxy %>% group_by(dataset) %>% 
+  summarize(rxy = cor(x,y), miny =min(y), maxy = max(y)) %>% 
+  mutate(label = c("r[xy]>0", "r[xy]<0", rep("r[xy] %~~% 0", 4)),
+    y = c(maxy[1], miny[2], maxy[3:4], miny[5], maxy[6]))
+ggplot(data_rxy, aes(x = x, y = y)) +
+    geom_point(alpha = .5) +
+    theme(legend.position = "none") +
+    theme_void() + theme(panel.border = element_rect(fill=NA)) +
+    facet_wrap( ~ dataset, ncol = 3, labeller = function(...) "", dir = "v", 
+      scales = "free_y") + 
+  geom_text(data = r_xy, x = min(data_rxy$x) + .5, 
+    aes(y = y, label = label), parse = TRUE, size = 6, vjust = "inward")
+```
+
+### Eigenschaften Bravais-Pearson-Korrelation
+
+```{r, 04-datasaurus, echo =FALSE, scale = .7}
+ggplot(datasaurus_dozen |> filter(dataset != "slant_down"), aes(x = x, y = y)) +
+    geom_point(alpha = .4) +
+    theme(legend.position = "none") +
+    facet_wrap( ~ dataset, ncol = 4, labeller = function(...) "")
+```
+
+**Alle** diese Datensätze haben **$r_{xy} = -0.06$**!  
+(und $n = 142$, $\bar x = 54.3, S_x = 16.8$, $\bar y = 47.8, S_y = 26.9$)
+
+
+### Lineare Transformationen
+
+-  Bei exakten linearen Zusammenhängen gilt:
+          \[
+              r_{xy} = +1 \mbox{ bzw. }-1 \quad \iff \quad Y = aX+b
+\mbox{
+              mit }a > 0 \mbox{ bzw. }a < 0
+          \]
+-  Lineare Transformationen $\tilde{X} = a_X X+b_X, \tilde{Y} = a_Y Y+b_Y, a_X, a_Y \neq
+0$:  
+          $r_{xy}$ Korrelationskoeffizient zwischen $X$ und $Y$  
+          $\tilde{r}_{xy}$ Korrelationskoeffizient zwischen $\tilde{X}$ und
+$\tilde{Y}$
+          \[
+          \implies \begin{array}{lcl}
+    \tilde{r}_{xy} = r_{xy} & \iff & a_X, a_Y \text{ gleiches Vorzeichen}\\
+    \tilde{r}_{xy} = -r_{xy} & \iff & a_X, a_Y \text{ verschiedene Vorzeichen}.
+    \end{array}
+          \]
+
+<!-- ### Vektor-Darstellung -->
+
+<!-- Definiere die zentrierten Datenvektoren -->
+<!--               \[ -->
+<!--               \begin{array}{c} -->
+<!--                   x_c = -->
+<!-- (x_1-\bar{x},\ldots,x_i-\bar{x},\ldots,x_n-\bar{x})'\\ -->
+<!--                   y_c = -->
+<!-- (y_1-\bar{y},\ldots,y_i-\bar{y},\ldots,y_n-\bar{y})' -->
+<!--               \end{array} -->
+<!--               \] -->
+
+<!-- $\implies r_{xy} = \frac{x_c' y_c}{\lVert x_c \rVert \lVert y_c \rVert}$, -->
+<!-- mit $||\, . \,||$ euklidische Norm.  -->
+
+<!-- - das ist der Cosinus des Winkels zwischen $x_c$ und $y_c$! -->
+<!-- - aus der Cauchy-Schwarz-Ungleichung folgt  -->
+<!-- $$|x_c'y_c| \leq \lVert x_c \rVert \lVert y_c \rVert,$$ -->
+<!-- d.h. $-1 \leq r_{xy} \leq +1.$ -->
+
+<!-- s. a. 04-02-kovarianz-linalg.xopp &  pics/ ... .pdf -->
+

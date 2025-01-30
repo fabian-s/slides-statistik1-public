@@ -1,0 +1,282 @@
+## Beispiele
+
+### Bundestagswahl 2021
+
+**Prognose 18:00 Infratest Dimap  (ARD):**
+
+\begin{tabular}{l|c|c|c|c|c|c|c}
+  Partei: & CDU/CSU & SPD & AfD & FDP & Linke & Grüne\\
+  \hline
+  Stimmanteil (\%): & 25  & 25 & 11 & 11 & 5 & 15\\
+\end{tabular}
+Basis: Nachwahlbefragung, ca. 33 000 Wahlberechtigte
+
+**Ergebnis:**
+
+\begin{center}
+  \includegraphics[width=.7\textwidth]{pics/bundestagswahl21-ergebnis.png}
+\end{center}
+\scriptsize\url{bundestagswahl.br.de/public/ec/ergebnis-bundestagswahl-2021-bayern-deutschland.html}  
+
+
+### Bundestagswahl 2021
+
+Ziele:
+
+*  Schluss von der Befragung einer Stichprobe von Wähler:innen auf Gesamtergebnis
+*  Analyse von Wahlverhalten durch weitere Fragen (Wechselwähler:innen etc.)
+
+
+### Wahlfälschung
+Idee: Untersuche Zusammenhang zwischen Wahlergebnis
+(Stimmenanteil der Sieger) und Wahlbeteiligung.  
+*ballot stuffing* treibt beides in die Höhe!  
+
+\begin{center}
+  \includegraphics[width=.7\textwidth]{pics/0-ex2-electionfraud.jpg}
+\end{center}
+\scriptsize
+\vspace{-.5em}
+P. Klimek, Y. Yegorov, R. Hanel, S. Thurner (2012). 
+Statistical detection of systematic election irregularities.
+*PNAS* 109(41):16469--16473.
+
+### KOALA - Koalitions Analyse
+
+StaBLab-Projekt mit H. Küchenhoff, A. Bender, A. Bauer
+
+*  Ziel: Bessere Vermittlung der den Wahlumfragen zugrunde liegenden Unsicherheiten
+*  Kleinere Änderungen in Umfrageanteilen der Parteien vor Wahlen nicht immer relevant, teilweise überbewertet
+*  Tatsächlich relevant sind Änderungen in der Wahrscheinlichkeit bestimmter Ereignisse nach Wahlen (Wahrscheinlichkeit für Zustandekommen von Mehrheiten für Koalitionen)
+*  Basis: Simulation vieler möglicher Wahlergebnisse auf Basis (mehrerer) aktueller Umfragen
+*  Wahrscheinlichkeit: Anteil der Simulationen in welchen Ereignis eintritt
+
+\vspace{.5cm}
+
+Website: [koala.stat.uni-muenchen.de](https://koala.stat.uni-muenchen.de/)
+
+
+### KOALA - Koalitions Analyse
+
+![](pics/koala_survey)
+
+
+### KOALA - Koalitions Analyse
+
+![](pics/koala_probs)
+
+
+### ISAR - Lebensmittelimportscreening
+
+StaBLab-Projekt mit H. Küchenhoff, A. Bauer und F. Günther in Zusammenarbeit mit Bayrischem Landesamt für Gesundheit und Lebensmittelsicherheit, sowie Bundesamt für Verbraucherschutz und Lebensmittelsicherheit
+
+* Ziel: Früherkennung von Risiken im Lebensmittelhandel
+* Ansatz: Dauerhaftes Screening von produkt- und länderspezifischen Daten aller deutscher Lebensmittelimporte
+* Auffälligkeiten in Mengen oder Preisen können Hinweise zu Risiken und Betrugspotentialen liefern
+* Ansatz: Verwendung statistischer Zeitreihen-Modelle
+    * Vergleich der Beobachtungen mit Vorhersagen der Modelle
+    * Definition von Auffälligkeiten von Interesse
+    * Jeden Monat erhalten Lebensmittelkontrolleure Liste mit auffälligen Zeitreihen
+* Programmierung von Tool zur interaktiven Darstellung der Daten in enger Zusammenarbeit mit Anwendern
+
+### ISAR: Beispiel Haselnüsse Türkei
+
+* 2014 Ernteeinbruch von Haselnüssen in der Türkei
+* Darauf folgend starker Preisanstieg
+* Es wurden verstärkt Kontrollen der nach Deutschland importierten Haselnussprodukte durchgeführt
+* In verarbeiteten Produkten wurde Verfälschungen, u.a. durch Cashews/Mandeln gefunden, hohes Gesundheitsrisiko (Allergie)
+* In ISAR erste Signale für auffällige Preisentwicklung im September 2015
+
+\begin{center}
+\includegraphics[width=.6\textwidth]{pics/Haselnuesse_03} \\
+\end{center}
+
+### ISAR: Beispiel Haselnüsse Türkei
+
+* 2014 Ernteeinbruch von Haselnüssen in der Türkei
+* Darauf folgend starker Preisanstieg
+* Es wurden verstärkt Kontrollen der nach Deutschland importierten Haselnussprodukte durchgeführt
+* In verarbeiteten Produkten wurde Verfälschungen, u.a. durch Cashews/Mandeln gefunden, hohes Gesundheitsrisiko (Allergie)
+* In ISAR erste Signale für auffällige Preisentwicklung im September 2015
+
+\begin{center}
+\includegraphics[width=.6\textwidth]{pics/Haselnuesse_05} \\
+\end{center}
+
+<!-- ### Analyse von Daten zu Bombentrichtern -->
+
+<!-- StaBLab-Projekt mit H. Küchenhoff, M. Höhle und M. Mahling -->
+
+
+<!-- \begin{center} -->
+<!-- \includegraphics[width=.48\textwidth]{pics/0-ex3-bombrisk1} -->
+<!-- \includegraphics[width=.48\textwidth]{pics/0-ex3-bombrisk2} -->
+<!-- \end{center} -->
+<!-- \scriptsize -->
+<!-- \vskip -.5em -->
+<!-- M. Mahling, M. Hoehle, H. Küchenhoff (2013). -->
+<!-- Determining high-risk zones for unexploded World War II bombs by -->
+<!-- using point process methodology. -->
+<!-- *Journal of the Royal Statistical Society Series C-Applied -->
+<!-- Statistics* 62(2):181-199. -->
+
+<!-- ### Ziele und Methoden -->
+
+<!-- *  Räumliche Punktmuster analysieren -->
+<!-- *  Effiziente Risikoabschätzung -->
+<!-- *  Algorithmus zur Bestimmung von Sicherheitszonen bei gegebenen Risikoparametern -->
+<!-- *  Ausweisung von Risikozonen -->
+
+<!-- ### Lösung -->
+
+<!-- 1. Intensitätsschätzung mit Kernmethoden -->
+<!-- 2. Cut-off Wert der Sicherheitszone aus Annahme zum Anteil der Blindgänger -->
+
+<!-- Sicherheitszonen: -->
+<!-- \begin{center} -->
+<!-- \includegraphics[width=.48\textwidth]{pics/0-ex3-bombrisk4} -->
+<!-- \includegraphics[width=.48\textwidth]{pics/0-ex3-bombrisk3} -->
+<!-- \end{center} -->
+
+<!-- ### Lebenszufriedenheit und Alter -->
+
+<!-- **Gibt es eine Midlife Crisis?** -->
+
+<!-- * Analysen von Panel-Daten zur subjektiven Lebenszufriedenheit mit -->
+<!-- semiparametrischen Regressionsmodellen. -->
+<!-- * Forschungsarbeit von Andrea Wiencierz mit Helmut Küchenhoff, Sonja Greven, Christoph Wunder -->
+
+<!-- \scriptsize -->
+
+<!-- C. Wunder, A. Wiencierz, J. Schwarze, and H. Küchenhoff (2013). -->
+<!-- Well-being over the Life Span: Semiparametric evidence from British -->
+<!-- and German Longitudinal Data. -->
+<!-- *Review of Economics and Statistics* 95(1):154--167. -->
+
+<!-- A. Wiencierz, S. Greven, and H. Küchenhoff (2011). -->
+<!-- Restricted likelihood ratio testing in linear mixed models with -->
+<!-- general error covariance structure. -->
+<!-- *Electronic Journal of Statistics* 5:1718--1734. -->
+
+
+<!-- ### Datengrundlage -->
+
+<!-- *  Daten stammen aus den Haushaltsstichproben A (Westdeutsche) und C -->
+<!-- (Ostdeutsche) des Sozio-ökonomischen Panels (SOEP) -->
+<!-- *  für die ausgewählten Modellvariablen liegen Beobachtungen -->
+<!-- aus den Jahren 1992, 1994 bis 2006 vor -->
+<!-- *  durchschnittliche Anzahl von Beobachtungen pro Person: 7.8 -->
+<!-- *  in die Modellberechnungen gingen 102 708 vollständige Beobachtungen von 13 224 Individuen ein -->
+<!-- *  Anzahl Beobachtungen pro Jahr:   -->
+
+<!-- **1992** | **1994** | **1995** | **1996** | **1997** | **1998** | **1999** -->
+<!-- ---------|--------- | ---------|--------- |--------- |--------- |--------- -->
+<!-- 8 145 | 7 720 | 7 943 | 7 606 | 8 052 | 7 550 | 7 403 -->
+
+<!-- **2000** | **2001** | **2002** | **2003** | **2004** | **2005** | **2006** -->
+<!-- ---------|--------- | ---------|--------- |--------- |--------- |--------- -->
+<!-- 7 628 | 7 092 | 7 068 | 7 000 | 6 876 | 6 543 | 6 082 -->
+
+
+<!-- ### Ergebnis für Alterseffekt -->
+
+<!-- \begin{center} -->
+<!--   \includegraphics[height = .75\textheight]{pics/0-ex4-happiness1} -->
+<!-- \end{center} -->
+
+<!-- Midlife-Crisis nur bei glatter Funktion erkennbar. -->
+
+<!-- ### Ergebnisse ohne Gesundheitsvariable -->
+
+<!-- \begin{center} -->
+<!--   \includegraphics[height = .75\textheight]{pics/0-ex4-happiness2} -->
+<!-- \end{center} -->
+
+<!-- Beachte: Deutlich stärkerer Abfall ohne adjustieren nach Gesundheit -->
+
+<!-- ### Ziele und Methoden -->
+
+<!--   *  Zusammenhänge analysieren -->
+<!--   *  Komplexe Einflüsse -->
+<!--   *  Flexibles Modell -->
+
+### Mineralwasserstudie
+
+Studie in Zusammenarbeit mit Prof. O. Adam (LMU)  
+**Fragestellung:** Schmeckt mit Sauerstoff angereichertes Mineralwasser besser
+als gewöhnliches Mineralwasser ?
+
+  *  Doppel--Blindstudie
+  *  Kontroll--Gruppe: zweimal das gleiche Wasser ohne $O_2$
+  *  Verum--Gruppe: Beim zweiten Mal mit $O_2$ angereichertes
+Mineralwasser
+
+Ergebnis (Clausnitzer et al., 2004) :
+
+  * Placebo: 76\% gaben an, dass das zweite Wasser anders schmeckt
+  * Verum : 89 \% gaben an, dass das zweite Wasser anders  schmeckt
+
+  Signifikanter Effekt $\rightarrow$ Zulassung
+
+
+### Ziele und Methoden
+
+  *  Randomisierte Studie (Doppelblind)
+  *  Entscheidungsfindung durch statistischen Test
+  *  Quantifizierung des Effekts
+
+
+### Umweltzone und Feinstaubbelastung
+
+Wirkt die Umweltzone?
+
+Einfacher Ansatz:
+Vergleiche Mittelwerte vor und nach der Einführung von Umweltzone
+und Fahrverbot
+
+Probleme:
+
+*  Grundbelastung ohne Autoverkehr kann sich ändern
+*  Starke Wettereinflüsse
+*  Schwankungen über Tag und Jahreszeit
+
+Daher: Regressionsmodell mit Referenzstation, Wetter, Tagesverlauf
+
+\scriptsize
+
+V. Fensterer, H. Küchenhoff, V. Maier, H.-E. Wichmann, S. Breitner,
+A. Peters, J. Gu, and J. Cyrys (2014).
+Evaluation of the impact of low emission zone and heavy traffic ban
+in Munich (Germany) on the reduction of PM$_{10}$ in ambient air.
+*International Journal of Environmental Research and Public
+Health* 11(5):5094-5112.
+
+
+### Wirkung der Umweltzone: Prinzregentenstrasse
+
+\begin{center}
+\includegraphics[height = .8\textheight]{pics/0-ex6-umweltzone-prinzregenten.png}
+\end{center}
+
+### Wirkung der Umweltzone: Lothstrasse
+
+\begin{center}
+\includegraphics[height = .8\textheight]{pics/0-ex6-umweltzone-loth.png}
+\end{center}
+
+### Weitere Beispiele
+
+* Klinische Studien
+* Epidemiologische Studien
+* Qualitätskontrolle
+* Marktforschung
+    *  Einschaltquoten
+    *  Bewertung und Vergleich von Produkten gleichen Typs aber
+verschiedener Produzenten durch Verbraucher (Waschmittel, Kaffee,
+Schokolade, usw.)
+    * Online-Tracking-Daten: Cookies, Userprofile, Websitenutzung, ...
+    * A-B-Testing von Websitedesigns, User Interfaces
+* Sportstatistik
+* Analyse von Genexpressions- oder -sequenzdaten
+* Netzwerkanalysen
+* Mustererkennung ("'Pattern recognition"'): Spamfilter, Customer Churn, Kundensegmentierung, ...

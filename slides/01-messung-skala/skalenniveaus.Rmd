@@ -1,0 +1,204 @@
+## Skalenniveaus
+
+### Skalen
+
+Messungen als strukturerhaltende Abbildungen  
+also: empirisches Relativ $\cong$ numerisches Relativ
+\  
+
+**Existenz:**  
+Ist die Struktur der Objekte so, dass eine strukturerhaltende Abbildung existiert?  
+$\implies$ Axiome von Repräsentationstheoremen müssen erfüllt sein (z.B. Transitivität)  
+$\implies$ Verletzt z.B. oft durch unerfüllte Annahme von Eindimensionalität 
+
+\   
+
+**Eindeutigkeit:**  
+Gibt es mehrere zulässige Skalen?  
+(z.B. Fläche in km$^2$ & ha; Temperatur in °C, °F & °K)  
+$\implies$ gibt es zulässige (strukturerhaltende) Transformationen?
+
+<!-- mehr dazu: https://www.uni-goettingen.de/en/kat/download/2453f65e2e6bd4cf523bd241a3b92c29.pdf/Fol06.pdf-->
+
+### Transformationen und Operationen
+
+:::{.block}
+#### Def.: **Transformation** einer Skala
+Funktion, die Ausprägungen eines Merkmals auf neue Ausprägungen abbildet.
+:::
+in etwa: "Skalenwechsel", z.B:  
+
+ - Umwandlung in andere physikalische Einheit (Temperatur: °F $\to$ °C)
+ - Relabeling (Beruf: "Putzkraft" $\to$ "Raumpfleger*in")
+ - Gruppierung (Haarfarbe: {"braun", "schwarz"} $\to$ {"dunkel"})
+
+:::{.block}
+#### Def.: **Operation** auf einer Skala
+Funktion, die Ausprägungen eines Merkmals auf der selben Skala miteinander in Bezug setzt.
+:::
+z.b "$=$ / $\neq$", "$>$ / $=$ / $<$", Differenzen, Quotienten etc.
+
+### Skalenniveaus
+
+Zulässige Skalentransformationen erhalten die Struktur der empirischen Relative, die durch Messungen repräsentiert wird.
+
+Die Menge zulässiger Transformationen bestimmt das Skalenniveau eines Merkmals.
+
+Höhere Skalenniveaus erlauben eine *größere* Menge von sinnvollen *Operationen auf Werten der Skala*,
+aber eine *kleinere* Menge an zulässigen strukturerhaltenden *Transformationen der Skala* an sich.
+
+### Nominalskala
+
+  -  Beispiele: Religionszugehörigkeit, Wohnort, Sockenfarbe
+  -  Struktur: keine
+  -  Sinnvolle Operationen: gleich/ungleich
+  -  Erlaubte Transformationen:
+              alle eineindeutigen Abbildungen $f$, da für sie gilt:
+              \begin{equation*}
+                  a = b \iff f(a) = f(b)
+              \end{equation*}
+
+### Ordinal- oder Rangskala
+
+
+  -  Beispiele: Schulbildung, soziale Schicht, Schweregrad einer Erkrankung
+  -  Struktur: [lineare Ordnung](https://de.wikipedia.org/wiki/Ordnungsrelation#Totalordnung)
+  -  Sinnvolle Operationen: gleich/ungleich, größer/kleiner
+  -  Erlaubte Transformationen:
+              alle streng monoton steigenden Abbildungen $f$, da für sie gilt:
+              \begin{equation*}
+                  a<b \iff f(a) < f(b)
+              \end{equation*}
+
+### Intervallskala
+
+  -  Beispiele: Temperatur, Jahreszahlen, IQ
+  -  Struktur: **Abstände** quantifizierbar
+  -  Sinnvolle Operationen:
+              gleich/ungleich, größer/kleiner, **Differenzbildung**
+  -  Erlaubte Transformationen:
+              alle linearen Transformationen $f(x) = ax+b,\, a > 0$, da für sie gilt:
+              \begin{equation*}
+                  f(x_1) - f(x_2) = f(x_3) - f(x_4) \iff x_1 - x_2 = x_3 - x_4
+              \end{equation*}
+
+
+### Verhältnisskala
+
+Intervallskala mit (natürlichem) Nullpunkt
+
+  -  Beispiele: Zeitdauer, Preise, Längen, Gewichte
+  -  Struktur: Abstände quantifizierbar und **Nullpunkt** eindeutig festgelegt
+  -  Sinnvolle Operationen: gleich/ungleich, größer/kleiner, Differenzen, **Verhältnisse**
+  -  Erlaubte Transformationen:
+              Multiplikation/Reskalierung mit $f(x) = ax,\, a > 0$, da für sie gilt:
+              \begin{equation*}
+                  \frac{f(x_1)}{f(x_2)} = \frac{x_1}{x_2}
+              \end{equation*}
+
+### Absolutskala
+
+  -  Beispiel: Häufigkeit, Anzahl
+  -  Struktur: Einheit liegt auf natürliche Weise fest
+  -  Erlaubte Transformationen: keine
+
+### Skalenniveau
+
+Beachte:
+
+- Je höher das Skalenniveau, desto mehr Rechenoperationen können mit den beobachteten Werten sinnvoll durchgeführt werden.
+- Nur Rechenoperationen, deren inhaltliche Ergebnisse nicht von den zulässigen Transformationen der Skala beeinflusst werden, sind *sinnvoll* interpretierbar.
+
+Zusammenfassung:
+
+\begin{table}
+\small
+\begin{tabular}{cc|cccc}
+Überbegriff &  Skalenniveau & ausz\"{a}hlen & ordnen & Differenzen & Quotienten \\ \hline
+qualitativ & Nominal & $\checkmark$ & \textcolor{red}{X} & \textcolor{red}{X} & \textcolor{red}{X} \\
+          & Ordinal & $\checkmark$ & $\checkmark$ & \textcolor{red}{X} & \textcolor{red}{X} \\ \hline
+quantitativ/ &  Intervall & $\checkmark$ & $\checkmark$ & $\checkmark$ & \textcolor{red}{X} \\
+metrisch    & Verh\"{a}ltnis & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ \\
+        & Absolut & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ \\
+\end{tabular}
+\end{table}
+
+Sonderfall: dichotome, binär codierte ("0"/"1") Merkmale sind nominalskaliert, aber z.B. ihr Mittelwert ist sinnvoll interpretierbar.
+
+### Skalentransformationen
+
+Beispiel: Konzentration von Bakterien
+
+\begin{table}
+\begin{tabular}{lcl}
+$0.003$ && $\log_{10}(3.0 \cdot 10^{-3}) \approx -2.5$ \\
+$0.0003$ &oder& $\log_{10}(3.0 \cdot 10^{-4})\approx -3.5$ \\
+$0.00003$ && $\log_{10}(3.0 \cdot 10^{-5})\approx -4.5$
+\end{tabular}
+\end{table}
+      
+Skalenwahl $\iff$ Interpretation der Differenz
+
+Also: Inhaltlich sinnvoll, theoretisch nicht zulässig!^[Willkommen in der wunderbaren Welt der angewandten Statistik...]  
+
+
+Bei $\log$-Skala: Differenz = $\log$(Faktor der Veränderung)  
+Oft: Verwende $\log$ zur Basis 10 oder 2
+
+### Indexbildung
+
+Zusammenfassung verschiedener Merkmale (*Items*) zu einem aggregierten Merkmal (*Score*, *Index*).
+
+Häufig: Bildung von (gewichteten) Summen  
+
+Beispiel: Wahl-O-Mat  
+$\text{Übereinstimmung SPD} = w_1 \cdot Q(\text{Tempolimit}) + w_2 \cdot Q(\text{Verteidigungsausgaben}) + ...$
+\ 
+
+Indexbildung meist theoriegeleitet bzw. nach fachspezifischen Überlegungen  
+Häufige Problematik:  
+
+-  Gewichtung der Items? 
+-  Skalenniveau des Index? 
+
+### Indexbildung: Likert-Skalen
+
+\begin{center}
+       \includegraphics [height = .8\textheight]{pics/1-Example_Likert_Scale.jpg}
+\end{center}
+
+{\scriptsize Bild: Nicholas Smith, CC BY-SA 3.0, via Wikimedia Commons}
+
+### Indexbildung: Likert-Skalen
+
+Häufig verwendetes Verfahren in der Pychometrie:
+
+- Items sind Ratingskalen die Zustimmung/Ablehnnung zu bestimmten Aussagen zum selben Thema abfragen
+- Skalenwert der Likert-Skala als Summen- oder Durchschnittsscore der (ordinalen!) Ratings der verschiedenen Items
+
+
+
+
+### Merkmalstypen: Stetige und diskrete Merkmale
+
+-  **Diskretes** Merkmal:  
+  nur endlich oder abzählbar unendlich viele verschiedene Werte möglich  
+  z.B. Geschlecht, Kinderanzahl
+- **Stetiges** Merkmal:  
+  alle Werte in einem Kontinuum möglich  
+  z.B. Zeitdauer, Größe, Gewicht
+  
+Wichtige Unterscheidung für Wahl geeigneter grafischer Darstellungsformen & numerischer Zusammenfassungen.
+
+<!-- abzählbar/überabzählbar unendlich!!-->
+
+### Weitere Klassen
+
+-  **Quasi-stetiges** Merkmal:  
+   diskret, sehr kleine Einheiten, "praktisch" stetig.  
+   Beispiel: Monetäre Größen in Cent  
+   (Real existierende Messungen immer quasi-stetig wegen beschränkter Auflösung des Messinstruments & der Gleitkommazahlendarstellung im Rechner.)
+-  **Gruppierte** Daten, **Häufigkeits**daten:   
+  Wertebereich eines (quasi-)stetigen Merkmals wird in Gruppen (Klassen, Kategorien) eingeteilt.  
+              Beispiele: Gehalt in Gehaltsklassen, Alter in Altersklassen  
+              Bemerkung: Gruppierung dient auch dem Datenschutz!

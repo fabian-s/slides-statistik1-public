@@ -1,0 +1,104 @@
+## Statistik: Was - Wie - Warum
+
+### Was ist Statistik?
+
+**Statistik als Wissenschaft bezeichnet eine Methodenlehre, die sich mit
+der Erhebung, der Darstellung, der Analyse und der Bewertung von Daten auseinander
+setzt.  
+Ein zentraler Aspekt ist dabei die Modellbildung mit zufälligen
+Komponenten.**
+
+Teilgebiete:
+
+  *  **Deskriptive** Statistik:  
+  Beschreibung, Zusammenfassung, Visualisierung von Daten.  
+  Techniken: Grafiken, Tabellen, Kennzahlen
+  
+  *  **Explorative** Statistik:  
+  Suche nach Strukturen in Daten.
+  Benutzt deskriptive und induktive Techniken interaktiv und iterativ.
+  
+  *  **Induktive** Statistik: Schließt von beobachteten Daten auf zugrundeliegende Strukturen.  
+  Angewandte Wahrscheinlichkeitsmathematik.  
+  Techniken: Statistische Modellierung, statistische Tests.
+
+### Deskriptive Statistik
+
+>- *Data is merely the raw material of knowledge.*  
+Charles Wheelan (* 1966, Autor)
+
+
+**Ziel: Wahrhaftige Beschreibung von Daten mit möglichst geringem Informationsverlust**
+
+-  Eigenschaften und Strukturen erkennbar machen
+-  Grafisch und durch Kennwerte
+-  Eindimensional und mehrdimensional ("*uni-*/*multivariat*")
+-  keine Rückschlüsse von beobachteter Stichprobe auf die Grundgesamtheit oder allgemeine Phänomene
+  (nur *Deskription*, nicht *Inferenz*)
+
+### Was ist Statistik?
+
+
+>- *Maths is a language that you use to describe statistics, but really it's about collecting information and putting it in an order that makes sense.*  
+Lauren Stamile (* 1976, Schauspielerin)
+>- *Statistics is the grammar of science.*  
+Karl Pearson (1857 - 1936, Mathematiker)
+<!-- >- *Statistics: the mathematical theory of ignorance.*   -->
+<!-- Morris Kline (1908 - 1992, Mathematikdidaktiker)  -->
+>- *Statistics is the science of learning from experience.*  
+Bradley Efron (* 1938, Statistiker)
+
+>- $\implies$ **Statistische Methodik als unabdingbares Werkzeug jeder empirischen Wissenschaft.**
+
+### Warum Statistik?
+
+>- *Statistics is a body of methods for making wise decisions in the face of uncertainty.*  
+W. Allen Wallis (1912-1998, Statistiker & Ökonom)  
+>-  *Cognitive psychology tells us that the unaided human mind is vulnerable to many fallacies and illusions because of its reliance on its memory for vivid anecdotes rather than systematic statistics.*  
+Steven Pinker  (* 1954, Psychologe & Linguist)
+>- *It is the mark of a truly intelligent person to be moved by statistics.*  
+George Bernard Shaw  (1856 - 1950, Dramatiker)
+>-  *Statistik ist für mich das Informationsmittel der Mündigen. Wer mit ihr umgehen kann, ist weniger leicht zu manipulieren. Der Satz "Mit Statistik kann man alles beweisen" gilt nur für die Bequemen, die keine Lust haben, genau hinzusehen.*  
+Elisabeth Noelle-Neumann (1916-2010, Demoskopin)
+
+>- $\implies$ **Statistische (Aus-)Bildung um irrationales Handeln zu vermeiden und mit Unsicherheit vernünftig umzugehen.**
+
+### Warum (nicht) Statistik? 
+
+>- *All models are wrong, but some are useful.*  
+George E. P. Box (1919 - 2013, Statistiker)
+<!-- >- *Statistics are like bikinis. What they reveal is suggestive, but what they conceal is vital.*  
+Aaron Levenstein (1911- 1986, Ökonom)  (Frauenbeauftragte sagt PFUI) --> 
+>- *The combination of some data and an aching desire for an answer does not ensure that a reasonable answer can be extracted from a given body of data.*  
+John Tukey (1915- 2000, Mathematiker)
+>- *If you torture the data enough, nature will always confess.*  
+Ronald Coase (1910 - 2013, Ökonom)
+>- *There are no routine statistical questions, only questionable statistical routines.*  
+David R. Cox (1924 - 2022, Statistiker)
+
+>- $\implies$ **Statistik ist komplex und ihre Ergebnisse werden oft missbraucht oder missinterpretiert.**
+
+### Warum nicht Statistik? 
+
+>- *Not everything that counts can be counted, and not everything that can be counted counts.*  
+William Bruce Cameron (1904 - 1988, Soziologe)
+
+>- *Our scientific age demands that we provide definitions, measurements, and statistics in order to be taken seriously. Yet most of the important things in life cannot be precisely defined or measured. Can we define or measure love, beauty, friendship, or decency, for example?*  
+Dennis Prager (* 1948, Radiomoderator & Publizist)
+
+>- *Statistics are the triumph of the quantitative method, and the quantitative method is the victory of sterility and death.*  
+Hilaire Belloc (1870 - 1953, Schriftsteller & Historiker)
+
+>- $\implies$ **Statistik nur dort sinnvoll, wo Messbarkeit und Quantifizierbarkeit gegeben sind.**
+
+### ... und außerdem:
+
+>- *Any observed statistical regularity will tend to collapse once pressure is placed upon it for control purposes.*  
+[Goodhart's Law](https://en.wikipedia.org/wiki/Goodhart's_law), auch:  
+*"When a measure becomes a target, it ceases to be a good measure."*  
+oder  
+*"The more any quantitative social indicator is used for social decision-making, the more subject it will be to corruption pressures."*
+
+- Ähnlich auch: Präventions-Paradox, *self-fullfilling/-destroying prophecies* 
+
+>- $\implies$ **Verlässliche Messungen & Vorhersagen in Systemen, die selbst Messergebnissen beeinflussen können & von Vorhersagen beeinflusst werden, sind problematisch.**

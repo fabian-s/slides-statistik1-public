@@ -1,0 +1,71 @@
+## Gegenwart & Zukunft der Statistik
+
+### "Big Data"
+
+*  Analyse und Verarbeitung großer Datenmengen
+*  Drei Vs: Volume, Velocity, Variety
+*  Häufig rein heuristische/algorithmische Herangehensweise ohne probabilistische Modelle oder kausale Theorien
+*  Große Herausforderungen für Statistik und Informatik
+
+### "Big Data"
+
+\begin{center}
+       \includegraphics [width = .9\textwidth]{pics/0-bigdata.png}
+ \end{center}
+
+### Big Data, Machine Learning, KI
+
+- *Induktive Statistik* umfasst "Machine Learning" & heutige "Künstliche Intelligenz" $:\approx$ Methoden für Mustererkennung & Vorhersagen basierend auf Daten
+
+- Alltagserfahrungen zunehmend durch datengetriebene Algorithmen bestimmt -- Beispiele:  
+    - Medien: "filter bubble", "engagement maximization" durch Empfehlungsalgorithmen
+    - Finanziell: z.B. werden verfügbare Zahlungsmethoden bei Online-Käufen durch Kreditscores bestimmt
+- Entscheidungen großer Tragweite zunehmend durch datengetriebene Algorithmen -- Beispiele:     
+    - Kreditvergabe via Kreditscoring
+    - Risikoscoring der [Corona-Warn-App](https://github.com/corona-warn-app/cwa-documentation/blob/master/transmission_risk.pdf) 
+    - Medizinische Diagnostik und Therapievorschläge (z.B [*Watson for Oncology*](https://www.nature.com/articles/s41598-021-84973-5))
+    - ["Predictive Policing"](https://projects.tampabay.com/projects/2020/investigations/police-pasco-sheriff-targeted/intelligence-led-policing/)
+    - Haftentlassung auf Bewährung - z.B. Berk, R. (2017) [*Impact assessment of machine learning risk forecasts on parole board decisions and recidivism.*](https://doi.org/10.1007/s11292-017-9286-2)
+    - Militärische KI: [US Algorithmic Warfare Initiative](https://venturebeat.com/2019/11/08/the-u-s-military-algorithmic-warfare-and-big-tech/), [Project Maven](https://theintercept.com/2018/03/06/google-is-quietly-providing-ai-technology-for-drone-strike-targeting-project/), 
+
+### Big Data & ML: Politische & soziale Folgen
+
+>- *Big data knows and can deduce more about you than Big Brother ever could.*  
+Toomas Hendrik Ilves (*1953, Diplomat & Politiker) 
+
+>- *Arguing that you don't care about the right to privacy because you have nothing to hide is no different than saying you don't care about free speech because you have nothing to say. [...]*  
+*Privacy isn’t about something to hide. Privacy is about something to protect. And that’s who you are. That’s what you believe in. That’s who you want to become. Privacy is the right to the self. Privacy is what gives you the ability to share with the world who you are on your own terms.*  
+Edward Snowden (* 1983, Dissident)
+
+>- *No system of mass surveillance has existed in any society, that we know of to this point, that has not been abused.*  
+Edward Snowden (* 1983, Dissident)
+
+>- $\implies$ **Bedeutet vollautomatische, allgegenwärtige, pausenlose Datenerfassung das Ende der Privatsphäre?**
+
+### Big Data & ML: Politische & soziale Folgen
+
+>- ***Predictive models are, increasingly, the tools we will be relying on to run our institutions, deploy our resources, and manage our lives.** But [...] these models are constructed not just from data but from the choices we make about which data to pay attention to -- and which to leave out. Those choices are not just about logistics, profits, and efficiency. They are fundamentally moral. If we back away from them and treat mathematical models as a neutral and inevitable force, like the weather or the tides, we abdicate our responsibility. We must come together to police [...], tame and disarm them. My hope is that they’ll be remembered, like the deadly coal mines of a century ago, as relics of the early days of this new revolution, before we learned how to bring fairness and accountability to the age of data.*  
+Cathy O'Neil (Statistikerin, Zitat aus "Weapons of Math Destruction" (Crown, 2016)) 
+
+### Big Data & ML: Politische & soziale Folgen
+
+>- *[... M]any of these models encode human prejudice, misunderstanding, and bias into the software systems that increasingly manage our lives. Like gods, these mathematical models are opaque, their workings invisible to all but the highest priests in their domain: mathematicians and computer scientists. Their verdicts, even when wrong or harmful, are beyond dispute or appeal. And they tend to punish the poor and the oppressed in our society, while making the rich richer.*  
+Cathy O'Neil (Statistikerin, Zitat aus "Weapons of Math Destruction" (Crown, 2016))
+
+>- *Hidden biases in both the collection and analysis stages present considerable risks and are as important to the big-data equation as the numbers themselves. [...] The fear isn't that big data discriminates. We already know that it does. It's that you don't know if you've been discriminated against.*  
+Kate Crawford (Informatikerin)
+
+>- $\implies$ **Große Herausforderung der nächsten Jahrzehnte: Humane & faire Verwirklichung der positiven Potentiale, Vermeidung der dystopischen Aspekte.**
+
+### Gegenwart & Zukunft der Statistik
+
+- Enorm gewachsener Bedarf durch Allgegenwart automatisiert erhobener Daten & Digitalisierung
+
+- Falsch/missbräuchlich angewendete Statistik führt zu Reproduzierbarkeitskrisen in 
+(Sozial-)psychologie, vielen Bereichen der Medizin, Ernährungswissenschaften  
+    **Gegenwärtiger Paradigmenwechsel in der angewandten Forschung**  
+    (Stichworte: *p-hacking*, *replication crisis*)
+
+- "Künstliche Intelligenz" / Maschinelles Lernen & Big Data: Hochkomplexe, extrem rechenintensive Algorithmen in Kombination mit riesigen Datenmengen ermöglichen ganz neue Anwendungen von Datenanalyse  
+    **Beitrag der Statistik zur Beherrschbarmachung / Interpretation / Risikoabschätzung dieser Techniken?**
+  

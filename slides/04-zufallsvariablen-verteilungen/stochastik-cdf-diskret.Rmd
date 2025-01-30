@@ -1,0 +1,48 @@
+## Verteilungsfunktion
+
+### Die Verteilungsfunktion 
+
+::: {.block}
+#### Def.: **Verteilungsfunktion** (diskret)  
+Die *Verteilungsfunktion*  einer diskreten ZV ist definiert als 
+$$F_X(x) := P(X \leq x) = \sum_{i: x_i \leq x} f_X(x_i).$$
+:::
+
+Kennt man also die **Wahrscheinlichkeitsfunktion** $f(x)$ für alle
+$x \in \cal{T}$, so kennt man auch die **Verteilungsfunktion**
+$F(x)$ und umgekehrt.
+
+\note{Terminologie: cdf, cumulative density function, distribution (function)}
+
+
+### Eigenschaften der Verteilungsfunktion 
+
+- $F(x)$ ist monoton wachsend ("Treppenfunktion")\
+- $F(x)$ ist stückweise konstant mit Sprungstellen an Werten 
+$x_i$ mit $f(x_i) > 0$, d.h. an allen Realisierungen $x_i \in {\cal{T}}$
+- Die Höhe des Sprungs an der Stelle $x_i \in {\cal{T}}$ ist $f(x_i)$
+- $\lim\limits_{x \to \infty} F(x) = 1$
+- $\lim\limits_{x \to -\infty} F(x) = 0$
+
+### Beispiel: 3-maliger Münzwurf
+
+$X :=$ "Anzahl Kopf", ${\cal{T}}=\{0,1,2,3\}$
+
+$$\begin{array}{lll}
+f(0) &= P(\{ZZZ\}) &= 1/8\\
+f(1) &= P(\{KZZ, ZKZ, ZZK\}) &= 3/8\\
+f(2) &= P(\{KKZ, KZK, ZKK\}) &= 3/8\\
+f(3) &= P(\{KKK\}) &= 1/8\\
+\end{array}
+\qquad
+\implies
+\qquad
+F(x) = \begin{cases}
+0 & x < 0 \\
+1/8 & 0 \leq x < 1\\
+4/8 & 1 \leq x < 2\\
+7/8 & 2 \leq x < 3\\
+1 & x \geq 3
+\end{cases}$$
+
+Beachte: $f(x)=0$ für alle $x \notin {\cal{T}}$

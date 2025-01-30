@@ -1,0 +1,253 @@
+## Alternative Zusammenhangsmaße
+
+### Spearman-/Rang-Korrelationskoeffizient
+
+$X, Y$ (mindestens) ordinal
+
+**Idee**: Berechne **Korrelation nach Bravais-Pearson für die *Ränge*** statt für die *Werte* der Merkmale.
+
+Der \textit{Korrelationskoeffizient nach Spearman} ist definiert durch
+\begin{displaymath}
+r^{SP}_{xy} = \frac{\sum(rg(x_i)-\bar{rg}_X)(rg(y_i) - \bar{rg}_Y)}
+{\sqrt{\sum(rg(x_i)-\bar{rg}_X)^2\sum(rg(y_i)-\bar{rg}_Y)^2}}.
+\end{displaymath}
+
+Wertebereich: $-1 \le r^{SP}_{xy} \le 1$
+
+### Vorgehen
+
+- Urliste der Größe nach sortieren
+- $\implies$ Ranglisten $rg(x_i), rg(y_i), i = 1,\ldots,n$ vergeben (bei
+Bindungen: Durchschnittsränge)
+
+z.B: 
+
+\[
+\begin{array}{cccccc}
+x_i & 2.3 & 7.1 & 1.0 & 2.1\\
+rg(x_i) & 3 & 4 & 1 & 2
+\end{array}
+\]
+
+bei Bindungen (ties):
+
+\[
+\begin{array}{cccccc}
+x_i & 2.3 & 7.1 & 1.0 & 2.1 & 2.3\\
+rg(x_i) & 3.5 & 5 & 1 & 2 & 3.5
+\end{array}
+\]
+
+$\implies$ Durchschnittsrang $\frac{3+4}{2} = 3.5$ vergeben.
+
+### Interpretation
+
+- $r^{SP}_{xy} > 0 \iff$  gleichsinniger monotoner Zusammenhang,  
+Tendenz:  $x$ groß $\Leftrightarrow y$ groß,
+$x$ klein $\Leftrightarrow y$ klein
+
+- $r^{SP}_{xy} < 0 \iff$ gegensinniger monotoner Zusammenhang,  
+Tendenz: $x$ groß $\Leftrightarrow y$ klein,
+$x$ klein $\Leftrightarrow y$ groß
+
+- $r^{SP}_{xy} \approx 0 \iff$ kein monotoner Zusammenhang
+
+### Extremfälle
+
+```{r 04-rsp-extreme, echo=FALSE, fig.height=4, fig.width=4,  fig.width=4, out.height=".7\\textheight", out.width=".7\\textheight"}
+set.seed(11212)
+x <- seq(0.5, 2, l = 5)
+y1 <- x^4 + .1 * rnorm(5)
+y2 <- -log(x) + .1 * rnorm(5)
+par(mfrow = c(2,2), mar = par()$mar - 1, mgp = c(2,1,0))
+plot(sqrt(x), y1, xlab = "x", ylab = "y", pch = 19, xaxt='n', yaxt='n',
+     mgp = c(1,1,0))
+plot(rank(x), rank(y1), ylab = "rg(y)", xlab = "rg(x)", pch = 19)
+plot(x, y2^3, ylab = "y", pch = 19, xaxt='n', yaxt='n', 
+     mgp = c(1,1,0))
+plot(rank(x), rank(y2), ylab = "rg(y)", xlab = "rg(x)", pch = 19)
+```
+$r^{SP}_{xy}=1$ (oben) und $r^{SP}_{xy} = -1$ (unten)
+
+
+### Bemerkungen:
+
+-  Rechentechnische Vereinfachungen:
+\[
+\begin{array}{c}
+\bar{rg}_X = \frac{1}{n}\sum_{i=1}^n rg(x_i) = \frac{1}{n}\sum_{i=1}^n i
+= (n+1)/2,\\
+\bar{rg}_Y = \frac{1}{n}\sum_{i=1}^n rg(y_i) = \frac{1}{n}\sum_{i=1}^n i
+= (n+1)/2.
+\end{array}
+\]
+
+Rechentechnisch günstige Version von $r^{SP}_{xy}$:  
+
+- Voraussetzung: keine Bindungen
+- Daten: $(x_i, y_i),\ i=1, \ldots, n,\quad x_i\neq x_j,\ y_i\neq y_j$
+für alle $i,j$
+- Rangdifferenzen: $d_i = rg(x_i) - rg(y_i)$  
+$$\implies r^{SP}_{xy} = 1 - \frac{6 \sum d^2_i}{(n^2 - 1) n}$$
+
+
+### Monotone Transformationen
+
+$\tilde{X} = g(X) \quad g$ streng monoton,  
+$\tilde{Y} = h(Y) \quad h$ streng monoton
+
+\vspace{2em}
+
+- $g$ \textit{und} $h$ beide monoton wachsend oder beide monoton fallend  
+$\implies$ $r^{SP}(\tilde X, \tilde Y)=r^{SP}(X,Y)$
+- $g, h$ nicht *beide* wachsend oder *beide* fallend  
+$\implies$ $r^{SP}(\tilde X, \tilde Y)= -\, r^{SP}(X,Y)$ 
+
+
+
+
+### Paarvergleichsmaße: Kendall's Tau
+
+Betrachte Paare von Beobachtungen $(x_i, y_i)$ und $(x_j, y_j)$
+
+Ein Paar heißt: 
+
+\begin{tabular}{ll}
+\textbf{konkordant}, & falls $x_i < x_j$ und $y_i < y_j$ \\
+& oder $x_i > x_j$ und $y_i > y_j$,\\
+& also: Rangfolge der $X$-Werte gleich der der $Y$-Werte.\\
+&\\
+\textbf{diskordant}, & falls $x_i < x_j$ und $y_i > y_j$\\
+& oder $x_i > x_j$ und $y_i < y_j,$\\
+& also: Rangfolge der $X$-Werte umgekehrt der $Y$-Werte.\\
+\end{tabular}
+
+$N_C$: Anzahl der konkordanten Paare  
+$N_D$: Anzahl der diskordanten Paare  
+Insgesamt $n(n-1)/2$ mögliche Paare.
+
+\begin{equation*}
+\text{\textbf{Kendall's Tau:}} \qquad  \tau_{xy} = \frac{N_C - N_D}{n(n-1)/2} 
+\end{equation*}
+
+
+### Kendall's Tau: Veranschaulichung 
+
+```{r, echo = FALSE, message=FALSE}
+pairs_plot <- function(n, corr) {
+  d <- data.frame(mvtnorm::rmvnorm(n, mean = c(0, 0), 
+                                   sigma = matrix(c(1, corr, corr, 1),2,2)))
+  colnames(d) <- c("x", "y")
+  d1 <- mutate(d, id1 = 1:n) %>% rename(x1 = x, y1 = y)
+  d2 <- mutate(d, id2 = 1:n) %>% rename(x2 = x, y2 = y)
+  pairs <- 
+    expand.grid(id1 = d1$id1, id2= d2$id2) %>% 
+    left_join(d1) %>% left_join(d2) %>% 
+    mutate(concordance = sign(x1 - x2) * sign(y1 - y2)) %>% #0 for undecidable
+    filter(concordance != 0 & id1 > id2) %>% 
+    mutate(concordance = factor(-concordance, labels = c("konkordant", "diskordant")))
+  
+  this_caption <- bquote(n == .(n)~"; "~
+                           N[C] == .(sum(pairs$concordance == "konkordant"))~"; "~
+                           N[D] == .(sum(pairs$concordance == "diskordant"))~"; "~
+                           tau[XY] == .(round((sum(pairs$concordance == "konkordant") - 
+                                           sum(pairs$concordance == "diskordant"))/choose(n, 2), 2)))
+  
+  ggplot(d) + theme_void() + theme(panel.border = element_rect(fill = "transparent")) +
+    geom_segment(data = pairs, alpha = .1, linewidth = .5,
+                 aes(x = x1, xend = x2, y = y1, yend = y2, col = concordance)) +
+    scale_color_manual("Paare", values = c("blue", "red")) +
+    guides(color = guide_legend(override.aes = list(alpha = .5))) +
+    geom_point(aes(x = x, y = y)) + ylab("y") + xlab("x") +
+    labs(caption = this_caption)
+}
+set.seed(1129)
+pairs_plot(10, 0) + theme(legend.position = "none") +
+  pairs_plot(15, .7) +  theme(legend.position = "none") +
+  pairs_plot(20, -.3)
+```
+
+### Varianten
+
+-    Goodman \& Kruskal $\gamma$-Koeffizient ignoriert Paare mit Bindungen:
+\begin{equation*}
+\gamma_{xy} = \frac{N_C - N_D}{N_C + N_D}
+\end{equation*}
+-  Somers' D wird typischerweise verwendet wenn Y binär ist  
+($\implies$ viele Paare mit Bindungen in $Y$)  
+\begin{equation*}
+D_{xy}:= \frac{N_C - N_D}{\mbox{Anzahl Paare mit ungleichem y}}
+\end{equation*}
+
+<!-- ###  Kendall's $\tau_{xy}$, Spearman's $r^{SP}_{xy}$ -->
+
+<!-- **Beispiel:** -->
+
+<!-- \vspace{0.5cm} -->
+
+<!-- \begin{center} -->
+<!-- \begin{tabular}{ll|c|c} -->
+<!--   &&$\tau_{xy}$& $r^{SP}_{xy}$\\ \hline -->
+<!--   rg X &  1 \; 2 \; 3 \; 4 & 0.33& 0.6 \\ -->
+<!--   rg Y &  2 \; 1 \; 4 \; 3 & & \\  \hline -->
+<!--   rg X &  1 \; 2 \; 3 \; 4 & 0.33 & 0.4 \\ -->
+<!--   rg Y &  1 \; 3 \; 4 \; 2 && -->
+<!-- \end{tabular} -->
+
+<!-- $r^{SP}_{xy}$ bestraft Abweichung stärker als $\tau_{xy}$ -->
+<!-- \end{center} -->
+
+### Gemeinsamkeiten der Paarvergleichsmaße
+
+Für Kendall' s $\tau$, Somers' D und Goodman \& Kruskal's $\gamma$-Koeffizient gilt: 
+
+- ihr Wertebereich ist $[-1, 1]$
+- sie setzen (mindestens) *ordinale* Variablen $X$, $Y$ voraus 
+
+
+###  Paarvergleichsmaßen vs. Spearman's $r^{SP}_{xy}$
+
+-  $r^{SP}_{xy}$ verwendet Abstände auf der Rang-Skala
+-  $\tau_{xy}$ und Varianten verwendet alle Paarvergleiche
+-  $\tau_{xy}$ ist in der Regel betragsmäßig kleiner als $r^{SP}_{xy}$
+
+### Distanzkovarianz & Distanzkorrelation
+
+Modernes Zusammenhangsmaß für (fast) beliebige Zusammenhänge (nicht nur linear/monoton).
+
+Basiert auf Produkten der (zentrierten) Distanzen der Beobachtungen untereinander, nicht nur auf Distanzen zu ihren Mittelwerten.
+
+**Distanzkovarianz** $dS_{xy}$:
+$$dS_{xy} = \frac{1}{n^2}\sum^n_{i=1}\sum^n_{j=1}D^x_{ij}D^y_{ij}$$
+
+- zentrierte Distanzen $D^x_{ij} = d^x_{i j} - \left(\bar{d^x_{i \cdot}} + \bar{d^x_{\cdot j}} - \bar{d^x}\right)$ mit
+- $d^x_{i j} = |x_i - x_j|$
+- $\bar{d^x_{i \cdot}} =  \frac{1}{n} \sum^n_{j=1} d^x_{i j}$ und $\bar{d^x_{\cdot j}} =  \frac{1}{n} \sum^n_{i=1} d^x_{i j}$,
+- $\bar{d^x} = \frac{1}{n^2} \sum^n_{i=1}\sum^n_{j=1} d^x_{i j}$
+- analog für $D^y_{ij}$
+
+### Distanzkorrelation
+
+Die **Distanzkorrelation** ist definiert als
+
+$$dr_{xy} = \sqrt{\frac{dS^2_{xy}}{\sqrt{dS^2_{xx}dS^2_{yy}}}}$$
+wobei
+
+- $dS^2_{xy} = dS_{xy}dS_{xy}$
+- $dS_{xx}$ ist die Distanzkovarianz von X mit sich selbst.
+
+
+### Eigenschaften Distanzkorrelation
+
+- $0 \leq dr_{xy} \leq 1$ -- misst nur Stärke, nicht "Richtung" der Abhängigkeit.
+- $dr_{xy} = 0$ $\iff$ $X$ und $Y$ *empirisch unabhängig* (!)
+- $dr_{xy} = 1$ für perfekt lineare Zusammenhänge (bei Verwendung der euklidischen Distanz)
+
+- **Sehr** allgemein anwendbar:  
+   - beliebige Distanzmaße verwendbar als $d^x_{i j}$, $d^y_{i j}$
+   - $\implies$ auch für alle *multivariaten* oder *nicht-numerischen* Daten $X, Y$ (z.B. Bilder, Audiosignale, Gensequenzen, ....) 
+     benutzbar, für die man Distanzen definieren kann.
+
+\vspace{4em}
+\scriptsize
+[(Székely, Rizzo, Bakirov; 2007)](https://doi.org/10.1214%2F009053607000000505)

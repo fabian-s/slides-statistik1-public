@@ -1,0 +1,158 @@
+## Stochastische Unabhängigkeit 
+
+### Stochastische Unabhängigkeit: Motivation
+
+Frage: Wann sind 2 Ereignisse $A, B$ **stochastisch unabhängig**?
+\ 
+
+Motivation über bedingte Wahrscheinlichkeiten:
+
+Zwei Ereignisse $A, B$ sind *stochastisch unabhängig*, wenn
+\begin{align*}
+\underbrace{P(A|B)}_{\frac{P(A \cap B)}{P(B)}} & =   P(A)\\
+\mbox{ bzw. } \underbrace{P(B|A)}_{\frac{P(A \cap B)}{P(A)}} & =   P(B)
+\end{align*}
+
+Intuition:  
+
+Zwei Ereignisse sind stochastisch unabhängig, wenn das Eintreten des einen nichts an der Wahrscheinlichkeit des Eintretens des anderen verändert.
+
+
+### Stochastische Unabhängigkeit
+::: {.block}
+#### Def.: **Stochastische Unabhängigkeit**  
+Zwei Ereignisse $A, B$ sind *stochastisch unabhängig*, wenn gilt: 
+$$ P(A \cap B) = P(A) \cdot P(B)$$
+Notation: $A \perp B :\iff P(A \cap B) = P(A) \cdot P(B)$
+:::
+
+- Voraussetzungen $P(B) > 0$ und/oder $P(A) > 0$ dafür nicht nötig. 
+- Unabhängigkeit überträgt sich auf die Gegenereignisse:
+    - $A \perp B \iff \bar{A} \perp B$
+    - $A \perp B \iff A \perp \bar B$ 
+    - $A \perp B \iff \bar A \perp \bar B$ 
+
+\note{
+\begin{align*}
+P(\bar A \cap B) &= P(B) - P(A \cap B) \\
+&= P(B) - P(A)P(B)\\
+&= P(B)(1 - P(A)).\\
+\end{align*}
+$P(A \cap \bar B)$ analog.
+\begin{align*}
+P(\bar A \cap \bar B) &= P(\bar A) - P(\bar A \cap B) \\
+&= P(\bar A) - (P(B) - P(A \cap B)) \\
+&= P(\bar A) - (1 - P(\bar B) - (1 - P(\bar A))(1 - P(\bar B)))\\
+&= P(\bar A)P(\bar B).
+\end{align*}
+}
+
+### Beispiel: Zweimaliges Würfeln 
+
+Ein fairer Würfel wird zweimal hintereinander geworfen. Definiere
+
+\begin{tabular}{ll}
+$A:$ & "Beim 1. Würfelwurf eine Sechs" \\
+$B:$ & "Beim 2. Würfelwurf eine Sechs"
+\end{tabular}
+
+Bei jedem Würfelwurf ist die Grundgesamtheit $\Omega = \{1,2,3,4,5,6 \}$.  
+Nach Laplace gilt $P(A) = P(B) = \frac{1}{6}$.  
+Bei "unabhängigem" Werfen gilt somit
+$$
+P(A \cap B) = P(A) \cdot P(B) = \frac{1}{36}
+$$
+
+
+### Beispiel: Zweimaliges Würfeln mit Tricks 
+
+Angenommen die Würfelwerfende legt es darauf an einen Pasch zu würfeln. 
+Sie kann den zweiten Wurf so steuern, dass sie mit W.keit $0.5$ das gleiche Ergebnis wie beim ersten Wurf würfelt.
+Die fünf anderen möglichen Ergebnisse haben dann jeweils W.keit $0.1$.
+
+Dann ist zwar $P(A)=\frac{1}{6}$ und auch $P(B) = \frac{1}{6}$, aber
+$$P(A \cap B)= P(A)P(B|A) = \frac{1}{6} \cdot \frac{1}{2} = \frac{1}{12}$$
+Die Ereignisse $A$ und $B$ sind also abhängig, da
+$$
+\frac{1}{12} = P(A \cap B) \neq P(A) \cdot P(B) = \frac{1}{36}
+$$
+
+### Unabhängigkeit von mehr als zwei Ereignissen 
+
+Allgemeiner:
+
+::: {.block}
+#### Def.: **Stochastische Unabhängigkeit von mehr als zwei Ereignissen**  
+Ereignisse $A_1, A_2, ..., A_n$ sind *stochastisch unabhängig*,
+wenn für **alle Teilmengen** $I \subseteq \{1, 2, ..., n\}$ mit $I = \{i_1, i_2, ..., i_k \}$ gilt:
+$$
+P(A_{i_1} \cap A_{i_2} \cap ... \cap A_{i_k}) =
+P(A_{i_1}) \cdot P(A_{i_2}) \cdot ... \cdot P(A_{i_k})
+$$
+:::
+
+*Bemerkung:*  
+Aus paarweiser Unabhängigkeit folgt **nicht** die Unabhängigkeit von mehr als zwei Ereignissen.
+
+
+### Beispiel zur paarweisen Unabhängigkeit 
+
+\begin{align*}
+\Omega &= \{0, 1, 2, 3\} \quad \mbox{Laplace-Wahrscheinlichkeitsraum}\\
+A_i &= \{0\} \cup \{i\} \quad \mbox{ mit $i = 1, 2, 3$}
+\intertext{(z.B.: einmaliges Ziehen aus einer Urne mit 4 numerierten Kugeln)}  
+\mbox{Dann gilt: } P(A_i) &= \frac{1}{2} \; \forall \; i \\
+\mbox{ und } P(A_i \cap A_j) = P(\{0\}) &=  \frac{1}{4} = P(A_i) \cdot P(A_j) \; \forall \; i \neq j. \\
+\intertext{$\implies A_i$ alle paarweise unabhängig -- Aber:}
+P(A_1 \cap A_2 \cap A_3) &= P(\{0\}) = \frac{1}{4}\\
+P(A_1) \cdot P(A_2) \cdot P(A_3) &= \frac{1}{8}
+\end{align*}
+$\implies A_1, A_2, A_3$ also **nicht** unabhängig.
+
+### Bedingte Unabhängigkeit 
+
+::: {.block}
+#### Def.: **Bedingte Unabhängigkeit**
+Sei $C$ ein beliebiges Ereignis mit $P(C)>0$.  Zwei Ereignisse $A$ und
+$B$ nennt man **bedingt unabhängig gegeben** $C$, genau dann wenn
+$$
+P(A \cap B|C) = P(A|C) \cdot P(B|C).
+$$
+:::
+
+Notation: $(A \perp B)|C :\iff P(A \cap B|C) = P(A|C) \cdot P(B|C)$
+
+- Für feste Bedingung $C$ gelten die selben Folgerungen wie für unbedingte stochastische Unabhängigkeit:  
+$(A \perp B)|C \iff (\bar{A} \perp B)|C;\; (A \perp \bar B)|C;\; (\bar A \perp \bar B)|C$
+- Aus bedingter stochastischer Unabhängigkeit folgt nicht unbedingte stochastische Unabhängigkeit!
+- Aus unbedingter stochastischer Unabhängigkeit folgt nicht bedingte stochastische Unabhängigkeit!
+
+### Beispiel 1 zu bedingter (Un)abhängigkeit 
+
+Eine Box enthält 2 Münzen -- eine normale und eine gezinkte, die auf beiden Seiten "Kopf" zeigt.  
+Eine Münze wird zufällig aus der Box gezogen und zweimal geworfen.  
+
+
+Definiere  
+$A :=$ "Kopf beim 1. Wurf",  
+$B :=$ "Kopf beim 2. Wurf",  
+$C:=$ "Normale Münze wurde ausgewählt".
+
+Dann gilt:  
+$A \not \perp B$, aber $(A \perp B)|C$!
+
+Also: aus "bedingt stochastisch unabhängig" folgt *nicht* "stochastisch unabhängig".  
+
+<!-- see https://www.probabilitycourse.com/chapter1/1_4_4_conditional_independence.php-->
+
+### Beispiel 2 zu bedingter (Un)abhängigkeit
+
+Szenario: Einfacher Würfelwurf
+
+Definiere Ereignisse $A = \{1, 2\}; B = \{2, 4, 6\}; C = \{1, 4\}$.  
+
+Dann gilt: $A \perp B$ (!), aber $(A \not \perp B)|C$!
+
+Also: aus "stochastisch unabhängig" folgt *nicht* "bedingt stochastisch unabhängig".  
+
+<!-- see https://www.probabilitycourse.com/chapter1/1_4_4_conditional_independence.php-->

@@ -1,0 +1,141 @@
+## Das Gesetz der großen Zahlen 
+
+### Das Gesetz der großen Zahlen (GGZ)
+
+:::{.block}
+#### **Schwaches Gesetz der großen Zahlen**
+Für das arithmetische Mittel $\bar{X}_n = \frac{1}{n} \sum_{i = 1}^n X_i$ von
+unabhängig und identisch verteilten ("i.i.d.") Zufallsvariablen aus einer
+Verteilung mit Erwartungswert $E(X_i) = \mu_X$ und Varianz $Var(X_i) = \sigma_X^2 < \infty$ gilt:
+\begin{align*}
+E(\bar{X}_n) = \mu_X &\;\text{und}\; \Var(\bar{X}_n) = \frac{1}{n} \, \sigma_X^2 \stackrel{n\to\infty}{\longrightarrow} 0\\
+\implies P(|\bar{X}_n - \mu_X| \geq \epsilon) &\stackrel{n\to\infty}{\longrightarrow} 0 \;\forall\, \epsilon > 0\\
+\text{Man schreibt: } \bar{X}_n &\stackrel{P}{\longrightarrow} \mu_x
+\end{align*}
+:::
+$\implies$ **Das arithmetische Mittel beobachteter *i.i.d.* Daten konvergiert "in Wahrscheinlichkeit" gegen den Erwartungswert der datengenerierenden Verteilung.**  
+Die Varianz dieses Schätzers wird bei wachsendem Stichprobenumfang beliebig klein.  
+
+\scriptsize Terminologie: *i.i.d.* := "*i*ndependent and *i*dentically *d*istributed"
+
+### Beispiel: Normalverteilung 
+
+```{r ggz-prep, echo = FALSE}
+plot_sequential_means <- 
+  function(dist = "norm", n = 10000, plot = TRUE, add = FALSE) {
+    x <- switch(dist,
+                "norm" = rnorm(n),
+                "cauchy" = rcauchy(n))
+    # sequential means of x:
+    means <- cumsum(x)/(1:n)
+    if (plot) {
+      if (!add) {
+        plot(-10, 10, ylim = range(means), xlim=c(0, n), xlab="n",
+             ylab = expression("Arithmetisches Mittel "~bar(x)[n]))
+        lines(c(0, n), c(0, 0), lty = "dashed")
+      }
+      lines(1:n, means)
+    }
+  invisible(means)
+}
+```
+```{r ggz-norm, echo = FALSE}
+set.seed(11121112)
+par(mgp = c(2, 1, 0))
+plot_sequential_means(dist = "norm", n = 2500)
+title(main = 
+        expression(bar(x)[n] == scriptstyle(frac(1,n))~Sigma[i==1]^n~x[i]~
+                     "mit steigendem n für iid "~X[i]%~%N(0, 1)))
+```
+
+### Gegenbeispiel: Cauchyverteilung 
+```{r ggz-cauchy, echo = FALSE}
+set.seed(11121112)
+par(mgp = c(2, 1, 0))
+plot_sequential_means(dist = "cauchy", n = 1e6)
+title(main = 
+        expression(bar(x)[n]== scriptstyle(frac(1,n))~Sigma[i==1]^n~x[i]~
+                     "mit steigendem n für Cauchy-verteilte"~X[i]))
+```
+
+<!-- https://psu-eberly.shinyapps.io/Law_of_Large_Numbers/ -->
+
+## Fundamentalsatz der Statistik
+
+### Punktweise Konvergenz der empirischen Verteilung
+
+\begin{align*}
+\intertext{Weil für beliebige Zufallsvariablen $X$ und Mengen $B$  gilt:} E\big(I(X \in B)\big) &= P(X \in B) \\
+\intertext{impliziert das GGZ für \emph{iid} ZV $X_i; i = 1,\dots,n$ mit Verteilung $F_X(x)$  speziell auch:}
+\frac{1}{n} \sum^n_{i = 1} I(X_i \leq x) &\stackrel{P}{\longrightarrow} P(X \leq x) = F_X(x). \\
+\intertext{Also gilt für die \emph{empirische} Verteilungsfunktion $F_n(x) = \frac{1}{n} \sum^n_{i = 1} I(X_i \leq x)$}
+F_n(x) &\stackrel{P}{\longrightarrow} F_X(x) \;\,\forall\, x
+\end{align*}
+
+$\implies$ **Die empirische Verteilungsfunktion konvergiert punktweise gegen die 
+"wahre" Verteilungsfunktion der datengenerierenden Verteilung**
+
+\scriptsize
+*Notation*: Indikatorfunktion $I(x \in B) := \begin{cases} 1 & x \in B \\ 0 & x \notin B \end{cases}$; oft auch $I_B(x); \symbf{\Bbbone}_B(x); \delta_x(B) (!!)$
+
+
+### Fundamentalsatz der Statistik
+
+:::{.block}
+#### **Fundamentalsatz der Statistik** (Satz v. Glivenko-Cantelli)
+Für *iid* ZV $X_i,\, i = 1,\dots,n$ mit Verteilungsfunktion $F_X(x)$ gilt für die empirische Verteilungsfunktion $F_n(x) = \frac{1}{n} \sum^n_{i = 1} I(X_i \leq x)$:
+$$P\left(\sup_{x \in \mathbb R}\left(|F_n(x) - F_X(x)|\right) < \epsilon\right) \stackrel{n \to \infty}{\longrightarrow} 1 \qquad \forall\, \epsilon > 0 \;\forall\, x $$
+:::
+
+$\implies$ **Die *maximale* Abweichung zwischen ECDF und Verteilungsfunktion der datengenerierenden Verteilung wird für wachsenden Stichprobenumfang mit Sicherheit *beliebig klein*.**
+
+- stärkere Aussage als punktweiser Konvergenz in Wahrscheinlichkeit: die *maximale* Abweichung zwischen Schätzung $F_n$ und Wahrheit $F$ geht mit Wahrscheinlichkeit 1 gegen Null. 
+
+```{r glivenko-prep, echo= FALSE}
+set.seed(1221)
+x_b <- rbinom(1e6, size = 100, prob = .7)
+x_e <- rexp(1e6)
+x_c <- rcauchy(1e6)
+n <- c(20, 100, 1000, 10000)
+gg_ecdf <- function(x, n, fun, geom = "line", xlim = NULL) {
+  ggplot(data.frame(x = x[1:(10*n)], f = rep(1:10, e = n))) + 
+    stat_function(fun = fun, col = "gold", lwd = 2, geom = geom, xlim = xlim) +
+    stat_ecdf(aes(x = x, group = f), alpha = .3) + ggtitle(bquote(n == .(n)))  
+}
+ecdf_b <- lapply(n, \(n) gg_ecdf(x_b, n, 
+                                 function(x) pbinom(x, size = 100, prob = .7), 
+                                 geom = "step") + coord_cartesian(xlim = c(50, 90)))
+ecdf_e <- lapply(n, \(n) gg_ecdf(x_e, n, pexp) + coord_cartesian(xlim = c(0, 6)))
+ecdf_c <- lapply(n, \(n) gg_ecdf(x_c, n, pcauchy, xlim = c(-30, 30)) + 
+                          coord_cartesian(xlim = c(-30, 30)))
+```
+
+### Beispiel Glivenko-Cantelli: Binomialverteilung
+
+```{r glivenko-bin, echo= FALSE}
+((ecdf_b[[1]] + ecdf_b[[2]]) / 
+  (ecdf_b[[3]] + ecdf_b[[4]])) + 
+  plot_annotation(
+    title = bquote("Binomialverteilung B(100,0.7): "~F[n](x)~" & "~F(x)),
+    caption = "ECDFs in schwarz, F(x) in gold.\n Jeweils 10 Stichproben mit n Beobachtungen.")
+```
+
+### Beispiel Glivenko-Cantelli: Exponentialverteilung
+
+```{r glivenko-exp, echo= FALSE}
+((ecdf_e[[1]] + ecdf_e[[2]]) / 
+  (ecdf_e[[3]] + ecdf_e[[4]])) + 
+  plot_annotation(
+    title = bquote("Exponentialverteilung E(1): "~F[n](x)~" & "~F(x)),
+    caption = "ECDFs in schwarz, F(x) in gold.\n Jeweils 10 Stichproben mit n Beobachtungen.")
+```
+
+### Beispiel Glivenko-Cantelli: Cauchyverteilung
+
+```{r glivenko-cauchy, echo= FALSE}
+((ecdf_c[[1]] + ecdf_c[[2]]) / 
+  (ecdf_c[[3]] + ecdf_c[[4]])) + 
+  plot_annotation(
+    title = bquote("Cauchyverteilung: "~F[n](x)~" & "~F(x)),
+    caption = "ECDFs in schwarz, F(x) in gold.\n Jeweils 10 Stichproben mit n Beobachtungen.")
+```

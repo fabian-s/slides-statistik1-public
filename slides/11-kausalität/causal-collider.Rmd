@@ -1,0 +1,145 @@
+## (Schein)Assoziation durch Stichprobenauswahl
+
+### Conditioning on the Collider
+
+- $X$ ist "collider" wenn $Y$ und $Z$ beides Ursachen von $X$ sind:  
+
+$$\xymatrix@R-2pc{
+& \ar[dl]  Y\\
+X  &\\
+& \ar[ul] Z} \quad\text{   oder   }\quad 
+\xymatrix@R-2pc{
+& \ar[dl] \ar[dd] Y\\
+X  &\\
+& \ar[ul] Z} 
+\quad\text{   oder   }\quad 
+\xymatrix@R-2pc{
+& \ar[dl]  Y\\
+X  &\\
+& \ar[ul]\ar[uu] Z}$$
+
+- Durch Bedingen auf $X$ können *spurious correlations* zwischen $Y$ und $Z$ entstehen
+- Durch Bedingen auf $X$ können (marginale) Assoziationen zwischen $Y$ und $Z$ ihre Richtung ändern oder verschwinden
+
+### Conditioning on the Collider: Beispiel
+
+```{r 05-coc-iqcon-prep, echo = FALSE, message = FALSE, warning = FALSE}
+#idee: http://www.the100.ci/2017/03/14/that-one-weird-third-variable-problem-nobody-ever-mentions-conditioning-on-a-collider/
+set.seed(12221)
+n <- 1500
+iqcon <- tibble(iq = rnorm(n, m = 100, sd = 12), 
+                con = pmax(0,rnorm(n, m = 50, sd = 20))) %>% 
+  mutate(p = plogis(-20 + 1.5*iq/15 + 1*con/7 + 3*(iq > 90) + 2*(con > 60)),
+         mah = sign(iq - 100)*(iq - 100)^2 / 15^2 + sign(con - 90)*(con - 50)^2 / 20^2, 
+         stip = ifelse(rbinom(n, size = 1, p = p), "studierend", "nicht studierend"))
+cor <- iqcon %>% group_by(stip) %>% summarize(cor = round(cor(iq, con), 2))
+```
+
+
+
+```{r 05-coc-iqcon-1, echo = FALSE, out.width=".7\\textwidth"}
+ggplot(filter(iqcon, stip == "studierend"), aes(iq, con)) + geom_point(alpha = .3) + 
+  labs(x = "IQ", y = "Gewissenhaftigkeit (Score)") + 
+  ggtitle("IQ & Gewissenhaftigkeit von Studierenden (fiktiv)") + 
+  xlim(range(iqcon$iq)) + ylim(range(iqcon$con)) + 
+  annotate(x = min(iqcon$iq) + 10, y = min(iqcon$con) + 5, 
+           label = paste0("r[xy] ==", cor[2,2]), geom = "label", parse = TRUE)
+```
+
+"Schlampige Genies" und "Stumpfe Arbeitsbienen"...?
+
+### Conditioning on the Collider: Beispiel 
+
+```{r 05-coc-iqcon-2, echo = FALSE, out.width=".7\\textwidth"}
+ggplot(iqcon, aes(iq, con)) + geom_point(alpha = .3) + 
+  labs(x = "IQ", y = "Gewissenhaftigkeit (Score)") + 
+  ggtitle("IQ & Gewissenhaftigkeit in Gesamtbevölkerung (fiktiv)") + 
+  annotate(x = min(iqcon$iq)+10, y = min(iqcon$con) + 5, 
+           label = paste0("r[xy] ==", round(cor(iqcon$iq, iqcon$con), 3)), 
+           geom = "label", parse = TRUE)
+```
+
+### Conditioning on the Collider: Beispiel
+
+```{r 05-coc-iqcon-3, echo = FALSE, out.width=".7\\textwidth"}
+ggplot(iqcon, aes(iq, con, col = stip)) + geom_point(alpha = .3) + 
+  labs(x = "IQ", y = "Gewissenhaftigkeit (Score)") + 
+  scale_color_brewer("", palette = "Set1") +
+  geom_label(data = cor, alpha = 1, x = rep(min(iqcon$iq)+10, 2), y = min(iqcon$con) + c(5, 25), 
+             label = paste0("r[xy] ==", cor$cor), aes(col = stip, label = paste0("r[xy] ==", cor)),
+             parse = TRUE, show.legend = FALSE) + guides(colour = guide_legend(reverse = TRUE))
+```
+
+### Conditioning on the Collider: Beispiel
+
+$$\xymatrix@R-2pc{
+& \ar[dl] \text{Schlau}\\
+\text{Studiert}  &\\
+& \ar[ul] \text{Fleißig}}$$ 
+
+Durch die Bedingung auf "Studiert" entsteht eine Scheinkorrelation zwischen Schläue und Fleiß:  
+nur diejenigen, die eher schlau oder eher fleißig oder sogar beides sind, können studieren,  
+dadurch entsteht eine negative Korrelation in der *beobachteten* Teilpopulation der Studierenden.
+
+Anders gesagt: Durch den Auswahlprozess der Stichprobe sind "besonders schlau, nicht so fleißig" und
+"besonders fleißig, nicht so schlau" in der Stichprobe relativ häufiger als in der Gesamtpopulation.
+Dadurch entsteht eine negative Korrelation.
+
+### Conditioning on the Collider: *endogeneous selection bias*
+
+Hier also Spezialfall *endogeneous selection bias*:  
+
+Ob eine Untersuchungseinheit in der beobachteten Stichprobe ist oder nicht hängt von einer Variable ab, die von den untersuchten Variablen kausal abhängt. 
+
+Auch bekannt als *selection-distortion effect*.
+
+### Conditioning on the Collider: *endogeneous selection bias*
+
+```{r 05-coc-endoselect, echo = FALSE, fig.height = 5}
+set.seed(1221)
+n <- 400
+data <- tibble(x = runif(n), y = runif(n)) %>% 
+  mutate(beobachtet = ifelse(x + y > .8, "ja", "nein"))
+rm_axis <- theme(axis.text.x=element_blank(),
+                 axis.ticks.x=element_blank(), axis.text.y=element_blank(),
+                 axis.ticks.y=element_blank())
+
+grid.arrange(
+  ggplot(data, aes(x,y)) + geom_point(alpha = .5) + labs(title = "Gesamtbevölkerung", 
+                                                         caption = "kein Zusammenhang!") + theme(plot.caption = element_text(hjust = 0.5))+ rm_axis,
+  ggplot(data, aes(x,y)) + geom_point(aes(col = beobachtet), alpha = .5) + 
+    scale_color_brewer(palette = "Set1")  + labs(title = "  ") + 
+    theme(legend.position="bottom", 
+          legend.margin = margin(0, 0, 0, 0, unit = "pt"), 
+          legend.key.size = unit(.5, "lines"))+ rm_axis,
+  ggplot(filter(data, beobachtet == "ja"), aes(x,y)) + geom_point(alpha = .5) + labs(subtitle = "Beobachtet falls x + y > const", 
+                                                                                     caption = expression(" " %=>% "negative Korrelation")) +
+    theme(plot.caption = element_text(hjust = .5)) + rm_axis,
+  nrow = 1)
+```
+
+
+### Conditioning on the Collider: *endogeneous selection bias*
+
+```{r 05-coc-endoselect2, echo = FALSE, fig.height = 5}
+set.seed(1221)
+n <- 400
+data <- tibble(x = runif(n), y = runif(n)) %>% 
+  mutate(beobachtet = ifelse(abs(x - y) < .5, "ja", "nein"))
+grid.arrange(
+  ggplot(data, aes(x,y)) + geom_point(alpha = .5) + 
+    labs(title = "Gesamtbevölkerung",  caption = "kein Zusammenhang!") + 
+    theme(plot.caption = element_text(hjust = 0.5))  + rm_axis,
+  ggplot(data, aes(x,y)) + geom_point(aes(col = beobachtet), alpha = .5) + 
+    scale_color_brewer(palette = "Set1")  + labs(title = "  ") + 
+    theme(legend.position="bottom", 
+          legend.margin = margin(0, 0, 0, 0, unit = "pt"), 
+          legend.key.size = unit(.5, "lines"))  + rm_axis,
+  ggplot(filter(data, beobachtet == "ja"), aes(x,y)) + 
+    geom_point(alpha = .5) + 
+    labs(subtitle = expression("Beobachtet falls" ~ group("|",list(x-y),"|") < "const"), 
+         caption = expression(" " %=>% "positive Korrelation")) +
+    theme(plot.caption = element_text(hjust = .5)) + rm_axis,
+  nrow = 1)
+```
+<!-- also add "range restriction effect"  examples here? low predictiveness of SAT scores for elite uni success, height of NBA players not predictive of scoring, etc  -->

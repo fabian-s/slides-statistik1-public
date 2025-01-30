@@ -1,0 +1,99 @@
+## Wahrscheinlichkeit: Begriffsbildung & Interpretation
+ 
+### Wahrscheinlichkeit 
+
+Grundbegriff der Stochastik:  
+Wahrscheinlichkeit $P(A)$ für das Auftreten eines bestimmten Ereignisses $A$  
+
+\begin{align*}
+P(A) & =  1           &  & A \text{ tritt mit Sicherheit ein}\\
+P(A) & =  0           &  & A \text{ tritt mit Sicherheit {\em nicht} ein}\\
+P(A) & =  p \in (0,1) &  & A \text{ tritt mit Wahrscheinlichkeit $p$ ein}
+\end{align*}
+
+Interpretation?
+
+\note[item]{**NOTATION erklären!**}
+\note[item]{**Interpretation fragen: Häufigkeit? Unsicherheit?**}
+
+### Subjektivistische Interpretation 
+
+Wahrscheinlichkeit aus Wetteinsatz: 
+
+"Wie sicher bist *Du*, dass das Ereignis $A$ eintreten wird?"  
+$\longrightarrow$ "Wie viel Einsatz $e$ bist *Du* maximal bereit zu setzen, wenn beim Eintreten von $A$ ein Gewinn $g$ ausgezahlt wird?" (unter Risikoneutralität) 
+  
+$$\implies P(A) = \frac{e}{g}$$
+
+$\implies$ Wahrscheinlichkeit als Maß für **individuelle/subjektive Unsicherheit**.
+
+\note[item]{Kritik: objektive W.keiten: zB Würfelwurf, statistische Mechanik; \\
+wenn der gewinn hoch genug ist, dann würde man auch bei $P(A)<50\%$ spielen. }
+
+### Beispiel: Sportwette
+
+Nick zahlt Yolanda den doppelten Einsatz als Gewinn aus, falls
+Yolanda's Lieblingsteam die Meisterschaft gewinnt (Ereignis $M$).
+
+- Nur falls Yolanda glaubt, dass $P(M) \geq \frac12$, lässt sie sich auf die Wette ein.
+- Nick glaubt $P(M) \leq \frac12$, sonst würde er die Wette nicht anbieten.
+
+
+### Frequentistische Interpretation 
+
+Wahrscheinlichkeit als **Häufigkeit**:
+
+Wenn der zufällige Vorgang beliebig oft wiederholt werden würde, dann würde die **relative Häufigkeit**
+des Eintretens des Ereignisses $A$ gegen die Wahrscheinlichkeit $P(A)$ konvergieren.
+
+Klassisches Beispiel:  
+Wiederholtes Werfen eines "fairen" Würfels 
+
+### Interpretation der Interpretationen
+
+- Für mathematische Theoriebildung weitestgehend irrelevant was "$P(A)$" *inhaltlich* bedeutet.  
+(Für Kommunikation und Interpretation statistischer Analysen aber *höchst* relevant!)
+
+- Beide Interpretationen jeweils (nicht) sinnvoll für bestimmte Arten von Zufallsvorgängen:
+  - Frequentistische Interpretation der W.keit von *einzigartigen* Ereignissen? ... von bereits eingetretenen, aber *unbeobachteten* Ereignissen? 
+  - Subjektivistische Interpretation von W.keiten für einfache & wiederholbare physikalische Prozesse wie Würfelwurf? ...    
+  \
+
+- Anwendungen des subjektivistischen W.keitsbegriff:  
+  $\to$ **Bayesianische Statistik**
+- Anwendungen des frequentistischen W.keitsbegriff:  
+  $\to$ **Klassische/Frequentistische Statistik**
+
+\note[item]{Kritik: frequentistische Interpretation von W.keiten für einzigartige Ereignisse? (z.B. ``Person X überlebt Tumor.'' oder ``Server-Auslastung am Wochenende bleibt unter 50\%'') Für Ereignisse die bereits eingetreten sind über die wir aber noch nichts wissen? (z.B. ``Wahrscheinlichkeitsverteilung'' des Absturzortes von MH370)}
+\note[item]{Synthese: für praktische Arbeit \& Großteil der mathematischen Herleitung der Theorie recht egal: sowohl subjektivistische als auch objektivistische Interpretation sinnvoll/denkbar je nach Anwendung.
+Mathematisch oft ineinander überführbar. Subjektivistische Interpretation $\leadsto$ Bayes)}
+
+### Grundbegriffe der Stochastik
+
+:::{.block}
+#### Def.: **Ergebnisse** $\omega$
+$\omega$: mögliches **Ergebnis** eines Zufallsexperiments.
+::::
+
+:::{.block}
+#### Def.: **Stochastische Grundgesamtheit** $\Omega$ 
+Als **stochastische Grundgesamtheit** $\Omega$ bezeichnet man die Menge aller möglichen Ergebnisse $\omega$ eines Zufallsexperiments. 
+::::
+Auch: "Grundraum", "Basismenge", "Ergebnisraum".
+
+:::{.block}
+#### Def.:  **Ereignis**
+Eine Teilmenge $A \subseteq \Omega$ heißt **Ereignis**.
+::::
+
+:::{.block}
+#### Def.: **Elementarereignisse** $\{\omega\}$   
+Eine Teilmenge von $\Omega$, die als einziges Element ein Ergebnis $\omega$ enthält, nennt man
+**Elementareignis**.
+::::
+*Immer nur genau ein* Elementarereignis tritt ein.
+
+
+\note[item]{griechische Buchstaben einführen / nachfragen!}
+\note[item]{Frage: bekannt aus Schule?}
+\note[item]{Wichtig: Immer nur EIN Elementareignis kann gleichzeitig auftreten!}

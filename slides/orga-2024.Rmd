@@ -1,0 +1,105 @@
+### Termine
+
+**Vorlesung:** *Fabian Scheipl*  
+
+Montag & Donnerstag 14-16 
+\ 
+
+**Übung:** *Patrick Schenk*  
+
+Beginn am **21.10.**
+
+Montag 10-12  
+Donnerstag 12-14
+\ 
+
+
+**Tutorium:** *Michael Kobl*  
+
+Beginn am **22.10.**  
+Dienstag 18-20 
+
+**Korrekturen:** *Felix Schweikl, Simon Schreiner*
+
+### Formales
+
+* 2 Module: Vorlesung (6 ECTS) + Übung (3 ECTS)
+* Prüfungsleistung für Statistik PO 2021: 
+   * benotete Hausaufgaben während dem Semester (Übungsmodul) 
+   * GOP (Statistik 1 + 2, 150 min) im September (Vorlesungsmodul)
+* Prüfungsleistung für alle anderen: Klausur im Februar, kein Übungsmodul
+
+* Benotete Hausaufgaben (nur HF Statistik PO 2021):
+    * mindestens alle 2 Wochen, markierte Aufgaben auf den Übungsblättern
+    * Abgaben immer bis Montag 10:00 der folgenden Woche über moodle
+    * keine Gruppenarbeit -- nur Einzelabgaben
+    * Gesamtpunktzahl über das Semester ergibt Note für das Übungsmodul
+
+* Klausur (nur NF und alte Statistik PO 2010):
+    * Termin am Ende des Semesters 
+    * 90 min 
+    * *open book* -- alle eigenen Unterlagen & Bücher zugelassen
+    * Zweitklausur Ende März/Anfang April: selber Stoff, selbe Schwierigkeit 
+
+### Moodle
+
+- Online-Learning-Plattform der LMU
+- Login mit Ihrer `@campus.lmu.de`-Kennung
+- **Alle** Teilnehmenden müssen sich in die Veranstaltung einschreiben.  
+    Einschreibeschlüssel ist **dskrpt**  
+    Nur wer eingeschrieben ist kann auf Material zugreifen, Hausaufgaben abgeben,
+    etc.
+
+**Moodle URL:** [moodle.lmu.de/course/view.php?id=35516](https://moodle.lmu.de/course/view.php?id=35516)
+
+### Programmierung
+
+Programmpaket **R** 
+
+* Frei verfügbar, *open source*: [`r-project.org`](https://www.r-project.org/)
+* *lingua franca* der Statistik
+    * (fast) jede denkbare statistische Methode implementiert
+    * aktuelle Forschung geht in Form von Zusatzpaketen ("packages") ein
+    * immer wichtiger / etablierter auch in Wirtschaft & Verwaltung
+* Obacht, steile Lernkurve: Kommandozeile, kein grafisches *interface* -- 
+tippen statt klicken\&wischen!
+
+* Editor **RStudio** ([`rstudio.com`](https://www.rstudio.com/), frei verfügbar)
+* Interaktive R-Kursprogramme zum Selbststudium:
+[`swirl`](http://swirlstats.com/), [`DataCamp`](https://learn.datacamp.com/courses?technologies=R), 
+[`Software Carpentry`](http://swcarpentry.github.io/r-novice-inflammation/), [`Code Academy`](https://www.codecademy.com/learn/learn-r), ....
+
+### Programmierung
+
+*Äußerst* wichtige Schwesterveranstaltung für HF Statistik:  
+**Einführung in die statistische Software**  
+
+$\implies$ praktische Umsetzung der hier vermittelten Inhalte mit Programmiersprache `R`
+
+### DataCamp
+
+![](pics/datacamp.png)
+
+Wir bieten Ihnen kostenfreie, zeitlich limitierte Datacamp-Accounts fürs Selbststudium.
+
+### DataCamp
+
+[Sign-Up Link:](https://www.datacamp.com/groups/shared_links/f2306b5305f638f41f0d7e700cee5212a0009421a281db02329e09851bb905e1)
+
+\centering \includegraphics[height = 0.75\textheight]{pics/qr-datacamp-2425.png}
+
+\footnotesize
+**Anmeldung mit Ihrer `@campus.lmu.de`-, `@lmu.de` oder `@stat.uni-muenchen.de`-Adresse möglich.** 
+
+### Literatur
+
+**L. Meier:**  
+[**Wahrscheinlichkeitsrechnung und Statistik - Eine Einführung für Verständnis, Intuition und Überblick**](https://link-springer-com.emedien.ub.uni-muenchen.de/book/10.1007%2F978-3-662-61488-4)   
+Springer-Verlag, 1. Auflage, 2020
+
+**L. Fahrmeir, R. Künstler, I. Pigeot, G. Tutz:**  
+[**Statistik - Der Weg zur Datenanalyse**](https://link-springer-com.emedien.ub.uni-muenchen.de/book/10.1007%2F978-3-662-50372-0)  
+Springer-Verlag, 8. Auflage, 2016  
+Nutzen Sie auch das ["Arbeitsbuch Statistik"](https://link-springer-com.emedien.ub.uni-muenchen.de/book/10.1007/b138336) mit Übungsaufgaben dazu.
+
+Mehr Lektüre & Material zu speziellen Themen auf der Moodle-Seite und verlinkt auf den Folien.

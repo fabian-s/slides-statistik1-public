@@ -1,0 +1,239 @@
+## Diskrete Zusammenhangsanalyse: Odds
+
+### Zusammenhangsanalyse in Kontingenztabellen
+
+*Bisher:* Tabellarische / grafische Präsentation\
+*Jetzt:* Maßzahlen für Stärke des Zusammenhangs zwischen $X$ und $Y$.
+
+**Chancen und relative Chancen:**
+
+-  Betrachte zunächst nur $2 \times 2$ - Kontingenztafeln \begin{displaymath}
+    \begin{array}{cc|cc|c}
+    & \multicolumn{1}{c}{}
+      & \multicolumn{2}{c}{$Y$}\\
+    & \multicolumn{1}{c}{}
+      & 1
+     & \multicolumn{1}{c}{2} \\\cline{3-4}
+    & 1
+      & h_{11}
+     & h_{12}
+       & h_{1\cdot}\\
+    \raisebox{1.5ex}[-1.5ex]{$X$}
+    & 2
+      & h_{21}
+     & h_{22}
+       & h_{2\cdot}\\\cline{3-4}
+    & \multicolumn{1}{c}{}
+      &\multicolumn{1}{c}{h_{\cdot 1}}
+     & \multicolumn{1}{c}{h_{\cdot 2} }
+       & \multicolumn{1}{c}{n}
+    \end{array}
+    \end{displaymath}
+
+### Odds (Chancen)
+
+-   Wir betrachten die Merkmale $X$ und $Y$ zunächst asymmetrisch: Die
+    Ausprägungen von $X$ definieren (hier 2) Subpopulationen, $Y$ ist das
+    interessierende dichotome Merkmal in diesen Subpopulationen
+-   Unter einer **Chance** (*odds*) versteht man nun das **Verhältnis der Häufigkeiten** von $Y=1$ und $Y=2$.
+-   **bedingte Odds**: Verhältnis der bedingten Häufigkeiten von $Y=1$ und $Y=2$
+    **in einer Subpopulation** $X=a_i$.
+
+### Chancenverhältnis (Odds Ratio)
+
+-   Die (empirischen) **bedingten Odds** für festes $X=a_i$ sind definiert als
+    \begin{displaymath}
+     \gamma(1,2|X=a_i) = \frac{h_{i1}}{h_{i2}}.
+      \end{displaymath}
+-   Ein sehr einfaches Zusammenhangsmaß stellen die empirischen **relativen
+    Chancen** (*Odds Ratio*) dar, die gegeben sind durch \begin{displaymath}
+     \gamma(1,2|X=1,X=2) = \frac{\gamma(1,2|X=1)}{\gamma(1,2|X=2)} =
+     \frac{h_{11}/h_{12}} {h_{21}/h_{22}} = \frac{h_{11}h_{22}}{h_{21}h_{12}},
+      \end{displaymath} d.h. $\gamma(1,2|X=1,X=2)$ ist das Verhältnis zwischen
+    den Odds für $Y=1$ gegen $Y=2$ in der $1.$ Population ($X=1$, $1.$ Zeile)
+    zu den entsprechenden Odds in der $2.$ Population ($X=2$, $2.$ Zeile).
+
+### Beispiel: Dauer der Arbeitslosigkeit
+
+Beschränkt man sich jeweils nur auf zwei Kategorien der Merkmale
+Ausbildungsniveau und Dauer der Arbeitslosigkeit, erhält man beispielsweise die
+Tabelle
+
+```{=tex}
+\begin{center}
+\small
+\begin{tabular}[b]{lcc}
+\multicolumn{1}{c}{}
+& Kurzzeit-
+  & Mittel- und langfristige\\
+\multicolumn{1}{c}{}
+& arbeitslosigkeit
+  & Arbeitslosigkeit\\\cline{2-3}
+\multicolumn{1}{l|}{Fachspezifische Ausbildung}
+& $40$ & \multicolumn{1}{c|}{$16$} \\
+\multicolumn{1}{l|}{Hochschulabschluss}
+& $28$ & \multicolumn{1}{c|}{$7$}\\\cline{2-3}
+\end{tabular}
+\end{center}
+```
+\medskip Daraus ergeben sich für Personen mit fachspezifischer Ausbildung die
+Odds, kurzzeitig arbeitslos zu sein statt mittel-- oder
+langfristig arbeitslos zu sein, als \begin{displaymath}
+\gamma(1,2|\text{fachsp. Ausbildung}) = \frac{40}{16} = 5:2 = 2.5.
+\end{displaymath}
+
+### Beispiel: Dauer der Arbeitslosigkeit
+
+Für Arbeitslose mit Hochschulabschluss erhält man \begin{displaymath}
+\gamma(1,2|\text{Hochschulabschluss}) = \frac{28}{7} = 4:1 = 4.
+\end{displaymath} Für fachspezifische Ausbildung stehen die Odds für Kurzzeitarbeitslosigkeit somit $5:2$, für Arbeitslose mit Hochschulabschluss $4:1$.
+
+\vspace{0.5cm}
+
+Man erhält für fachspezifische Ausbildung und Hochschulabschluss das **Odds Ratio** \begin{displaymath}
+\gamma(1,2|\text{fachsp. Ausbildung, Hochschule}) = \frac{5:2}{4:1} = \frac{2.5}{4} = 0.625 =
+\frac{40\cdot 7}{16 \cdot 28}
+\end{displaymath}
+
+### Odds Ratio: Interpretation
+
+-   Wegen der spezifischen Form
+    $\gamma(1,2|X=1,X=2)=(h_{11}h_{22})/(h_{21}h_{12})$ wird das *Odds Ratio* auch als **Kreuzproduktverhältnis** bezeichnet. Es gilt
+
+    ```{=tex}
+    \begin{center}
+      \begin{tabular}{ll}
+      $\gamma =1$ \hspace{1cm}& Odds in beiden Subpopulationen gleich\\*[0.3cm]
+      $\gamma > 1$ & Odds in Subpopulation $X=1$ \\
+      & größer als in Subpopulation $X=2$\\*[0.3cm]
+      $\gamma < 1$ & Odds in Subpopulation $X=1$ \\
+      & niedriger als in Subpopulation $X=2$.
+      \end{tabular}
+      \end{center}
+      \vspace*{0.3cm}
+    ```
+
+-   Das Odds Ratio gibt somit an, um welchen Faktor sich die Odds in
+    den beiden Subpopulationen unterscheiden
+
+### Odds Ratio: Symmetrie
+
+-   Für die Kontingenztafel \begin{displaymath}
+    \begin{array}{|cc|}\hline
+    h_{11} & h_{12}\\
+    h_{21} & h_{22}\\\hline
+    \end{array}
+    \end{displaymath} ist das \textit{Kreuzproduktverhältnis}
+    (\textit{relative Chance} oder \textit{Odds
+    Ratio}) bestimmt durch \begin{displaymath}
+    \gamma = \frac{h_{11}/h_{12}}{h_{21}/h_{22}} = \frac{h_{11}
+    h_{22}}{h_{21}h_{12}}.
+    \end{displaymath}
+-   Die asymmetrische Betrachtung der Merkmale $X$ und $Y$ wird aufgehoben:
+    \vskip -1em \begin{align*}
+    \gamma(Y=1,Y=2|X=1,X=2) &=& \gamma(X=1,X=2|Y=1,Y=2)\\
+                         &=& \gamma(Y=2,Y=1|X=2,X=1)\\
+                         &=& \gamma(X=2,X=1|Y=2,Y=1)\\
+                         &=& 1/\gamma(Y=2, Y=1|X = 1, X=2)\\
+                         &=& 1/\gamma(X=2, X=1|Y = 1, Y=2)\text{ ...etc.}\\
+    \end{align*}
+
+### Odds Ratio: Fall - Kontroll - Studie
+
+Beispiel: Morbus Alzheimer und Genetik
+
+\vspace{0.5cm}
+
+```{=tex}
+\begin{tabular}{c| cc | c}
+  & ApoE3 & ApoE4 & $\sum$ \\ \hline
+  Kontrolle & 2258 & 803 & 3061 \\ 
+  Fall & 593 & 620 & 1213 \\ \hline
+  $\sum$ & 2851 & 1423 & 4274 \\ 
+\end{tabular}
+```
+\vspace{0.5cm}
+
+```{=tex}
+\begin{equation*}
+  OR = \gamma(\text{ApoE3, ApoE4}|\text{Kontrolle, Fall}) = \frac{2258/803}{593/620} \approx 2.94
+\end{equation*}
+```
+\vspace{0.5cm}
+
+$\implies$ Odds für ApoE3 bei Kontrollen um den Faktor 3 höher als bei
+Fällen $\implies$ Odds für ApoE4 bei Kontrollen um den Faktor 3 niedriger
+als bei Fällen
+
+\vspace{0.3cm}
+
+$\stackrel{?}{\implies}$ ApoE4 Risiko-Faktor für Morbus Alzheimer
+
+### Odds Ratio: Fall - Kontroll - Studie
+
+Zentrale Argumentation:
+
+\vspace{0.5cm}
+
+Odds Ratio ist *symmetrisches* Maß
+
+d.h. Chancenverhältnis für Auftreten von ApoE4 bei Kontrolle zu Auftreten von
+ApoE4 bei Fällen  
+
+\vspace{0.2cm}
+entspricht
+\vspace{0.2cm}
+
+Chancenverhältnis für Ausbleiben von Alzheimer bei ApoE3 zu Ausbleiben von Alzheimer bei ApoE4
+
+\vspace{0.5cm}
+
+$\implies$ Interpretation als **Risikofaktor** zulässig:  
+$\gamma(\text{Kontrolle, Fall}|\text{ApoE3, ApoE4}) = \gamma(\text{ApoE3, ApoE4}|\text{Kontrolle, Fall}) \approx 2.94$
+
+### Verallgemeinerung auf $k\times m$ Kontingenztafeln, Anmerkungen
+
+-   Verallgemeinerung des Verfahres auf mehr als zwei Ausprägungen mindestens
+    eines Merkmals: Man beschränkt sich auf jeweils zwei Zeilen $X=a_i$ und
+    $X=a_j$ und zwei Spalten $Y=b_r$ und $Y=b_s$ und die zugehörigen vier Zellen
+    einer $(k \times m)$-Kontingenztafel.
+-   Verwendung einer Referenzkategorie
+-   Statt Odds Ratio wird oft auch das logarithmierte Odds Ratio verwendet
+
+### Anwendung: Apolipoprotein E und Morbus Alzheimer
+
+Etablierter Zusammenhang zwischen Apolipoprotein E$\varepsilon4$ und Morbus
+Alzheimer
+
+\vspace{0.5cm}
+
+Daten aus Metaanalyse:
+
+\vspace{0.3cm}
+
+```{=tex}
+\begin{tabular}{c| c c c c c |c}
+  ApoE genotype   & $\varepsilon2\varepsilon2$ & $\varepsilon2\varepsilon3$   & $\varepsilon2\varepsilon4$
+  & $\varepsilon3\varepsilon3$  & $\varepsilon3\varepsilon4$ & $\varepsilon4\varepsilon4$ \\\hline
+  Clinical controls & 27& 425&    81& 2258&   803&    71\\
+  Clinical Alzheimer& 7   &74&    41& 593&    620&    207\\\hline \hline
+  PM controls &3  &75&    18& 358 &120&   8\\
+  PM Alzheimer    &1  &20&    17& 249&    373&    97\\
+\end{tabular}
+```
+
+### Anwendung: Apolipoprotein E und Morbus Alzheimer
+
+ORs $\gamma(\text{Alzheimer}, \text{Control} | \varepsilon{?}\varepsilon{?}, \varepsilon 3\varepsilon 3)$,  
+also immer im Vergleich zu $\varepsilon3\varepsilon3$ (Referenz):
+
+\vspace{0.5cm}
+
+```{=tex}
+\begin{tabular}{c|c c c c c c }
+  ApoE genotype   & $\varepsilon2\varepsilon2$ & $\varepsilon2\varepsilon3$   & $\varepsilon2\varepsilon4$
+  & $\varepsilon3\varepsilon3$  & $\varepsilon3\varepsilon4$ & $\varepsilon4\varepsilon4$ \\\hline 
+  OR (klinisch) & 0.99 & 0.7 & 1.93 & 1 & 2.94 & 11.1 \\ 
+  OR (post mortem) & 0.5 & 0.4 & 1.4 & 1 & 4.5 & 17.4 \\ 
+\end{tabular}
+```

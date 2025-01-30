@@ -1,0 +1,181 @@
+## Statistische Kennzahlen: Verteilungseigenschaften
+
+### Uni- und multimodale Verteilungen
+
+**unimodal** = eingipflig, **multimodal** = mehrgipflig
+\begin{center}
+ \includegraphics[width=.5\textwidth]{pics/2-zinssatz3.jpg}\\
+  {\small Das Histogramm der Zinssätze zeigt eine
+bimodale (trimodale...?) Verteilung.}
+\end{center}
+
+### Symmetrie und Schiefe I
+
+\begin{tabular}{lcl}
+  \textbf{symmetrisch} & $\Leftrightarrow$
+  & Rechte und linke Häfte der Verteilung sind \\
+  && annähernd zueinander spiegelbildlich \\*[0.8cm]
+  \textbf{linkssteil } & $\Leftrightarrow$ & Verteilung
+fällt nach links deutlich steiler und \\
+  \textbf{(rechtsschief)}&& nach rechts langsamer ab\\*[0.8cm]
+  \textbf{rechtssteil }& $\Leftrightarrow$   & Verteilung
+fällt nach rechts deutlich steiler und \\
+ \textbf{(linksschief)}&& nach links langsamer ab
+\end{tabular}
+
+
+### Symmetrie und Schiefe II
+
+\begin{center}
+        \includegraphics[width=.8\textwidth]{pics/2-lage}\\*[0.3cm]
+        {\small Eine linkssteile~(a), symmetrische~(b) und rechtssteile
+Verteilung~(c)}
+    \end{center}
+
+
+### Lageregeln
+
+- Symmetrische und unimodale Verteilung:  
+  $\bar{x} \approx x_{med} \approx x_{mod}$
+- Linkssteile Verteilung:  $\bar{x} > x_{med} > x_{mod}$ 
+- Rechtssteile Verteilung: $\bar{x} < x_{med} < x_{mod}$
+- Bei gruppierten Daten: Auch für Histogramme gültig
+
+**Beachte:**  
+
+- Lageregeln sind Daumenregeln, gelten nicht notwendigerweise in jedem Einzelfall.
+- Form der Verteilung bleibt bei linearen Transformationen gleich, aber 
+ändert sich bei nichtlinearen Transformationen.
+
+
+
+### Maßzahlen für die Schiefe I
+
+**Quantilskoeffizient**:
+\begin{equation*}
+    g_p = \frac{(\tilde x_{1-p} - \tilde x_{med}) - (\tilde x_{med} - \tilde x_p)}{\tilde x_{1-p} - \tilde x_p}; \quad \text{mit } 0 < p < 0.5
+\end{equation*}
+$g_{0.25}$ bezeichnet man als **Quartilskoeffizient**.
+
+Werte des Quantilskoeffizienten:
+\begin{tabular}{ll}
+      $g_p = 0$ & für symmetrische Verteilungen \\
+      $g_p > 0$ & für linkssteile Verteilungen \\
+      $g_p < 0$ & für rechtssteile Verteilungen \\
+\end{tabular}
+
+
+
+### Maßzahlen für die Schiefe II
+
+Momentenkoeffizient der Schiefe:
+\begin{equation*}
+g_m = \frac{m_3}{s_x^3} \ \ \text{mit} \ \ m_3 =
+\frac{1}{n} \sum_{i=1}^n (x_i - \bar x)^3 
+\end{equation*}
+bzw.
+\begin{equation*}
+g_m = \frac{1}{n} \sum_{i=1}^n \left(\frac{x_i - \bar x}{s_x}\right)^3 
+\end{equation*}
+
+Werte des Momentenkoeffizienten:
+\begin{tabular}{ll}
+  $g_m = 0$ & für symmetrische Verteilungen \\
+  $g_m > 0$ & für linkssteile Verteilungen \\
+  $g_m < 0$ & für rechtssteile Verteilungen
+\end{tabular}
+
+
+### Wölbung und Extremwerte
+
+Sehr wichtige Verteilungseigenschaft für viele Anwendungsbereiche:  
+
+*Wie häufig oder selten treten extreme Werte auf, die weit entfernt von der "Mitte" der Verteilung liegen?*
+
+*Wie häufig sind Beobachtungen aus den Rändern der Verteilung (im Vergleich zur "Mitte")?*
+
+```{r, 02-mietspiegel-kurtosis-1, echo = FALSE, out.height = ".6\\textheight"}
+ggplot2::ggplot(mietspiegel, aes(x = bj)) + geom_density(bw = 10) + geom_rug(alpha = .01) + xlab("Baujahr") + labs(caption = "keine extremen Werte") +
+ggplot(mietspiegel, aes(x = wfl)) + geom_density() + geom_rug(alpha = .01) + xlab("Wohnfläche [qm]") +labs(caption = "viele Ausreißer") +
+ggplot(mietspiegel, aes(x = nm)) + geom_density() + geom_rug(alpha = .01) + xlab("Nettomiete [EUR]") + labs(caption ="viele extreme Ausreißer")
+```
+
+### Wölbung und Extremwerte
+
+\begin{align*}
+\intertext{$\implies$ Wölbung/\textbf{Kurtosis} misst Häufigkeit (und Distanz) extremer Werte:}
+k &= \frac{m_4}{s_x^4} \ \ \text{mit} \ \ m_4 =
+\frac{1}{n} \sum_{i=1}^n (x_i - \bar x)^4 \\
+  &= \frac{1}{n} \sum_{i=1}^n \left(\frac{x_i - \bar x}{s_x}\right)^4 
+\intertext{Meist betrachtet:  \textbf{Exzess-Kurtosis}}
+k^\star &= k - 3
+\end{align*}
+\vskip -1em
+
+- $k^\star \approx 0$: normalgipflig (vgl. *Normalverteilung*), *mesokurtisch*.  
+- $k^\star > 0$: steilgipflig, *leptokurtisch*.  
+   Stärker ausgeprägter schmaler Gipfel im Vergleich zu den Rändern,  
+  **häufigere extreme Werte**  
+- $k^\star < 0$: flachgipflig, *platykurtisch*.  
+   Wenig ausgeprägter breiterer Gipfel im Vergleich zu den Rändern,  
+  **seltenere extreme Werte**
+
+### Wölbung und Extremwerte
+
+Klassisches theoretisches Schaubild:
+
+\begin{center}\includegraphics[height=.7\textheight]{pics/02-kurtosis-wiki.png}\end{center}
+
+\scriptsize
+Abb: [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Standard_symmetric_pdfs.svg)
+
+### Wölbung und Extremwerte
+
+Praktische Beispiele:
+
+```{r, 02-mietspiegel-kurtosis-2, echo = FALSE}
+kurt <- function(x) mean(scale(x)^4, na.rm = TRUE) - 3
+ggplot2::ggplot(mietspiegel) + geom_histogram(aes(x = bj), binwidth = 10) + xlab("Baujahr") + labs(caption = "keine Ausreißer -\n Exzesskurtosis = -0.69") +
+ggplot(mietspiegel) + geom_histogram(aes(x = wfl), binwidth = 10) + xlab("Wohnfläche [qm]") +labs(caption = "viele Ausreißer -\n Exzesskurtosis = 5.3") +
+ggplot(mietspiegel) + geom_histogram(aes(x = nm), binwidth = 100) + xlab("Nettomiete [EUR]") + labs(caption ="viele extreme Ausreißer -\n Exzesskurtosis = 22")
+```
+
+### Momente von Zufallsvariablen
+
+:::{.block}
+#### Def.: Moment einer ZV
+Das $k$-te Moment einer ZV $X$ ist $E(X^k)$
+::::
+
+:::{.block}
+#### Def.: Zentriertes Moment einer ZV
+Das $k$-te zentrierte Moment einer ZV $X$ ist $E\left((X-E(X))^k\right)$
+::::
+
+- Der Erwartungswert ist das *erste Moment* einer Verteilung  
+- Die Varianz ist das *zweite zentrierte Moment* einer Verteilung   
+
+### Höhere Momente von Zufallsvariablen
+
+Theoretische Analoga zu empirischem Momentenkoeffizient der Schiefe und 
+und Wölbung:
+
+- Die **Schiefe** einer Verteilung ist das dritte (zentrale) Moment ihrer standardisierten Werte: $E\left[\left(\frac{X - E(X)}{\sigma(X)}\right)^3\right]$  
+
+- Die **Wölbung** (Kurtosis) einer Verteilung ist das vierte (zentrale) Moment ihrer standardisierten Werte: $E\left[\left(\frac{X - E(X)}{\sigma(X)}\right)^4\right]$
+
+- Alle geraden zentralen Momente sind im Endeffekt "Varianzen", die zunehmend mehr Gewicht auf die extremen Ränder der Verteilung legen 
+- Alle ungeraden zentralen Momente (außer dem ersten) messen die *Asymmetrie* von Verteilungen, mit immer größerem Gewicht auf Asymmetrie in den extremen Rändern der Verteilung
+
+
+### Theorie & Empirie
+
+Theorie (ZV) |  | Empirie (beob. Merkmale)
+--------|--|--------
+$E(X) := \int x\, f(x)\, dx$ |  $\leftrightarrow$ | $\bar x := 1/n \sum^n_{i=1} x_i = \sum^k_{j=1} a_j f_j$  
+$\Var(X) := \int (x - E(X)^2)\, f(x)\, dx$   |  $\leftrightarrow$ | $s^2_x :=  1/(n-1) \sum^n_{i=1} (x_i - \bar x)^2$  
+Median $x_{\text{med}}: F_X(x_{\text{med}}) = 0.5$   | $\leftrightarrow$ | $\tilde x_{\text{med}} := x_{(\lceil n/2 \rceil)}$  
+Modus $x_{\text{mod}} := \arg\max(f_X(x))$ | $\leftrightarrow$ | $\tilde x_{\text{mod}}: h(x_{\text{mod}}) \geq h(a_j) \;\forall\, j=1, \dots, k$  
+
+
+etc etc
