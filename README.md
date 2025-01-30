@@ -9,7 +9,7 @@ Hauptdokument ist `slides/main.Rmd`, s. a. Makefile. Kompilation am komfortabels
 
 Systemvoraussetzungen:
 
--    alle R Pakete die in main.Rmd gelistet sind
+-    alle R Pakete die in setup.R gelistet sind
 -    Systemfonts: Fira Math (https://github.com/firamath/firamath), Fira Sans
 -    XeTex (zB via R-Paket tinytex)
 -    latexmk system utility (zB via R-Paket tinytex)
