@@ -1,6 +1,6 @@
 %\usepackage{etex} % avoid "! No room for a new \dimen" error
 
-\usepackage[ngerman]{babel}
+\usepackage[german,provide=*]{babel}
 %\usepackage[utf8]{inputenc}
 \usepackage{mathtools}
 \usepackage{amsmath,amsfonts,amssymb,bm}
@@ -12,6 +12,10 @@
 %\usepackage{attachfile}
 
 \usepackage{booktabs}
+\usepackage{colortbl}
+\usepackage{array}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
 \usepackage{hyperref}
 %\usepackage{epic}
 %\usepackage{eepic}
@@ -51,6 +55,17 @@
 %\renewenvironment{Shaded}{\begin{snugshade}\begin{scriptsize}}{\end{scriptsize}\end{snugshade}}
 % add missing glyphs for Fira Math from XITS
 \setmathfont[range={\vdots,\ddots,\star,\checkmark,\succeq, \succ, \widehat,\bigcup, \bigcap, \setminus, \mathcal, \underbrace, \Bbbone}]{XITS Math}
+
+% nummerierte Abschnitte in allen Inhaltsverzeichnissen.
+% Kapitelzaehlung startet bei 0, damit die Nummern zu den Kap.-Querverweisen
+% auf den Folien passen; beamers \inserttocsectionnumber ist fix 1-basiert,
+% darum via \numexpr um 1 verschoben.
+\setbeamertemplate{section in toc}{%
+  {\the\numexpr\inserttocsectionnumber-1\relax}.\kern1.25ex\inserttocsection\par}
+\setbeamertemplate{subsection in toc}{%
+  \leavevmode\leftskip=2.5em%
+  {\the\numexpr\inserttocsectionnumber-1\relax}.\inserttocsubsectionnumber\kern1.25ex%
+  \inserttocsubsection\par}
 
 \AtBeginSubsection[]
 {

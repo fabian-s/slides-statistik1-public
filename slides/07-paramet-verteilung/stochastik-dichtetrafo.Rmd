@@ -1,71 +1,153 @@
 ## Dichtetransformationssatz
 
+```{r, dens-trafo-setup, echo = FALSE}
+# Helper function for density transformation plots
+plot_density_transform <- function(
+    fx,           # original density function f_X(x)
+    g,            # transformation function g(x)
+    g_inv_deriv,  # |g^{-1}'(y)| as a function of x (for computing f_Y)
+    x_range = c(0, 1),
+    y_range = NULL,      # if NULL, computed from g(x_range)
+    g_label,             # expression for y-axis label, e.g. expression(y == 2*x)
+    g_title,             # expression for title
+    lower = 0.25,
+    upper = 0.75,
+    n = 501
+) {
+  x_seq <- seq(x_range[1], x_range[2], length.out = n)
+
+  d <- tibble(
+    x = x_seq,
+    fx = fx(x),
+    gx = g(x),
+    fy = fx * g_inv_deriv(x)
+  )
+
+  if (is.null(y_range)) {
+    y_range <- c(min(d$gx), max(d$gx))
+  }
+
+ # Explicitly compute boundary points for tick marks and segments
+  x_blue <- c(x_range[1], lower)
+  x_red  <- c(upper, x_range[2])
+
+  d_blue <- tibble(
+    x = x_blue,
+    fx = fx(x_blue),
+    gx = g(x_blue),
+    fy = fx(x_blue) * g_inv_deriv(x_blue)
+  )
+
+  d_red <- tibble(
+    x = x_red,
+    fx = fx(x_red),
+    gx = g(x_red),
+    fy = fx(x_red) * g_inv_deriv(x_red)
+  )
+
+  # Transformation plot (g function)
+  pg <- ggplot(d) + geom_line(aes(x = x, y = gx)) +
+    ylab(g_label) + xlab(expression(x)) +
+    geom_segment(data = d_blue,
+                 aes(x = x, xend = x, y = 0, yend = gx), col = "blue") +
+    geom_segment(data = d_blue,
+                 aes(x = 0, xend = x, y = gx, yend = gx), col = "blue") +
+    geom_rug(data = d_blue, aes(y = gx), col = "blue") +
+    geom_segment(data = d_red,
+                 aes(x = x, xend = x, y = 0, yend = gx), col = "red") +
+    geom_segment(data = d_red,
+                 aes(x = 0, xend = x, y = gx, yend = gx), col = "red") +
+    geom_rug(data = d_red, aes(y = gx), col = "red") +
+    coord_equal() +
+    labs(title = g_title)
+
+  # Original density plot f_X(x)
+  px <- ggplot(d) + geom_line(aes(x = x, y = fx)) +
+    ylab(expression(f[X](x))) + xlab(expression(x)) +
+    scale_y_reverse(position = "right") +
+    theme(axis.title.x = element_blank(), axis.text.x = element_blank()) +
+    geom_area(data = filter(d, x <= lower),
+              aes(x = x, y = fx), fill = scales::alpha("blue", .1)) +
+    geom_area(data = filter(d, x >= upper),
+              aes(x = x, y = fx), fill = scales::alpha("red", .1)) +
+    geom_rug(data = d_blue, aes(x = x), col = "blue", sides = "t") +
+    geom_rug(data = d_red, aes(x = x), col = "red", sides = "t") +
+    labs(caption = expression("Dichte der ursprünglichen ZV X")) +
+    theme(plot.caption = element_text(hjust = 0.5, size = rel(1.2)))
+
+  # Transformed density plot f_Y(y)
+  py <- ggplot(d) + geom_path(aes(y = fy, x = gx)) +
+    ylab(expression(f[Y](y))) +
+    scale_y_reverse() + xlim(y_range) +
+    theme(axis.title.y = element_blank(), axis.text.y = element_blank()) +
+    geom_area(data = filter(d, x <= lower),
+              aes(x = gx, y = fy), fill = scales::alpha("blue", .1)) +
+    geom_area(data = filter(d, x >= upper),
+              aes(x = gx, y = fy), fill = scales::alpha("red", .1)) +
+    geom_rug(data = d_blue, aes(x = gx), col = "blue", sides = "t") +
+    geom_rug(data = d_red, aes(x = gx), col = "red", sides = "t") +
+    labs(title = expression("Dichte der transformierten ZV Y = g(X)"))
+
+  layout <- "AB
+             #C"
+  # Note: Don't use widths parameter - let coord_equal() on pg determine sizing
+  # for proper axis alignment between all three plots
+  py + coord_flip() + pg + px + plot_layout(design = layout)
+}
+```
+
+### Transformationssatz für Dichten: Idee
+
+Was ist die Dichte von $Y = g(X)$?^[s. a. [Claude Artefact](https://claude.ai/public/artifacts/05f1b58a-b932-4bc2-9e6a-4a10fa1dd8eb)]
+
+```{r, dens-trafo-linear, echo = FALSE, warning= FALSE, message = FALSE, results='hide'}
+# Linear transformation: g(x) = 2x
+# g^{-1}(y) = y/2,  |g^{-1}'(y)| = 1/2
+fx_beta_mix <- function(x) 0.5 * dbeta(x, 3, 4) + 0.5
+
+plot_density_transform(
+  fx = fx_beta_mix,
+  g = function(x) 2 * x,
+  g_inv_deriv = function(x) 0.5,  # constant: 1/g'(x) = 1/2
+  y_range = c(0, 2),
+  g_label = expression(y == 2*x),
+  g_title = expression("Transformation:"~g(x) == 2*x)
+)
+```
+
+
+### Transformationssatz für Dichten: Idee
+
+Was ist die Dichte von $Y = g(X)$?
+
+```{r, dens-trafo-sqrt, echo = FALSE, warning= FALSE, message = FALSE, results='hide'}
+# Sqrt transformation: g(x) = sqrt(x)
+# g^{-1}(y) = y^2,  |g^{-1}'(y)| = 2y = 2*sqrt(x)
+# Use uniform f_X for pedagogical clarity
+
+plot_density_transform(
+  fx = function(x) rep(1, length(x)),  # Uniform(0,1)
+  g = function(x) sqrt(x),
+  g_inv_deriv = function(x) 2 * sqrt(x),  # 2y where y = sqrt(x)
+  g_label = expression(y == sqrt(x)),
+  g_title = expression("Transformation:"~g(x) == sqrt(x))
+)
+```
+
 ### Transformationssatz für Dichten: Idee
 
 Was ist die Dichte von $Y = g(X)$?
 
 ```{r, dens-trafo-1, echo = FALSE, warning= FALSE, message = FALSE, results='hide'}
-a <- 3; b <- 4; p <- 3
-d <- tibble(x = seq(0, 1, l = 501),
-            fx = 0.5 * dbeta(x, a, b) + 0.5,
-            gx = exp(p*x)/exp(p) ,  
-            fy = fx * 1/(exp(p * x) * p/exp(p)))
-#with(d, plot(x, gx))
-#with(d, plot(x, fx))
-#with(d, plot(gx, fy))
-
-lower <- .25
-upper <- .75
-
-pg <- ggplot(d) + geom_line(aes(x = x, y = gx)) + ylab(expression(y == e^{-3}*e^{3 * x})) + xlab(expression(x)) +
-  geom_segment(data = filter(d, x %in% c(0, lower)), 
-               aes(x = x, xend=x, y = 0, yend = gx), col = "blue") +
-  geom_segment(data = filter(d, x %in% c(0, lower)), 
-               aes(x = 0, xend=x, y = gx, yend = gx), col = "blue") + 
-  geom_rug(data = filter(d, x %in% c(0, lower)), aes(y = gx), col = "blue") +
-  geom_segment(data = filter(d, x %in% c(upper, 1)), 
-               aes(x = x, xend=x, y = 0, yend = gx), col = "red") +
-  geom_segment(data = filter(d, x %in% c(upper, 1)), 
-               aes(x = 0, xend=x, y = gx, yend = gx), col = "red") +
-  geom_rug(data = filter(d, x %in% c(upper, 1)), aes(y = gx), col = "red") +
-  coord_equal() + 
-  labs(title = expression("Transformation:"~g(x) == e^{-3}*e^{3 * x} ))
-
-
-px <- ggplot(d) + geom_line(aes(x = x, y = fx)) + 
-         ylab(expression(f[X](x))) + xlab(expression(x)) + 
-  scale_y_reverse(position = "right") + 
-  theme(axis.title.x = element_blank(), axis.text.x = element_blank()) + 
-  geom_area(data = filter(d, x <= lower), 
-               aes(x = x, y = fx), fill = scales::alpha("blue", .1)) +
-  geom_area(data = filter(d, x >= upper),  
-               aes(x = x, y = fx), fill = scales::alpha("red", .1)) +
-  geom_rug(data = filter(d, x %in% c(0, lower)), 
-           aes(x = x), col = "blue", sides = "t") +
-  geom_rug(data = filter(d, x %in% c(upper, 1)), 
-           aes(x = x), col = "red", sides = "t")
-  labs(caption = expression("Dichte der ursprünglichen ZV X")) + 
-  theme(plot.caption = element_text(hjust=0.5, size=rel(1.2)))
-  
-py <- ggplot(d) + geom_path(aes(y = fy, x = gx)) + ylab(expression(f[Y](y))) + 
-  scale_y_reverse() + xlim(c(0, 1)) +
-  theme(axis.title.y = element_blank(), axis.text.y = element_blank()) +
-  geom_area(data = filter(d, x <= lower), 
-               aes(x = gx, y = fy), fill = scales::alpha("blue", .1)) +
-  geom_area(data = filter(d, x >= upper), 
-               aes(x = gx, y = fy), fill = scales::alpha("red", .1)) +
-  geom_rug(data = filter(d, x %in% c(0, lower)), 
-           aes(x = gx), col = "blue", sides = "t") +
-  geom_rug(data = filter(d, x %in% c(upper, 1)), 
-           aes(x = gx), col = "red", sides = "t") +
-  labs(title = expression("Dichte der transformierten ZV Y = g(X)"))
-layout <- 
-"AB
- #C"  
-
-py + coord_flip() + pg + px + plot_layout(design = layout)
+# Original complex example: g(x) = e^{-3} * e^{3x}
+plot_density_transform(
+  fx = fx_beta_mix,
+  g = function(x) exp(-3) * exp(3 * x),
+  g_inv_deriv = function(x) 1 / (3 * exp(-3) * exp(3 * x)),  # 1/g'(x)
+  g_label = expression(y == e^{-3} * e^{3*x}),
+  g_title = expression("Transformation:"~g(x) == e^{-3} * e^{3*x})
+)
 ```
-
 
 ### Der Transformationssatz für Dichten 
 

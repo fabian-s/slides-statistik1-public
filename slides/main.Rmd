@@ -26,7 +26,7 @@ linkcolor: darkbrown
 ```{r setup, include=FALSE, cache=FALSE, code = readLines('setup.R')}
 ```
 
-```{r 0-orga, child="orga-2024.Rmd"}
+```{r 0-orga, child="orga-2025.Rmd"}
 ```
 
 ### Inhalt
@@ -106,9 +106,6 @@ linkcolor: darkbrown
 # Zufallsvariablen, Verteilungen & Häufigkeiten
 
 ```{r sto-zv-diskret, child="04-zufallsvariablen-verteilungen/stochastik-zv-diskret.Rmd"}
-```
-
-```{r sto-cdf-diskret, child="04-zufallsvariablen-verteilungen/stochastik-cdf-diskret.Rmd"}
 ```
 
 ```{r sto-zv-stetig, child="04-zufallsvariablen-verteilungen/stochastik-zv-stetig.Rmd"}

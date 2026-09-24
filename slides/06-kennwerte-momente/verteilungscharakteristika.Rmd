@@ -12,13 +12,13 @@ bimodale (trimodale...?) Verteilung.}
 ### Symmetrie und Schiefe I
 
 \begin{tabular}{lcl}
-  \textbf{symmetrisch} & $\Leftrightarrow$
+  \textbf{symmetrisch} & $\iff$
   & Rechte und linke Häfte der Verteilung sind \\
   && annähernd zueinander spiegelbildlich \\*[0.8cm]
-  \textbf{linkssteil } & $\Leftrightarrow$ & Verteilung
+  \textbf{linkssteil } & $\iff$ & Verteilung
 fällt nach links deutlich steiler und \\
   \textbf{(rechtsschief)}&& nach rechts langsamer ab\\*[0.8cm]
-  \textbf{rechtssteil }& $\Leftrightarrow$   & Verteilung
+  \textbf{rechtssteil }& $\iff$   & Verteilung
 fällt nach rechts deutlich steiler und \\
  \textbf{(linksschief)}&& nach links langsamer ab
 \end{tabular}
@@ -135,9 +135,9 @@ Praktische Beispiele:
 
 ```{r, 02-mietspiegel-kurtosis-2, echo = FALSE}
 kurt <- function(x) mean(scale(x)^4, na.rm = TRUE) - 3
-ggplot2::ggplot(mietspiegel) + geom_histogram(aes(x = bj), binwidth = 10) + xlab("Baujahr") + labs(caption = "keine Ausreißer -\n Exzesskurtosis = -0.69") +
-ggplot(mietspiegel) + geom_histogram(aes(x = wfl), binwidth = 10) + xlab("Wohnfläche [qm]") +labs(caption = "viele Ausreißer -\n Exzesskurtosis = 5.3") +
-ggplot(mietspiegel) + geom_histogram(aes(x = nm), binwidth = 100) + xlab("Nettomiete [EUR]") + labs(caption ="viele extreme Ausreißer -\n Exzesskurtosis = 22")
+ggplot2::ggplot(mietspiegel, aes(x = bj)) + geom_density(bw = 10) + geom_rug(alpha = .01) + xlab("Baujahr") + labs(caption = "keine Ausreißer -\n Exzesskurtosis = -0.69") +
+ggplot(mietspiegel, aes(x = wfl)) + geom_density() + geom_rug(alpha = .01) + xlab("Wohnfläche [qm]") +labs(caption = "viele Ausreißer -\n Exzesskurtosis = 5.3") +
+ggplot(mietspiegel, aes(x = nm)) + geom_density() + geom_rug(alpha = .01) + xlab("Nettomiete [EUR]") + labs(caption ="viele extreme Ausreißer -\n Exzesskurtosis = 22")
 ```
 
 ### Momente von Zufallsvariablen

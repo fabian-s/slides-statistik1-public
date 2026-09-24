@@ -2,40 +2,41 @@
 
 **Vorlesung:** *Fabian Scheipl*  
 
-Montag & Donnerstag 14-16 
+- Montag & Donnerstag 14-16 
 \ 
 
-**Übung:** *Patrick Schenk*  
+**Übung:** *Daniel Schlichting*  
 
-Beginn am **21.10.**
-
-Montag 10-12  
-Donnerstag 12-14
+- Beginn am **20.10.**
+- Montag **12 -14** & Mittwoch 10-12  
+  (selber Stoff an beiden Terminen)
 \ 
 
 
 **Tutorium:** *Michael Kobl*  
 
-Beginn am **22.10.**  
-Dienstag 18-20 
+- Beginn am **28.10.**  
+- Dienstag 18-20 (10 Termine, s. Moodlekalender)
 
-**Korrekturen:** *Felix Schweikl, Simon Schreiner*
+**Korrektor:innen:**  
+- *Simon Schreiner, Jo-Tung Wang, Laurant Qiriqi, Kilian Schödlbauer*
 
 ### Formales
 
 * 2 Module: Vorlesung (6 ECTS) + Übung (3 ECTS)
-* Prüfungsleistung für Statistik PO 2021: 
-   * benotete Hausaufgaben während dem Semester (Übungsmodul) 
+* Prüfungsleistung für Statistik BA PO 2021: 
+   * benotete Hausaufgaben während des Semesters (Übungsmodul) 
    * GOP (Statistik 1 + 2, 150 min) im September (Vorlesungsmodul)
-* Prüfungsleistung für alle anderen: Klausur im Februar, kein Übungsmodul
+* Prüfungsleistung für alle anderen: Klausuren zur Vorlesung im Februar/April, kein Übungsmodul
 
-* Benotete Hausaufgaben (nur HF Statistik PO 2021):
-    * mindestens alle 2 Wochen, markierte Aufgaben auf den Übungsblättern
-    * Abgaben immer bis Montag 10:00 der folgenden Woche über moodle
-    * keine Gruppenarbeit -- nur Einzelabgaben
+* Benotete Hausaufgaben (nur **HF Statistik**):
+    * jede Woche: markierte Aufgabe(n) auf den Übungsblättern (bzw. benotete Moodle-Quizzes)
+    * Abgaben immer bis Montag 12:00 der folgenden Woche über Moodle
+    * keine Gruppenarbeit, keine KI-Tools -- nur Einzelabgaben eigener Arbeit
+    * Korrektur & Feedback durch Korrektor:innen
     * Gesamtpunktzahl über das Semester ergibt Note für das Übungsmodul
 
-* Klausur (nur NF und alte Statistik PO 2010):
+* Klausur (nur **NF Statistik**):
     * Termin am Ende des Semesters 
     * 90 min 
     * *open book* -- alle eigenen Unterlagen & Bücher zugelassen
@@ -45,12 +46,12 @@ Dienstag 18-20
 
 - Online-Learning-Plattform der LMU
 - Login mit Ihrer `@campus.lmu.de`-Kennung
-- **Alle** Teilnehmenden müssen sich in die Veranstaltung einschreiben.  
+- **Alle** Teilnehmenden müssen sich in den Moodle-Kurs einschreiben.  
     Einschreibeschlüssel ist **dskrpt**  
     Nur wer eingeschrieben ist kann auf Material zugreifen, Hausaufgaben abgeben,
     etc.
 
-**Moodle URL:** [moodle.lmu.de/course/view.php?id=35516](https://moodle.lmu.de/course/view.php?id=35516)
+**Moodle URL:** [moodle.lmu.de/course/view.php?id=41420](https://moodle.lmu.de/course/view.php?id=41420)
 
 ### Programmierung
 
@@ -65,8 +66,8 @@ Programmpaket **R**
 tippen statt klicken\&wischen!
 
 * Editor **RStudio** ([`rstudio.com`](https://www.rstudio.com/), frei verfügbar)
-* Interaktive R-Kursprogramme zum Selbststudium:
-[`swirl`](http://swirlstats.com/), [`DataCamp`](https://learn.datacamp.com/courses?technologies=R), 
+* Interaktive R-Kursprogramme zum Selbststudium:  
+[`DataCamp`](https://learn.datacamp.com/courses?technologies=R), 
 [`Software Carpentry`](http://swcarpentry.github.io/r-novice-inflammation/), [`Code Academy`](https://www.codecademy.com/learn/learn-r), ....
 
 ### Programmierung
@@ -84,12 +85,12 @@ Wir bieten Ihnen kostenfreie, zeitlich limitierte Datacamp-Accounts fürs Selbst
 
 ### DataCamp
 
-[Sign-Up Link:](https://www.datacamp.com/groups/shared_links/f2306b5305f638f41f0d7e700cee5212a0009421a281db02329e09851bb905e1)
+[Sign-Up Link:](https://www.datacamp.com/groups/shared_links/324a1de77efebe315dfd0f304efb44b0803ed9e8a006e2db0bf05aba7eb06342)
 
-\centering \includegraphics[height = 0.75\textheight]{pics/qr-datacamp-2425.png}
+\centering \includegraphics[height = 0.75\textheight]{pics/qr-datacamp-2526.png}
 
 \footnotesize
-**Anmeldung mit Ihrer `@campus.lmu.de`-, `@lmu.de` oder `@stat.uni-muenchen.de`-Adresse möglich.** 
+**Sign-up nur mit Ihrer `@campus.lmu.de`-Adresse möglich.** 
 
 ### Literatur
 

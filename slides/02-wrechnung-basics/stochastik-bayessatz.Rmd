@@ -40,10 +40,10 @@ $P(A|B_i)$ als *Likelihood* von A:
 
 $P(B_i|A)$ *a-posteriori*-Wahrscheinlichkeiten:  
 
-- Auf Basis der Beobachtung von $A$ ändert sich die Wahrscheinlichkeit der Hypothese $B_i$ von $P(B_i)$ zu $P(B_i|A).$  
+- Durch die Beobachtung von $A$ ändert sich die Wahrscheinlichkeit der Hypothese $B_i$ von $P(B_i)$ zu $P(B_i|A).$  
 
   $\implies$ Bayes liefert "Update-Regel":  
-  Wie verändert sich durch die Beobachtung von Daten $A$ die Plausibilität der Vorannahme $B_i$?  
+  **Wie verändert sich durch die Beobachtung von Daten $A$ die Plausibilität der Annahme $B_i$?**  
 
 ### Bedeutung 
 
@@ -90,9 +90,62 @@ Gegeben:
 \begin{align*}
 \implies P(T)  & =  P(T|K)P(K) + P(T|\bar{K})P(\bar{K})  =  \\
       & = P(T|K)P(K) + (1-P(\bar{T}|\bar{K}))(1-P(K)) \approx  0.011 \\
-P(K|T) & =  \frac{P(T|K)P(K)}{P(T)} \approx  0.073 \; (!!)	\\
-P(\bar{K}|\bar{T}) &\approx  0.989
+P(K|T) & =  \frac{P(T|K)P(K)}{P(T)} \approx  0.074 \; (!!)	\\
+P(\bar{K}|\bar{T}) &\approx  0.9998
 \end{align*}
+
+### Beispiel: Diagnostischer Test -- geometrisch
+
+Warum ist $P(K|T)$ so klein? Alle Möglichkeiten als Fläche:
+
+```{r sto-bayes-geometrisch, echo = FALSE, fig.height = 3.1, fig.width = 8, out.width = ".95\\textwidth", out.height = "1.95in", message = FALSE, warning = FALSE}
+sens <- 0.8
+spez <- 0.99
+prev <- 0.001
+fp <- 1 - spez
+val_num <- sprintf("%.4f", sens * prev) # P(T|K)P(K)
+val_den2 <- sprintf("%.4f", fp * (1 - prev)) # P(T|Kquer)P(Kquer)
+val_post <- sprintf("%.3f", sens * prev / (sens * prev + fp * (1 - prev)))
+# Anzeige-Proportionen (NICHT massstabsgetreu, s. Folientext):
+w <- 0.012 # Breite "krank"-Streifen
+h <- 0.10 # Hoehe "falsch-positiv"-Band
+dunkel <- "#2F5F93"
+mittel <- "#97B5D4"
+p_quadrat <- ggplot2::ggplot() +
+  ggplot2::annotate("rect", xmin = 0, xmax = w, ymin = sens, ymax = 1, fill = "grey92", colour = "grey65", linewidth = 0.2) +
+  ggplot2::annotate("rect", xmin = w, xmax = 1, ymin = h, ymax = 1, fill = "grey92", colour = "grey65", linewidth = 0.2) +
+  ggplot2::annotate("rect", xmin = 0, xmax = w, ymin = 0, ymax = sens, fill = dunkel, colour = "grey30", linewidth = 0.2) +
+  ggplot2::annotate("rect", xmin = w, xmax = 1, ymin = 0, ymax = h, fill = mittel, colour = "grey30", linewidth = 0.2) +
+  ggplot2::annotate("text", x = w / 2, y = 1.06, label = "krank", size = 3, colour = dunkel) +
+  ggplot2::annotate("text", x = (1 + w) / 2, y = 1.06, label = "gesund", size = 3, colour = "grey40") +
+  ggplot2::annotate("text", x = w / 2, y = -0.08, label = "P(K) == 0.001", parse = TRUE, size = 2.9) +
+  ggplot2::annotate("text", x = (1 + w) / 2, y = -0.08, label = "P(bar(K)) == '0.999'", parse = TRUE, size = 2.9) +
+  ggplot2::annotate("segment", x = -0.03, xend = -0.03, y = 0, yend = sens, colour = dunkel, linewidth = 0.4) +
+  ggplot2::annotate("text", x = -0.09, y = sens / 2, label = "P(T~'|'~K) == 0.8", parse = TRUE, size = 2.9, angle = 90, colour = dunkel) +
+  ggplot2::annotate("segment", x = 1.03, xend = 1.03, y = 0, yend = h, colour = mittel, linewidth = 0.6) +
+  ggplot2::annotate("text", x = 1.06, y = h / 2, label = "P(T~'|'~bar(K)) == 0.01", parse = TRUE, size = 2.9, hjust = 0) +
+  ggplot2::coord_equal(xlim = c(-0.16, 1.55), ylim = c(-0.13, 1.1), expand = FALSE) +
+  ggplot2::theme_void() +
+  ggplot2::labs(title = "alle Möglichkeiten; Test positiv: farbig") +
+  ggplot2::theme(plot.title = ggplot2::element_text(size = 9, hjust = 0.35))
+p_bruch <- ggplot2::ggplot() +
+  ggplot2::annotate("text", x = 0.02, y = 0.5, label = "P(K~'|'~T) == phantom(0)", parse = TRUE, size = 4, hjust = 0) +
+  ggplot2::annotate("rect", xmin = 0.55, xmax = 0.562, ymin = 0.60, ymax = 0.88, fill = dunkel) +
+  ggplot2::annotate("text", x = 0.60, y = 0.74, label = val_num, size = 2.7, hjust = 0, colour = dunkel) +
+  ggplot2::annotate("segment", x = 0.33, xend = 0.82, y = 0.5, yend = 0.5, linewidth = 0.4) +
+  ggplot2::annotate("rect", xmin = 0.37, xmax = 0.382, ymin = 0.12, ymax = 0.40, fill = dunkel) +
+  ggplot2::annotate("text", x = 0.445, y = 0.26, label = "+", size = 4) +
+  ggplot2::annotate("rect", xmin = 0.50, xmax = 0.80, ymin = 0.235, ymax = 0.285, fill = mittel) +
+  ggplot2::annotate("text", x = 0.65, y = 0.13, label = val_den2, size = 2.7, colour = mittel) +
+  ggplot2::annotate("text", x = 0.86, y = 0.5, label = paste0("phantom(0) %~~% ", val_post, "~'(!!)'"), parse = TRUE, size = 4, hjust = 0) +
+  ggplot2::coord_cartesian(xlim = c(0, 1.25), ylim = c(0, 1)) +
+  ggplot2::theme_void()
+p_quadrat + p_bruch + patchwork::plot_layout(nrow = 1, widths = c(1.5, 1))
+```
+
+\scriptsize Flächen *nicht* maßstabsgetreu (der "krank"-Streifen wäre unsichtbar
+schmal) -- aber das Prinzip stimmt: das flache, *breite* Band der Falsch-Positiven
+hat mehr Fläche als der hohe, *schmale* Streifen der Richtig-Positiven.
 
 <!-- ### Beispiel: Creutzfeldt-Jakob -->
 
@@ -119,46 +172,9 @@ P(\bar{K}|\bar{T}) &\approx  0.989
 
 <!-- \note[item]{14-3-3 proteine: erhöhte konzentration in rückenmarksflüssigkeit als biomarker für CJD } -->
 
-### Odds / "Chancen"
-
-Alternative Darstellung von W.keit als (Wett-)Chance  
-(z.B. 1:10 ("1 zu 10") oder 3:1, engl. *"odds"*):  
-
-\begin{columns}
-\begin{column}{0.5\textwidth}
-\begin{block}{Def.: \textbf{Odds} (``Chance")} 
-Die Odds $\gamma(A)$ für ein Ereignis $A$ sind
-$$\gamma(A) := \frac{P(A)}{1 - P(A)} \in [0, \infty]$$
-\end{block}
-$\implies P(A) = \frac{\gamma(A)}{1 + \gamma(A)}$
-\end{column}
-\begin{column}{0.5\textwidth}
-```{r prob-odds, echo = FALSE, fig.height = 10, message= FALSE, warning = FALSE}
-odds <- tibble(p = seq(1e-5, .999, l = 301)) |> 
-  mutate(odds = p/(1-p))
-ggplot(odds, aes(x = p, y = odds)) + 
-  geom_hline(yintercept = 1, col = "black", lty = 3) +
-  geom_vline(xintercept = .5, col = "black", lty = 3) +
-  geom_line() +
-  ylab(expression(gamma(A) == P(A)/(1-P(A))~" [log2-Skala]")) +
-  xlab("P(A)") +
-  scale_y_continuous(breaks = c(0, .1, .5, 1, 2, 5, 10, 20), minor = NULL, trans = "log2") + 
-  scale_x_continuous(breaks = round(c(0, .1, .5, 1, 2, 5, 10, 20)/(1 + c(0, .1, .5, 1, 2, 5, 10, 20)), 1), minor = NULL) + 
-  coord_cartesian(ylim = c(1e-2, 25)) +
-  # scale_y_continuous(breaks = c(0, .5,   1,   2, 5, 10, 20), minor = NULL, limits = c(0, 21)) + 
-  # scale_x_continuous(breaks = c(0, .25, .5, .75, 0.95), minor = NULL) + 
-  theme_bw(base_size = 17)
-```
-\end{column}
-\end{columns}
-\note[item]{
-In manchen Quellen wird statt "Chance" auch "Risiko" verwendet.}
-\note[item]{
-Chance/Odds/Risiko: $\gamma = 1 = 1:1$ heisst $\pi=.5$;  $\gamma = 9 = 9:1$ heisst $\pi=.9$, $\gamma = .11 = 1:9$ heisst $\pi=.1$ etc.\\
-Für $\pi \rightarrow 0$, $\pi \approx \gamma$}
-
-
 ### Satz von Bayes in Odds-Notation
+
+Odds kennen wir aus 2.1 -- jetzt zahlt sich das aus:
 
 \begin{alignat*}{3}
 \frac{P(B|A)}{P(\bar{B}|A)} & = \frac{P(B)}{P(\bar{B})} &&\cdot \frac{P(A|B)}{P(A|\bar{B})}\\
@@ -166,7 +182,7 @@ Für $\pi \rightarrow 0$, $\pi \approx \gamma$}
 \mbox{\em Posterior Odds} &=  \mbox{\em Prior Odds} &&\cdot \mbox{\em Likelihood Ratio}
 \end{alignat*}
 
-Je weiter der *Likelihood Quotient* von 1 weg ist, desto aussagekräftiger ist die Beobachtung von $A$ bezüglich der Plausibilität der Annahme $B$.
+Je weiter der *Likelihood Quotient* (auch: *Bayes-Faktor*) von 1 weg ist, desto aussagekräftiger ist die Beobachtung von $A$ bezüglich der Plausibilität der Annahme $B$.
 
 ### Bsp: Bayesianisches Update mit Odds
 
@@ -174,12 +190,12 @@ Mit $$P(T|K) = 0.8; \quad P(\bar{T}|\bar{K}) = 0.99; \quad
 P(K) = 0.001$$ ergibt sich:
 \begin{align*}
 \text{Prior Odds: } \gamma(K) &= \frac{0.001}{0.999} = 0.\overline{001} = 1:999 \\
-\text{Likelihood Ratio: } \frac{P(T|K)}{P(T|\bar K)} &= \frac{0.8}{0.01} = 80 = 80:1  \\
+\text{Likelihood Ratio (Bayes-Factor):} \frac{P(T|K)}{P(T|\bar K)} &= \frac{0.8}{0.01} = 80 = 80:1  \\
 \implies\text{ Posterior Odds: } \gamma(K|T) &= \tfrac{1}{999} \cdot \tfrac{80}{1} = 0.\overline{080} \approx 1:12 !!
 \end{align*}
 Also: Nur bei 1 von 13 positiven Test liegt tatsächlich eine Krankheit vor....
 
-Obacht, sehr häufiger Fehlschluss **``base-rate fallacy''** --  
+Obacht, sehr häufiger Fehlschluss **"base-rate fallacy"** --  
 verwechselt Likelihood(-Ratio) (hier: positiver Test 80-mal wahrscheinlicher bei Kranken)  
 mit Posteriori (hier: *wahr* positive Tests sind viel seltener als falsch positive)  
 und vergisst/ignoriert Einfluss der Priori/*base-rate* (hier: 1000-mal mehr Gesunde als Kranke)...
@@ -200,8 +216,8 @@ s.a. https://www.youtube.com/watch?v=BrK7X_XlGB8
 
 Von 1100 Studierenden studieren 100 Mathe.  
 
-Sei $M:=$"Tom studiert Mathe."  
-Sei $P:=$"Tom kann Python"
+Sei $M:=$"Kim studiert Mathe."  
+Sei $P:=$"Kim kann Python"
 
 Berechnen Sie $\gamma(M|P)$ bzw $P(M|P)$.
 

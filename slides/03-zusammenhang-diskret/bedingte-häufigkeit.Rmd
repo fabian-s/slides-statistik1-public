@@ -41,7 +41,8 @@ f_{X|Y}(a_1|b_j) = \frac{h_{1j}}{h_{\cdot j}},\dots,f_{X|Y}(a_k|b_j) =
 
 
 
-### Bemerkung
+### Bedingte relative Häufigkeit: Berechnung
+
 Wegen
 \begin{displaymath}
 \frac{h_{i1}}{h_{i\cdot}} = \frac{h_{i1}/n}{h_{i\cdot}/n} = \frac{f_{i1}}{f_{i\cdot}}
@@ -56,6 +57,7 @@ f_{X|Y}(a_1|b_j) = \frac{f_{1j}}{f_{\cdot j}} ,\ldots, f_{X|Y}(a_k|b_j) = \frac{
 
 \noindent 
 **Merksatz:**  
+
 Bedingte Häufigkeitsverteilungen werden durch Division der $h_{ij}$ bzw. $f_{ij}$ durch
 die entsprechende Zeilen- bzw. Spaltensumme gebildet.
 
@@ -63,11 +65,17 @@ die entsprechende Zeilen- bzw. Spaltensumme gebildet.
 ### Beispiel: Wahlverhalten
 
 \small
-    \begin{center}
+\begin{center}
+```{r 03-tab-wahl-abs-2, echo=FALSE, results='asis'}
+cat(gt_contingency(wahl_abs, proportional_size = FALSE, independence_colors = FALSE))
+```
+\end{center}
+$\hookrightarrow$
+\begin{center}
       \begin{tabular}{r | ccccccc | c}
-          & \text{SPD} & \text{CDU/CSU} & \text{Grüne} & \text{FDP} & \text{AfD} & \text{Linke} &  \text{Rest} & $\sum$ \\ \hline
-          Männer & 626 & 601 & 352 & 325 & 300 & 125 & 175 & 2504\\
-          Frauen & 567 & 504 & 335 & 211 &  167 & 104 & 210 & 2098 \\ 
+          & \text{SPD} & \text{CDU/CSU} & \text{Grüne} & \text{FDP} & \text{AfD} & \text{Linke} &  \text{Rest} \\  \hline
+          Männer & 25 & 24 & 14 & 13 & 12 & 5 & 7  & 100\\
+          Frauen & 27 & 24 & 16 & 10 &  8 & 5 & 10 & 100 \\ 
       \end{tabular}
 \end{center}
 
@@ -75,10 +83,36 @@ die entsprechende Zeilen- bzw. Spaltensumme gebildet.
 
 -  Zeile $X = a_1$ (Männer)  
    Bedingte relative Häufigkeiten für Parteipräferenz der Männer $f_{Y|X}(Y = b_j | X = a_1)$:  
-   "1.Zeile / Randhäufigkeit für Männer"  
+   "Erste Zeile / Randhäufigkeit für Männer"  
    $\frac{h(a_1,b_1)}{h(a_1)} = f_{Y|X}(b_1|a_1),\ldots,\frac{h(a_1,b_j)}{h(a_1)} = f_{Y|X}(b_j|a_1) ,\ldots$   
    $\frac{626}{2504} \approx 25\%, \ldots, \frac{175}{2504}\approx 7\%$ usw.
 -  Zeile $X = a_2$ (Frauen) analog, z.B. $\frac{h(a_2,b_1)}{h(a_2)} = \frac{567}{2098} \approx 27\%$ usw.
+
+### Anteile vergleichen: Prozentpunkte vs. relative Änderung
+
+Bedingte relative Häufigkeiten (Anteile) werden oft als **Prozente** angegeben --
+beim Vergleich zweier Anteile lauern Fallstricke. Beispiel: SPD-Anteil bei
+Frauen $27\%$, bei Männern $25\%$.
+
+>- **Prozentpunkte** ($\%$-Punkte): *absolute* Differenz zweier Anteile.
+>   $27\% - 25\% = 2$ Prozentpunkte.
+>- **relative Änderung**: Anteil der Differenz *am Ausgangswert*.
+>   $\frac{27\% - 25\%}{25\%} = 8\%$ -- der Anteil ist um $8\%$ **größer**, aber nur um $2$ Prozentpunkte.
+>- **"$x$-mal so groß"** ist eindeutig ($27\% = 1{,}08 \cdot 25\%$).
+>   **"$x$-mal größer"** ist strittig (Faktor $x$ oder Zunahme *um* das $x$-fache?)
+>   $\longrightarrow$ vermeiden.
+
+### Anteile vergleichen: Asymmetrie
+
+Der Vergleich zweier Anteile ist **nicht symmetrisch** -- Bezugsgröße beachten!
+
+Beispiel: Anteil $A = 110$, Anteil $B = 100$ (in geeigneten Einheiten).
+
+>- $A$ ist um $\frac{110-100}{100} = 10\%$ **größer** als $B$.
+>- Aber $B$ ist **nicht** um $10\%$ kleiner als $A$, sondern nur um
+>   $\frac{110-100}{110} \approx 9{,}1\%$ (Bezug jetzt auf $110$).
+>- $\implies$ Relative Änderungen sind richtungsabhängig; immer angeben,
+>   **worauf** sich der Prozentwert bezieht.
 
 ### Bedingte und gemeinsame Häufigkeiten
 

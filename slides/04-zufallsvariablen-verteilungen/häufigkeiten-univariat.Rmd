@@ -67,7 +67,7 @@ Aggregation der Urliste durch Bildung geeigneter Klassen
 ### Beispiel Nettomieten I
 
 ```{r, 02-mietspiegel-kleinkalt-prep, echo=FALSE}
-url <- "http://chris.userweb.mwn.de/statistikbuch/mietspiegel2015.txt"
+url <- "../data/mietspiegel2015.txt"
 mietspiegel <- read.table(file = url, header = TRUE)
 klein_und_kalt <- subset(mietspiegel, zh0 == 1 & wfl < 60)
 ```
@@ -77,14 +77,14 @@ Wir greifen aus dem gesamten Datensatz des Münchner Mietspiegels 2015 die Wohnu
 Die folgende Urliste zeigt, bereits der Größe nach geordnet, die Nettomieten dieser $n=`r nrow(klein_und_kalt)`$ Wohnungen:
 
 ```{r, 02-mietspiegel-kleinkalt}
-mietspiegel_url <- "http://chris.userweb.mwn.de/statistikbuch/mietspiegel2015.txt"
+mietspiegel_url <- "../data/mietspiegel2015.txt"
 mietspiegel <- read.table(file = mietspiegel_url, header = TRUE)
 klein_und_kalt <- subset(mietspiegel, zh0 == 1 & wfl < 60)
 sort(klein_und_kalt[, "nm"]) |> print(digits = 4)
 ```
 
 Alle Werte verschieden:  
-$\Rightarrow k=n$ und $\{x_1 , \ldots , x_n\} = \{a_1 , \ldots , a_k\};\; f_j = \frac{1}{`r nrow(klein_und_kalt)`} \,\forall\,  j = 1, \ldots, `r nrow(klein_und_kalt)`$.
+$\implies k=n$ und $\{x_1 , \ldots , x_n\} = \{a_1 , \ldots , a_k\};\; f_j = \frac{1}{`r nrow(klein_und_kalt)`} \,\forall\,  j = 1, \ldots, `r nrow(klein_und_kalt)`$.
 
 ### Beispiel Nettomieten II
 

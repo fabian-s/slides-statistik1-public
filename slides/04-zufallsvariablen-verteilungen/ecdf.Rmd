@@ -54,7 +54,7 @@ ggplot(klein_und_kalt, aes(nmqm)) + stat_ecdf(geom = "step") +
   geom_vline(xintercept = 12, col = "red") + 
   geom_hline(yintercept = mean(klein_und_kalt$nmqm <= 12), col = "red", lty = 2) 
 ```
-$\Rightarrow \approx$ `r round(mean(klein_und_kalt$nmqm < 12)*100)`%
+$\longrightarrow \approx$ `r round(mean(klein_und_kalt$nmqm < 12)*100)`%
 
 ### Beispiel: $F_n$(Quadratmetermiete) für Klein & Kalt 
 
@@ -67,7 +67,7 @@ ggplot(klein_und_kalt, aes(nmqm)) + stat_ecdf(geom = "step") +
   geom_hline(yintercept = .25, col = "red") + 
   geom_vline(xintercept = quantile(klein_und_kalt$nmqm, .25), col = "red", lty = 2) 
 ```
-$\Rightarrow \approx$ `r round(quantile(klein_und_kalt$nmqm, .25), 1)`€
+$\longrightarrow \approx$ `r round(quantile(klein_und_kalt$nmqm, .25), 1)`€
 
 ### Theorie & Empirie
 

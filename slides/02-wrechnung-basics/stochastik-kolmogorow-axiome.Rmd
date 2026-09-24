@@ -38,13 +38,39 @@ Eigenschaften erfüllt:
 - **A3:** $P(A \cup B) = P(A) + P(B)$ für *disjunkte* Ereignisse $A,B \subseteq \Omega$ (*Additivität*)
 :::
 
-### Folgerungen 
+### Folgerungen
 
-- $P(\cup_{i=1}^n\: A_i) = \sum\limits_{i=1}^n P(A_i)$ 
-für *paarweise disjunkte* Ereignisse $A_1, A_2, ..., A_n \subset \Omega$
-- $A \subseteq B \implies P(A) \leq P(B)$ 
-- $P(\bar{A}) = 1 - P(A)$
-- $P(A \cup B) = P(A) + P(B) - P(A \cap B)$ für beliebige $A, B \subset \Omega$
+\begin{columns}
+\begin{column}{0.55\textwidth}
+\begin{itemize}
+\item $P(\cup_{i=1}^n\: A_i) = \sum\limits_{i=1}^n P(A_i)$
+für \emph{paarweise disjunkte} Ereignisse $A_1, A_2, ..., A_n \subset \Omega$
+\item $A \subseteq B \implies P(A) \leq P(B)$
+\item $P(\bar{A}) = 1 - P(A)$
+\item $P(A \cup B) = P(A) + P(B) - P(A \cap B)$ für beliebige $A, B \subset \Omega$
+\end{itemize}
+\end{column}
+\begin{column}{0.45\textwidth}
+```{r sto-venn-folgerungen, echo = FALSE, fig.height = 3.1, fig.width = 4}
+draw_circle <- function(x0, y0, r, col) {
+  th <- seq(0, 2 * pi, length.out = 200)
+  polygon(x0 + r * cos(th), y0 + r * sin(th), col = col, border = "grey20")
+}
+par(mar = c(0, 0, 0, 0))
+plot.new()
+plot.window(xlim = c(0, 10), ylim = c(0, 7), asp = 1)
+rect(0.2, 0.2, 9.8, 6.8, border = "grey50")
+draw_circle(4, 3.5, 2.3, adjustcolor("#3B6EA5", 0.5))
+draw_circle(6, 3.5, 2.3, adjustcolor("#E08A1E", 0.5))
+text(2.9, 3.5, "A", cex = 2)
+text(7.1, 3.5, "B", cex = 2)
+text(5, 3.5, expression(A * intersect(B)), cex = 1.1)
+text(0.9, 6.3, expression(Omega), cex = 1.6)
+```
+\end{column}
+\end{columns}
+
+\footnotesize $A \cap B$ steckt in beiden Kreisen -- in $P(A) + P(B)$ doppelt gezählt, daher einmal abziehen.
 
 \note[item]{
 {\em Beweis $P(A) \leq P(B)$ falls $A \subseteq B$:}\\[0,3cm]
@@ -69,18 +95,168 @@ P(A_1 \cup A_2 \cup \dots \cup A_n) & = \sum_i P(A_i) - \sum_{i < j} P(A_i \cap 
 & \qquad \qquad - \dots \pm \dots \pm \dots + (-1)^{n+1} \cdot P(A_1 \cap A_2 \cap ... \cap A_n)
 \end{align*}
 
-Bsp.:  
+Bsp.:
 \begin{align*}
 P(A \cup B \cup C)  =& (P(A) + P(B) + P(C))  \\
                      &  - (P(A \cap B) + P(A \cap C) + P(B \cap C)) \\
                      &    + P(A \cap B \cap C)
 \end{align*}
 
-### Anwendung: Bonferroni Ungleichungen 
+### Anwendung: Siebformel von Sylvester-Poincaré
+
+Bsp. für $n = 3$: jeder Summand der Siebformel entspricht einer Fläche --
+
+\vspace{1em}
+\begin{center}
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}
+\definecolor{siebblau}{RGB}{59,110,165}
+\def\vennA{(-0.45,0.26) circle (0.75)}
+\def\vennB{(0.45,0.26) circle (0.75)}
+\def\vennC{(0,-0.52) circle (0.75)}
+\def\vennoutline{\draw[semithick, black!60] \vennA; \draw[semithick, black!60] \vennB; \draw[semithick, black!60] \vennC;}
+% ---- Zeile 1: Zielflaeche = A + B + C
+\begin{scope}[shift={(0,0)}]
+  \fill[siebblau!45] \vennA \vennB \vennC;
+  \vennoutline
+  \node[font=\scriptsize] at (-0.85,0.85) {$A$};
+  \node[font=\scriptsize] at (0.85,0.85) {$B$};
+  \node[font=\scriptsize] at (0,-1.02) {$C$};
+  \node[font=\tiny] at (0,-1.6) {$A \cup B \cup C$};
+\end{scope}
+\node[font=\normalsize] at (1.65,0) {$=$};
+\begin{scope}[shift={(3.1,0)}]
+  \fill[siebblau!45] \vennA;
+  \vennoutline
+  \node[font=\tiny] at (0,-1.6) {$A$};
+\end{scope}
+\node[font=\normalsize] at (4.55,0) {$+$};
+\begin{scope}[shift={(6.0,0)}]
+  \fill[siebblau!45] \vennB;
+  \vennoutline
+  \node[font=\tiny] at (0,-1.6) {$B$};
+\end{scope}
+\node[font=\normalsize] at (7.45,0) {$+$};
+\begin{scope}[shift={(8.9,0)}]
+  \fill[siebblau!45] \vennC;
+  \vennoutline
+  \node[font=\tiny] at (0,-1.6) {$C$};
+\end{scope}
+% ---- Zeile 2: - Paarschnitte + Dreifachschnitt
+\node[font=\normalsize] at (1.65,-3.5) {$-$};
+\begin{scope}[shift={(3.1,-3.5)}]
+  \begin{scope}\clip \vennA; \fill[siebblau!45] \vennB;\end{scope}
+  \vennoutline
+  \node[font=\tiny] at (0,-1.6) {$A \cap B$};
+\end{scope}
+\node[font=\normalsize] at (4.55,-3.5) {$-$};
+\begin{scope}[shift={(6.0,-3.5)}]
+  \begin{scope}\clip \vennA; \fill[siebblau!45] \vennC;\end{scope}
+  \vennoutline
+  \node[font=\tiny] at (0,-1.6) {$A \cap C$};
+\end{scope}
+\node[font=\normalsize] at (7.45,-3.5) {$-$};
+\begin{scope}[shift={(8.9,-3.5)}]
+  \begin{scope}\clip \vennB; \fill[siebblau!45] \vennC;\end{scope}
+  \vennoutline
+  \node[font=\tiny] at (0,-1.6) {$B \cap C$};
+\end{scope}
+\node[font=\normalsize] at (10.35,-3.5) {$+$};
+\begin{scope}[shift={(11.8,-3.5)}]
+  \begin{scope}\clip \vennA; \clip \vennB; \fill[siebblau!45] \vennC;\end{scope}
+  \vennoutline
+  \node[font=\tiny] at (0,-1.6) {$A \cap B \cap C$};
+\end{scope}
+\end{tikzpicture}%
+}
+\end{center}
+
+\vspace{0.5em}
+Die Paarschnitte werden abgezogen, weil sie in $P(A) + P(B) + P(C)$
+**doppelt** gezählt wurden -- der Dreifachschnitt wurde dabei $3 - 3 = 0$-mal
+gezählt und muss darum wieder **addiert** werden.
+
+### Anwendung: Bonferroni Ungleichungen
 
 $\implies$ Abschätzung von $P(A_1 \cup A_2 \cup ... \cup A_n)$  
 
 Für beliebige Ereignisse $A_1, A_2, ... A_n$ gilt
-$$\sum_i P(A_i) \geq P\left(\bigcup_{i=1}^n A_i\right) \geq\sum_i P(A_i) - \sum_{i<j} P(A_i \cap A_j)$$
+
+\begin{center}
+\makebox[0.2914\textwidth][c]{$\sum_i P(A_i)$}%
+\makebox[0.0379\textwidth][c]{$\geq$}%
+\makebox[0.2914\textwidth][c]{$P\left(\bigcup_{i=1}^n A_i\right)$}%
+\makebox[0.0379\textwidth][c]{$\geq$}%
+\makebox[0.2914\textwidth][c]{$\sum_i P(A_i) - \sum_{i<j} P(A_i \cap A_j)$}
+\end{center}
+
+```{r sto-bonferroni-venn, echo = FALSE, fig.height = 2.9, fig.width = 8.6, out.width = ".95\\textwidth", out.height = "1.55in", message = FALSE, warning = FALSE}
+# 4 events on a grid: shade by how often each region is counted
+cx <- c(-0.6, 0.6, 0.6, -0.6)
+cy <- c(0.6, 0.6, -0.6, -0.6)
+r <- 1.15
+grid_df <- expand.grid(
+  x = seq(-2.1, 2.1, length.out = 401),
+  y = seq(-2.1, 2.1, length.out = 401)
+)
+grid_df$m <- rowSums(
+  sapply(1:4, \(k) (grid_df$x - cx[k])^2 + (grid_df$y - cy[k])^2 <= r^2)
+)
+stopifnot(setequal(unique(grid_df$m[grid_df$m > 0]), 1:4))
+grid_df$w <- grid_df$m - choose(grid_df$m, 2) # Zaehlgewicht der unteren Schranke
+outlines <- purrr::map_dfr(1:4, \(k) tibble(
+  kreis = k,
+  x = cx[k] + r * cos(seq(0, 2 * pi, length.out = 200)),
+  y = cy[k] + r * sin(seq(0, 2 * pi, length.out = 200))
+))
+venn_theme <- list(
+  ggplot2::coord_equal(),
+  ggplot2::theme_void(base_size = 11),
+  ggplot2::theme(
+    plot.title = ggplot2::element_text(size = 9, hjust = 0.5),
+    plot.subtitle = ggplot2::element_text(size = 7, hjust = 0.5),
+    legend.position = "none"
+  )
+)
+kreise <- ggplot2::geom_path(
+  data = outlines, ggplot2::aes(x, y, group = kreis),
+  linewidth = 0.25, colour = "black"
+)
+blues <- c("1" = "#CBD9EA", "2" = "#97B5D4", "3" = "#638FBC", "4" = "#2F5F93")
+p_ob <- ggplot2::ggplot(subset(grid_df, m > 0)) +
+  ggplot2::geom_raster(ggplot2::aes(x, y, fill = factor(m))) +
+  ggplot2::scale_fill_manual(values = blues) +
+  kreise + venn_theme +
+  ggplot2::labs(
+    title = "obere Schranke",
+    subtitle = "je dunkler, desto\nöfter gezählt"
+  )
+p_union <- ggplot2::ggplot(subset(grid_df, m > 0)) +
+  ggplot2::geom_raster(ggplot2::aes(x, y), fill = "#97B5D4") +
+  kreise + venn_theme +
+  ggplot2::labs(
+    title = "wahre Vereinigung",
+    subtitle = "jede Fläche\neinfach gezählt"
+  )
+p_ub <- ggplot2::ggplot(subset(grid_df, m > 0)) +
+  ggplot2::geom_raster(ggplot2::aes(x, y, fill = factor(w))) +
+  ggplot2::scale_fill_manual(
+    values = c("1" = "#97B5D4", "0" = "white", "-2" = "#E4998D")
+  ) +
+  kreise + venn_theme +
+  ggplot2::labs(
+    title = "untere Schranke",
+    subtitle = "weiß: 0-fach,\nrot: (-2)-fach gezählt"
+  )
+geq <- ggplot2::ggplot() +
+  ggplot2::annotate("text", x = 0, y = 0, label = "'' >= ''", parse = TRUE, size = 7) +
+  ggplot2::theme_void()
+p_ob + geq + p_union + geq + p_ub +
+  patchwork::plot_layout(nrow = 1, widths = c(1, 0.13, 1, 0.13, 1))
+```
+
+\scriptsize Die untere Schranke zählt Regionen, in denen sich *drei* Ereignisse
+überlappen, $3 - 3 = 0$-mal und Vierfach-Überlappungen $4 - 6 = -2$-mal
+$\implies$ sie unterschätzt $P\left(\bigcup_i A_i\right)$.
 
 \note[item]{mit Venn-Diagrammen grafisch zeigen: summe 2er schnitte muss größer als summe 3erschnitte sein, etc.}

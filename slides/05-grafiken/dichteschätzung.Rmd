@@ -7,7 +7,7 @@
 - Relative Häufigkeit in einer Histogramm-Klasse $=$ Fläche der Histogramm-Säule $=$ Fläche "unter der Kurve"
 - Aber: Histogramm ist stückweise konstante Funktion
 - Sehr problematisch: Abhängigkeit von Wahl der Klassengrenzen 
-```{r, 2-problem-hist, echo = FALSE, fig.height=3.2, fig.width=6, out.width="0.6\\textwidth"}
+```{r, 2-problem-hist, echo = FALSE, fig.height=3.2, fig.width=6, out.height = ".5\\textheight"}
 par(mar = c(2, 4, 1, 0.1), mfrow = c(1,2))
 col = c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#CC79A7")
 
@@ -45,19 +45,19 @@ $|\{\ldots\}|$: *Mächtigkeit* der Menge, also Anzahl der Elemente der Menge
 set.seed(11212)
 data_kde <- data.frame(x = rnorm(1e3))
 densplot <- ggplot(data_kde, aes(x=x)) + geom_density(col="blue") 
-densplot + geom_histogram(aes(y = after_stat(density)), bins=20, fill=NA, col="black")
-```
-
-### Beispiele Histogramm und Dichte
-
-```{r, 2-density-hist-2, echo=FALSE}
-densplot + geom_histogram(aes(y = ..density..), bins=50, fill=NA, col="black")
+densplot + 
+  geom_histogram(aes(y = after_stat(density)), bins=10, fill=rgb(1,1,1,.8), col="black", linewidth = .1) +
+  geom_density(col="blue")  +
+  ylim(c(0, 0.65))
 ```
 
 ### Beispiele Histogramm und Dichte
 
 ```{r, 2-density-hist-3, echo=FALSE}
-densplot + geom_histogram(aes(y = ..density..), bins=100, fill=NA, col="black")
+densplot + 
+  geom_histogram(aes(y = after_stat(density)), bins=150, fill=rgb(1,1,1,.8), col="black", linewidth = .1) +
+  geom_density(col="blue")  +
+  ylim(c(0, 0.65))
 ```
 
 ### Berechnung von Dichte-Kurven
@@ -97,7 +97,7 @@ Dreieck-Kern & $k(u) = \max\left(0, 1 - |u|\right)$
 
 ### Kerndichteschätzer
 
-```{r, 2-kernelexamples, echo = FALSE, fig.height=3.2, fig.width=6, out.width="0.6\\textwidth"}
+```{r, 2-kernelexamples, echo = FALSE, fig.height = 4, fig.width = 6, out.width = ".9\\textwidth", out.height = ".6\\textwidth"}
 par(mar = c(4,4,1,0.1))
 kernels = eval(formals(density.default)$kernel)
 kernels = kernels[c(1,2,3,4)]
@@ -115,10 +115,10 @@ legend("topleft", legend = kernels, col = kernel_colors, lty = 1, bty = "n")
 
 ### Kerndichteschätzer
 
-- Histogramme berücksichtigen nicht ob Beobachtungen zentral oder am Rand der Klasse liegen, zählen nur die *Anzahl der Beobachtungen* innerhalb der Klassengrenzen
-- Kerndichteschätzungen berücksichtigen die *Entfernung der benachbarten Punkte*, mit abnehmender Gewichtung über die Distanz:
+- Histogramme berücksichtigen nicht, *wo* Beobachtungen in der Klasse liegen, zählen nur die *Anzahl der Beobachtungen* innerhalb der Klassengrenzen
+- Kerndichteschätzung an der Stelle $x$ berücksichtigt *Entfernung der benachbarten Punkte* zu $x$, mit über die Distanz *abnehmender Gewichtung*:
 
-```{r, 2-kdehist1, echo = FALSE, fig.height=4, fig.width=9, out.width="\\textwidth"}
+```{r, 2-kdehist1, echo = FALSE, fig.height=3.2, fig.width=6, out.height = ".5\\textheight"}
 par(mar = c(2, 4, 1, 0.1), mfrow = c(1,2))
 x = c(0.25, 1.75, 2.95, 3.25, 4.5)
 #col = c("#332288", "#44AA99", "#88CCEE", "#DDCC77", "#AA4499")
@@ -146,7 +146,7 @@ kde = function(x, perc = 1, kernel = "gaussian", main = NULL, col = rep("red", l
   points(x = x, y = rep(0, length(x)), pch = 21, bg = col)
   invisible(list(density = dens, kernels = kernels))
 }
-k = kde(x, main = "Kerndichteschätzung mit Gauss-Kern", col = col, ylim = c(0, 0.4))
+k = kde(x, main = "Kerndichte (Gauss-Kern)", col = col, ylim = c(0, 0.4))
 y.dens = k$density$y[which(k$density$x <= 0.26 & k$density$x >= 0.24)]
 y1 = k$kernels[[1]]$y[which(k$kernels[[1]]$x <= 0.255 & k$kernels[[1]]$x >= 0.2475)]
 y2 = k$kernels[[2]]$y[which(k$kernels[[2]]$x <= 0.255 & k$kernels[[2]]$x >= 0.2475)]
@@ -154,29 +154,11 @@ lines(x = c(x[1], x[1]) + 0.03, y = c(y1, y1 + y2), col = col[2], lwd = 2, lty =
 lines(x = c(x[1], x[1]) + 0.03, y = c(0, y2), col = col[2], lwd = 2, lty = 1)
 ```
 
-### Kerndichteschätzer
-
-- Histogramme berücksichtigen nicht ob Beobachtungen zentral oder am Rand der Klasse liegen, zählen nur die *Anzahl der Beobachtungen* innerhalb der Klassengrenzen
-- Kerndichteschätzungen berücksichtigen die *Entfernung der benachbarten Punkte*, mit abnehmender Gewichtung über die Distanz:
-
-```{r, 2-kdehist2, echo = FALSE, fig.height=4, fig.width=9, out.width="\\textwidth"}
-par(mar = c(2, 4, 1, 0.1), mfrow = c(1,2))
-x = c(0.25, 1.75, 3.05, 3.25, 4.5)
-#col = c("#332288", "#44AA99", "#88CCEE", "#DDCC77", "#AA4499")
-col = c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#CC79A7")
-hist(x, main = "Histogram", freq = FALSE, ylim = c(0, 0.4), xlim = c(-2, 6),
-     breaks = 0:5)
-points(x = x, y = rep(0, length(x)), pch = 21, bg = col)
-
-k = kde(x, main = "Kerndichteschätzung mit Gauss-Kern", col = col, ylim = c(0, 0.4))
-```
-
-$\implies$ KDE
-
 ### Kerndichteschätzer: Bandbreite
 
 
-```{r, 2-kde-bw1, echo = FALSE, fig.height=4, fig.width=9, out.width="\\textwidth"}
+```{r, 2-kde-bw1, echo = FALSE}
+#, fig.height=4, fig.width=9, out.width="2.25\\textheight", out.height="\\textheight"}
 par(mar = c(2, 4, 1, 0.1), mfrow = c(2, 3))
 kde(x, perc = 0.6, col = col, ylim = c(0, 0.4), xlim = c(-3, 7))
 kde(x, perc = 1,  col = col, ylim = c(0, 0.4), xlim = c(-3, 7))
@@ -196,18 +178,70 @@ ggplot(data_kde, aes(x = x)) +
   geom_rug(alpha = .05) +
   geom_density(col = "blue", lwd = 1) +
   geom_density(col = "orange", bw = .05, lwd = 1) +
-  geom_density(col = "purple", bw = 2, lwd = 1) 
+  geom_density(col = "purple", bw = 1.2, lwd = 1) 
 ```
 
 Kerndichteschätzer mit "optimaler" Bandbreite $h$ (blau), zu kleiner (orange) und zu 
 großer (lila) Bandbreite $h$.
 
+## Verteilungen grafisch vergleichen
+
+### Schritt für Schritt: 1. Histogramm
+
+Reale Daten (Mietspiegel): Verteilung der Quadratmetermiete, aufbereitet für den
+Gruppenvergleich nach *Baujahr-Klasse*.
+
+```{r, 05-build-dist1, echo = TRUE, message = FALSE, fig.height = 3, fig.width = 6, out.height = ".45\\textheight"}
+mietspiegel <- mietspiegel |>
+  mutate(Baujahr = cut(bj, c(1918, 1945, 1960, 1980, 2013),
+    dig.lab = 4, include.lowest = TRUE))
+
+ggplot(mietspiegel, aes(x = nmqm)) +
+  geom_histogram(aes(y = after_stat(density)), bins = 30)
+```
+
+### Schritt für Schritt: 2. Kerndichte
+
+- `geom_density()` legt eine glatte Kerndichteschätzung über das Histogramm
+- unabhängig von Klassengrenzen, gut für (quasi-)stetige Merkmale
+
+```{r, 05-build-dist2, echo = TRUE, message = FALSE, fig.height = 3, fig.width = 6, out.height = ".45\\textheight"}
+ggplot(mietspiegel, aes(x = nmqm)) +
+  geom_histogram(aes(y = after_stat(density)), bins = 30) +
+  geom_density(colour = "blue", linewidth = 1)
+```
+
+### Schritt für Schritt: 3. Dichten je Gruppe
+
+- eine Dichte *pro Baujahr-Klasse* (Ästhetik **Farbe** = Gruppe)
+- zeigt, wie sich die *bedingten* Verteilungen unterscheiden -- neuere Bauten teurer/$m^2$
+
+```{r, 05-build-dist3, echo = TRUE, message = FALSE, fig.height = 3, fig.width = 6.5, out.height = ".45\\textheight"}
+ggplot(mietspiegel, aes(x = nmqm, colour = Baujahr)) +
+  geom_density(linewidth = 1)
+```
+
+### Schritt für Schritt: 4. Boxplot & Violinplot
+
+- kompakter Gruppenvergleich: *Violinplot* (gespiegelte Dichte) + *Boxplot* innen
+- eine Ebene pro `geom_*`, aufeinander gestapelt
+
+```{r, 05-build-dist4, echo = TRUE, message = FALSE, fig.height = 3, fig.width = 6.5, out.height = ".45\\textheight"}
+ggplot(mietspiegel, aes(x = Baujahr, y = nmqm)) +
+  geom_violin(aes(fill = Baujahr), show.legend = FALSE) +
+  geom_boxplot(width = .1)
+```
+
+\footnotesize
+(Median, Quartile & Boxplot-Aufbau: genauer in Kap. 6.)
+
 ### Bemerkungen zur Dichteschätzung
 
-- Abhängigkeit von der Bandbreite $h$ $\rightarrow$ Verfahren zur Bestimmung von $h$ aus den Daten
-- Abhängigkeit von der Wahl des Kerns eher unbedeutend
+- Abhängigkeit von der Bandbreite $h$  
+  $\rightarrow$ Benutze automatische Verfahren zur Bestimmung von "optimalem" $h$ aus den Daten
+- Abhängigkeit von der Wahl der Kernfunktion eher unbedeutend
 - Kerndichteschätzungen sind insbesondere bei größeren Datenmengen und (quasi-)stetigen Merkmalen Histogrammen vorzuziehen.
-- Kerndichteschätzungen sind immer Histogrammen mit unterschiedlichen Klassenbreiten vorzuziehen.
+- Kerndichteschätzungen sind *immer* Histogrammen mit unterschiedlichen Klassenbreiten vorzuziehen.
 
 \vspace{4em}
 \scriptsize

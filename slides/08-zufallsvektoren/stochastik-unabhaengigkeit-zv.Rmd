@@ -36,7 +36,7 @@ X \perp Y &\iff P((X(\omega) \leq x) \cap (Y(\omega) \leq y)) = P(X(\omega) \leq
 \end{align*}
 
 
-<!-- todo: bedingte dichten & def unabh über bedingte dichten einführen..? -->
+- Äquivalent über **bedingte Dichten** (Kap. "Bedingte Verteilungen"): $X$ und $Y$ sind genau dann unabhängig, wenn $f_{X|Y}(x|y) = f_X(x)$ für alle $x, y$ gilt -- die Bedingung auf $Y=y$ ändert die Verteilung von $X$ dann nicht. (So wird Unabhängigkeit in Blatt 12 nachgewiesen.)
 
 ### Beispiel: Randverteilung & Gemeinsame Verteilung
 
@@ -71,7 +71,7 @@ p_x1_ind <- p_x1 + geom_line(aes(y = f_ind))
 p_x2_ind <- p_x2 + geom_line(aes(y = f_ind))
 ```
 
-```{r, sto-marginal-joint-1, echo = FALSE}
+```{r, sto-marginal-joint-1, echo = FALSE, out.height = ".62\\textheight"}
 p_x1_dep + plot_spacer() + p_dep + p_x2_dep +
   plot_layout(
     ncol = 2, 
@@ -79,14 +79,16 @@ p_x1_dep + plot_spacer() + p_dep + p_x2_dep +
     widths = c(4, 1),
     heights = c(1, 4)
   )  + 
-  plot_annotation(title = "Abhängige Zufallsvariablen ", 
+  plot_annotation(title = "Abhängige Zufallsvariablen ",
                   caption = expression(f(x[1], x[2]) != f[X1](x[1])*f[X2](x[2])),
                   theme = theme(plot.caption = element_text(size = rel(2.5))))
 ```
 
+**Takeaway:** Dichte auf der Diagonalen konzentriert -- aus den Rändern **nicht** rekonstruierbar: $f(x_1, x_2) \neq f_{X_1}(x_1)\, f_{X_2}(x_2)$.
+
 ### Beispiel: Randverteilung & Gemeinsame Verteilung
 
-```{r, sto-marginal-joint-2, echo = FALSE}
+```{r, sto-marginal-joint-2, echo = FALSE, out.height = ".62\\textheight"}
 p_x1_ind + plot_spacer() + p_ind + p_x2_ind +
   plot_layout(
     ncol = 2, 
@@ -94,12 +96,14 @@ p_x1_ind + plot_spacer() + p_ind + p_x2_ind +
     widths = c(4, 1),
     heights = c(1, 4)
   )  + 
-  plot_annotation(title = "Unabhängige Zufallsvariablen ", 
+  plot_annotation(title = "Unabhängige Zufallsvariablen ",
                   caption = expression(f(x[1], x[2]) == f[X1](x[1])*f[X2](x[2])),
                   theme = theme(plot.caption = element_text(size = rel(2.5))))
 ```
 
-### Beispiel: Bernoulli-Kette 
+**Takeaway:** *Gleiche* Ränder wie links, aber hier gilt $f(x_1, x_2) = f_{X_1}(x_1)\, f_{X_2}(x_2)$ -- bei Unabhängigkeit bestimmen die Ränder die gemeinsame Verteilung vollständig.
+
+### Beispiel: Bernoulli-Kette
 
 Sind $X_1, X_2, ..., X_n$ jeweils Bernoulli-verteilt mit Parameter $\pi$ und unabhängig, so
 heißt $\symbf{X}=(X_1, X_2, ..., X_n)$ **Bernoulli-Kette**.\

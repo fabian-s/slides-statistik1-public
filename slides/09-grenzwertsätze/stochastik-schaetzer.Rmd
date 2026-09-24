@@ -1,3 +1,15 @@
+### Lernziele: Schätzung & Grenzwertsätze
+
+Nach diesem Kapitel können Sie ...
+
+- das Gesetz der großen Zahlen (GGZ) und den Zentralen Grenzwertsatz (ZGWS) unterscheiden und auf konkrete Fragestellungen anwenden
+- die Voraussetzungen von GGZ und ZGWS benennen und Situationen erkennen, in denen sie verletzt sind
+- Wahrscheinlichkeiten über die Normal-Approximation des ZGWS näherungsweise berechnen
+
+\vspace{1em}
+
+**Voraussetzungen:** Erwartungswert & Varianz (Kap. 6), parametrische Verteilungen (Kap. 7)
+
 ## Ausblick: Parameterschätzung
 
 ### Schätzung

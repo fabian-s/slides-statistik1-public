@@ -117,7 +117,7 @@ Streuungszerlegung der Netto-Quadratmetermiete bezüglich Zimmerzahl:
 \begin{column}{0.4\textwidth}
 ```{r, 02-mietspiegel-variancedecomposition, echo=FALSE, warning = FALSE, message = FALSE}
 library(dplyr)
-url <- "http://chris.userweb.mwn.de/statistikbuch/mietspiegel2015.txt"
+url <- "../data/mietspiegel2015.txt"
 mietspiegel <- read.table(file = url, header = TRUE)
 meantab <- mietspiegel %>% 
   mutate(`Zimmer` = ordered(rooms)) %>% group_by(`Zimmer`) %>% 

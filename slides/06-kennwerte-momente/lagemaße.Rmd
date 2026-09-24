@@ -1,5 +1,18 @@
 ## Univariate statistische Kennwerte
 
+### Lernziele: Kennwerte, Lage & Streuung
+
+Nach diesem Kapitel können Sie ...
+
+- Lage- und Streuungsmaße berechnen und ihre Robustheit gegen Ausreißer beurteilen
+- Boxplots konstruieren und ablesen
+- Verteilungsform (Schiefe, Modalität) aus Kennwerten und Grafiken diagnostizieren
+- Konzentration mit Lorenzkurve und Gini-Koeffizient messen
+
+\vspace{1em}
+
+**Voraussetzungen:** Häufigkeiten & empirische Verteilungen (Kap. 4).
+
 ### Statistische Kennwerte
 
 **Lagemaßzahlen**
@@ -134,8 +147,14 @@ $$\bar x_W = \frac{1}{\sum^n_{i=1} w_i} \sum^n_{i=1} w_i x_i$$
 -  nur geeignet für positive, mindestens intervallskalierte Merkmale
 - Anwendung: Durchschnitt von Änderungsraten, z.B. durchschnittliche Verzinsung
 
-Allgemein: Das geometrische Mittel ist der richtige Mittelwert für Merkmale, 
-deren Ausprägungen als multiplikative Faktoren zu interpretieren sind. 
+Allgemein: Das geometrische Mittel ist der richtige Mittelwert für Merkmale,
+deren Ausprägungen als multiplikative Faktoren zu interpretieren sind.
+
+:::{.block}
+#### Multiplikativ vs. additiv
+Wachstums\emph{faktoren} multiplizieren sich $\longrightarrow$ *geometrisches* Mittel;
+Prozent\emph{punkt}-Differenzen addieren sich (Prozente vs. Prozentpunkte: siehe Kap. 3).
+:::
 
 ### Das geometrische Mittel: Beispiel
 
@@ -204,7 +223,7 @@ Lineare Transformation:
 
 \begin{eqnarray*}
   g(x) &=& a + bx \\
-  y_i &=& a + bx_i \;\Rightarrow\; \bar y = a + b \bar x
+  y_i &=& a + bx_i \implies \bar y = a + b \bar x
 \end{eqnarray*}
 
 d.h.
@@ -252,10 +271,10 @@ d.h.
 <!-- a)  Zeige $\bar x_G \leq \bar x$:   -->
 
 <!-- $g: t \rightarrow \log(t)$ konkav, da $g''(t) = - \frac{1}{t^2} < 0$   -->
-<!-- $\Rightarrow \log(\bar x) \geq \overline{\log(x)}$   -->
-<!-- $\Rightarrow \bar x \geq \exp\left(\overline{log(x)}\right) = \exp -->
+<!-- $\implies \log(\bar x) \geq \overline{\log(x)}$   -->
+<!-- $\implies \bar x \geq \exp\left(\overline{log(x)}\right) = \exp -->
 <!-- \left(\frac{1}{n} \sum_{i=1}^n \log(x_i)\right)$   -->
-<!-- $\phantom{\Rightarrow x}= \left(\prod_{i=1}^n  -->
+<!-- $\phantom{\implies x}= \left(\prod_{i=1}^n  -->
 <!-- \exp\left(\log(x_i)\right)\right)^{\frac{1}{n}} = \bar x_G$ -->
 
 <!-- ### Vergleich II -->
@@ -265,9 +284,9 @@ d.h.
 <!-- $g_2: t \rightarrow \frac{1}{\exp(t)}$ ist konvex, da $g_2''(t) =  \frac{1}{\exp(t)} \geq 0$   -->
 <!-- Benutze transformierte Daten $\log(x_1), \ldots , \log(x_n)$   -->
 <!-- $g_2 \left(\frac{1}{n} \sum\limits_{i=1}^n \log(x_i)\right) \leq \frac{1}{n} \sum\limits_{i=1}^n \left(\exp (\log(x_i))^{-1}\right)$   -->
-<!-- $\Rightarrow \frac{1}{\sqrt[n]{\prod\limits_{i=1}^n x_i}} \leq -->
+<!-- $\implies \frac{1}{\sqrt[n]{\prod\limits_{i=1}^n x_i}} \leq -->
 <!-- \frac{1}{n} \sum\limits_{i=1}^n \frac{1}{x_i}$   -->
-<!-- $\Rightarrow \underbrace{\sqrt[n]{\prod\limits_{i=1}^n x_i}}_{\bar x_G} \geq -->
+<!-- $\implies \underbrace{\sqrt[n]{\prod\limits_{i=1}^n x_i}}_{\bar x_G} \geq -->
 <!--   \underbrace{\frac{1}{\frac{1}{n} \sum\limits_{i=1}^n \frac{1}{x_i}}}_{\bar x_H}$ -->
   
 ### Getrimmtes Mittel

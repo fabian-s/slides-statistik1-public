@@ -142,8 +142,32 @@ Frauen & 543.88 & 503.76 & 313.20 & 244.36 & 212.90 & 104.40 & 175.52 & 2098 \\[
     Häufigkeiten $h_{ij}$ (in Klammern)}
 \end{center}
 \end{table}
-Interpretation: Wären Geschlecht und Parteipräferenz unabhängig, dann wären $649.12$ SPD-wählende Männer in der Stichprobe zu erwarten gewesen, tatsächlich wurden aber nur $626$ beobachtet. 
+Interpretation: Wären Geschlecht und Parteipräferenz unabhängig, dann wären $649.12$ SPD-wählende Männer in der Stichprobe zu erwarten gewesen, tatsächlich wurden aber nur $626$ beobachtet.
 
+
+### Beispiel: Nachwahlbefragung 2021 -- Abweichungen
+
+Beobachtete Häufigkeiten $h_{ij}$, eingefärbt nach der Abweichung von der
+Unabhängigkeitserwartung $\tilde h_{ij}$:
+
+\vskip 1.5em
+
+\begin{center}
+```{r 03-tab-wahl-resid, echo=FALSE, results='asis'}
+# gt_contingency() + wahl_abs kommen aus kontingenztafeln.Rmd (Chunk
+# 03-gt-contingency-setup) -- Kapitel-Kinder teilen die knit-Umgebung,
+# Reihenfolge in main.Rmd beachten; standalone rendert diese Datei nicht.
+cat(gt_contingency(wahl_abs, proportional_size = TRUE, size_range = c(7, 16),
+                   independence_colors = TRUE))
+```
+\end{center}
+
+\vskip 1em
+
+\footnotesize
+Farbe: Abweichung von der Unabhängigkeitserwartung (Pearson-Residuen);
+\textcolor[rgb]{0.843,0.188,0.153}{rot} $=$ seltener, \textcolor[rgb]{0.271,0.459,0.706}{blau} $=$ häufiger als erwartet.
+Die Schriftgröße kodiert zusätzlich die Zellhäufigkeit (auch im Graustufendruck lesbar).
 
 ### Interpretation:
 

@@ -248,8 +248,8 @@ $$
 \end{smallmatrix}\right)\right)
 $$
 
-Ausblick:
-Das Konzept ist auf beliebig hohe Dimensionen übertragbar. Die Parameter einer $d$-dimensionalen NV sind 
+**Ausblick (nicht klausurrelevant):**
+Das Konzept ist auf beliebig hohe Dimensionen übertragbar. Die Parameter einer $d$-dimensionalen NV sind
 ihr Erwartungswertvektor $\symbf \mu$ und ihre Kovarianzmatrix $\symbf \Sigma$:
 \begin{align*}
 \symbf X = (X_1, X_2, \dots, X_d)^T &\sim \mathcal N_d(\symbf \mu, \symbf \Sigma) \\

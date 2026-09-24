@@ -50,55 +50,29 @@ Bradley Efron (* 1938, Statistiker)
 
 >- $\implies$ **Statistische Methodik als unabdingbares Werkzeug jeder empirischen Wissenschaft.**
 
-### Warum Statistik?
+### Warum (nicht) Statistik?
 
->- *Statistics is a body of methods for making wise decisions in the face of uncertainty.*  
-W. Allen Wallis (1912-1998, Statistiker & Ökonom)  
->-  *Cognitive psychology tells us that the unaided human mind is vulnerable to many fallacies and illusions because of its reliance on its memory for vivid anecdotes rather than systematic statistics.*  
-Steven Pinker  (* 1954, Psychologe & Linguist)
->- *It is the mark of a truly intelligent person to be moved by statistics.*  
-George Bernard Shaw  (1856 - 1950, Dramatiker)
->-  *Statistik ist für mich das Informationsmittel der Mündigen. Wer mit ihr umgehen kann, ist weniger leicht zu manipulieren. Der Satz "Mit Statistik kann man alles beweisen" gilt nur für die Bequemen, die keine Lust haben, genau hinzusehen.*  
-Elisabeth Noelle-Neumann (1916-2010, Demoskopin)
-
->- $\implies$ **Statistische (Aus-)Bildung um irrationales Handeln zu vermeiden und mit Unsicherheit vernünftig umzugehen.**
-
-### Warum (nicht) Statistik? 
-
+>- *Statistik ist für mich das Informationsmittel der Mündigen. Wer mit ihr umgehen kann, ist weniger leicht zu manipulieren.*  
+Elisabeth Noelle-Neumann (1916--2010, Demoskopin)
 >- *All models are wrong, but some are useful.*  
-George E. P. Box (1919 - 2013, Statistiker)
-<!-- >- *Statistics are like bikinis. What they reveal is suggestive, but what they conceal is vital.*  
-Aaron Levenstein (1911- 1986, Ökonom)  (Frauenbeauftragte sagt PFUI) --> 
+George E. P. Box (1919--2013, Statistiker)
 >- *The combination of some data and an aching desire for an answer does not ensure that a reasonable answer can be extracted from a given body of data.*  
-John Tukey (1915- 2000, Mathematiker)
->- *If you torture the data enough, nature will always confess.*  
-Ronald Coase (1910 - 2013, Ökonom)
+John Tukey (1915--2000, Mathematiker)
 >- *There are no routine statistical questions, only questionable statistical routines.*  
-David R. Cox (1924 - 2022, Statistiker)
+David R. Cox (1924--2022, Statistiker)
 
->- $\implies$ **Statistik ist komplex und ihre Ergebnisse werden oft missbraucht oder missinterpretiert.**
+>- $\implies$ **Statistik ist unentbehrlich, aber komplex -- ihre Ergebnisse werden oft missbraucht oder missinterpretiert.**
 
-### Warum nicht Statistik? 
+### Frage an Sie
 
+Wo begegnet Ihnen im Alltag "Statistik" -- und wann trauen Sie einer Zahl **nicht**?
+
+\vspace{.5em}
+
+>- Denken Sie an eine Schlagzeile mit einer Prozentzahl, die Sie zuletzt gelesen haben.
+>- Wer hat die Daten erhoben -- und wer profitiert von der Aussage?
+>- Ist die Grundgesamtheit klar? Wurde etwas Wichtiges *nicht* gemessen?
 >- *Not everything that counts can be counted, and not everything that can be counted counts.*  
-William Bruce Cameron (1904 - 1988, Soziologe)
+William Bruce Cameron (1904--1988, Soziologe)
 
->- *Our scientific age demands that we provide definitions, measurements, and statistics in order to be taken seriously. Yet most of the important things in life cannot be precisely defined or measured. Can we define or measure love, beauty, friendship, or decency, for example?*  
-Dennis Prager (* 1948, Radiomoderator & Publizist)
-
->- *Statistics are the triumph of the quantitative method, and the quantitative method is the victory of sterility and death.*  
-Hilaire Belloc (1870 - 1953, Schriftsteller & Historiker)
-
->- $\implies$ **Statistik nur dort sinnvoll, wo Messbarkeit und Quantifizierbarkeit gegeben sind.**
-
-### ... und außerdem:
-
->- *Any observed statistical regularity will tend to collapse once pressure is placed upon it for control purposes.*  
-[Goodhart's Law](https://en.wikipedia.org/wiki/Goodhart's_law), auch:  
-*"When a measure becomes a target, it ceases to be a good measure."*  
-oder  
-*"The more any quantitative social indicator is used for social decision-making, the more subject it will be to corruption pressures."*
-
-- Ähnlich auch: Präventions-Paradox, *self-fullfilling/-destroying prophecies* 
-
->- $\implies$ **Verlässliche Messungen & Vorhersagen in Systemen, die selbst Messergebnissen beeinflussen können & von Vorhersagen beeinflusst werden, sind problematisch.**
+>- $\implies$ **Statistische Grundbildung heißt: die richtigen kritischen Fragen stellen können.**

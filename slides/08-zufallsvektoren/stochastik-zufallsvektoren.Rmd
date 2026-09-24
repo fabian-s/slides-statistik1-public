@@ -1,5 +1,18 @@
 ## Zufallsvektoren
 
+### Lernziele: Zufallsvektoren
+
+Nach diesem Kapitel können Sie ...
+
+- gemeinsame, Rand- und bedingte Verteilungen unterscheiden und -- diskret wie stetig -- konkret berechnen
+- prüfen, ob zwei Zufallsvariablen stochastisch unabhängig sind
+- die Verteilung einer Summe unabhängiger Zufallsvariablen per Faltung bestimmen
+- bedingte Erwartungswerte und bedingte Varianzen berechnen und inhaltlich interpretieren
+
+\vspace{1em}
+
+**Voraussetzungen:** Zufallsvariablen (Kap. 4), Erwartungswert & Varianz (Kap. 6), parametrische Verteilungen (Kap. 7)
+
 ### Gemeinsame Verteilungsfunktion
 
 :::{.block}
@@ -57,6 +70,11 @@ $$
 $$
 P((X, Y) \in A) = \int_{A} f(x, y)\, d (x, y)
 $$
+
+:::{.block}
+#### Ausblick
+Die *wichtigste* stetige gemeinsame Verteilung -- die **bivariate Normalverteilung** -- lernen wir in Kap. 10 kennen.
+:::
 
 \note[item]{Wdh. diskrete Größen. Alles analog!}
 \note[item]{Def. Randverteilung? Erwartungswert?}
@@ -138,6 +156,9 @@ Ergebnis zweimal: $X_F$ und $Y_F$.\
 - Berechne die gemeinsame Wahrscheinlichkeitsfunktion von
 $(X_G, Y_G)$ und von $(X_F, Y_F)$.
 
+>- **Gewissenhaft** ($X_G \perp Y_G$): $f_{X_G, Y_G}(x, y) = \tfrac12 \cdot \tfrac12 = \tfrac14$ für alle $(x,y) \in \{0,1\}^2$.
+>- **Faul** ($X_F = Y_F$): $f_{X_F, Y_F}(0,0) = f_{X_F, Y_F}(1,1) = \tfrac12$, sonst $0$.
+>- Beide haben *dieselben* Randverteilungen ($X, Y \sim {\mathcal B}(1, \tfrac12)$), aber *verschiedene* gemeinsame Verteilungen $\leadsto$ die gemeinsame Verteilung steckt mehr Information als die Ränder.
 
 \note{
 Randverteilungen aufstellen, gemeinsame Verteilung über Unabh.

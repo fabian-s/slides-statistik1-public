@@ -114,6 +114,70 @@ Erscheinungsbild von Lorenzkurven:
 -    Die Steigung des nächsten Polygonsegments ist entweder \textit{gleich groß} oder \textit{größer} als die Steigung des vorherigen Polygonsegments.
 
 
+### Lorenzkurve für gruppierte Daten
+
+Liegen die Daten als **Häufigkeitstabelle** vor ($k$ Klassen), konstruiert man
+die Lorenzkurve aus den Klassen statt aus einzelnen Werten:
+
+- geordnete Ausprägungen $a_1 \leq a_2 \leq \ldots \leq a_k$ (z.B. Klassenmitten),
+  mit absoluten Häufigkeiten $h_j$ und relativen Häufigkeiten $f_j = h_j/n$
+- kumulierter Anteil der **Einheiten**:
+  $$u_j = \sum_{l=1}^{j} f_l$$
+- kumulierter Anteil der **Merkmalssumme**:
+  $$v_j = \frac{\sum_{l=1}^{j} h_l\, a_l}{\sum_{l=1}^{k} h_l\, a_l}$$
+
+$\implies$ Der Individualdaten-Fall ist der **Spezialfall** $k = n$, $h_j = 1$,
+$a_j = x_{(j)}$.
+
+\scriptsize *Beachte:* Mit Klassenmitten $a_j$ ist das eine **Näherung** -- sie
+unterstellt, dass alle Beobachtungen einer Klasse in der Klassenmitte liegen
+(Konzentration *innerhalb* der Klassen wird ignoriert; besonders heikel bei
+offenen Randklassen).
+
+### Lorenzkurve für gruppierte Daten: Beispiel
+
+Nettoeinkommen von $n = 100$ Haushalten in 4 Klassen:
+
+\columnsbegin
+\column{5.5cm}
+\renewcommand{\arraystretch}{1.2}
+\small
+\begin{tabular}{cccccc}
+$a_j$ & $h_j$ & $f_j$ & $h_j a_j$ & $u_j$ & $v_j$ \\
+\hline
+0    &  -  &  -   &   -  & 0    & 0    \\
+15   & 40  & 0.40 & 600  & 0.40 & 0.15 \\
+30   & 30  & 0.30 & 900  & 0.70 & 0.38 \\
+60   & 20  & 0.20 & 1200 & 0.90 & 0.69 \\
+120  & 10  & 0.10 & 1200 & 1.00 & 1.00 \\
+\end{tabular}
+
+\scriptsize ($a_j$: Klassenmitte in Tsd.\ €; \; $\sum_j h_j a_j = 3900$)
+\column{6cm}
+```{r, 06-lorenz-grouped, echo = FALSE, fig.height = 5}
+grp <- tibble(
+  a = c(15, 30, 60, 120), # Klassenmitte (Tsd. €)
+  h = c(40, 30, 20, 10) # Häufigkeit
+) |>
+  mutate(
+    f = h / sum(h),
+    hs = h * a,
+    u = cumsum(f),
+    v = cumsum(hs) / sum(hs)
+  )
+lor <- bind_rows(tibble(u = 0, v = 0), dplyr::select(grp, u, v))
+ggplot(lor, aes(u, v)) +
+  geom_abline(slope = 1, intercept = 0, col = "darkgray") +
+  geom_line() +
+  geom_point() +
+  scale_x_continuous(labels = scales::label_percent()) +
+  scale_y_continuous(labels = scales::label_percent()) +
+  ylab(expression("kum. Anteil Merkmalssumme " * v[j])) +
+  xlab(expression("kum. Anteil Einheiten " * u[j]))
+```
+\columnsend
+
+
 ### Gini-Koeffizient
 
 \columnsbegin
@@ -188,6 +252,9 @@ $$ H := \sum_{i=1}^n p_i^2 $$
 Der Wertebereich ist von $\frac{1}{n}$ (identische $x_i$) bis 1 (Monopol)
 
 ### Konzentrationsmessung: Deutsche Vermögensverteilung
+
+Jedes **Dezil** ist eine Klasse mit $f_j = 10\%$ der Bevölkerung -- die Kurve ist
+also genau die Lorenzkurve für *gruppierte Daten* (vgl. oben).
 
 ```{r, lorenzkurve-de-prep, echo = FALSE, eval = FALSE}
 # data dl'ed @ 21/10/04  

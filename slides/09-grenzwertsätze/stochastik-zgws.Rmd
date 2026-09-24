@@ -92,7 +92,21 @@ $$
 - Anwendung: Die Verteilung der Summe/des Mittelwerts vieler (in etwa) *iid* Zufallsvariablen kann gut durch ein Normalverteilungsmodell approximiert werden. 
 
 
-### Veranschaulichung ZGWS und GGZ 
+### Selbsttest: GGZ & ZGWS
+
+Überlegen Sie zuerst selbst, bevor Sie die Antworten aufdecken:
+
+1. Welche Voraussetzungen braucht der ZGWS?
+2. Wozu braucht man die *endliche Varianz*?
+3. Gilt der ZGWS auch für diskrete oder schiefe $X_i$?
+
+\vspace{0.5em}
+
+>- **1.** i.i.d. Zufallsvariablen mit *existierendem* Erwartungswert und *endlicher* Varianz --- die datengenerierende Verteilung selbst ist beliebig.
+>- **2.** Nur dann gilt $\Var(\bar X_n) = \sigma^2/n \to 0$; ohne endliche Varianz (z.B. Cauchy) konvergiert das Mittel nicht --- weder GGZ noch ZGWS greifen.
+>- **3.** Ja --- solange $E(X_i)$ und $\Var(X_i)$ existieren, ist die Form der Verteilung (diskret, schief, multimodal) egal.
+
+### Veranschaulichung ZGWS und GGZ
 
 ```{r zgws-ggz-vis-1, echo = FALSE, out.height='.55\\textheight'}
 par(mgp = c(2,1,0), mfrow = c(1,2))

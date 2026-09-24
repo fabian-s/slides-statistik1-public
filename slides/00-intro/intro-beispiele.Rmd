@@ -1,6 +1,31 @@
 ## Beispiele
 
-### Bundestagswahl 2021
+### Lernziele: Was ist Statistik?
+
+Nach diesem Kapitel können Sie ...
+
+- die drei Aufgaben der Statistik -- **Deskription**, **Exploration** und **Induktion** -- unterscheiden und je ein Beispiel zuordnen
+- typische **Anwendungsfelder** statistischer Datenanalyse (Wahlprognosen, klinische Studien, maschinelles Lernen, ...) erkennen
+- benennen, welche **Frage** eine Analyse jeweils beantwortet: beschreiben, Strukturen suchen oder auf die Grundgesamtheit verallgemeinern
+- **Grenzen und Missbrauchsmöglichkeiten** von Datenanalysen kritisch einordnen (Verzerrung, Fehlinterpretation, Manipulation)
+
+### Roter Faden: Schlaf im ersten Semester
+
+**Frage:** Wie viel schlafen Erstsemester -- und hängt die Schlafdauer mit
+der selbstberichteten Schlafqualität (oder dem Studiengang) zusammen?
+
+>- **Deskription:** Wie sind Schlafdauer & -qualität in der Stichprobe verteilt?
+>- **Exploration:** Gibt es einen Zusammenhang zwischen Dauer und Qualität?
+>- **Induktion:** Lässt sich von den Befragten auf *alle* Erstsemester schließen?
+
+\vspace{.5em}
+
+An dieser alltagsnahen Fragestellung illustrieren wir im Verlauf der Vorlesung
+immer wieder neue Konzepte. Den ersten Schritt machen Sie selbst: **Blatt 1**
+analysiert eine solche Schlaf-Umfrage unter Studienanfänger:innen.
+
+
+### Bundestagswahl 2021 -- Prognose vs.\ Ergebnis (Fallbeispiel)
 
 **Prognose 18:00 Infratest Dimap  (ARD):**
 
@@ -16,14 +41,15 @@ Basis: Nachwahlbefragung, ca. 33 000 Wahlberechtigte
 \begin{center}
   \includegraphics[width=.7\textwidth]{pics/bundestagswahl21-ergebnis.png}
 \end{center}
-\scriptsize\url{bundestagswahl.br.de/public/ec/ergebnis-bundestagswahl-2021-bayern-deutschland.html}  
+\scriptsize\url{bundestagswahl.br.de/public/ec/ergebnis-bundestagswahl-2021-bayern-deutschland.html}
 
 
-### Bundestagswahl 2021
+### Bundestagswahl 2021 -- Fragestellungen
 
-Ziele:
+Historisches Fallbeispiel -- dasselbe Prinzip wiederholt sich bei jeder Wahl
+(zuletzt Bundestagswahl 2025):
 
-*  Schluss von der Befragung einer Stichprobe von Wähler:innen auf Gesamtergebnis
+*  Schluss von der Befragung einer Stichprobe von Wähler:innen auf das Gesamtergebnis
 *  Analyse von Wahlverhalten durch weitere Fragen (Wechselwähler:innen etc.)
 
 
@@ -58,12 +84,23 @@ Website: [koala.stat.uni-muenchen.de](https://koala.stat.uni-muenchen.de/)
 
 ### KOALA - Koalitions Analyse
 
-![](pics/koala_survey)
+\begin{center}
+  \includegraphics[width=.75\textwidth]{pics/koala_survey}
+\end{center}
+
+**Schritt 1:** Mehrere aktuelle Umfragen werden zu einem gemeinsamen Schätzwert
+je Partei gebündelt -- einzelne Umfragen schwanken, die Bündelung glättet.
 
 
 ### KOALA - Koalitions Analyse
 
-![](pics/koala_probs)
+\begin{center}
+  \includegraphics[width=.62\textwidth]{pics/koala_probs}
+\end{center}
+
+**Schritt 2:** Aus vielen simulierten Wahlausgängen ergibt sich die
+*Wahrscheinlichkeit* einer Sitzmehrheit für eine Koalition -- und wie sie sich
+über die Zeit verändert.
 
 
 ### ISAR - Lebensmittelimportscreening
@@ -84,23 +121,12 @@ StaBLab-Projekt mit H. Küchenhoff, A. Bauer und F. Günther in Zusammenarbeit m
 * 2014 Ernteeinbruch von Haselnüssen in der Türkei
 * Darauf folgend starker Preisanstieg
 * Es wurden verstärkt Kontrollen der nach Deutschland importierten Haselnussprodukte durchgeführt
-* In verarbeiteten Produkten wurde Verfälschungen, u.a. durch Cashews/Mandeln gefunden, hohes Gesundheitsrisiko (Allergie)
+* In verarbeiteten Produkten wurden Verfälschungen, u.a. durch Cashews/Mandeln gefunden, hohes Gesundheitsrisiko (Allergie)
 * In ISAR erste Signale für auffällige Preisentwicklung im September 2015
 
 \begin{center}
-\includegraphics[width=.6\textwidth]{pics/Haselnuesse_03} \\
-\end{center}
-
-### ISAR: Beispiel Haselnüsse Türkei
-
-* 2014 Ernteeinbruch von Haselnüssen in der Türkei
-* Darauf folgend starker Preisanstieg
-* Es wurden verstärkt Kontrollen der nach Deutschland importierten Haselnussprodukte durchgeführt
-* In verarbeiteten Produkten wurde Verfälschungen, u.a. durch Cashews/Mandeln gefunden, hohes Gesundheitsrisiko (Allergie)
-* In ISAR erste Signale für auffällige Preisentwicklung im September 2015
-
-\begin{center}
-\includegraphics[width=.6\textwidth]{pics/Haselnuesse_05} \\
+\includegraphics[width=.48\textwidth]{pics/Haselnuesse_03}
+\includegraphics[width=.48\textwidth]{pics/Haselnuesse_05}
 \end{center}
 
 <!-- ### Analyse von Daten zu Bombentrichtern -->
@@ -252,17 +278,16 @@ in Munich (Germany) on the reduction of PM$_{10}$ in ambient air.
 Health* 11(5):5094-5112.
 
 
-### Wirkung der Umweltzone: Prinzregentenstrasse
+### Wirkung der Umweltzone: zwei Messstationen
 
 \begin{center}
-\includegraphics[height = .8\textheight]{pics/0-ex6-umweltzone-prinzregenten.png}
+\includegraphics[height = .72\textheight]{pics/0-ex6-umweltzone-prinzregenten.png}
+\includegraphics[height = .72\textheight]{pics/0-ex6-umweltzone-loth.png}
 \end{center}
 
-### Wirkung der Umweltzone: Lothstrasse
-
-\begin{center}
-\includegraphics[height = .8\textheight]{pics/0-ex6-umweltzone-loth.png}
-\end{center}
+\footnotesize Prinzregentenstraße (links) und Lothstraße (rechts): Das
+Regressionsmodell trennt den Effekt der Umweltzone von Wetter- und
+Tagesverlaufseinflüssen.
 
 ### Weitere Beispiele
 

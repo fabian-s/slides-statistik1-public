@@ -1,5 +1,17 @@
 ## Skalenniveaus
 
+### Warum Skalenniveaus?
+
+Ist der **Durchschnitt von Postleitzahlen** eine sinnvolle Größe?
+
+>- Ist die mittlere Trikotnummer einer Fußballmannschaft interpretierbar?
+>- Sind 20 °C *doppelt so warm* wie 10 °C?
+>- Der Median von Schulnoten ("sehr gut" ... "ungenügend") ist interpretierbar --- das arithmetische Mittel auch?
+
+\vspace{1em}
+
+>- **Welche Rechnungen sinnvoll sind, hängt vom *Skalenniveau* des Merkmals ab --- nicht davon, ob sich die Ausprägungen als Zahlen schreiben lassen.**
+
 ### Skalen
 
 Messungen als strukturerhaltende Abbildungen  
@@ -44,8 +56,10 @@ Zulässige Skalentransformationen erhalten die Struktur der empirischen Relative
 
 Die Menge zulässiger Transformationen bestimmt das Skalenniveau eines Merkmals.
 
-Höhere Skalenniveaus erlauben eine *größere* Menge von sinnvollen *Operationen auf Werten der Skala*,
-aber eine *kleinere* Menge an zulässigen strukturerhaltenden *Transformationen der Skala* an sich.
+Höhere Skalenniveaus 
+
+- erlauben eine *größere* Menge von sinnvollen *Operationen mit Werten auf der Skala*,
+- aber eine *kleinere* Menge an zulässigen strukturerhaltenden *Transformationen der Skala selbst*.
 
 ### Nominalskala
 

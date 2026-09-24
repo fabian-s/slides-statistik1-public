@@ -1,5 +1,46 @@
 ## Kontingenztafeln für diskrete und gruppierte Merkmale
 
+```{r 03-gt-contingency-setup, echo=FALSE, message=FALSE, warning=FALSE, cache=FALSE}
+# colored contingency-table helper (child wd = chapter dir).
+# cache=FALSE: knitr's cache does NOT track gt-contingency.R's mtime — a cached
+# version of this chunk would silently keep using a stale helper after edits.
+source("gt-contingency.R")
+
+# Beispieldaten EINMAL definieren, danach in allen Kapitel-Kindern wiederverwendet:
+# Wahlverhalten nach Geschlecht (Nachwahlbefragung Bundestag 2021), absolute Häufigkeiten
+wahl_abs <- matrix(
+  c(626, 601, 352, 325, 300, 125, 175,
+    567, 504, 335, 211, 167, 104, 210),
+  nrow = 2, byrow = TRUE,
+  dimnames = list(
+    c("Männer", "Frauen"),
+    c("SPD", "CDU/CSU", "Grüne", "FDP", "AfD", "Linke", "Rest")))
+
+# Arbeitslosigkeit: Ausbildungsniveau x Dauer der Arbeitslosigkeit, absolute Häufigkeiten
+arbeit_abs <- matrix(
+  c(86, 19, 18,
+    170, 43, 20,
+    40, 11, 5,
+    28, 4, 3),
+  nrow = 4, byrow = TRUE,
+  dimnames = list(
+    c("k.A.", "Lehre", "Fachspez.", "Hochschule"),
+    c("Kurzzeit", "mittelfristig", "Langzeit")))
+```
+
+### Lernziele: Zusammenhang diskreter Merkmale
+
+Nach diesem Kapitel können Sie ...
+
+- Kontingenztafeln aufstellen, lesen und ihre Rand- und bedingten Verteilungen berechnen
+- bedingte relative Häufigkeiten zwischen Subpopulationen vergleichen und dabei Prozente, Prozentpunkte und Anteile korrekt unterscheiden
+- Odds und Odds Ratios aus einer Kontingenztafel berechnen und sprachlich korrekt verbalisieren
+- die Abweichung von empirischer Unabhängigkeit mit $\chi^2$-, Kontingenz- und korrigiertem Kontingenzkoeffizienten beurteilen
+
+\vspace{1em}
+
+**Voraussetzungen:** Bedingte Wahrscheinlichkeiten und Chancen $\gamma(A) = P(A)/(1-P(A))$ (Kap. 2)
+
 ### Einführung
 
 Zurück zur Empirie --  
@@ -7,7 +48,7 @@ Zurück zur Empirie --
 Wie können wir in beobachteten Daten Aussagen über die (Un-)Abhängigkeit von
 Merkmalen machen?
 
-$\Rightarrow$ **mehrdimensionale** oder **multivariate** Daten
+$\longrightarrow$ **mehrdimensionale** oder **multivariate** Daten
 
 ### Multivariate Daten
 
@@ -37,19 +78,16 @@ b_1,\ldots,b_m \qquad \mbox{für }\,Y
 - *benutzt* wird hier allerdings nur das *Nominal*skalenniveau der Merkmale.
 
 
-### Kontingenztabellen
+### Beispiel: Wahlverhalten nach Geschlecht
 
-Nachwahlbefragung Bundestag 2021:   
+Nachwahlbefragung Bundestag 2021:
 
 \vskip 3em
 \small
 \begin{center}
-      \begin{tabular}{r | ccccccc | c}
-          & \text{SPD} & \text{CDU/CSU} & \text{Grüne} & \text{FDP} & \text{AfD} & \text{Linke} &  \text{Rest} & $\sum$ \\ \hline
-          Männer & 626 & 601 & 352 & 325 & 300 & 125 & 175 & 2504\\
-          Frauen & 567 & 504 & 335 & 211 & 167 & 104 & 210 & 2098 \\ \hline
-          \sum  & 1193 & 1105 & 687 & 536 & 467 & 229 & 385 & 4602  
-      \end{tabular}
+```{r 03-tab-wahl-abs, echo=FALSE, results='asis'}
+cat(gt_contingency(wahl_abs, proportional_size = FALSE, independence_colors = FALSE))
+```
 \end{center}
 
 \vskip 5em
@@ -72,38 +110,17 @@ Zwei Merkmale:
     -  ``Langzeitarbeitslosigkeit'' ($\geq$ $12$ Monate)
 
 ### Arbeitslosigkeit
-\small
 
-\begin{table}[hbt]
-  \begin{center}
-    \leavevmode\small
-    \begin{tabular}{l|ccc|c}
-\multicolumn{1}{c}{}
-& \multicolumn{1}{c}{Kurzzeit-}
-  & \multicolumn{1}{c}{mittelfristige}
-    & \multicolumn{1}{c}{Langzeit-}
-    & \multicolumn{1}{c}{$\sum$}\\
-\multicolumn{1}{c}{}
-& \multicolumn{1}{c}{arbeitslosigkeit}
-  & \multicolumn{1}{c}{Arbeitslosigkeit}
-    & \multicolumn{1}{c}{arbeitslosigkeit}\\\cline{2-4}
-k.A.  & 86 & 19 & 18 & 123 \\
-Lehre & 170 & 43 & 20 & 233 \\
-Fachspez. & 40 & 11 & 5 & 56\\
-Hochschule & 28 & 4 & 3 & 35\\\cline{2-4}
-\multicolumn{1}{c}{$\sum$}
-& \multicolumn{1}{c}{$324$}
-  & \multicolumn{1}{c}{$77$}
-    & \multicolumn{1}{c}{$46$}
-      & \multicolumn{1}{c}{$447$}
-    \end{tabular}
-    \vspace{3mm}
-    \\{Ausbildungsspezifische Dauer der Arbeitslosigkeit für männliche Deutsche}
+Kontingenztafel der absoluten Häufigkeiten für die Merkmale Ausbildungsniveau
+und Dauer der Arbeitslosigkeit:
+
+\vskip 2em
+
+\begin{center}
+```{r 03-tab-arbeit-abs, echo=FALSE, results='asis'}
+cat(gt_contingency(arbeit_abs, proportional_size = FALSE, independence_colors = FALSE))
+```
 \end{center}
-\end{table}
-
-
-
 
 
 ### Allgemeine Darstellung

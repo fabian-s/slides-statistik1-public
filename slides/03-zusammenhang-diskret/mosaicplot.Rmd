@@ -4,10 +4,34 @@
 
 Beispiel: Überleben beim Titanic-Untergang
 
-  -  Mehrere diskrete Merkmale: Geschlecht, Klasse, Kind/ Erwachsene, Überleben (Ja/Nein)
+  -  Mehrere diskrete Merkmale: 
+      - Geschlecht (m / w)
+      - Klasse (1st / 2nd / 3rd / Crew)
+      - Alter (Kind/ Erwachsene)
+      - Überleben (Ja / Nein)
   -  Darstellung durch geeignete bedingte und marginale Verteilungen
   -  Berechnung von Odds-Ratio zweier Merkmale bedingt auf ein drittes Merkmal
   -  grafische Darstellung durch Mosaik-Plot
+
+### Wide vs. tidy: zwei Sichten auf dieselben Daten
+
+**Wide** (Kontingenz-Array, kompakt zum Ablesen):
+
+```{r 03-tidy-wide, echo=TRUE}
+arbeit_abs
+```
+
+**Long / tidy** (eine Zeile pro Merkmalskombination):
+
+```{r 03-tidy-long, echo=TRUE}
+long <- as.data.frame(as.table(arbeit_abs))
+names(long) <- c("Ausbildung", "Dauer", "Anzahl")
+head(long, 4)
+```
+
+\footnotesize
+Ganz "tidy": eine Zeile pro *Beobachtung* (Zeilen gemäß `Anzahl` vervielfacht).
+$\implies$ `ggplot2` (Kap. 5) erwartet Daten im tidy/long-Format.
 
 ### Beispiel: Titanic
 

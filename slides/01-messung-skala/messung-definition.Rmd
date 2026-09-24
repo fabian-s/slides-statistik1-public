@@ -1,7 +1,15 @@
+### Lernziele: Datenerhebung & Messung
+
+Nach diesem Kapitel können Sie ...
+
+- die statistischen Grundbegriffe (Untersuchungseinheit, Grundgesamtheit, Stichprobe, Merkmal, Ausprägung) an konkreten Erhebungen anwenden
+- Merkmale nach ihrem Skalenniveau klassifizieren und die jeweils zulässigen Transformationen begründen
+- Erhebungsarten (Vollerhebung vs. Stichprobe, Experiment vs. Beobachtung) charakterisieren und unterscheiden
+
 ### Grundbegriffe
 
 :::{.block}
-#### Def.: **Statistische Einheit, Untersuchungseinheit** (UE)  
+#### Def.: **Statistische Einheit, Untersuchungseinheit** (UE)
 Objekte, an denen interessierende Größen erfasst werden. "Merkmalsträger".
 :::
 
@@ -43,9 +51,6 @@ Die Gesamtheit der beobachteten Merkmalsausprägungen der gemessenen Merkmale ei
 ## Messung
 
 ### Messen
-
->- *Measurement is the contact of reason with nature.*  
-Henry Margenau (1959)
 
 >- *In its broadest sense, measurement is the assignment of numerals to objects or events according to rules.*  
 Stanley S. Stevens (1951)

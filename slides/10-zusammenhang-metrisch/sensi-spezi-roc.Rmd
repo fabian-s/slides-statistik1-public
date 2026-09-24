@@ -110,7 +110,9 @@ Die **ROC-Kurve**
 bzw ("falsch positiv"-Rate, "wahr positiv"-Rate)  
 - für *alle* möglichen Schwellenwerte $c \in [x_{(1)}, x_{(n)}]$
 
-Sie zeigt die Zuverlässigkeit der Vorhersagen für alle möglichen Schwellenwerte $c$ an. 
+Sie zeigt die Zuverlässigkeit der Vorhersagen für alle möglichen Schwellenwerte $c$ an.
+
+**Interaktiv ausprobieren:** [shinyapps.io/sensi-spezi-roc](https://fabian-s.shinyapps.io/sensi-spezi-roc/) --- Schwellenwert verschieben und Sensitivität, Spezifität & ROC-Kurve live beobachten.
 
 Es gilt: 
 

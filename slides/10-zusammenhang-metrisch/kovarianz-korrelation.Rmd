@@ -1,3 +1,16 @@
+### Lernziele: Zusammenhangsmaße für metrische Merkmale
+
+Nach diesem Kapitel können Sie ...
+
+- Kovarianz und Korrelationskoeffizienten aus Daten berechnen und ihre Werte inhaltlich interpretieren
+- die Grenzen der Bravais-Pearson-Korrelation (nur *linearer* Zusammenhang, Ausreißer) beurteilen
+- Rangkorrelation (Spearman) gegen die Bravais-Pearson-Korrelation abgrenzen und passend einsetzen
+- Sensitivität, Spezifität, ROC-Kurve und AUC berechnen, interpretieren und anwenden
+
+\vspace{1em}
+
+**Voraussetzungen:** Streuungsmaße & Kennwerte (Kap. 6), Zufallsvektoren & Kovarianz (Kap. 8)
+
 ## Kovarianz und Korrelation beobachteter Merkmale
 
 ### Kovarianz
@@ -35,28 +48,28 @@ klein_und_kaltpos = subset(klein_und_kalt, subset = !((wfl > wfl_mean & nm < nm_
 close_pos = round(scale(klein_und_kaltpos[,c("wfl", "nm")], center = T), 1)
 klein_und_kaltpos = klein_und_kaltpos[row.names(unique(close_pos)),]
 
-p <-  ggplot(klein_und_kalt) + 
+p <-  ggplot(klein_und_kalt) +
   xlab("Wohnfläche [qm]") + ylab("Nettomiete [EUR]") + theme_gray(base_size = 13)
 
 p1 <- p +  geom_point(aes(x = wfl, y = nm), shape = 1) + #, alpha = .5) +
-  geom_hline(yintercept = nm_mean, linetype = "dashed") + 
-  scale_y_continuous(sec.axis = 
+  geom_hline(yintercept = nm_mean, linetype = "dashed") +
+  scale_y_continuous(sec.axis =
                        sec_axis(~ ., breaks = nm_mean, label = expression(bar(Y)))) +
   geom_vline(xintercept = wfl_mean, linetype = "dashed") +
-  scale_x_continuous(sec.axis = 
+  scale_x_continuous(sec.axis =
                        sec_axis(~ ., breaks = wfl_mean, label = expression(bar(X))))
 
-show_four <- rbind(subset(klein_und_kaltneg, (wfl == min(wfl)) | nm == min(nm)), 
+show_four <- rbind(subset(klein_und_kaltneg, (wfl == min(wfl)) | nm == min(nm)),
               subset(klein_und_kaltpos, (wfl == 40) | nm == max(nm)))
 show_four <- cbind(show_four, neg = c("< 0", "< 0", "> 0", "> 0"))
-p2 <- p1 + 
-  geom_rect(data = show_four, 
-            aes(xmin = wfl_mean, ymin = nm_mean, xmax = wfl, ymax = nm, fill = neg), 
+p2 <- p1 +
+  geom_rect(data = show_four,
+            aes(xmin = wfl_mean, ymin = nm_mean, xmax = wfl, ymax = nm, fill = neg),
             alpha = .25, color =  NA) +
-  geom_point(data = show_four, 
+  geom_point(data = show_four,
             aes(x = wfl, y = nm, col = neg), size = 1, show.legend = FALSE) +
-  scale_fill_manual(values = c("blue", "red")) + 
-  scale_color_manual(values = c("blue", "red")) + 
+  scale_fill_manual(values = c("blue", "red")) +
+  scale_color_manual(values = c("blue", "red")) +
   guides(fill = guide_legend(title = expression((x[i]-bar(x))~(y[i]-bar(y))))) +
   annotate("text", x = mean(c(wfl_mean, max(show_four$wfl))),
       y = max(show_four$nm),
@@ -65,9 +78,9 @@ p2 <- p1 +
       y = mean(c(max(show_four$nm), nm_mean)),
       label = "y[i] - bar(y)", parse = T, hjust = 0.2, vjust = -0.4, angle = -90)
 
-p3 <- p1 + 
+p3 <- p1 +
   geom_rect(data = klein_und_kaltpos, aes(xmin = wfl_mean, ymin = nm_mean, xmax = wfl, ymax = nm), alpha = .05, color = NA, fill = "red") +
-  geom_rect(data = klein_und_kaltneg, aes(xmin = wfl_mean, ymin = nm_mean, xmax = wfl, ymax = nm), alpha = .05, color = NA, fill = "blue") 
+  geom_rect(data = klein_und_kaltneg, aes(xmin = wfl_mean, ymin = nm_mean, xmax = wfl, ymax = nm), alpha = .05, color = NA, fill = "blue")
 ```
 ```{r, cov-intuition-1, warning = FALSE, message = FALSE, echo = FALSE}
 p1
@@ -82,7 +95,7 @@ p2
 ### Kovarianz: Geometrische Intuition
 
 ```{r, cov-intuition-3, warning = FALSE, message = FALSE, echo = FALSE}
-var_covs <- with(klein_und_kalt, c(var(wfl), var(nm), cov(wfl, nm), cor(wfl, nm))) |> 
+var_covs <- with(klein_und_kalt, c(var(wfl), var(nm), cov(wfl, nm), cor(wfl, nm))) |>
                   signif(3)
 p3 + labs(
   caption = bquote(S[x]^2 == .(var_covs[1])~", "~S[y]^2 == .(var_covs[2])~", "~S[xy] == .(var_covs[3])~", "~r[xy] == .(var_covs[4]))
@@ -103,9 +116,9 @@ $(x_i,y_i), i=1,\ldots,n$ durch
              &= \frac{\sum_{i=1}^n(x_i - \bar x)(y_i - \bar y)}
       {\sqrt{\sum_{i=1}^n(x_i - \bar x)^2 \sum_{i=1}^n(y_i - \bar y)^2}} = \frac{S_{xy}}{S_x S_y}
   \end{align*}
-Wertebereich: $-1 \leq r_{xy} \leq 1$  
+Wertebereich: $-1 \leq r_{xy} \leq 1$
 
-- dimensionslose Größe, hängt nicht mehr von $S_x$ oder $S_y$ ab: 
+- dimensionslose Größe, hängt nicht mehr von $S_x$ oder $S_y$ ab:
 
 \vspace{0.3cm}
 
@@ -124,7 +137,7 @@ Wertebereich: $-1 \leq r_{xy} \leq 1$
 -  Misst vor allem die Stärke des **linearen** Zusammenhangs
 -  Betrag der Korrelation unverändert bei linearen Transformationen
 -  Symmetrisch: $r_{xy} = r_{yx}$
--  Positive Korrelation bedeutet:  
+-  Positive Korrelation bedeutet:
    "Je größer X, desto größer im Durchschnitt Y"
 -  Korrelation = +1 [-1] falls die Punkte genau auf einer Geraden mit positiver [negativer] Steigung liegen -- **unabhängig von Steigung dieser Geraden** (außer sie ist 0 oder $\infty$).
 -  "Korrelation = 0" bedeutet "kein *linearer* Zusammenhang", aber **nicht Unabhängigkeit**! (s. Bsp. unten)
@@ -138,26 +151,28 @@ Misst nur Stärke des **linearen** Zusammenhangs:
 ```{r, 04-rxy, echo =FALSE, warning = FALSE, message = FALSE, scale = .85}
 n <- 30
 set.seed(1121121)
-data_rxy <- data_frame(x = drop(scale(runif(n, -2, 2)))) %>% 
+data_rxy <- data_frame(x = drop(scale(runif(n, -2, 2)))) %>%
   mutate(y1 = 1.8*x + rnorm(n),
          y2 = -1.8*x + rnorm(n),
-         y3 = scale(rnorm(n)), 
+         y3 = scale(rnorm(n)),
          y4 = rnorm(n),
-         y5 = x^2 + .3*scale(rnorm(n)), 
-         y6 = -x^2 + .3*scale(rnorm(n))) %>% 
-  gather(key = "dataset", value = "y", -x) %>% 
+         y5 = x^2 + .3*scale(rnorm(n)),
+         y6 = -x^2 + .3*scale(rnorm(n))) %>%
+  gather(key = "dataset", value = "y", -x) %>%
   mutate(x = ifelse(dataset == "y4", .1*x, x))
-r_xy <- data_rxy %>% group_by(dataset) %>% 
-  summarize(rxy = cor(x,y), miny =min(y), maxy = max(y)) %>% 
+r_xy <- data_rxy %>% group_by(dataset) %>%
+  summarize(rxy = cor(x,y), miny =min(y), maxy = max(y)) %>%
   mutate(label = c("r[xy]>0", "r[xy]<0", rep("r[xy] %~~% 0", 4)),
     y = c(maxy[1], miny[2], maxy[3:4], miny[5], maxy[6]))
 ggplot(data_rxy, aes(x = x, y = y)) +
     geom_point(alpha = .5) +
     theme(legend.position = "none") +
-    theme_void() + theme(panel.border = element_rect(fill=NA)) +
-    facet_wrap( ~ dataset, ncol = 3, labeller = function(...) "", dir = "v", 
-      scales = "free_y") + 
-  geom_text(data = r_xy, x = min(data_rxy$x) + .5, 
+    theme_void() +
+    theme(panel.border = element_rect(fill = NA, colour = "grey30", linewidth = 0.4),
+      panel.spacing = unit(2, "mm")) +
+    facet_wrap( ~ dataset, ncol = 3, labeller = function(...) "", dir = "v",
+      scales = "free_y") +
+  geom_text(data = r_xy, x = min(data_rxy$x) + .5,
     aes(y = y, label = label), parse = TRUE, size = 6, vjust = "inward")
 ```
 
@@ -170,7 +185,7 @@ ggplot(datasaurus_dozen |> filter(dataset != "slant_down"), aes(x = x, y = y)) +
     facet_wrap( ~ dataset, ncol = 4, labeller = function(...) "")
 ```
 
-**Alle** diese Datensätze haben **$r_{xy} = -0.06$**!  
+**Alle** diese Datensätze haben **$r_{xy} = -0.06$**!
 (und $n = 142$, $\bar x = 54.3, S_x = 16.8$, $\bar y = 47.8, S_y = 26.9$)
 
 
@@ -183,8 +198,8 @@ ggplot(datasaurus_dozen |> filter(dataset != "slant_down"), aes(x = x, y = y)) +
               mit }a > 0 \mbox{ bzw. }a < 0
           \]
 -  Lineare Transformationen $\tilde{X} = a_X X+b_X, \tilde{Y} = a_Y Y+b_Y, a_X, a_Y \neq
-0$:  
-          $r_{xy}$ Korrelationskoeffizient zwischen $X$ und $Y$  
+0$:
+          $r_{xy}$ Korrelationskoeffizient zwischen $X$ und $Y$
           $\tilde{r}_{xy}$ Korrelationskoeffizient zwischen $\tilde{X}$ und
 $\tilde{Y}$
           \[
@@ -194,25 +209,157 @@ $\tilde{Y}$
     \end{array}
           \]
 
-<!-- ### Vektor-Darstellung -->
+### Exkurs: Inneres Produkt & Winkel
 
-<!-- Definiere die zentrierten Datenvektoren -->
-<!--               \[ -->
-<!--               \begin{array}{c} -->
-<!--                   x_c = -->
-<!-- (x_1-\bar{x},\ldots,x_i-\bar{x},\ldots,x_n-\bar{x})'\\ -->
-<!--                   y_c = -->
-<!-- (y_1-\bar{y},\ldots,y_i-\bar{y},\ldots,y_n-\bar{y})' -->
-<!--               \end{array} -->
-<!--               \] -->
+\columnsbegin
+\column{5.0cm}
+\begin{center}
+\begin{tikzpicture}[scale=1.7, >=Stealth]
+  \draw[gray!50] (0,0) circle (1);
+  \draw[fill=orange!25, draw=orange!60] (0,0) -- (0.3,0) arc (0:60:0.3) -- cycle;
+  \node at (30:0.48) {\small $\theta$};
+  \draw[dashed, gray] (60:1) -- (0.5,0);
+  \draw[gray] (0.42,0) -- (0.42,0.08) -- (0.5,0.08);
+  \draw[->, very thick, red] (0,0) -- (1,0) node[below right] {$a$};
+  \draw[->, very thick, blue] (0,0) -- (60:1) node[above right] {$b$};
+  \draw[|-|, thick, blue!70] (0,-0.16) -- (0.5,-0.16)
+    node[midway, below] {\small $\cos(\theta) = \langle a, b \rangle$};
+\end{tikzpicture}\\[.7em]
+\begin{tikzpicture}[scale=0.75, >=Stealth]
+  \draw[gray!50] (0,0) circle (1);
+  \draw[draw=orange!60] (0.28,0) arc (0:90:0.28);
+  \draw[->, thick, red] (0,0) -- (1,0) node[below right] {\scriptsize $a$};
+  \draw[->, thick, blue] (0,0) -- (0,1) node[above] {\scriptsize $b$};
+  \node at (0,-1.35) {\scriptsize $90^{\circ}\!:\, \langle a, b \rangle = 0$};
+\end{tikzpicture}
+\hspace{.2em}
+\begin{tikzpicture}[scale=0.75, >=Stealth]
+  \draw[gray!50] (0,0) circle (1);
+  \draw[draw=orange!60] (0.28,0) arc (0:180:0.28);
+  \draw[->, thick, red] (0,0) -- (1,0) node[below right] {\scriptsize $a$};
+  \draw[->, thick, blue] (0,0) -- (-1,0) node[above left] {\scriptsize $b$};
+  \draw[|-|, thick, blue!70] (-1,-0.22) -- (0,-0.22);
+  \node at (0,-1.35) {\scriptsize $180^{\circ}\!:\, \langle a, b \rangle = -1$};
+\end{tikzpicture}
+\end{center}
+\column{6.2cm}
+Für **Einheitsvektoren** $a, b$
+(d.h. $\lVert a \rVert = \lVert b \rVert = 1$) gilt für $\theta = \angle(a, b)$:
+$$\langle a, b \rangle :=  a^T b = \sum a_i b_i = \cos(\theta)$$
+\small
+= Länge der orthogonalen **Projektion** von $b$ auf $a$:\
+*"Wie viel von $b$ zeigt in Richtung $a$?"*
 
-<!-- $\implies r_{xy} = \frac{x_c' y_c}{\lVert x_c \rVert \lVert y_c \rVert}$, -->
-<!-- mit $||\, . \,||$ euklidische Norm.  -->
+\begin{center}
+\begin{tikzpicture}[>=Stealth, x=0.026cm, y=0.95cm]
+  \draw[->] (-5,0) -- (195,0) node[below right] {\scriptsize $\theta$};
+  \draw[->] (0,-1.3) -- (0,1.4) node[above] {\scriptsize $\cos(\theta)$};
+  \foreach \t in {0,90,180} \draw (\t,0.06) -- (\t,-0.06) node[below] {\scriptsize $\t^{\circ}$};
+  \draw (4,1) -- (-4,1) node[left] {\scriptsize $1$};
+  \draw (4,-1) -- (-4,-1) node[left] {\scriptsize $-1$};
+  \draw[thick, blue!70] plot[domain=0:180, samples=90] (\x, {cos(\x)});
+\end{tikzpicture}
+\end{center}
 
-<!-- - das ist der Cosinus des Winkels zwischen $x_c$ und $y_c$! -->
-<!-- - aus der Cauchy-Schwarz-Ungleichung folgt  -->
-<!-- $$|x_c'y_c| \leq \lVert x_c \rVert \lVert y_c \rVert,$$ -->
-<!-- d.h. $-1 \leq r_{xy} \leq +1.$ -->
+Beliebige Vektoren $x, y$ werden durch **Normieren** zu Einheitsvektoren $\tfrac{x}{\lVert x \rVert}, \tfrac{y}{\lVert y \rVert}$
+$\implies \cos(\theta) = \tfrac{\langle x, y \rangle}{\lVert x \rVert \, \lVert y \rVert}$ für beliebige $x, y$.
+\columnsend
 
-<!-- s. a. 04-02-kovarianz-linalg.xopp &  pics/ ... .pdf -->
+### Korrelation = Cosinus eines Winkels
 
+Definiere die *zentrierten* Datenvektoren
+$$
+x_c = (x_1-\bar{x},\ldots,x_n-\bar{x})^T, \qquad
+y_c = (y_1-\bar{y},\ldots,y_n-\bar{y})^T.
+$$
+
+Dann ist
+$$
+r_{xy} = \frac{\sum x_{c,i} y_{c,i}}{\sqrt{\sum x_{c,i}^2}\sqrt{\sum y_{c,i}^2}} = \frac{\langle x_c, y_c\rangle}{\lVert x_c \rVert \, \lVert y_c \rVert} = \cos\big(\angle(x_c, y_c)\big),
+$$
+mit innerem Produkt $\langle x, y \rangle = x^T y = \sum x_i y_i$ und $\lVert\,x\,\rVert = \sqrt{\sum x_i^2}$ = euklidische Norm.
+
+- Die Korrelation ist der **Cosinus des Winkels** zwischen den zentrierten Datenvektoren:\
+  $r_{xy} = \pm 1$ $\Leftrightarrow$ Vektoren (anti-)parallel, $r_{xy} = 0$ $\Leftrightarrow$ orthogonal.
+- Aus der *Cauchy-Schwarz-Ungleichung* $|\langle x_c, y_c \rangle| \leq \lVert x_c \rVert \lVert y_c \rVert$ folgt direkt $-1 \leq r_{xy} \leq +1$.
+
+```{r 10-linalg-setup, echo = FALSE, cache = FALSE}
+# cache=FALSE: knitr-Cache verfolgt die mtime ge-source-ter Dateien nicht
+source("lin-alg-vectors.R")
+```
+
+### Korrelation als Winkel: $r_{xy} = +1$
+
+Dieselben Daten, zwei Sichtweisen: 3 Punkte in 2D $\;\leftrightarrow\;$ 2 Vektoren in 3D --
+
+\columnsbegin
+\column{2.9cm}
+\small
+\begin{tabular}{c|rr|rr}
+ & $x$ & $y$ & $x_c$ & $y_c$\\ \hline
+$i$ & $1$ & $2$ & $-1$ & $-2$\\
+$j$ & $2$ & $4$ & $0$ & $0$\\
+$k$ & $3$ & $6$ & $1$ & $2$\\
+\end{tabular}
+\column{8.1cm}
+```{r 10-linalg-pos, echo = FALSE, fig.width = 7, fig.height = 3.3, out.width = "8.1cm", message = FALSE, warning = FALSE, cache.extra = tools::md5sum("lin-alg-vectors.R")}
+plot_vectors(matrix(c(1, 2, 3, 2, 4, 6), nrow = 3), jk = FALSE, theta = 30)
+```
+\columnsend
+
+\vspace{0.6em}
+\begin{small}
+$$x_c^T y_c = 4; \quad \lVert x_c \rVert \, \lVert y_c \rVert = \sqrt{2} \cdot 2\sqrt{2} = 4 \implies r_{xy} = \tfrac{4}{4} = +1; \quad \angle(x_c, y_c) = \cos^{-1}(1) = 0^{\circ}$$
+\end{small}
+
+$\implies$ $x_c$ und $y_c$ zeigen in *dieselbe* Richtung: **perfekte positive Korrelation**.
+
+### Korrelation als Winkel: $r_{xy} = 0$
+
+\columnsbegin
+\column{2.9cm}
+\small
+\begin{tabular}{c|rr|rr}
+ & $x$ & $y$ & $x_c$ & $y_c$\\ \hline
+$i$ & $1$ & $1$ & $-1$ & $1$\\
+$j$ & $2$ & $-2$ & $0$ & $-2$\\
+$k$ & $3$ & $1$ & $1$ & $1$\\
+\end{tabular}
+\column{8.1cm}
+```{r 10-linalg-null, echo = FALSE, fig.width = 7, fig.height = 3.3, out.width = "8.1cm", message = FALSE, warning = FALSE, cache.extra = tools::md5sum("lin-alg-vectors.R")}
+plot_vectors(matrix(c(1, 2, 3, 1, -2, 1), nrow = 3), ik = FALSE, theta = 130,
+  reihenfolge = c("ij", "x", "jk", "ik", "y")) # x_c hinter der j-k-Ebene
+```
+\columnsend
+
+\vspace{0.6em}
+\begin{small}
+$$x_c^T y_c = 0; \quad \lVert x_c \rVert \, \lVert y_c \rVert = \sqrt{2} \cdot \sqrt{6} \implies r_{xy} = \tfrac{0}{\sqrt{12}} = 0; \quad \angle(x_c, y_c) = \cos^{-1}(0) = 90^{\circ}$$
+\end{small}
+
+$\implies$ $x_c$ und $y_c$ stehen *senkrecht* aufeinander: **unkorreliert**.
+
+### Korrelation als Winkel: $r_{xy} = -1$
+
+\columnsbegin
+\column{2.9cm}
+\small
+\begin{tabular}{c|rr|rr}
+ & $x$ & $y$ & $x_c$ & $y_c$\\ \hline
+$i$ & $1$ & $3$ & $-1$ & $2$\\
+$j$ & $2$ & $1$ & $0$ & $0$\\
+$k$ & $3$ & $-1$ & $1$ & $-2$\\
+\end{tabular}
+\column{8.1cm}
+```{r 10-linalg-neg, echo = FALSE, fig.width = 7, fig.height = 3.3, out.width = "8.1cm", message = FALSE, warning = FALSE, cache.extra = tools::md5sum("lin-alg-vectors.R")}
+plot_vectors(matrix(c(1, 2, 3, 3, 1, -1), nrow = 3), jk = FALSE,
+  reihenfolge = c("y", "ij", "ik", "jk", "x")) # y_c hinter der i-j-Ebene
+```
+\columnsend
+
+\vspace{0.6em}
+\begin{small}
+$$x_c^T y_c = -4; \quad \lVert x_c \rVert \, \lVert y_c \rVert = \sqrt{2} \cdot 2\sqrt{2} = 4 \implies r_{xy} = \tfrac{-4}{4} = -1; \quad \angle(x_c, y_c) = \cos^{-1}(-1) = 180^{\circ}$$
+\end{small}
+
+$\implies$ $x_c$ und $y_c$ zeigen in *entgegengesetzte* Richtungen: **perfekte negative Korrelation**.

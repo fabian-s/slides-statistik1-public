@@ -48,14 +48,14 @@ P(X=x|Z=z) &= \frac{P(X=x \cap Y = z-x)}{P(Z=z)} \\
 \end{align*}
 
 
-### Bedingte Verteilungen von stetigen ZVn 
+### Bedingte Verteilungen stetiger ZV: Problem
 
 
 Betrachte die Zufallsvariablen $X$ und $Y$ mit gemeinsamer Dichte
-$f_{X,Y}(x,y)$. Wir interessieren uns für die bedingte Verteilung von 
+$f_{X,Y}(x,y)$. Wir interessieren uns für die bedingte Verteilung von
 $X$ gegeben $Y = y$.
 
-"Problem": 
+"Problem":
 
 Es gilt $P(Y = y) = 0$ für alle $y$. Daher ist
 $$
@@ -66,11 +66,11 @@ nicht definiert.
 
 
 
-### Bedingte Verteilungen von stetige ZVn 
+### Bedingte Verteilungen stetiger ZV: Herleitung
 
-"Lösung:" 
+"Lösung:"
 
-Betrachte W.keit bedingt auf sehr kleine Intervalle mit Länge $\delta$ -- es gilt näherungsweise: 
+Betrachte W.keit bedingt auf sehr kleine Intervalle mit Länge $\delta$ -- es gilt näherungsweise:
 $P(y-\tfrac{\delta}{2} \leq Y \leq y + \tfrac{\delta}{2}) = \int^{y + \delta/2}_{y-\delta/2} f_Y(u)du \approx f_Y(y) \, \delta$
 \begin{small}
 \begin{align*}
@@ -83,7 +83,9 @@ $P(y-\tfrac{\delta}{2} \leq Y \leq y + \tfrac{\delta}{2}) = \int^{y + \delta/2}_
 \end{small}
 \note{$\int^{y+\delta}_y f(u) du \approx f(y) \delta$}
 
-### Bedingte Verteilungen von stetigen ZVn 
+### Bedingte Verteilungen von stetigen ZVn
+
+Bei stetigen ZV ist $P(Y = y) = 0$, der diskrete Quotient $\tfrac{P(X\le x, Y=y)}{P(Y=y)}$ also nicht definiert. **Idee:** bedinge auf ein winziges Intervall um $y$ und lasse dessen Länge gegen $0$ gehen -- dabei kürzt sich diese Länge heraus und man erhält dieselbe einfache Form wie im diskreten Fall.
 
 #### Def: Bedingte Verteilungs- & Dichtefunktion stetiger ZV
 Die *bedingte Verteilungsfunktion* einer stetigen ZV $X$, gegeben $Y = y$ ist
@@ -121,23 +123,31 @@ Analog erhält man $Y|X = x \sim N(\rho \cdot x, 1 - \rho^2)$
 Sei $(X, Y) \in [0, 1] \times [0, 1]$ ein stetiger Zufallsvektor mit gemeinsamer Dichte 
 $$f_{X,Y}(x, y) = (1 + x - y - 2 x^2 + 4x^2 y)\cdot  I(x \in [0, 1]) \cdot I(y \in [0, 1]):$$
 
-```{r, fig.height = 4, echo = FALSE}
+```{r bedingt-randdichte-plot, fig.height = 3.4, echo = FALSE}
 # source("setup.R")
 grid <- seq(0, 1, l = 100)
 grid2 <- seq(0, 1, l = 20)
 fxy <- function(x,y) 1 + x - y - 2*x^2 + 4*x^2*y
-d <- expand_grid(x = grid, y = grid) |> mutate(f = fxy(x, y)) 
+d <- expand_grid(x = grid, y = grid) |> mutate(f = fxy(x, y))
 
 ggplot(d, aes(x= x, y=y)) + scale_fill_viridis_c("f(x,y)") +
-  coord_equal() + geom_raster(aes(fill = f)) + geom_contour(aes(z = f), colour = rgb(1, 1, 1, .2), bins = 40) + 
+  coord_equal() + geom_raster(aes(fill = f)) + geom_contour(aes(z = f), colour = rgb(1, 1, 1, .2), bins = 40) +
   ~ {par(mar = rep(.8, 4), oma =rep(0.1, 4)); persp(x = grid2, y= grid2, z = outer(grid2, grid2, FUN = fxy), cex.axis = .8,
-       ticktype= "detailed", xlab = "x", ylab = "y", zlab = "f(x,y)", 
+       ticktype= "detailed", xlab = "x", ylab = "y", zlab = "f(x,y)",
        border = rgb(1, 1, 1, .6), col = rgb(0, .4, 1, .8), shade = 0.6, zlim = c(0, 4),
       theta = 30, phi = 25)}
 ```
 
-- Was ist die Rand-Dichte von $X$?
-- Was ist die bedingte Dichte von $Y|X = x$?
+### Beispiel: Rand- und bedingte Dichte -- Lösung
+
+Gemeinsame Dichte $f_{X,Y}(x, y) = (1 + x - y - 2 x^2 + 4x^2 y)$ auf $[0,1]^2$:
+
+- **Rand-Dichte von $X$?**
+- **Bedingte Dichte von $Y|X = x$?**
+
+>- Rand-Dichte: $f_X(x) = \int_0^1 f_{X,Y}(x,y)\,dy = x + \tfrac12$ für $x \in [0,1]$.
+>- Bedingte Dichte: $f_{Y|X}(y|x) = \dfrac{f_{X,Y}(x,y)}{f_X(x)} = 2 - 2x + (4x-2)\,y$ für $y \in [0,1]$.
+>- $f_{Y|X}(y|x)$ hängt von $x$ ab $\leadsto$ $X$ und $Y$ sind **nicht** unabhängig.
 
 ### Verteilung einer diskreten und einer stetigen ZV 
 
@@ -157,7 +167,14 @@ deren Erfolgswahrscheinlichkeit $\pi$ selbst eine Zufallsvariable $X$ ist:
 
 
 
-### Beispiel: Die gemeinsame Verteilung 
+### Wichtiges Beispiel: Bayes-Lernen
+
+Dieses Setup ($X \sim {\mathcal B}e(\alpha, \beta)$, $Y|X \sim {\mathcal B}(n, X)$) ist das **Grundmodell des Bayes-Lernens**:
+
+- **gemeinsame** Verteilung, **bedingte** Verteilung $X|Y=y \sim {\mathcal B}e(\alpha + y,\, \beta + n - y)$ (Update der Erfolgswahrscheinlichkeit, nachdem man $y$ Erfolge beobachtet hat) und **Randverteilung** von $Y$ (die *Beta-Binomialverteilung*)
+
+
+### Bayes-Lernen: Die gemeinsame Verteilung
 
 
 Die gemeinsame Verteilung von $X$ und $Y$ ist
@@ -168,7 +185,7 @@ f(x,y) & =  f(y|x) \cdot f(x)\\
 \end{align*}
 für $x \in [0,1]$ und $y \in \{0, 1, ..., n \}$.
 
-### Beispiel: Die bedingte Verteilung von $X|Y=y$ 
+### Bayes-Lernen: Die bedingte Verteilung von $X|Y=y$
 
 Für die bedingte Dichte $f(x|y)$ folgt:
 $$
@@ -193,7 +210,7 @@ nicht von $x$ abhängt, also für $Y = y$ konstant ist.
 \note{vorher Dichte der Beta-Verteilung anschreiben}
 
 
-### Beispiel: Die Randverteilung von $Y$ 
+### Bayes-Lernen: Die Randverteilung von $Y$
 
 
 Damit folgt für $f(y) = {f(x,y)}/{f(x|y)}$:
@@ -260,7 +277,7 @@ p1[[1]] + ylim(c(0, .15))  +
 
 ### Bedingte Momente
 
-:::.{block}
+:::{.block}
 #### Def: Bedingte Momente von Zufallsvariablen
 Völlig analoge Definitionen basierend auf den bedingten Dichten -- es gilt:
 \begin{align*}
@@ -284,7 +301,7 @@ Beachte:
 
 ### Satz vom iterierten Erwartungswert
 
-:::.{block}
+:::{.block}
 #### Satz vom iterierten Erwartungswert
 Für beliebige Funktionen $g$ und Zufallsvariablen $X, Z$ gilt:
 $$E(E(g(X)|Z)) = E(g(X))$$
@@ -303,7 +320,7 @@ E_Z(E_{X|Z}(g(X)|Z)) &= \sum_{z \in T_z} E_{X|Z}(g(X)|Z = z) P(Z = z) =  \sum_{z
 
 ### Satz von der totalen Varianz
 
-:::.{block}
+:::{.block}
 #### Satz von der totalen Varianz
 
 Für beliebige Zufallsvariablen $X, Z$ gilt:  
@@ -315,7 +332,8 @@ $$\Var(X) = E(\Var(X|Z)) + \Var(E(X|Z))$$
 - Analog zur *Streuungszerlegung* in geschichteten Stichproben mit schichtweisen Mittelwerten $\bar x_j$ und schichtweisen Varianzen $s_{xj}^2, \; j=1,\dots,r$ --  
 "Gesamtvarianz = Varianz innerhalb der Schichten +  Varianz zwischen den Schichten": $$\widetilde s_x^2 = \frac{1}{n} \sum_{j=1}^r n_j \widetilde s_{xj}^2 + \frac{1}{n} \sum_{j=1}^r n_j(\bar x_j - \bar x)^2$$ 
 
-### Satz von der totalen Varianz - Beweis
+
+### Satz von der totalen Varianz -- Beweis
 
 Es gilt: $\Var(X|Z) = E(X^2|Z) - (E(X|Z))^2$, also auch
 \begin{align*}

@@ -5,28 +5,31 @@
 Sind $X$ und $Y$ diskrete ZV mit Wahrscheinlichkeitsfunktionen
 $f_X(x)$ und $f_Y(y)$, so gilt für die Summe $Z = X + Y$:
 \begin{align*}
-P(X + Y = z) & =  \sum_x P(X = x, x + Y = z)\\
-& =  \sum_x P(X = x, Y = z - x)\\
+P(X + Y = z) & =  \sum_{x  \in T_X} P(X = x, x + Y = z)\\
+& =  \sum_{x  \in T_X} P(X = x, Y = z - x)\\
 \intertext{falls $X \perp Y$ gilt außerdem:}
-&=  \sum_x P(X = x) \cdot P(Y = z - x)\\
-& =  \sum_x f_X(x) \cdot f_Y(z - x)
+&=  \sum_{x  \in T_X} P(X = x) \cdot P(Y = z - x)\\
+& =  \sum_{x  \in T_X} f_X(x) \cdot f_Y(z - x)
 \end{align*}
 
 ### Faltungen
 
 ::: {.block}
-#### Def: Faltung
+#### Def: Faltung von stochastisch unabhängigen, diskreten Zufallsvariablen
 Die *Faltung* der stochastisch unabhängigen, diskreten Zufallsvariablen $X$ und $Y$ 
 bezeichnet die Wahrscheinlichkeitsverteilung ihrer Summe $Z = X + Y$: 
 \begin{align*}
-P(X + Y = z) = f_Z(z) & =  \sum_x f_X(x) \cdot f_Y(z - x) \\
-& = \sum_y f_X(z-y) \cdot f_Y(y)
+P(X + Y = z) = f_Z(z) & =  \sum_{x  \in T_X} f_X(x) \cdot f_Y(z - x) \\
+& = \sum_{y \in T_Y} f_X(z-y) \cdot f_Y(y)
 \end{align*}
 :::
 
 Für *stetige* unabhängige ZVn $X, Y$ mit $Z = X + Y$ gilt analog die **Faltung**
 $$f_Z(z) = \int f_X(x) f_Y(z-x) dx = \int f_X(z-y) f_Y(y) dy$$
-
+\note{
+Man muss immer mit der allgemeinen Faltungsformel (sh. vorige Seite) starten. 
+Wenn stu vorliegt, kann diese Formel dann so vereinfacht werden wie hier gezeigt.
+}
   
 
 
@@ -38,6 +41,11 @@ unabhängig.
 Berechne Träger und Wahrscheinlichkeitsfunktion der Summe $Z=X+Y$.
 
 Wie kann man $Z$ interpretieren?
+
+>- **Träger:** $T_Z = \{2, 3, 4, \dots\}$ (mindestens 2 Versuche für 2 Erfolge).
+>- **W.keitsfunktion:** $f_Z(z) = \sum_{x=1}^{z-1} \pi(1-\pi)^{x-1}\, \pi(1-\pi)^{z-x-1} = (z-1)\,\pi^2 (1-\pi)^{z-2}$
+>- **Interpretation:** $Z$ ist die Anzahl der Versuche bis zum **2. Erfolg** (Summe zweier Wartezeiten).
+
 \note{
 Interpretation: Anzahl Versuche bis zum 2. Erfolg.\\
 Träger: $\mathbb{N}\setminus{1}$\\

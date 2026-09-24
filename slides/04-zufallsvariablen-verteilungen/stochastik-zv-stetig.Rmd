@@ -32,18 +32,27 @@ Diese nicht-negative Funktion $f(x)$ zur Verteilungsfunktion $F(x)$ heißt *Wahr
 
 Beachte: bei *diskreten* Zufallsvariablen gilt $F(x) = \sum_{i: x_i \leq x} f(x_i)$.
 
+### Dichtefunktionen 
+
+- Nicht-negative, *normierte* Funktion $f(x) \geq 0$ mit 
+  $\int_{-\infty}^{+\infty} f(x)\,dx = 1$
+- $f(x)$ selbst gibt **keine W.keit** an, sondern misst die *"Dichte"* von Realisierungen von $X$ in der Umgebung von $x$
+- Intuitiv: Je höher die Dichte an einer Stelle, desto mehr "W.keit" steckt in der Umgebung dieser Stelle
+  - Je größer $f(x)$, desto wahrscheinlicher ist es, dass $X$ Werte in der Nähe von $x$ annimmt
+  - W.keit für $X$ in einem Intervall $[a,b]$ ist $$P(a \leq X \leq b) = \int_a^b f(x)\,dx$$ -- Dichte also quasi  *Vorstufe* von Wahrscheinlichkeiten
+
 ### Folgerungen 
 
-- $\int_{-\infty}^{+\infty} f(x)\,dx = 1$  
-\  
-
+- $F(x)$ einer stetigen ZV ist 
+    - stetig und 
+    - monoton wachsend 
+    - mit $\lim\limits_{x \to \infty} F(x) = 1$,   $\lim\limits_{x \to -\infty} F(x) = 0$
+- $\int_{-\infty}^{+\infty} f(x)\,dx = 1 \qquad$  (da $F(\infty) = 1$)
+\
 - Mit Dichte- bzw. Verteilungsfunktion lassen sich W.keiten für beliebige Teilmengen des 
 Trägers ausrechnen:  
   $P(X \in [a, b])	=  \int_a^b f(x)\,dx = F(b) - F(a)$  
-\  
-
-- Unintuitive Konsequenz:  
-  für stetige ZV $X$ gilt $P(X = x) = 0 \; \forall \; x \in \mathbb{R}$!  
+  $\implies$ **Unintuitive Konsequenz:**  für stetige ZV gilt $$P(X = x) = 0 \; \forall \; x \in \mathbb{R} \;(!!)$$   da $\int^x_x f_X(u)du = 0$
   
   \scriptsize [Video dazu von `3blue1brown`](https://youtu.be/ZA4JkHKZM50)
 
@@ -56,17 +65,74 @@ Trägers ausrechnen:
 - $P(a \leq X \leq b) = F(b) - F(a)$
 - $P(X > a) = 1 - F(a)$
 
-### Ausblick
+### Ausblick: von der Fläche zum Integral
 
-Stringentere Definitionen in späteren Vorlesungen zu W.keitstheorie
-\  
+**Fläche unter der Dichte** als Grenzwert von Rechteck-Summen:
 
-Eine allgemein gültige Definition ohne Fallunterscheidungen zwischen 
+$$\sum_{i=1}^{n} f(x_i)\,\delta
+  \;\;\xrightarrow{\;n \to \infty\;}\;\;
+  \int_a^b f(x)\,dx = P(a \leq X \leq b)$$
 
-- diskreten ZVn, 
-- stetigen ZVn,
-- und ZVn, deren Träger teils stetig und teils diskret ist,
+```{r sto-riemann-density, echo = FALSE, fig.height = 2.7, fig.width = 8, out.width = ".95\\textwidth", out.height = "1.6in", message = FALSE, warning = FALSE}
+f <- function(x) dnorm(x, mean = 0.3, sd = 0.8)
+a <- -0.8
+b <- 1.6
+xs <- seq(-2.4, 2.8, length.out = 400)
+curve_df <- tibble(x = xs, y = f(xs))
+riemann <- function(n) {
+  br <- seq(a, b, length.out = n + 1)
+  tibble(
+    xmin = br[-(n + 1)], xmax = br[-1], ymin = 0,
+    ymax = f((br[-(n + 1)] + br[-1]) / 2)
+  )
+}
+base_plot <- function(rect_df, title) {
+  ggplot() +
+    geom_rect(
+      data = rect_df, aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax),
+      fill = "#3B6EA5", alpha = 0.4, colour = "#3B6EA5", linewidth = 0.2
+    ) +
+    geom_line(data = curve_df, aes(x, y), linewidth = 0.8) +
+    labs(title = title, x = "x", y = "f(x)") +
+    theme_minimal(base_size = 11)
+}
+# annotate rectangle i = 3 in the coarse panel with its width and height
+r4 <- riemann(4)
+x_i <- (r4$xmin[3] + r4$xmax[3]) / 2
+anno_col <- "#1F3D5C"
+p1 <- base_plot(r4, "grob (n = 4)") +
+  annotate("segment",
+    x = r4$xmin[3], xend = r4$xmax[3], y = 0.025, yend = 0.025,
+    arrow = arrow(ends = "both", length = unit(1.6, "mm"), type = "closed"),
+    linewidth = 0.35, colour = anno_col
+  ) +
+  annotate("text",
+    x = x_i, y = 0.075, label = "delta", parse = TRUE,
+    size = 3.6, colour = anno_col
+  ) +
+  annotate("text",
+    x = x_i, y = 0.55 * r4$ymax[3], label = "f(x[i])", parse = TRUE,
+    size = 3.6, colour = anno_col
+  ) +
+  annotate("text",
+    x = x_i, y = -0.045, label = "x[i]", parse = TRUE,
+    size = 3.2, colour = anno_col
+  ) +
+  coord_cartesian(clip = "off")
+p2 <- base_plot(riemann(16), "feiner (n = 16)")
+p3 <- ggplot() +
+  geom_area(
+    data = filter(curve_df, x >= a, x <= b), aes(x, y),
+    fill = "#3B6EA5", alpha = 0.4
+  ) +
+  geom_line(data = curve_df, aes(x, y), linewidth = 0.8) +
+  labs(title = "Grenzwert: Integral", x = "x", y = "f(x)") +
+  theme_minimal(base_size = 11)
+p1 + p2 + p3
+```
 
-benötigt Maßtheorie mit einem verallgemeinertem Integrationsbegriff.
-
+\scriptsize
+*Für Expert:innen:* **Maßtheorie** vereinheitlicht diskret und stetig:
+$\int_{[a,b]} \,dP_X = \int_{[a,b]} f_X \,d\mu$ mit $\mu$ = Lebesgue-Maß (stetig: Integral)
+bzw. Zählmaß (diskret: Summe).
 

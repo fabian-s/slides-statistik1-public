@@ -1,0 +1,61 @@
+---
+title: | 
+    | Statistik I
+    | Deskriptive Statistik & Explorative Datenanalyse 
+author: | 
+    | **LMU München**
+output: 
+  beamer_presentation:
+    latex_engine: xelatex
+    keep_tex: true
+    slide_level: 3
+header-includes:
+  - \input{header.tex}
+fontsize: 10pt
+handout: false
+mathfont: "Fira Math"
+mainfont: "Fira Sans"
+sansfont: "Fira Sans"
+urlcolor: darkbrown
+linkcolor: darkbrown
+---
+
+
+```{r setup, include=FALSE, cache=FALSE, code = readLines('setup.R')}
+```
+
+### Inhalte
+
+- Statistik: Was? Warum? Wann (nicht)?  
+  
+**Deskriptive & Explorative Statistik:**  
+
+- Datenerhebung \& Messung
+- Statistische Grafiken \& Datenvisualisierung
+- Statistische Kennwerte \& Zusammenhangsmaße
+  
+**Wahrscheinlichkeitsrechnung:** 
+
+- Grundlagen \& Definitionen
+- Zufallsvariablen 
+- Wahrscheinlichkeitsverteilungen \& Verteilungseigenschaften
+- Zufallsvektoren \& multivariate Verteilungen
+- (Schätzung \& Grenzwertsätze)  
+\  
+- Korrelation \& Kausalität  
+
+
+```{r, child="orga-2023.Rmd"}
+```
+
+### To Do
+
+- Einschreiben auf Moodle
+- Registrieren bei Datacamp
+- Lektüre bei der Unibib runterladen
+- R und Rstudio installieren
+
+
+
+
+

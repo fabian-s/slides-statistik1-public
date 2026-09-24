@@ -53,6 +53,27 @@
     den Odds für $Y=1$ gegen $Y=2$ in der $1.$ Population ($X=1$, $1.$ Zeile)
     zu den entsprechenden Odds in der $2.$ Population ($X=2$, $2.$ Zeile).
 
+### Odds: Zusammenhang mit Kapitel 2
+
+In Kap. 2 war die **Chance** eines Ereignisses $A$ definiert als
+$\gamma(A) = \frac{P(A)}{1-P(A)}$ (Wahrscheinlichkeits-Odds).
+
+::: {.block}
+#### Empirische Odds $=$ geschätzte Wahrscheinlichkeits-Odds der bedingten Verteilung
+
+Für dichotomes $Y \in \{1, 2\}$ und die Subpopulation $X = a_i$ gilt mit
+$p := f_{Y|X}(1|a_i) = \frac{h_{i1}}{h_{i\cdot}}$ (bedingte relative Häufigkeit):
+$$
+\gamma(1,2 \mid X = a_i) \;=\; \frac{h_{i1}}{h_{i2}}
+\;=\; \frac{h_{i1}/h_{i\cdot}}{h_{i2}/h_{i\cdot}}
+\;=\; \frac{p}{1-p}.
+$$
+:::
+
+Das **Häufigkeitsverhältnis** $\tfrac{h_{i1}}{h_{i2}}$ aus dieser Tabelle ist also
+genau die Chance $\gamma(A)$ von Kap. 2, angewandt auf das Ereignis $A = \{Y=1\}$
+mit der *bedingten empirischen* Verteilung in der Subpopulation $X = a_i$.
+
 ### Beispiel: Dauer der Arbeitslosigkeit
 
 Beschränkt man sich jeweils nur auf zwei Kategorien der Merkmale
@@ -193,7 +214,7 @@ $\gamma(\text{Kontrolle, Fall}|\text{ApoE3, ApoE4}) = \gamma(\text{ApoE3, ApoE4}
 
 ### Verallgemeinerung auf $k\times m$ Kontingenztafeln, Anmerkungen
 
--   Verallgemeinerung des Verfahres auf mehr als zwei Ausprägungen mindestens
+-   Verallgemeinerung des Verfahrens auf mehr als zwei Ausprägungen mindestens
     eines Merkmals: Man beschränkt sich auf jeweils zwei Zeilen $X=a_i$ und
     $X=a_j$ und zwei Spalten $Y=b_r$ und $Y=b_s$ und die zugehörigen vier Zellen
     einer $(k \times m)$-Kontingenztafel.

@@ -1,6 +1,18 @@
+### Lernziele: Wichtige parametrische Verteilungen
+
+Nach diesem Kapitel können Sie ...
+
+- zu einem gegebenen Zufallsvorgang die passende Verteilungsfamilie erkennen und die Wahl begründen
+- Wahrscheinlichkeiten, Erwartungswerte und Quantile der wichtigen Verteilungen von Hand und in R berechnen
+- Beziehungen zwischen Verteilungen (Approximationen, Grenzübergänge) erkennen und nutzen
+
+\vspace{1em}
+
+**Voraussetzungen:** Zufallsvariablen & Verteilungsfunktionen (Kap. 4), Erwartungswert & Varianz (Kap. 6)
+
 ## Diskrete parametrische Verteilungen
 
-###  Parametrische Verteilungen  
+###  Parametrische Verteilungen
 
 Statistik benutzt viele "gängige" Klassen von Verteilungen, 
 
@@ -99,42 +111,7 @@ p_geom[[1]] + p_geom[[2]] +
                   caption = expression(pi == 0.2 ~"in rot; " ~ pi == 0.5 ~ "in grün"))
 ```
 
-<!-- ### Erwartungswert von ZVn mit Träger $\mathbb{N}$ -->
-
-<!-- Hat $X$ den Träger $T = \mathbb{N}$, so gilt: -->
-<!-- $$ -->
-<!-- E(X) = \sum_{k=1}^\infty P(X \geq k) -->
-<!-- $$ -->
-<!-- \begin{tabular}{lp{9.5cm}} -->
-<!-- Anwendung:& Erwartungswert der geometrischen Verteilung:\\ -->
-<!-- & Ist  $X \sim G(\pi)$ so gilt: -->
-<!-- \end{tabular} -->
-<!-- $$ -->
-<!-- E(X) = \frac{1}{\pi} -->
-<!-- $$ -->
-<!-- \note{ -->
-<!-- \begin{align*} -->
-<!-- \sum_{k=1}^\infty P(X \geq k) & = &\sum_{k=1}^\infty -->
-<!-- \sum_{t = k}^\infty P(X = t)\ -->
-
-<!-- & = & \sum_{t=1}^\infty\sum_{k=1}^t P(X = t)\ -->
-
-<!-- & = & \sum_{t=1}^\infty t \cdot P(X = t)\ -->
-
-<!-- & = & E X -->
-<!-- \end{align*} -->
-<!-- $f(x) = \pi \cdot (1-\pi)^{x-1}$ für $x \in \mathbb{N}$, -->
-<!-- also $P(X \geq k) = (1-\pi)^{k-1}$\\ -->
-<!-- Wg.eben bewiesenem Satz: -->
-<!-- \begin{align*} -->
-<!-- E (X) & = & \sum_{k=1}^\infty P(X \geq k)=\sum_{k=1}^\infty (1 - \pi)^{k - 1}\\ -->
-<!-- & = & \sum_{k=0}^\infty ( 1 - \pi)^k\stackrel{\text{geom.Re.}}{=}  \frac{1}{1 - (1 -\pi)} = \frac{1}{\pi} -->
-<!-- \end{align*} -->
-<!-- } -->
-
-
-
-### Binomialverteilung 
+### Binomialverteilung
 
 Bei einer Folge von unabhängigen Bernoulli-Experimenten $X_i,\, i = 1, \dots, n$  interessiert man sich häufig nur für die **Anzahl** $X := \sum_{i=1}^n X_i$, wie oft $X_i =1$ aufgetreten ist.\  
 

@@ -48,7 +48,10 @@ title(main =
                      "mit steigendem n für iid "~X[i]%~%N(0, 1)))
 ```
 
-### Gegenbeispiel: Cauchyverteilung 
+### Gegenbeispiel: Cauchyverteilung
+
+Die Cauchy-Verteilung hat "heavy tails" und **keinen endlichen Erwartungswert** (vgl. Kap. 7) --- eine Voraussetzung des GGZ ist verletzt, das arithmetische Mittel konvergiert *nicht*:
+
 ```{r ggz-cauchy, echo = FALSE}
 set.seed(11121112)
 par(mgp = c(2, 1, 0))

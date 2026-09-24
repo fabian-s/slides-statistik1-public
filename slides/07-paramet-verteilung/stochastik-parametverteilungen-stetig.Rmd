@@ -263,7 +263,7 @@ clr_scale_norm <- colorspace::scale_color_discrete_qualitative("Dark 3", labels 
 $$X \sim \mathcal{N}(\mu, \sigma^2) \implies (a + bX) \sim \mathcal{N}(a + b \mu, b^2\sigma^2)$$
 
 - Summen (und Differenzen) normalverteilter Zufallsvariablen sind normalverteilt:  
-$$X_i \sim \mathcal{N}(\mu_i, \sigma_i^2) \implies \sum_i X_i \sim \mathcal{N}(\sum_i \mu_i, \sum_i \sigma_i^2)$$
+$$X_i \sim \mathcal{N}(\mu_i, \sigma_i^2) \implies \sum_i X_i \sim \mathcal{N}\left(\sum_i \mu_i, \sum_i \sigma_i^2\right)$$^[Varianz ist Summe der Varianzen nur wenn $X_i$ unabhängig.]
 
 - Das Integral der Normalverteilungsdichte ist nicht analytisch zugänglich, 
 d.h. $F(x) = \int_{-\infty}^x f(u)\,du$ hat keine geschlossene Form
@@ -343,7 +343,9 @@ heißt *Cauchy*-verteilt.\
 
 Notation: $$X \sim \mathcal C$$
 
-Die Cauchy-Verteilung hat "heavy tails", d.h. sehr viel Wahrscheinlichkeitsmasse verteilt sich auf extreme Werte. 
+Die Cauchy-Verteilung hat "heavy tails", d.h. sehr viel Wahrscheinlichkeitsmasse verteilt sich auf extreme Werte.
+
+>- **Der Erwartungswert existiert nicht:** Das arithmetische Mittel von Cauchy-Stichproben pendelt sich auch für sehr große $n$ **nie** auf einen festen Wert ein --- es ist selbst wieder Cauchy-verteilt. Damit versagt das Gesetz der großen Zahlen (Gegenbeispiel in Kap. 9).
 
 ### Vergleich Cauchy-Verteilung / Normalverteilung
 
@@ -365,7 +367,29 @@ ggplot(cauchy_norm) +
   labs(caption = "N(0, 1) in grün; Cauchyv. in rot")
 ```
 
-### Einige stetige Verteilungen 
+### Welche Verteilung passt?
+
+Von der **datengenerierenden Geschichte** zur Verteilungsfamilie:
+
+\footnotesize
+\begin{tabular}{p{6.3cm}|l}
+Zufallsvorgang & Verteilung\\
+\hline
+Einzelner Ja/Nein-Versuch & $\mathcal B(\pi)$\\
+Anzahl Erfolge in $n$ Versuchen (mit Zurücklegen) & $\mathcal B(n, \pi)$\\
+Anzahl Markierte bei Ziehen ohne Zurücklegen & $\mathcal H(n, N, M)$\\
+Anzahl Versuche bis zum ersten Erfolg & $\mathcal G(\pi)$\\
+Anzahl seltener Ereignisse pro Zeit-/Raumeinheit & $\mathcal P(\lambda)$\\
+\hline
+Alle Werte in $[a,b]$ gleich wahrscheinlich & $\mathcal U[a,b]$\\
+Wartezeit auf/zwischen Poisson-Ereignissen & $\mathcal E(\lambda)$\\
+Summe von Wartezeiten ($\chi^2$ als Spezialfall) & $\mathcal G(\alpha, \beta)$\\
+Summe/Mittel vieler kleiner Einflüsse (ZGWS) & $\mathcal N(\mu, \sigma^2)$\\
+Anteil / W.keit mit Träger $(0,1)$ & $\mathcal{Be}(\alpha, \beta)$\\
+Extreme Ausreißer / "heavy tails" (kein $E(X)$) & $\mathcal C$\\
+\end{tabular}
+
+### Einige stetige Verteilungen
 
 \begin{center}
 \begin{tabular}{l|c c c c}

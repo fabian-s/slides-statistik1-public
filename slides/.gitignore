@@ -1,0 +1,12 @@
+*_cache
+main_files
+*.tex
+*.pdf
+*.html
+*.log
+*.nav
+*.snm
+*.synctex.gz
+*.toc
+*.vrb
+2-univariate-descriptive.tex

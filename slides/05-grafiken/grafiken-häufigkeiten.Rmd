@@ -119,19 +119,6 @@ Grundsätzlich anwendbar für
 
 *pie chart*
 
-### Tortendiagramm: Klein & Kalt
-
-```{r, 02-pie-klein_und_kalt, echo=FALSE}
-klein_und_kalt$const <- factor(0)
-p_kleinkalt <- ggplot(data=klein_und_kalt, aes(x=const, fill=nm_gruppiert)) 
-p_kleinkalt + geom_bar(stat = "count", width = 1, position="fill") + 
-  coord_polar(theta="y", direction = -1)  + labs(y="", x="") + 
-  theme(axis.text.y=element_blank(), axis.text.x=element_blank()) + 
-  guides(fill = guide_legend(title="Nettomiete, gruppiert")) + 
-  scale_fill_brewer(type = "div", palette = 4) 
-```
-
-
 ### Beispiel Mietspiegel: Vergleich mit Kreisdiagramm
 
 ```{r, 02-pie-and-stackedbar-rooms, echo=FALSE}
@@ -170,6 +157,7 @@ Punkte (oder andere Symbole)
 ### Beispiel: Dotplot
 
 ```{r, 02-dot-bad-klein_und_kalt, echo=FALSE}
+klein_und_kalt$const <- factor(0)
 ggplot(data = klein_und_kalt, aes(y= const, x = nm)) + geom_point(alpha=.3, size=5) +
   xlab("Nettomiete") +  ylab("") + 
   theme(axis.text.y=element_blank())

@@ -152,9 +152,51 @@ $$\xymatrix@R-2pc{
 Allgemeinere Art von "omitted variable bias":  
 Unzulässige / falsche Schlüsse von aggregierten Daten auf Individualdaten.
 
-Aus einem bestehenden Zusammenhang auf Aggregatebene folgt nicht zwangsläufig ein 
+Aus einem bestehenden Zusammenhang auf Aggregatebene folgt nicht zwangsläufig ein
 entsprechender Zusammenhang auf Individualebene.
 
+### Ökologischer Fehlschluss: Lernzeit & Klausurpunkte
+
+Zusammenhang Lernzeit -- Klausurpunkte in 5 Gruppen nach **bisherigem
+Notenschnitt** (**simuliert**):
+
+```{r 05-eco-sim-simpson, echo = FALSE, fig.height = 4.4, out.height = "1.9in", message = FALSE, warning = FALSE}
+set.seed(42)
+n_gruppen <- 5
+n_pro_gruppe <- 30
+# schwaechere Notenschnitt-Gruppen: mehr mittlere Lernzeit, aber
+# niedrigere mittlere Punktzahl
+gruppe_zeit <- seq(2, 6, length.out = n_gruppen)
+gruppe_score <- seq(85, 55, length.out = n_gruppen)
+dat <- purrr::map_dfr(seq_len(n_gruppen), function(k) {
+  zeit <- gruppe_zeit[k] + rnorm(n_pro_gruppe, 0, 0.4)
+  punkte <- gruppe_score[k] + 6 * (zeit - gruppe_zeit[k]) + rnorm(n_pro_gruppe, 0, 2)
+  tibble(Gruppe = factor(k), Lernzeit = zeit, Punkte = punkte)
+})
+gruppen_means <- dplyr::summarize(dplyr::group_by(dat, Gruppe),
+  Lernzeit = mean(Lernzeit), Punkte = mean(Punkte)
+)
+ggplot(dat, aes(Lernzeit, Punkte)) +
+  geom_point(aes(color = Gruppe), alpha = 0.4, show.legend = FALSE) +
+  geom_smooth(aes(color = Gruppe),
+    method = "lm", se = FALSE, linewidth = 0.6, show.legend = FALSE
+  ) +
+  geom_point(data = gruppen_means, size = 4, shape = 18) +
+  geom_smooth(
+    data = gruppen_means, method = "lm", se = FALSE,
+    color = "black", linetype = "dashed"
+  ) +
+  scale_color_brewer(palette = "Set1") +
+  labs(
+    x = "Lernzeit [h/Woche]", y = "Klausurpunkte",
+    title = "Rauten & gestrichelt: nur die 5 Gruppenmittelwerte (Aggregatdaten)"
+  )
+```
+
+$\longrightarrow$ Auf **Aggregatebene** (schwarz): mehr Lernzeit $\to$ *weniger*
+Punkte. In jeder Notenschnitt-Gruppe aber: mehr Lernzeit $\to$ *mehr* Punkte!
+Schluss vom Aggregat auf Individuen hier falsch -- das Leistungsniveau
+konfundiert.
 
 <!-- ### Ökologischer Fehlschluss: Einkommen & Migrationshintergrund -->
 

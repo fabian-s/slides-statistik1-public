@@ -8,7 +8,6 @@ main.pdf: $(SLIDES)
 main-embed.pdf: main.pdf
 	# embed fonts:
 	gs -dNOPAUSE -sDEVICE=pdfwrite -sOUTPUTFILE=main-embed.pdf -dBATCH main.pdf
-	cp main-embed.pdf ~/Dropbox/statistik1-ex/main-embed.pdf
 
 texclean:
 	rm -rf *.html

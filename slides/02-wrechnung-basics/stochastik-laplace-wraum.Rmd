@@ -26,7 +26,7 @@ $\implies$ **"Anzahl *günstiger* und gleichwahrscheinlicher Fälle durch Anzahl
 
 ### Folgerungen und Erweiterungen 
 
-- Jedes Elementarereignis $\omega_i$,  $i = 1, \ldots, n$, eines Laplace-W.keitsraums hat Wahrscheinlichkeit $P(\{\omega_i\})=\frac{1}{n}$.
+- Jedes Elementarereignis $\{\omega_i\}$,  $i = 1, \ldots, n$, eines Laplace-W.keitsraums hat Wahrscheinlichkeit $P(\{\omega_i\})=\frac{1}{n}$.
 - Die Wahrscheinlichkeit von $\Omega$ ist $P(\Omega)=1$.
 \  
 
@@ -68,7 +68,7 @@ P(A_{12}) & = & \frac{1}{36}
 *Wie viele unterschiedliche Möglichkeiten, $k$ Elemente aus $n$ auszuwählen?*
 
 \begin{itemize}
-\item \textbf{Auswahl mit Zurücklegen, Ergebnis mit Reihenfolgen:} $$n^k$$  
+\item \textbf{Auswahl mit Zurücklegen, Ergebnis mit Reihenfolgen:} $$n^k = n \cdot n \cdot \dots \cdot n$$  
    $\to$ \emph{je $n$ Möglichkeiten für alle $k$ Ziehungen}
 \item \textbf{Auswahl ohne Zurücklegen, Ergebnis mit Reihenfolge:}
         $$\frac{n!}{(n-k)!} = n \cdot (n-1) \cdot \ldots \cdot (n-k+1)$$

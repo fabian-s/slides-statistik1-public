@@ -2,11 +2,47 @@
 
 ### Theorie & Empirie
 
-![](pics/reality-math-data-1.png)
+\begin{center}
+\begin{tikzpicture}[
+    >={Stealth[length=2.5mm]}, thick,
+    konzept/.style = {font=\large\bfseries},
+    weg/.style     = {font=\small\itshape, sloped, above, align=center}
+  ]
+  \node[konzept] (real)    at (4.5, 3.2) {REALITÄT};
+  \node[konzept] (theorie) at (0, 0)     {THEORIE};
+  \node[konzept] (empirie) at (9, 0)     {EMPIRIE};
+  \draw[->] (real) -- (theorie)
+    node[weg, pos = 0.45] {Modellierung};
+  \draw[->] (real) -- (empirie)
+    node[weg, pos = 0.45] {Beobachtung};
+\end{tikzpicture}
+\end{center}
 
 ### Theorie & Empirie
 
-![](pics/reality-math-data-2.png)
+\begin{center}
+\begin{tikzpicture}[
+    >={Stealth[length=2.5mm]}, thick,
+    konzept/.style = {font=\large\bfseries},
+    weg/.style     = {font=\small\itshape, sloped, above, align=center},
+    rueck/.style   = {densely dotted, ->},
+    rueckweg/.style = {font=\small\itshape, align=center}
+  ]
+  \node[konzept] (real)  at (4.5, 3.2)  {REALITÄT};
+  \node[konzept, align=center] (stoch) at (0, 0) {STOCHASTIK\\STATISTIK};
+  \node[konzept] (daten) at (9, 0)      {DATEN};
+  \draw[->] (real) -- (stoch)
+    node[weg, pos = 0.45] {Mathematische\\Formalisierung};
+  \draw[->] (real) -- (daten)
+    node[weg, pos = 0.45] {Messung};
+  \draw[<->] (stoch) -- (daten)
+    node[font=\small\itshape, midway, below = 1pt] {Inferenz, Schätzung};
+  \draw[rueck] (stoch.north) to[bend left = 45]
+    node[rueckweg, above left = -2pt] {Induktion} (real.west);
+  \draw[rueck] (daten.north) to[bend right = 45]
+    node[rueckweg, above right = -2pt] {Deskription,\\Visualisierung} (real.east);
+\end{tikzpicture}
+\end{center}
 
 ### Theorie & Empirie
 
