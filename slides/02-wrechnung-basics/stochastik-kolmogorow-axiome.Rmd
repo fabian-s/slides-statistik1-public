@@ -1,40 +1,40 @@
-## Axiome von Kolmogorov 
+## Axiome von Kolmogorov
 
 ### Definitionen
 
 :::{.block}
-#### Def.: **Disjunkte Ereignisse**  
+#### Def.: **Disjunkte Ereignisse**
  $A,B \subseteq \Omega$ sind *disjunkte Ereignisse* wenn gilt: $$A \cap B = \emptyset$$.
 :::
 
 :::{.block}
-#### Def.: **Komplement/Gegenereignis**  
+#### Def.: **Komplement/Gegenereignis**
 Das *Gegenereignis* oder *Komplement* $\bar A$ von $A \subseteq \Omega$ ist 
 $$\bar A := \Omega \setminus A = \{\omega \in \Omega: \omega \notin A\}$$
 :::
 
 - Ereignis und Gegenereignis sind disjunkt.
-- Disjunkte Ereignisse können also nie gleichzeitig bzw. gemeinsam eintreten  
+- Disjunkte Ereignisse können also nie gleichzeitig bzw. gemeinsam eintreten\
   $\implies$ *Elementarereignisse* in $\Omega$ bilden eine Menge von *disjunkten* Ereignissen.
-  
+
 
 \note{setbuilder notation einführen}
 
 ### Kolmogorov-Axiome
 
-Wir betrachten 
+Wir betrachten
 
-- eine beliebige (abzählbare) Grundgesamtheit $\Omega$ 
+- eine beliebige (abzählbare) Grundgesamtheit $\Omega$
 - und eine Funktion $P$ auf der Potenzmenge ${\mathcal P}(\Omega)$, die jedem Ereignis $A \subseteq \Omega$ eine
-Wahrscheinlichkeit zuordnet. 
+  Wahrscheinlichkeit zuordnet.
 
 :::{.block}
-#### Def.: **Wahrscheinlichkeitsverteilung**  
+#### Def.: **Wahrscheinlichkeitsverteilung**
 $P$ ist eine *Wahrscheinlichkeitsverteilung auf $\Omega$*, wenn sie folgende
 Eigenschaften erfüllt:
 
-- **A1:** $P(A)\geq 0$ \quad für beliebige $A \subseteq \Omega$  (*Positivität*)  
-- **A2:** $P(\Omega) = 1$ (*Sicheres Ereignis*)  
+- **A1:** $P(A)\geq 0$ \quad für beliebige $A \subseteq \Omega$  (*Positivität*)
+- **A2:** $P(\Omega) = 1$ (*Sicheres Ereignis*)
 - **A3:** $P(A \cup B) = P(A) + P(B)$ für *disjunkte* Ereignisse $A,B \subseteq \Omega$ (*Additivität*)
 :::
 
@@ -83,9 +83,9 @@ $P(B) \stackrel{\rm A3}{=} P(B \setminus A)
 \note[item]{Frage: $P(\emptyset)$? }
 
 
-### Anwendung: Siebformel von Sylvester-Poincaré 
+### Anwendung: Siebformel von Sylvester-Poincaré
 
-James Sylvester [1814-1897], Jules Henri Poincaré [1854-1912]  
+James Sylvester [1814-1897], Jules Henri Poincaré [1854-1912]
 
 Für beliebiges $n \in \mathbb{N}$ und Ereignisse $A_1, A_2,..., A_n \subseteq \Omega$ gilt:
 
@@ -178,7 +178,7 @@ gezählt und muss darum wieder **addiert** werden.
 
 ### Anwendung: Bonferroni Ungleichungen
 
-$\implies$ Abschätzung von $P(A_1 \cup A_2 \cup ... \cup A_n)$  
+$\implies$ Abschätzung von $P(A_1 \cup A_2 \cup ... \cup A_n)$
 
 Für beliebige Ereignisse $A_1, A_2, ... A_n$ gilt
 

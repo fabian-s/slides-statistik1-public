@@ -14,20 +14,20 @@ Objekte, an denen interessierende Größen erfasst werden. "Merkmalsträger".
 :::
 
 :::{.block}
-#### Def.: **Grundgesamtheit,  Population** (GG)  
+#### Def.: **Grundgesamtheit,  Population** (GG)
 Menge aller für eine Fragestellung relevanten statistischen Einheiten
 :::
 
 :::{.block}
-#### Def.:  **Teilgesamtheit, Stichprobe**  
+#### Def.:  **Teilgesamtheit, Stichprobe**
 Eine Teilmenge der GG, speziell: die Teilmenge an UE, für die Daten vorliegen.
 :::
 
 ### Grundbegriffe
 
 :::{.block}
-#### Def.: **Merkmal, (Ko-)Variable**  
-Eine messbare Eigenschaft der Untersuchungseinheiten 
+#### Def.: **Merkmal, (Ko-)Variable**
+Eine messbare Eigenschaft der Untersuchungseinheiten
 :::
 
 :::{.block}
@@ -52,42 +52,72 @@ Die Gesamtheit der beobachteten Merkmalsausprägungen der gemessenen Merkmale ei
 
 ### Messen
 
->- *In its broadest sense, measurement is the assignment of numerals to objects or events according to rules.*  
+>- *In its broadest sense, measurement is the assignment of numerals to objects or events according to rules.*\
 Stanley S. Stevens (1951)
+
+\vspace{1.5em}
+\begin{center}
+\begin{tikzpicture}[scale=.8, transform shape,
+    >={Stealth[length=2.5mm]}, thick,
+    konzept/.style = {font=\bfseries},
+    weg/.style     = {font=\small\itshape, sloped, above, align=center},
+    rueck/.style   = {densely dotted, ->},
+    rueckweg/.style = {font=\small\itshape, align=center},
+    blass/.style   = {draw=gray, text=gray}
+  ]
+  \node[konzept] (real)  at (4.5, 3.2)  {REALITÄT};
+  \node[konzept, align=center, text=gray] (stoch) at (0, 0) {THEORIE:\\STOCHASTIK, STATISTIK};
+  \node[konzept, align=center] (daten) at (9, 0)      {EMPIRIE:\\DATEN};
+  \draw[->, blass] (real) -- (stoch)
+    node[weg, pos = 0.45, text=gray] {Mathematische\\Formalisierung};
+  \draw[->, line width=2.5pt, draw=darkbrown] (real) -- (daten)
+    node[weg, pos = 0.45, font=\bfseries\itshape, text=darkbrown] {Messung};
+  \draw[<->, blass] (stoch) -- (daten)
+    node[font=\small\itshape, midway, below = 1pt, text=gray] {Inferenz, Schätzung};
+  \draw[rueck, blass] (stoch.north) to[bend left = 45]
+    node[rueckweg, above left = -2pt, text=gray] {Induktion} (real.west);
+  \draw[rueck, blass] (daten.north) to[bend right = 45]
+    node[rueckweg, above right = -2pt, text=gray] {Deskription,\\Visualisierung} (real.east);
+\end{tikzpicture}
+\end{center}
 
 ### Messen
 
-**Messen** bedeutet: Zuordnung von Zahlen/Symbolen zu Ausprägungen von Merkmalen an Untersuchungseinheiten.
+**Messen** bedeutet:\
+Zuordnen von Zahlen/Symbolen zu Ausprägungen von Merkmalen an Untersuchungseinheiten.
 
--  Physikalische Messungen:  
-   Länge, Blutdruck, Temperatur, ...  
--  Psychometrische Beispiele:  
+-  Physikalische Messungen:\
+   Länge, Blutdruck, Temperatur, ...
+-  Psychometrische Beispiele:\
    Gewaltbereitschaft, Schwere der Depression, ...
--  Wirtschaftswissenschaftliche Beispiele:  
+-  Wirtschaftswissenschaftliche Beispiele:\
    Inflation, Bruttosozialprodukt, Arbeitslosenquote, ...
 
 ### Messen
 
-Amir $\longrightarrow$ 1.84  
-Liz $\longrightarrow$ 1.61  
-Feihong $\longrightarrow$ 1.72  
+Amir $\longrightarrow$ 1.84\
+Liz $\longrightarrow$ 1.61\
+Feihong $\longrightarrow$ 1.72
 
-Jedes Merkmal definiert bestimmte **Relationen** zwischen den UE  
-Hier z.B.: "Amir größer als Feihong größer als Liz"  
-\ 
+Jedes Merkmal definiert bestimmte **Relationen** zwischen den UE.\
+Hier z.B.: "Amir größer als Feihong größer als Liz"\
+\
 
-Jede gültige Messung ist eine **strukturerhaltende Abbildung** (Homomorphismus) bezüglich dieser Relationen.  
-Hier z.B.: "Liz ist kleiner als Amir" $\iff$ "$1.61 < 1.84$"
+Jede gültige Messung ist eine **strukturerhaltende Abbildung** (Homomorphismus) bezüglich dieser Relationen.\
+Hier z.B.: \
+\
+
+"Liz ist kleiner als Amir" $\iff$\
+"Größe(Liz) $= 1.61 < 1.84 =$ Größe(Amir)"
 
 
 ### Typen von Messungen
 
-1.  Messung hat reales (physikalisches) Relativ;  
-    direkte Messung: ("*representational* measurement").  
+1.  Messung hat reales (physikalisches) Relativ;\
+    direkte Messung: ("*representational* measurement").\
     z.B. Länge, Gewicht, Anzahl, Blutzuckerkonzentration
-2.  Messung besitzt durch *Operationalisierung* definiertes Relativ;  
-    indirekte/operationale Messung  ("*pragmatic* measurement").  
+2.  Messung besitzt durch *Operationalisierung* definiertes Relativ;\
+    indirekte/operationale Messung  ("*pragmatic* measurement").\
     z.B. Intelligenz, Schweregrad einer Krankheit, Arbeitslosenquote
 
 *Operationalisierung* bedeutet "Messbarmachung", definiert genaue Messvorschrift, Messinstrumente, etc.
-

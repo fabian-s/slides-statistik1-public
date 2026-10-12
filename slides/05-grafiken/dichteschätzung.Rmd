@@ -6,7 +6,7 @@
 
 - Relative Häufigkeit in einer Histogramm-Klasse $=$ Fläche der Histogramm-Säule $=$ Fläche "unter der Kurve"
 - Aber: Histogramm ist stückweise konstante Funktion
-- Sehr problematisch: Abhängigkeit von Wahl der Klassengrenzen 
+- Sehr problematisch: Abhängigkeit von Wahl der Klassengrenzen
 ```{r, 2-problem-hist, echo = FALSE, fig.height=3.2, fig.width=6, out.height = ".5\\textheight"}
 par(mar = c(2, 4, 1, 0.1), mfrow = c(1,2))
 col = c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#CC79A7")
@@ -28,10 +28,10 @@ points(x = x, y = rep(0, length(x)), pch = 21, bg = col)
 
 Wiederholung: Für eine **Dichte**(-funktion) (*density*) gilt:
 
-- $f(x) \geq 0  \;\forall\,x$ und 
+- $f(x) \geq 0  \;\forall\,x$ und
 - $\int\limits_{-\infty}^{\infty} f(x)dx = 1.$
-  
-Die Fläche unter der Dichte über beliebige Intervalle soll in etwa den relativen 
+
+Die Fläche unter der Dichte über beliebige Intervalle soll in etwa den relativen
 Häufigkeiten in diesen Intervallen entsprechen, d.h.
 \begin{equation*}
     \int\limits_a^b f(x)dx \approx \frac{1}{n} \left| \left\{x_i : a<x_i\leq b\right\}\right|
@@ -75,7 +75,7 @@ k(u) &= \begin{cases}
 ### Kerndichteschätzer
 
 $k(u)$ sei **Kernfunktion**, d.h.
-$k(u) \geq 0  \;\forall\, u$ und $\int\limits_{-\infty}^{\infty} k(u) du =1$  
+$k(u) \geq 0  \;\forall\, u$ und $\int\limits_{-\infty}^{\infty} k(u) du =1$
 
 Dann ist der **Kerndichteschätzer** (auch: KDE - *kernel density estimator*)
 \begin{equation*}
@@ -181,7 +181,7 @@ ggplot(data_kde, aes(x = x)) +
   geom_density(col = "purple", bw = 1.2, lwd = 1) 
 ```
 
-Kerndichteschätzer mit "optimaler" Bandbreite $h$ (blau), zu kleiner (orange) und zu 
+Kerndichteschätzer mit "optimaler" Bandbreite $h$ (blau), zu kleiner (orange) und zu
 großer (lila) Bandbreite $h$.
 
 ## Verteilungen grafisch vergleichen
@@ -237,12 +237,12 @@ ggplot(mietspiegel, aes(x = Baujahr, y = nmqm)) +
 
 ### Bemerkungen zur Dichteschätzung
 
-- Abhängigkeit von der Bandbreite $h$  
+- Abhängigkeit von der Bandbreite $h$\
   $\rightarrow$ Benutze automatische Verfahren zur Bestimmung von "optimalem" $h$ aus den Daten
 - Abhängigkeit von der Wahl der Kernfunktion eher unbedeutend
 - Kerndichteschätzungen sind insbesondere bei größeren Datenmengen und (quasi-)stetigen Merkmalen Histogrammen vorzuziehen.
 - Kerndichteschätzungen sind *immer* Histogrammen mit unterschiedlichen Klassenbreiten vorzuziehen.
 
-\vspace{4em}
+\vspace{0pt plus 1filll}
 \scriptsize
-[Animation 1](http://varianceexplained.org/files/bandwidth.html), [Animation 2](http://qingkaikong.blogspot.com/2018/05/kernel-density-estimation-animation.html) 
+[Animation 1](http://varianceexplained.org/files/bandwidth.html), [Animation 2](http://qingkaikong.blogspot.com/2018/05/kernel-density-estimation-animation.html)

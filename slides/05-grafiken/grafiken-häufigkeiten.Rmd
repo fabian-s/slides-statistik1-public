@@ -11,10 +11,12 @@
 
 ### Stab-, Säulen-, Balkendiagramm
 
-- **Stabdiagramm:**  Trage über $a_1 , \ldots ,a_k$ jeweils einen zur $x$-Achse senkrechten Strich (Stab) mit  Höhe $h_1 , \ldots , h_k$   (oder $f_1 , \ldots , f_k$) ab.
+- **Stabdiagramm:**\
+  Trage über $a_1 , \ldots ,a_k$ jeweils einen zur $x$-Achse senkrechten Strich (Stab) mit  Höhe $h_1 , \ldots , h_k$   (oder $f_1 , \ldots , f_k$) ab.
 - **Säulendiagramm** wie Stabdiagramm, aber mit  Rechtecken statt
 Strichen.
-- **Balkendiagramm**:  wie Säulendiagramm, aber mit  vertikal statt horizontal gelegter $x$-Achse.
+- **Balkendiagramm**:\
+  wie Säulendiagramm, aber mit  vertikal statt horizontal gelegter $x$-Achse.
 
 Anwendungen:
 
@@ -27,10 +29,10 @@ Anwendungen:
 Darstellung der absoluten oder relativen Häufigkeiten als
 Höhen (Längen).
 
-*Verwendete Geometrien:*  
-Vertikale oder horizontale Linien oder Rechtecke 
+*Verwendete Geometrien:*\
+Vertikale oder horizontale Linien oder Rechtecke
 
-*Ästhetische Zuordnungen:*  
+*Ästhetische Zuordnungen:*
 
 - x-Position: Ausprägungen des Merkmals
 - y-Position des oberen Endes: absolute oder relative Häufigkeiten
@@ -51,7 +53,7 @@ grid.arrange(p_rooms, p_rooms + coord_flip(), ncol=2)
 
 ### Stapeldiagramm
 
-Darstellen absoluter oder relativer Häufigkeiten als Länge. 
+Darstellen absoluter oder relativer Häufigkeiten als Länge.\
 Die Abschnitte werden übereinander gestapelt und unterschiedlich eingefärbt.
 
 Anwendungen:
@@ -60,10 +62,10 @@ Anwendungen:
 -  Ordinale / gruppierte Merkmale
 -  Metrische Daten mit wenigen Ausprägungen
 
-Besonders geeignet für den Vergleich verschiedener Gruppen durch nebeneinander liegende Stapel.  
+Besonders geeignet für den Vergleich verschiedener Gruppen durch nebeneinander liegende Stapel.\
 $\implies$ also: *bedingte* Häufigkeiten gegeben Gruppe
 
-Zu beachten ist dann die Unterscheidung:  
+Zu beachten ist dann die Unterscheidung:\
 relative Häufigkeit (An*teil*) $\leftrightarrow$ absolute Häufigkeit (An*zahl*)
 
 
@@ -72,10 +74,10 @@ relative Häufigkeit (An*teil*) $\leftrightarrow$ absolute Häufigkeit (An*zahl*
 Darstellung der absoluten oder relativen Häufigkeiten als
 Segmente unterschiedlicher Länge (vertikal) oder Breite (horizontal).
 
-*verwendete Geometrien:*  
+*verwendete Geometrien:*\
 Vertikale oder horizontale Rechtecksegmente
 
-*Ästhetische Zuordnungen:*  
+*Ästhetische Zuordnungen:*
 
 - Ausdehnung: absolute oder relative Häufigkeiten der Merkmalsausprägungen
 - (Füll-)farbe: Ausprägungen des Merkmals
@@ -106,7 +108,7 @@ grid.arrange(
 Darstellung von relativen/absoluten Häufigkeiten als
 Anteile der Fläche eines Kreises.
 
-**Suboptimale Visualierung** --  
+**Suboptimale Visualierung** --\
 Darstellung über Längen $\gg$ Darstellung über Winkel!
 
 Grundsätzlich anwendbar für
@@ -114,8 +116,8 @@ Grundsätzlich anwendbar für
   -  Nominale Merkmale
   -  Ordinale Merkmale (Problem: Ordnung nicht korrekt wiedergegeben)
   -  Gruppierte Daten
-  
-\scriptsize 
+
+\scriptsize
 
 *pie chart*
 
@@ -143,10 +145,10 @@ grid.arrange(
 
 Darstellung der einzelnen Beobachtungen als Punkte (Breiten) entlang der Achse.
 
-*Verwendete Geometrien:*  
+*Verwendete Geometrien:*\
 Punkte (oder andere Symbole)
 
-*Ästhetische Zuordnungen:*  
+*Ästhetische Zuordnungen:*
 
 - x-Position: beobachtete Merkmalsausprägungen der UE
 - optional: y-Position: Ausprägungen des bedingenden Merkmals
@@ -182,7 +184,7 @@ ggplot(data = klein_und_kalt, aes(y= rooms, x = nm)) + geom_point(alpha=.3, size
   xlab("Nettomiete") +  ylab("# Zimmer") + scale_y_continuous(breaks = 1:3, minor_breaks = NULL)
 ```
 
-### Negativbeispiel: Streudiagramm 
+### Negativbeispiel: Streudiagramm
 
 ```{r, 02-scatter-klein_und-kalt, echo=FALSE}
 klein_und_kalt$Index <- 1:nrow(klein_und_kalt)
@@ -200,9 +202,9 @@ Darstellung der relativen Häufigkeiten durch *Flächen* (Prinzip der **Flächen
 
 Vorgehen:
 
-1. Aufteilung in Klassen (falls die Daten noch nicht gruppiert sind) 
+1. Aufteilung in Klassen (falls die Daten noch nicht gruppiert sind)
 2. Bestimmung der Klassenhäufigkeiten $n_j$ und der relativen Häufigkeiten $f_j = \frac{n_j}{n}$
-3. Bestimmung der Histogramm-Höhen $y_j$, so dass gilt:  
+3. Bestimmung der Histogramm-Höhen $y_j$, so dass gilt:\
 $b_j \cdot y_j =  f_j$, wobei $b_j$ die Breite der Klasse $j$ ist.
 
 ### Beispiel: Nettomiete Klein & Kalt
@@ -228,28 +230,31 @@ grid.arrange(
 
 ### Histogramm
 
-- Flächentreue Darstellung ähnlich zu Idee von *Dichtefunktionen*: Histogramm ist stückweise konstante Approximation der Dichte.
-- nur bei metrischen Daten sinnvoll 
-\  
+- Flächentreue Darstellung ähnlich zu Idee von *Dichtefunktionen*:\
+  Histogramm ist stückweise konstante Approximation der Dichte.
+- nur bei metrischen Daten sinnvoll
 
--  Beachte: Interpretation der Balkenhöhe bei unterschiedlichen Klasssenbreiten nicht angemessen -- Flächentreue!   
+  \
+
+-  Beachte: Interpretation der Balkenhöhe bei unterschiedlichen Klasssenbreiten nicht angemessen -- Flächentreue!\
   $\implies$ unterschiedlichen Klasssenbreiten vermeiden zu Gunsten einfacher Interpretierbarkeit
-\  
 
--  Nachteil: Visueller Eindruck von Klassenbreite abhängig  
+   \
+
+-  Nachteil: Visueller Eindruck von Klassenbreite abhängig\
    $\implies$ verschiedene Varianten ansehen, falls möglich: Klassenbreiten inhaltlich begründen
 -  Vorsicht bei Rändern (s.a. Kapitel "Kerndichteschätzer")
 
 ### Histogramm
 
-Flächentreue Darstellung der Verteilung eines metrischen Merkmals, 
+Flächentreue Darstellung der Verteilung eines metrischen Merkmals,
 unterteilt in Klassen.
 
-*Verwendete Geometrien:*  
+*Verwendete Geometrien:*\
 Achsenparallele Rechtecke
 
-*Ästhetische Zuordnungen:*  
+*Ästhetische Zuordnungen:*
 
 - x-Position der Ecken: Histogrammklassengrenzen
-- Fläche (*implizit also: Höhe*): relative Häufigkeit der Klasse 
+- Fläche (*implizit also: Höhe*): relative Häufigkeit der Klasse
 

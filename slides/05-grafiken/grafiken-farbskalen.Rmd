@@ -26,13 +26,16 @@ pal <- function(col, border = NA)
 
 Kodieren von Information durch:
 
-- **Position, Längen & Abstände**: am einfachsten zu erkennen, v.a. für gemeinsame/parallele Skalen
-- **Winkel & Steigung**: visueller Eindruck abhängig von Richtung & vom Seitenverhältnis der Darstellung
+- **Position, Längen & Abstände**:\
+  am einfachsten zu erkennen, v.a. für gemeinsame/parallele Skalen
+- **Winkel & Steigung**:\
+  visueller Eindruck abhängig von Richtung & vom Seitenverhältnis der Darstellung
 - **Flächen**:
    - lang/dünn erscheint größer als kompakt/konvex
    - abhängig von Farbe: hellere Flächen wirken größer
 
-- **Farbe**: oft schwierig präzise Vergleiche abzulesen
+- **Farbe**:\
+  oft schwierig präzise Vergleiche abzulesen
     - dennoch allgegenwärtig da *kombinierbar* mit anderen grafischen Elementen.
 
 ### Farbwahrnehmung
@@ -44,7 +47,7 @@ Kodieren von Information durch:
 
 ### Farbwahrnehmung
 
-Rot-Grün-Sehschwäche
+Rot-Grün-Sehschwäche\
 (Protanopia: Prävalenz 6%, Deuteranopia: Prävalenz 2%)
 
 
@@ -313,5 +316,6 @@ Differenz der Änderungsraten von Median-Bruttolöhnen und Neuvertragsmieten 201
 
 \includegraphics[height=.7\textheight]{pics/5-mietenlöhne.png}
 
+\vspace{0pt plus 1filll}
 Quelle: IW, [Berliner Morgenpost (17.01.2020)](https://interaktiv.morgenpost.de/gehalt-miete-studie/)
 <!-- OBACHT: Skala ist hier nicht optimal gewählt - nicht gleiche Abstände/Scale nach unten+oben! -->

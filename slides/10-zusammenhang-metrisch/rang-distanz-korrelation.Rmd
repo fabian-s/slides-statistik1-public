@@ -42,11 +42,11 @@ $\implies$ Durchschnittsrang $\frac{3+4}{2} = 3.5$ vergeben.
 
 ### Interpretation
 
-- $r^{SP}_{xy} > 0 \iff$  gleichsinniger monotoner Zusammenhang,  
+- $r^{SP}_{xy} > 0 \iff$  gleichsinniger monotoner Zusammenhang,\
 Tendenz:  $x$ groß $\Leftrightarrow y$ groß,
 $x$ klein $\Leftrightarrow y$ klein
 
-- $r^{SP}_{xy} < 0 \iff$ gegensinniger monotoner Zusammenhang,  
+- $r^{SP}_{xy} < 0 \iff$ gegensinniger monotoner Zusammenhang,\
 Tendenz: $x$ groß $\Leftrightarrow y$ klein,
 $x$ klein $\Leftrightarrow y$ groß
 
@@ -82,25 +82,25 @@ $r^{SP}_{xy}=1$ (oben) und $r^{SP}_{xy} = -1$ (unten)
 \end{array}
 \]
 
-Rechentechnisch günstige Version von $r^{SP}_{xy}$:  
+Rechentechnisch günstige Version von $r^{SP}_{xy}$:
 
 - Voraussetzung: keine Bindungen
 - Daten: $(x_i, y_i),\ i=1, \ldots, n,\quad x_i\neq x_j,\ y_i\neq y_j$
 für alle $i,j$
-- Rangdifferenzen: $d_i = rg(x_i) - rg(y_i)$  
+- Rangdifferenzen: $d_i = rg(x_i) - rg(y_i)$\
 $$\implies r^{SP}_{xy} = 1 - \frac{6 \sum d^2_i}{(n^2 - 1) n}$$
 
 
 ### Monotone Transformationen
 
-$\tilde{X} = g(X) \quad g$ streng monoton,  
+$\tilde{X} = g(X) \quad g$ streng monoton,\
 $\tilde{Y} = h(Y) \quad h$ streng monoton
 
 \vspace{2em}
 
-- $g$ \textit{und} $h$ beide monoton wachsend oder beide monoton fallend  
+- $g$ \textit{und} $h$ beide monoton wachsend oder beide monoton fallend\
 $\implies$ $r^{SP}(\tilde X, \tilde Y)=r^{SP}(X,Y)$
-- $g, h$ nicht *beide* wachsend oder *beide* fallend  
+- $g, h$ nicht *beide* wachsend oder *beide* fallend\
 $\implies$ $r^{SP}(\tilde X, \tilde Y)= -\, r^{SP}(X,Y)$ 
 
 
@@ -122,8 +122,8 @@ Ein Paar heißt:
 & also: Rangfolge der $X$-Werte umgekehrt der $Y$-Werte.\\
 \end{tabular}
 
-$N_C$: Anzahl der konkordanten Paare  
-$N_D$: Anzahl der diskordanten Paare  
+$N_C$: Anzahl der konkordanten Paare\
+$N_D$: Anzahl der diskordanten Paare\
 Insgesamt $n(n-1)/2$ mögliche Paare.
 
 \begin{equation*}
@@ -131,7 +131,7 @@ Insgesamt $n(n-1)/2$ mögliche Paare.
 \end{equation*}
 
 
-### Kendall's Tau: Veranschaulichung 
+### Kendall's Tau: Veranschaulichung
 
 ```{r, echo = FALSE, message=FALSE}
 pairs_plot <- function(n, corr) {
@@ -173,8 +173,8 @@ pairs_plot(10, 0) + theme(legend.position = "none") +
 \begin{equation*}
 \gamma_{xy} = \frac{N_C - N_D}{N_C + N_D}
 \end{equation*}
--  Somers' D wird typischerweise verwendet wenn Y binär ist  
-($\implies$ viele Paare mit Bindungen in $Y$)  
+-  Somers' D wird typischerweise verwendet wenn Y binär ist\
+($\implies$ viele Paare mit Bindungen in $Y$)
 \begin{equation*}
 D_{xy}:= \frac{N_C - N_D}{\mbox{Anzahl Paare mit ungleichem y}}
 \end{equation*}
@@ -239,15 +239,16 @@ wobei
 
 ### Eigenschaften Distanzkorrelation
 
-- $0 \leq dr_{xy} \leq 1$ -- misst nur Stärke, nicht "Richtung" der Abhängigkeit.
+- $0 \leq dr_{xy} \leq 1$ --\
+  misst nur Stärke, nicht "Richtung" der Abhängigkeit.
 - $dr_{xy} = 0$ $\iff$ $X$ und $Y$ *empirisch unabhängig* (!)
 - $dr_{xy} = 1$ für perfekt lineare Zusammenhänge (bei Verwendung der euklidischen Distanz)
 
-- **Sehr** allgemein anwendbar:  
+- **Sehr** allgemein anwendbar:
    - beliebige Distanzmaße verwendbar als $d^x_{i j}$, $d^y_{i j}$
    - $\implies$ auch für alle *multivariaten* oder *nicht-numerischen* Daten $X, Y$ (z.B. Bilder, Audiosignale, Gensequenzen, ....) 
      benutzbar, für die man Distanzen definieren kann.
 
-\vspace{4em}
+\vspace{0pt plus 1filll}
 \scriptsize
 [(Székely, Rizzo, Bakirov; 2007)](https://doi.org/10.1214%2F009053607000000505)

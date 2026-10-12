@@ -14,20 +14,21 @@ mietspiegel <- read.table(file = url, header = TRUE) %>%
 
 ### Bivariate metrische Daten
 
-Daten liegen zu zwei metrischen Merkmalen vor:
+Daten liegen zu zwei metrischen Merkmalen vor:\
 Datenpaare $(x_i,y_i),\; i=1,\ldots,n$
 
-**Fragen:**
-Gibt es einen Zusammenhang zwischen diesen Merkmalen?
-Wie lässt sich dieser Zusammenhang beschreiben?
-Was ist die *gemeinsame* Verteilung dieser Merkmale?
+**Fragen:**\
+Gibt es einen Zusammenhang zwischen diesen Merkmalen?\
+Wie lässt sich dieser Zusammenhang beschreiben?\
+Was ist die *gemeinsame* Verteilung dieser Merkmale?\
 \
 
-Einfachste grafische Darstellung: **Streudiagramm.**
+Einfachste grafische Darstellung: **Streudiagramm.**\
 Die Datenpaare entsprechen Punkten in der Ebene ("Punktwolke")
 
-**Beispiel (Mietspiegel):**
-$X$: Wohnfläche [$m^2$],  $Y$: Quadratmetermiete [€/$m^2$]
+**Beispiel (Mietspiegel):**\
+$X$: Wohnfläche [$m^2$],\
+$Y$: Quadratmetermiete [€/$m^2$]
 
 ### Schritt für Schritt: 1. Punktwolke
 
@@ -57,10 +58,12 @@ ggplot(mietspiegel, aes(x = wfl, y = nmqm)) +
 - Ausprägungen von *Beste Lage* werden auf die Ästhetik **Farbe** abgebildet
 - Punkte *und* Trendlinie werden nach der Gruppe getrennt -- direkter Gruppenvergleich
 
-```{r, 05-build-scatter3, echo = TRUE, message = FALSE, fig.height = 3.2, fig.width = 6, out.height = ".45\\textheight"}
-ggplot(mietspiegel, aes(x = wfl, y = nmqm, colour = `Beste Lage`)) +
+```{r, 05-build-scatter3, echo = TRUE, tidy = FALSE, message = FALSE, fig.height = 3.2, fig.width = 6, out.height = ".45\\textheight"}
+ggplot(arrange(mietspiegel, `Beste Lage`), # "ja" zuletzt zeichnen
+       aes(x = wfl, y = nmqm, colour = `Beste Lage`)) +
   geom_point(alpha = .2) +
-  geom_smooth(se = FALSE)
+  geom_smooth(se = FALSE) +
+  scale_colour_viridis_d(direction = -1, end = .8)
 ```
 
 ### Schritt für Schritt: 4. Facettierung
@@ -68,10 +71,12 @@ ggplot(mietspiegel, aes(x = wfl, y = nmqm, colour = `Beste Lage`)) +
 - `facet_wrap()` teilt die Daten nach *Zimmerzahl* in *small multiples* auf
 - zeigt die *bedingten* Zusammenhänge je Zimmerzahl -- selbe Achsen, direkt vergleichbar
 
-```{r, 05-build-scatter4, echo = TRUE, message = FALSE, fig.height = 3, fig.width = 6.5, out.height = ".5\\textheight"}
-ggplot(mietspiegel, aes(x = wfl, y = nmqm, colour = `Beste Lage`)) +
+```{r, 05-build-scatter4, echo = TRUE, tidy = FALSE, message = FALSE, fig.height = 3, fig.width = 6.5, out.height = ".5\\textheight"}
+ggplot(arrange(mietspiegel, `Beste Lage`), # "ja" zuletzt zeichnen
+       aes(x = wfl, y = nmqm, colour = `Beste Lage`)) +
   geom_point(alpha = .3, size = .8) +
-  facet_wrap(~ `# Zimmer`, labeller = label_both)
+  facet_wrap(~ `# Zimmer`, labeller = label_both) +
+  scale_colour_viridis_d(direction = -1, end = .8)
 ```
 
 ### Darstellung für größere Datenmengen:
@@ -89,7 +94,7 @@ ggplot(mietspiegel, aes(x = wfl, y = nmqm)) +
 ### Darstellung für größere Datenmengen
 
 Alternativen: Anzahlen/Dichte direkt über Farbe codieren (`hexbin`-Plots, 2D-Kerndichte):
-```{r, 04-hexbin, echo=FALSE}
+```{r, 04-hexbin, echo=FALSE, warning=FALSE, message=FALSE}
 miet_hex <- ggplot(mietspiegel, aes(x = wfl, y = nmqm)) +
   geom_hex(bins = 40) +
   viridis::scale_fill_viridis("Anzahl", option = "magma", direction = -1) +
@@ -101,7 +106,7 @@ miet_hex <- ggplot(mietspiegel, aes(x = wfl, y = nmqm)) +
 miet_kde <- ggplot(
   bind_rows(replicate(3, mietspiegel, simplify = FALSE)), #sonst Skala zu klein
   aes(x = wfl, y = nmqm)) +
-  stat_density2d(aes(fill = ..density..), alpha = .8, geom = "raster", contour = FALSE) +
+  stat_density2d(aes(fill = after_stat(density)), alpha = .8, geom = "raster", contour = FALSE) +
   viridis::scale_fill_viridis("2D-Dichte (Schätzung)", option="magma", direction = -1) +
   ylab(expression("Quadratmetermiete [EUR/"~m^2~"]")) +
   xlab(expression("Wohnfläche ["~m^2~"]")) +

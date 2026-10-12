@@ -9,13 +9,13 @@
 
 ### Die Spannweite (Range)
 
-Definition: 
+Definition:
 \begin{equation*}
   \operatorname{sp} = x_{\max} - x_{\min}
 \end{equation*}
 
 - Größe des Intervalls in dem die Daten liegen
-- Anwendung primär für Kontrolle der Datenqualität:  
+- Anwendung primär für Kontrolle der Datenqualität:\
  Plausibilität, Eingabe-/Codierungsfehler, Existenz von Fehlmessungen und Ausreißern
 - extrem sensibel gegen Ausreißer
 
@@ -28,10 +28,10 @@ Definition:
 
 - Größe des Bereichs in dem die "mittlere Hälfte" der Daten liegt
     - Länge der Box des Boxplots
-- Alternativer Name: *i*nter*q*uartile*r*ange: IQR
+- Alternativer Name: *I*nter*Q*uartile-*R*ange: IQR
 - Robust gegen Ausreißer
 
-- Bei ordinal skalierten Daten Angabe von $x_{0.75}$ und $x_{0.25}$:  
+- Bei ordinal skalierten Daten Angabe von $x_{0.75}$ und $x_{0.25}$:\
   definiert Bereich der zentralen 50% der Daten.
 
 ### Standardabweichung und Stichprobenvarianz
@@ -42,10 +42,11 @@ Definition:
 \textbf{Standardabweichung } s_x &:=& \sqrt{s_x^2}
 \end{eqnarray*}
 
--  $s_x$ lose interpretierbar als "mittlere Abweichung vom Mittelwert"
--  Mindestens Intervallskala
+-  $X$ mindestens Intervallskala
 -  Empfindlich gegen Ausreißer
--  Verwende $\widetilde{s}_x^2:= \frac{1}{n} \sum_{i=1}^n (x_i - \bar x)^2$ für Vollerhebungen, Division durch $n-1$ nur bei Stichproben sinnvoll
+-  $s_x$ lose interpretierbar als "mittlere Abweichung vom Mittelwert"
+-  Verwende $\widetilde{s}_x^2:= \frac{1}{n} \sum_{i=1}^n (x_i - \bar x)^2$ für Vollerhebungen,\
+   Division durch $n-1$ nur bei Stichproben sinnvoll
 
 
 
@@ -53,9 +54,9 @@ Definition:
 
 \begin{eqnarray*}
  y_i = a + bx_i \implies \widetilde s_y^2 &=& b^2 \widetilde s_x^2 \\
-   \widetilde s_y &=& |b| \widetilde s_x  
+   \widetilde s_y &=& |b| \widetilde s_x
 \end{eqnarray*}
-(Analog für $s_x, s_y$)  
+(Analog für $s_x, s_y$)
 
 Varianz und Standardabweichung sind also für lineare Transformationen einfach umrechenbar.
 
@@ -75,7 +76,7 @@ x^2 \\
   \widetilde s_x^2 &=& \overline{x^2} - \bar x^2
 \end{eqnarray*}
 
-**Beachte:**  
+**Beachte:**\
 Der Verschiebungssatz ist für die Berechnung präziser numerischer Ergebnisse am Computer **nicht geeignet** (Auslöschung von Gleitkommazahlen).
 
 ### Streuungszerlegung I
@@ -96,7 +97,7 @@ Schichtvarianzen:
 \begin{equation*}
   \widetilde s_{x1}^2 = \frac{1}{n_1}\sum_{i=1}^{n_1}(x_i - \bar x_1)^2, \qquad
   \widetilde s_{x2}^2 = \frac{1}{n_2} \sum_{i=n_1+1}^{n_1 + n_2}(x_i- \bar x_2)^2,\; \text{usw.}
-\end{equation*} 
+\end{equation*}
 
 
 ### Streuungszerlegung II
@@ -119,45 +120,45 @@ Streuungszerlegung der Netto-Quadratmetermiete bezüglich Zimmerzahl:
 library(dplyr)
 url <- "../data/mietspiegel2015.txt"
 mietspiegel <- read.table(file = url, header = TRUE)
-meantab <- mietspiegel %>% 
-  mutate(`Zimmer` = ordered(rooms)) %>% group_by(`Zimmer`) %>% 
-  summarize(`$n_j$` = n(), 
-            `$\\bar x_j$` = mean(nmqm), 
-            `$\\tilde s^2_{xj}$` = var(nmqm)*(n() - 1)/n()) %>% 
+meantab <- mietspiegel %>%
+  mutate(`Zimmer` = ordered(rooms)) %>% group_by(`Zimmer`) %>%
+  summarize(`$n_j$` = n(),
+            `$\\bar x_j$` = mean(nmqm),
+            `$\\tilde s^2_{xj}$` = var(nmqm)*(n() - 1)/n()) %>%
   arrange(desc(`Zimmer`))
 xbar <- mietspiegel %>% pull(nmqm) %>% mean
 nmqm_total <-  (mietspiegel %>% pull(nmqm) %>% var)
 nmqm_within <- sum(meantab[,2]*meantab[,4])  / nrow(mietspiegel)
 nmqm_between <- (sum(meantab[,2] * (meantab[,3] - xbar)^2) / nrow(mietspiegel))
-knitr::kable(meantab, "latex", escape = FALSE) 
+knitr::kable(meantab, "latex", escape = FALSE)
 #var(mietspiegel$nmqm)
 #sum(meantab[,2] * meantab[,4])  / nrow(mietspiegel)
 #sum(meantab[,2] * (meantab[,3] - xbar)^2) / nrow(mietspiegel)
 ```
 \vskip 1em
-Gesamtvarianz:  
-$\tilde s^2_x \approx `r nmqm_total`$ 
+Gesamtvarianz:
+$\tilde s^2_x \approx `r nmqm_total`$
 
-Innerhalb:  
-$\frac{1}{n} \sum_{j=1}^r n_j \widetilde s_{xj}^2 = `r  nmqm_within`$  
+Innerhalb:
+$\frac{1}{n} \sum_{j=1}^r n_j \widetilde s_{xj}^2 = `r  nmqm_within`$
 
-Zwischen:  
-$\frac{1}{n} \sum_{j=1}^r n_j(\bar x_j - \bar x)^2 = `r nmqm_between`$ 
+Zwischen:
+$\frac{1}{n} \sum_{j=1}^r n_j(\bar x_j - \bar x)^2 = `r nmqm_between`$
 \end{column}
 \begin{column}{0.55\textwidth}
 ```{r, 02-grouped-boxplot-mietspiegel2, echo=FALSE}
-ggplot(mietspiegel, 
-       aes(x = rooms, y = nmqm, group = rooms)) + 
-  coord_flip() + xlab("# Zimmer") + ylab("Nettomiete [EUR/qm]") + 
-  geom_boxplot(outlier.color = rgb(0,0,0,.3), varwidth = T) + 
-  scale_x_continuous(breaks = 1:8, minor_breaks = c()) + 
+ggplot(mietspiegel,
+       aes(x = rooms, y = nmqm, group = rooms)) +
+  coord_flip() + xlab("# Zimmer") + ylab("Nettomiete [EUR/qm]") +
+  geom_boxplot(outlier.color = rgb(0,0,0,.3), varwidth = T) +
+  scale_x_continuous(breaks = 1:8, minor_breaks = c()) +
   labs(caption = "Höhe der Boxplots proportional zur Gruppengröße") +
   theme_gray(base_size = 18)
 ```
 \end{column}
 \end{columns}
 \vskip 1.5em
-$\implies$ nur  $\tfrac{`r nmqm_between`}{`r nmqm_total`} = `r  (nmqm_between/nmqm_total) * 100`$% der Gesamtvarianz der Quadratmetermiete entfallen auf Unterschiede zwischen Wohnungen mit unterschiedlicher Zimmerzahl. 
+$\implies$ nur  $\tfrac{`r nmqm_between`}{`r nmqm_total`} = `r  (nmqm_between/nmqm_total) * 100`$% der Gesamtvarianz der Quadratmetermiete entfallen auf Unterschiede zwischen Wohnungen mit unterschiedlicher Zimmerzahl.
 
 ### Variationskoeffizient
 
@@ -169,10 +170,10 @@ ist gegeben durch
 \end{equation*}
 
 Der Variationskoeffizient hat keine Einheit und ist
-skalenunabhängig. 
+skalenunabhängig.
 
-Er ist eine Maßzahl für die relative Schwankung um den
-Mittelwert und nur für Merkmale mit positiven Ausprägungen sinnvoll.
+Er ist eine Maßzahl für die relative Schwankung um den Mittelwert\
+und nur für Merkmale mit positiven Ausprägungen sinnvoll.
 
 
 ### Mittlere absolute Abweichung (MAD)
@@ -182,14 +183,13 @@ Die **mittlere absolute Abweichung** (*m*ean *a*bsolute *d*eviation)  ist defini
 \begin{equation*}
     \text{MAD}_x= \frac{1}{n} \sum_{i=1}^n|x_i - \bar x|
 \end{equation*}
-Es gilt: MAD$_x \leq \widetilde s_x$  
+Es gilt: MAD$_x \leq \widetilde s_x$
 
 Der **Median der absoluten Abweichungen** ist
 \begin{equation*}
-    \text{MedAD}_x := \text{Median}(|x_i - x_{med}|) 
+    \text{MedAD}_x := \text{Median}(|x_i - x_{med}|)
 \end{equation*}
 
 -  $\text{MAD}_x$ einfacher interpretierbar als $s_x$
 -  beide weniger ausreißer-empfindlich, vor allem $\text{MedAD}_x$
 -  beide weniger "schöne" theoretische Eigenschaften als $s_x$ und werden deswegen seltener angewendet
-

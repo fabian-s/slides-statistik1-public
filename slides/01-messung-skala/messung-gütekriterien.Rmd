@@ -15,7 +15,7 @@ z.B.
 \end{equation*}
 $U$ im Mittel = 0 (unsystematischer Fehler, unverzerrte Vermessung)
 
-$\implies$ klassischer additiver Messfehler  
+$\implies$ klassischer additiver Messfehler\
 (Modell der klassischen (psychologischen) Testtheorie)
 
 
@@ -30,7 +30,7 @@ Extrem wichtige, komplexe Frage in den **Sozialwissenschaften**:
 - Konstruktvalidität: "Bildet das Messverfahren das theoretische Konstrukt vollständig, präzise, nachvollziehbar ab?" 
 - Kriteriumsvalidität: "Hängen Ergebnisse des Messverfahrens sinnvoll mit anderen empirischen Kriterien zusammen?" 
 
-**Statistik:**   
+**Statistik:**
 
 Valide Messung falls kein "systematischer" Messfehler, also $U$ im Mittel $= 0$.
 

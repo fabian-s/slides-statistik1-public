@@ -179,7 +179,9 @@
 \begin{itemize}
 \tightlist
 \item
-  Montag \& Donnerstag 14-16 ~
+  Montag 14-16 (S 001)\\
+\item
+  Donnerstag 14-16 (A 240) ~
 \end{itemize}
 
 \textbf{Übung:} \emph{Daniel Schlichting}
@@ -187,9 +189,7 @@
 \begin{itemize}
 \tightlist
 \item
-  Beginn am \textbf{20.10.}
-\item
-  Montag \textbf{12 -14} \& Mittwoch 10-12\\
+  Montag \textbf{12-14} (S 002) \& Mittwoch 10-12 (M 010)\\
   (selber Stoff an beiden Terminen) ~
 \end{itemize}
 
@@ -198,14 +198,24 @@
 \begin{itemize}
 \tightlist
 \item
-  Beginn am \textbf{28.10.}\\
+  Beginn am \textbf{13.10.}\\
 \item
-  Dienstag 18-20 (10 Termine, s. Moodlekalender)
+  Dienstag 18-20 (S 001), 14-tägig (s. Moodlekalender) ~
+\end{itemize}
+
+\textbf{Tutorium Mathematische Grundlagen:} \emph{Maxim Winter}
+
+\begin{itemize}
+\tightlist
+\item
+  Beginn am \textbf{20.10.}\\
+\item
+  Dienstag 10-12 (S 003, Schellingstraße 3), 14-tägig (s.
+  Moodlekalender)
 \end{itemize}
 
 \textbf{Korrektor:innen:}\\
-- \emph{Simon Schreiner, Jo-Tung Wang, Laurant Qiriqi, Kilian
-Schödlbauer}
+- \emph{Laurant Qiriqi, Nina Scheerer, Kilian Schödlbauer, Maxim Winter}
 \end{frame}
 
 \begin{frame}{Formales}
@@ -279,7 +289,7 @@ Schödlbauer}
 \end{itemize}
 
 \textbf{Moodle URL:}
-\href{https://moodle.lmu.de/course/view.php?id=41420}{moodle.lmu.de/course/view.php?id=41420}
+\href{https://moodle.lmu.de/course/view.php?id=48727}{moodle.lmu.de/course/view.php?id=48727}
 \end{frame}
 
 \begin{frame}[fragile]{Programmierung}
@@ -327,24 +337,31 @@ Programmpaket \textbf{R}
 Programmiersprache \texttt{R}
 \end{frame}
 
-\begin{frame}{DataCamp}
-\protect\hypertarget{datacamp}{}
-\includegraphics{main_files/pics/datacamp.png}
+\begin{frame}{KI-Tutor: oneTutor}
+\protect\hypertarget{ki-tutor-onetutor}{}
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\textbf{oneTutor} ist ein KI-Tutor speziell für diese Vorlesung:
 
-Wir bieten Ihnen kostenfreie, zeitlich limitierte Datacamp-Accounts fürs
-Selbststudium.
-\end{frame}
+\begin{itemize}
+\item beantwortet Ihre Fragen zum Stoff -- rund um die Uhr
+\item Antworten basieren auf \textbf{unseren} Kursmaterialien (Folien, Übungen, ...) und zitieren diese
+\item erklärt, gibt Hinweise, fragt nach -- statt fertige Lösungen vorzusagen
+\item Login mit Ihrer LMU-Kennung
+\end{itemize}
 
-\begin{frame}[fragile]{DataCamp}
-\protect\hypertarget{datacamp-1}{}
-\href{https://www.datacamp.com/groups/shared_links/324a1de77efebe315dfd0f304efb44b0803ed9e8a006e2db0bf05aba7eb06342}{Sign-Up
-Link:}
-
-\centering \includegraphics[height = 0.75\textheight]{pics/qr-datacamp-2526.png}
-
+\medskip
 \footnotesize
+Ersetzt nicht Übung, Tutorium oder Sprechstunde --\\
+und ist \textbf{kein} zugelassenes Hilfsmittel für benotete Abgaben.
+\end{column}
+\begin{column}{0.4\textwidth}
+\centering
+\includegraphics[width=\textwidth]{pics/qr-onetutor-2627.png}
 
-\textbf{Sign-up nur mit Ihrer \texttt{@campus.lmu.de}-Adresse möglich.}
+\scriptsize\href{https://lmu.onetutor.ai/course/8522f2dc-cd16-4a3c-9f32-bf80473663d5}{\texttt{lmu.onetutor.ai/course/...}}
+\end{column}
+\end{columns}
 \end{frame}
 
 \begin{frame}{Literatur}
@@ -378,643 +395,340 @@ verlinkt auf den Folien.
 \hypertarget{einfuxfchrung}{%
 \section{Einführung}\label{einfuxfchrung}}
 
-\hypertarget{beispiele}{%
-\subsection{Beispiele}\label{beispiele}}
-
-\begin{frame}{Lernziele: Was ist Statistik?}
-\protect\hypertarget{lernziele-was-ist-statistik}{}
-Nach diesem Kapitel können Sie \ldots{}
+\begin{frame}{Statistik I: eine Sprache lernen}
+\protect\hypertarget{statistik-i-eine-sprache-lernen}{}
+Vieles in der Statistik ist \textbf{nicht intuitiv}:\\
+Zufall, Durchschnitte, Zusammenhänge, Unsicherheit.
 
 \begin{itemize}
 \tightlist
 \item
-  die drei Aufgaben der Statistik -- \textbf{Deskription},
-  \textbf{Exploration} und \textbf{Induktion} -- unterscheiden und je
-  ein Beispiel zuordnen
+  Alltagssprache ist dafür zu ungenau:\\
+  ``im Schnitt'', ``deutlich mehr'', ``wahrscheinlich'', ``hängt
+  zusammen'', \ldots{}
 \item
-  typische \textbf{Anwendungsfelder} statistischer Datenanalyse
-  (Wahlprognosen, klinische Studien, maschinelles Lernen, \ldots)
-  erkennen
+  Ein großer Teil von Statistik I: eine \textbf{Sprache} lernen,\\
+  um über solche Dinge \textbf{präzise} zu sprechen -- und damit präzise
+  zu denken.
 \item
-  benennen, welche \textbf{Frage} eine Analyse jeweils beantwortet:
-  beschreiben, Strukturen suchen oder auf die Grundgesamtheit
-  verallgemeinern
-\item
-  \textbf{Grenzen und Missbrauchsmöglichkeiten} von Datenanalysen
-  kritisch einordnen (Verzerrung, Fehlinterpretation, Manipulation)
+  Gilt auch für die Arbeit mit KI:\\
+  präzise fragen \& Antworten prüfen geht nur mit präzisen Begriffen.
 \end{itemize}
+
+\(\implies\) Heute: zwei Beispiele, bei denen die Intuition danebenliegt
+\& die nötigen Begriffsklärungen.\\
+\(\implies\) Generell: Präzision im Denken durch Präzision in der
+Sprache.\\
+
+\textgreater{} Wahrscheinlichkeitsmathe und Statistik liefern die
+Sprache, in der wir \emph{präzise über unsicheres und unvollständig
+bekanntes} sprechen können.
 \end{frame}
 
-\begin{frame}{Roter Faden: Schlaf im ersten Semester}
-\protect\hypertarget{roter-faden-schlaf-im-ersten-semester}{}
-\textbf{Frage:} Wie viel schlafen Erstsemester -- und hängt die
-Schlafdauer mit der selbstberichteten Schlafqualität (oder dem
-Studiengang) zusammen?
+\begin{frame}{Zum Einstieg}
+\protect\hypertarget{zum-einstieg}{}
+Heute:
+
+\begin{itemize}
+\tightlist
+\item
+  zwei kurze Messungen -- Sie liefern die Daten
+\item
+  daran: Was ist Statistik, wie arbeitet sie?
+\item
+  danach: (Statistik) studieren, während die KI immer besser wird
+\end{itemize}
+
+\columnsbegin
+\column{.6\textwidth}
+
+Gleich brauchen Sie: Papier, Stift, Handy.
+
+Formular: 3 Fragen, anonym, ohne Anmeldung
+\scriptsize\url{https://docs.google.com/forms/d/e/1FAIpQLSewMVRSF_Uj1SUXV6kqHOVxK7OVPgLrJjUr_FU88vjMMCaOXg/viewform}
+\normalsize \column{.36\textwidth} \centering \scriptsize
+
+\begin{center}\includegraphics[width=.9\textwidth]{main_files/figure-beamer/iD-qr-1} \end{center}
+
+\normalsize
+\scriptsize\normalsize
+\columnsend
+\end{frame}
+
+\begin{frame}[fragile]{Messung 1: Zufall ausdenken}
+\protect\hypertarget{messung-1-zufall-ausdenken}{}
+Papier \& Stift raus.
+
+Schreiben Sie eine Folge von 20 Münzwürfen auf -- \textbf{ohne} zu
+werfen:\\
+\texttt{K} für Kopf, \texttt{Z} für Zahl.
+
+Ziel: Die Folge soll so aussehen, als käme sie von einer echten Münze.
+
+Zeit: 60 Sekunden.
+\end{frame}
+
+\begin{frame}{Zählen und eintragen}
+\protect\hypertarget{zuxe4hlen-und-eintragen}{}
+Meine Behauptung: Ausgedachte Folgen kann man meistens erkennen -- das
+prüfen wir gleich mit Ihren Daten.\\
+Dafür reicht eine einzige Zahl pro Folge, die \textbf{längste Serie}
+gleicher Zeichen:
+
+\texttt{K Z Z K Z K K Z Z Z K Z K K Z K Z Z K K} \(\longrightarrow\)
+\texttt{ZZZ} \(\longrightarrow\) \textbf{3}
+
+\columnsbegin
+\column{.6\textwidth}
+
+Ins Formular:
+
+\begin{enumerate}
+\tightlist
+\item
+  Ihre längste Serie
+\item
+  Haupt- oder Nebenfach
+\item
+  Wie lange Sie letzte Nacht geschlafen haben
+\end{enumerate}
+
+\column{.36\textwidth}
+\centering
+\scriptsize
+
+\begin{center}\includegraphics[width=.9\textwidth]{main_files/figure-beamer/iD-qr2-1} \end{center}
+
+\normalsize
+\scriptsize\normalsize
+\columnsend
+\end{frame}
+
+\begin{frame}{Messung 2: Weniger als der Durchschnitt?}
+\protect\hypertarget{messung-2-weniger-als-der-durchschnitt}{}
+\scriptsize
+
+\begin{center}\includegraphics[width=.95\textwidth]{main_files/figure-beamer/iD-einkommen-1} \end{center}
+
+\normalsize
+
+Monatseinkommen von 400 Personen (simulierte Beispieldaten).\\
+Behauptung: ``\textbf{59\%} dieser Personen verdienen weniger als der
+Durchschnitt.''
+
+Kann das stimmen? Handzeichen: ja oder nein?
+\end{frame}
+
+\begin{frame}{Messung 2: Auflösung}
+\protect\hypertarget{messung-2-aufluxf6sung}{}
+\scriptsize
+
+\begin{center}\includegraphics[width=.95\textwidth]{main_files/figure-beamer/iD-einkommen-aufl-1} \end{center}
+
+\normalsize
+
+\begin{itemize}
+\tightlist
+\item
+  Die Behauptung \textbf{stimmt}. \textbf{Mittelwert} (der übliche
+  ``Durchschnitt''): Summe aller Werte / Anzahl der Werte
+\item
+  \textbf{Median}: der mittlere Wert -- die Hälfte liegt darunter, die
+  Hälfte darüber
+\item
+  wenige sehr hohe Einkommen ziehen den Mittelwert nach oben, den Median
+  aber nicht.\\
+  \(\implies\) mehr als die Hälfte liegt hier unter dem Mittelwert (!)
+\end{itemize}
+
+\(\implies\) \textbf{``Der Durchschnitt'' ist zu ungenau -- klären, was
+gemeint ist.} (Kap. 6)
+\end{frame}
+
+\begin{frame}{Messung 1: Ihre Serien gegen die faire Münze}
+\protect\hypertarget{messung-1-ihre-serien-gegen-die-faire-muxfcnze}{}
+\scriptsize
+
+\begin{center}\includegraphics[width=.95\textwidth]{main_files/figure-beamer/iD-serien-1} \end{center}
+
+\normalsize
+
+\begin{itemize}
+\tightlist
+\item
+  faire Münze: \textbf{77\%} aller Folgen haben eine Serie \(\geq 4\)
+  (exakt berechnet)
+\item
+  Hörsaal: \textbf{59\%} (n = 237)
+\end{itemize}
 
 \begin{itemize}[<+->]
 \tightlist
 \item
-  \textbf{Deskription:} Wie sind Schlafdauer \& -qualität in der
-  Stichprobe verteilt?
+  Wo unterscheiden sich die beiden Verteilungen?
 \item
-  \textbf{Exploration:} Gibt es einen Zusammenhang zwischen Dauer und
-  Qualität?
-\item
-  \textbf{Induktion:} Lässt sich von den Befragten auf \emph{alle}
-  Erstsemester schließen?
+  Aus der Forschung: Ausgedachte Folgen wechseln meist zu oft.
 \end{itemize}
 
-\vspace{.5em}
+\vspace{0pt plus 1filll}
 
-An dieser alltagsnahen Fragestellung illustrieren wir im Verlauf der
-Vorlesung immer wieder neue Konzepte. Den ersten Schritt machen Sie
-selbst: \textbf{Blatt 1} analysiert eine solche Schlaf-Umfrage unter
-Studienanfänger:innen.
+\footnotesize Bar-Hillel \& Wagenaar (1991). The perception of
+randomness. \emph{Advances in Applied Mathematics} 12(4):428--454.\\
 \end{frame}
 
-\begin{frame}{Bundestagswahl 2021 -- Prognose vs.~Ergebnis
-(Fallbeispiel)}
-\protect\hypertarget{bundestagswahl-2021-prognose-vs.-ergebnis-fallbeispiel}{}
-\textbf{Prognose 18:00 Infratest Dimap (ARD):}
-
-\begin{tabular}{l|c|c|c|c|c|c|c}
-  Partei: & CDU/CSU & SPD & AfD & FDP & Linke & Grüne\\
-  \hline
-  Stimmanteil (\%): & 25  & 25 & 11 & 11 & 5 & 15\\
-\end{tabular}
-
-Basis: Nachwahlbefragung, ca. 33 000 Wahlberechtigte
-
-\textbf{Ergebnis:}
-
-\begin{center}
-  \includegraphics[width=.7\textwidth]{pics/bundestagswahl21-ergebnis.png}
-\end{center}
-
-\scriptsize\url{bundestagswahl.br.de/public/ec/ergebnis-bundestagswahl-2021-bayern-deutschland.html}
-\end{frame}
-
-\begin{frame}{Bundestagswahl 2021 -- Fragestellungen}
-\protect\hypertarget{bundestagswahl-2021-fragestellungen}{}
-Historisches Fallbeispiel -- dasselbe Prinzip wiederholt sich bei jeder
-Wahl (zuletzt Bundestagswahl 2025):
+\begin{frame}{Ein einfaches Prognosemodell}
+\protect\hypertarget{ein-einfaches-prognosemodell}{}
+Regel: längste Serie \(\geq 4 \implies\) Prognose ``echt'', sonst
+``ausgedacht''
 
 \begin{itemize}
 \tightlist
 \item
-  Schluss von der Befragung einer Stichprobe von Wähler:innen auf das
-  Gesamtergebnis
+  Schwelle 4 kommt aus dem Modell ``faire Münze'' -- festgelegt,
+  \emph{bevor} Sie geschrieben haben
 \item
-  Analyse von Wahlverhalten durch weitere Fragen (Wechselwähler:innen
-  etc.)
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Wahlfälschung}
-\protect\hypertarget{wahlfuxe4lschung}{}
-Idee: Untersuche Zusammenhang zwischen Wahlergebnis (Stimmenanteil der
-Sieger) und Wahlbeteiligung.\\
-\emph{ballot stuffing} treibt beides in die Höhe!
-
-\begin{center}
-  \includegraphics[width=.7\textwidth]{pics/0-ex2-electionfraud.jpg}
-\end{center}
-\scriptsize
-\vspace{-.5em}
-
-P. Klimek, Y. Yegorov, R. Hanel, S. Thurner (2012). Statistical
-detection of systematic election irregularities. \emph{PNAS}
-109(41):16469--16473.
-\end{frame}
-
-\begin{frame}{KOALA - Koalitions Analyse}
-\protect\hypertarget{koala---koalitions-analyse}{}
-StaBLab-Projekt mit H. Küchenhoff, A. Bender, A. Bauer
-
-\begin{itemize}
-\tightlist
-\item
-  Ziel: Bessere Vermittlung der den Wahlumfragen zugrunde liegenden
-  Unsicherheiten
-\item
-  Kleinere Änderungen in Umfrageanteilen der Parteien vor Wahlen nicht
-  immer relevant, teilweise überbewertet
-\item
-  Tatsächlich relevant sind Änderungen in der Wahrscheinlichkeit
-  bestimmter Ereignisse nach Wahlen (Wahrscheinlichkeit für
-  Zustandekommen von Mehrheiten für Koalitionen)
-\item
-  Basis: Simulation vieler möglicher Wahlergebnisse auf Basis (mehrerer)
-  aktueller Umfragen
-\item
-  Wahrscheinlichkeit: Anteil der Simulationen in welchen Ereignis
-  eintritt
-\end{itemize}
-
-\vspace{.5cm}
-
-Website:
-\href{https://koala.stat.uni-muenchen.de/}{koala.stat.uni-muenchen.de}
-\end{frame}
-
-\begin{frame}{KOALA - Koalitions Analyse}
-\protect\hypertarget{koala---koalitions-analyse-1}{}
-\begin{center}
-  \includegraphics[width=.75\textwidth]{pics/koala_survey}
-\end{center}
-
-\textbf{Schritt 1:} Mehrere aktuelle Umfragen werden zu einem
-gemeinsamen Schätzwert je Partei gebündelt -- einzelne Umfragen
-schwanken, die Bündelung glättet.
-\end{frame}
-
-\begin{frame}{KOALA - Koalitions Analyse}
-\protect\hypertarget{koala---koalitions-analyse-2}{}
-\begin{center}
-  \includegraphics[width=.62\textwidth]{pics/koala_probs}
-\end{center}
-
-\textbf{Schritt 2:} Aus vielen simulierten Wahlausgängen ergibt sich die
-\emph{Wahrscheinlichkeit} einer Sitzmehrheit für eine Koalition -- und
-wie sie sich über die Zeit verändert.
-\end{frame}
-
-\begin{frame}{ISAR - Lebensmittelimportscreening}
-\protect\hypertarget{isar---lebensmittelimportscreening}{}
-StaBLab-Projekt mit H. Küchenhoff, A. Bauer und F. Günther in
-Zusammenarbeit mit Bayrischem Landesamt für Gesundheit und
-Lebensmittelsicherheit, sowie Bundesamt für Verbraucherschutz und
-Lebensmittelsicherheit
-
-\begin{itemize}
-\tightlist
-\item
-  Ziel: Früherkennung von Risiken im Lebensmittelhandel
-\item
-  Ansatz: Dauerhaftes Screening von produkt- und länderspezifischen
-  Daten aller deutscher Lebensmittelimporte
-\item
-  Auffälligkeiten in Mengen oder Preisen können Hinweise zu Risiken und
-  Betrugspotentialen liefern
-\item
-  Ansatz: Verwendung statistischer Zeitreihen-Modelle
+  zwei Fehlerquoten:
 
   \begin{itemize}
   \tightlist
   \item
-    Vergleich der Beobachtungen mit Vorhersagen der Modelle
+    echte Folgen, die als ``ausgedacht'' gelten: 23\% (berechnet)
   \item
-    Definition von Auffälligkeiten von Interesse
-  \item
-    Jeden Monat erhalten Lebensmittelkontrolleure Liste mit auffälligen
-    Zeitreihen
+    ausgedachte Folgen, die als ``echt'' gelten: 59\% (Ihre Daten)
   \end{itemize}
 \item
-  Programmierung von Tool zur interaktiven Darstellung der Daten in
-  enger Zusammenarbeit mit Anwendern
+  für eine einzelne Folge oft falsch -- nützlich erst über viele Folgen
+\item
+  \textbf{Obacht:} Schwelle erst \emph{nach} Ansicht der Daten wählen
+  \(\implies\) geschönte Fehlerquote
+\end{itemize}
+
+\begin{itemize}[<+->]
+\tightlist
+\item
+  \emph{To consult the statistician after an experiment is finished is
+  often merely to ask him to conduct a post mortem examination. He can
+  perhaps say what the experiment died of.}\\
+  Ronald A. Fisher (1890--1962, Statistiker), 1938
 \end{itemize}
 \end{frame}
 
-\begin{frame}{ISAR: Beispiel Haselnüsse Türkei}
-\protect\hypertarget{isar-beispiel-haselnuxfcsse-tuxfcrkei}{}
-\begin{itemize}
-\tightlist
-\item
-  2014 Ernteeinbruch von Haselnüssen in der Türkei
-\item
-  Darauf folgend starker Preisanstieg
-\item
-  Es wurden verstärkt Kontrollen der nach Deutschland importierten
-  Haselnussprodukte durchgeführt
-\item
-  In verarbeiteten Produkten wurden Verfälschungen, u.a. durch
-  Cashews/Mandeln gefunden, hohes Gesundheitsrisiko (Allergie)
-\item
-  In ISAR erste Signale für auffällige Preisentwicklung im September
-  2015
-\end{itemize}
-
-\begin{center}
-\includegraphics[width=.48\textwidth]{pics/Haselnuesse_03}
-\includegraphics[width=.48\textwidth]{pics/Haselnuesse_05}
-\end{center}
-\end{frame}
-
-\begin{frame}{Mineralwasserstudie}
-\protect\hypertarget{mineralwasserstudie}{}
-Studie in Zusammenarbeit mit Prof.~O. Adam (LMU)\\
-\textbf{Fragestellung:} Schmeckt mit Sauerstoff angereichertes
-Mineralwasser besser als gewöhnliches Mineralwasser ?
-
-\begin{itemize}
-\tightlist
-\item
-  Doppel--Blindstudie
-\item
-  Kontroll--Gruppe: zweimal das gleiche Wasser ohne \(O_2\)
-\item
-  Verum--Gruppe: Beim zweiten Mal mit \(O_2\) angereichertes
-  Mineralwasser
-\end{itemize}
-
-Ergebnis (Clausnitzer et al., 2004) :
-
-\begin{itemize}
-\tightlist
-\item
-  Placebo: 76\% gaben an, dass das zweite Wasser anders schmeckt
-\item
-  Verum : 89 \% gaben an, dass das zweite Wasser anders schmeckt
-\end{itemize}
-
-Signifikanter Effekt \(\rightarrow\) Zulassung
-\end{frame}
-
-\begin{frame}{Ziele und Methoden}
-\protect\hypertarget{ziele-und-methoden}{}
-\begin{itemize}
-\tightlist
-\item
-  Randomisierte Studie (Doppelblind)
-\item
-  Entscheidungsfindung durch statistischen Test
-\item
-  Quantifizierung des Effekts
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Umweltzone und Feinstaubbelastung}
-\protect\hypertarget{umweltzone-und-feinstaubbelastung}{}
-Wirkt die Umweltzone?
-
-Einfacher Ansatz: Vergleiche Mittelwerte vor und nach der Einführung von
-Umweltzone und Fahrverbot
-
-Probleme:
-
-\begin{itemize}
-\tightlist
-\item
-  Grundbelastung ohne Autoverkehr kann sich ändern
-\item
-  Starke Wettereinflüsse
-\item
-  Schwankungen über Tag und Jahreszeit
-\end{itemize}
-
-Daher: Regressionsmodell mit Referenzstation, Wetter, Tagesverlauf
-
+\begin{frame}{Nebenbei gemessen: Ihr Schlaf}
+\protect\hypertarget{nebenbei-gemessen-ihr-schlaf}{}
 \scriptsize
 
-V. Fensterer, H. Küchenhoff, V. Maier, H.-E. Wichmann, S. Breitner, A.
-Peters, J. Gu, and J. Cyrys (2014). Evaluation of the impact of low
-emission zone and heavy traffic ban in Munich (Germany) on the reduction
-of PM\(_{10}\) in ambient air. \emph{International Journal of
-Environmental Research and Public Health} 11(5):5094-5112.
-\end{frame}
+\begin{center}\includegraphics[width=\textwidth]{main_files/figure-beamer/iD-schlaf-1} \end{center}
 
-\begin{frame}{Wirkung der Umweltzone: zwei Messstationen}
-\protect\hypertarget{wirkung-der-umweltzone-zwei-messstationen}{}
-\begin{center}
-\includegraphics[height = .72\textheight]{pics/0-ex6-umweltzone-prinzregenten.png}
-\includegraphics[height = .72\textheight]{pics/0-ex6-umweltzone-loth.png}
-\end{center}
+\normalsize
 
-\footnotesize Prinzregentenstraße (links) und Lothstraße (rechts): Das
-Regressionsmodell trennt den Effekt der Umweltzone von Wetter- und
-Tagesverlaufseinflüssen.
-\end{frame}
+\vspace{-1.2em}\small
 
-\begin{frame}{Weitere Beispiele}
-\protect\hypertarget{weitere-beispiele}{}
-\begin{itemize}
+Links alle, rechts nach Studiengang (je Punkt eine Person). Linien:
+Mittelwert (durchgezogen), Median (gestrichelt).
+
+\begin{itemize}[<+->]
 \tightlist
 \item
-  Klinische Studien
+  Schläft das Nebenfach länger als das Hauptfach -- oder umgekehrt?
 \item
-  Epidemiologische Studien
-\item
-  Qualitätskontrolle
-\item
-  Marktforschung
-
-  \begin{itemize}
-  \tightlist
-  \item
-    Einschaltquoten
-  \item
-    Bewertung und Vergleich von Produkten gleichen Typs aber
-    verschiedener Produzenten durch Verbraucher (Waschmittel, Kaffee,
-    Schokolade, usw.)
-  \item
-    Online-Tracking-Daten: Cookies, Userprofile, Websitenutzung,
-    \ldots{}
-  \item
-    A-B-Testing von Websitedesigns, User Interfaces
-  \end{itemize}
-\item
-  Sportstatistik
-\item
-  Analyse von Genexpressions- oder -sequenzdaten
-\item
-  Netzwerkanalysen
-\item
-  Mustererkennung (```Pattern recognition'''): Spamfilter, Customer
-  Churn, Kundensegmentierung, \ldots{}
+  Was genau müsste man dafür vergleichen? Mittelwerte? Mediane? Einzelne
+  Personen?
 \end{itemize}
+
+\vspace{0pt plus 1filll}
+\footnotesize
 \end{frame}
 
-\hypertarget{statistik-was---wie---warum}{%
-\subsection{Statistik: Was - Wie -
-Warum}\label{statistik-was---wie---warum}}
+\begin{frame}{Was haben Sie gerade gemacht?}
+\protect\hypertarget{was-haben-sie-gerade-gemacht}{}
+In den letzten 20 Minuten haben Sie:
+
+\begin{enumerate}
+\tightlist
+\item
+  \textbf{Daten erhoben:} Folge geschrieben, Serie gezählt, Formular
+  ausgefüllt
+\item
+  \textbf{Daten zusammengefasst:} Balkendiagramm, Histogramm,
+  Mittelwert, Median
+\item
+  \textbf{Daten mit einem Modell verglichen:} Ihre Serien vs.~faire
+  Münze
+\item
+  \textbf{ein Prognosemodell angewendet} und seine Fehlerquoten bestimmt
+\item
+  \textbf{eine Behauptung an Daten geprüft:} ``mehr als die Hälfte unter
+  dem Durchschnitt''
+\end{enumerate}
+
+\(\implies\) \textbf{Das ist Statistik.}\\
+Der Rest des Semesters: die meisten dieser Schritte genauer \& sauberer.
+\end{frame}
 
 \begin{frame}{Was ist Statistik?}
 \protect\hypertarget{was-ist-statistik}{}
 \textbf{Statistik als Wissenschaft bezeichnet eine Methodenlehre, die
 sich mit der Erhebung, der Darstellung, der Analyse und der Bewertung
-von Daten auseinander setzt.\\
-Ein zentraler Aspekt ist dabei die Modellbildung mit zufälligen
-Komponenten.}
-
-Teilgebiete:
-
-\begin{itemize}
-\item
-  \textbf{Deskriptive} Statistik:\\
-  Beschreibung, Zusammenfassung, Visualisierung von Daten.\\
-  Techniken: Grafiken, Tabellen, Kennzahlen
-\item
-  \textbf{Explorative} Statistik:\\
-  Suche nach Strukturen in Daten. Benutzt deskriptive und induktive
-  Techniken interaktiv und iterativ.
-\item
-  \textbf{Induktive} Statistik: Schließt von beobachteten Daten auf
-  zugrundeliegende Strukturen.\\
-  Angewandte Wahrscheinlichkeitsmathematik.\\
-  Techniken: Statistische Modellierung, statistische Tests.
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Deskriptive Statistik}
-\protect\hypertarget{deskriptive-statistik}{}
-\begin{itemize}[<+->]
-\tightlist
-\item
-  \emph{Data is merely the raw material of knowledge.}\\
-  Charles Wheelan (* 1966, Autor)
-\end{itemize}
-
-\textbf{Ziel: Wahrhaftige Beschreibung von Daten mit möglichst geringem
-Informationsverlust}
+von Daten auseinander setzt. Ein zentraler Aspekt ist dabei die
+Modellbildung mit zufälligen Komponenten.}
 
 \begin{itemize}
 \tightlist
 \item
-  Eigenschaften und Strukturen erkennbar machen
+  \textbf{Deskriptive} Statistik: Beschreibung, Zusammenfassung,
+  Visualisierung von Daten\\
+  heute: Diagramme, Median \& Mittelwert
 \item
-  Grafisch und durch Kennwerte
+  \textbf{Explorative} Statistik: Suche nach Strukturen in Daten\\
+  heute: Ihre Serien vs.~faire Münze; Schlaf nach Studiengang
 \item
-  Eindimensional und mehrdimensional
-  (``\emph{uni-}/\emph{multivariat}'')
-\item
-  keine Rückschlüsse von beobachteter Stichprobe auf die Grundgesamtheit
-  oder allgemeine Phänomene (nur \emph{Deskription}, nicht
-  \emph{Inferenz})
+  \textbf{Induktive} Statistik: Schluss von beobachteten Daten auf
+  zugrundeliegende Strukturen\\
+  heute: Fehlerquote aus dem Prognose-Modell; Gruppenunterschiede im
+  Schlafverhalten
 \end{itemize}
+
+\textbf{Auch große Teile von \emph{Machine Learning} \& KI sind im Kern
+induktive Statistik -- mit denselben Fehlerquellen.}
 \end{frame}
-
-\begin{frame}{Was ist Statistik?}
-\protect\hypertarget{was-ist-statistik-1}{}
-\begin{itemize}[<+->]
-\tightlist
-\item
-  \emph{Maths is a language that you use to describe statistics, but
-  really it's about collecting information and putting it in an order
-  that makes sense.}\\
-  Lauren Stamile (* 1976, Schauspielerin)
-\item
-  \emph{Statistics is the grammar of science.}\\
-  Karl Pearson (1857 - 1936, Mathematiker)
-\item
-  \emph{Statistics is the science of learning from experience.}\\
-  Bradley Efron (* 1938, Statistiker)
-\end{itemize}
-
-\begin{itemize}[<+->]
-\tightlist
-\item
-  \(\implies\) \textbf{Statistische Methodik als unabdingbares Werkzeug
-  jeder empirischen Wissenschaft.}
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Warum (nicht) Statistik?}
-\protect\hypertarget{warum-nicht-statistik}{}
-\begin{itemize}[<+->]
-\tightlist
-\item
-  \emph{Statistik ist für mich das Informationsmittel der Mündigen. Wer
-  mit ihr umgehen kann, ist weniger leicht zu manipulieren.}\\
-  Elisabeth Noelle-Neumann (1916--2010, Demoskopin)
-\item
-  \emph{All models are wrong, but some are useful.}\\
-  George E. P. Box (1919--2013, Statistiker)
-\item
-  \emph{The combination of some data and an aching desire for an answer
-  does not ensure that a reasonable answer can be extracted from a given
-  body of data.}\\
-  John Tukey (1915--2000, Mathematiker)
-\item
-  \emph{There are no routine statistical questions, only questionable
-  statistical routines.}\\
-  David R. Cox (1924--2022, Statistiker)
-\end{itemize}
-
-\begin{itemize}[<+->]
-\tightlist
-\item
-  \(\implies\) \textbf{Statistik ist unentbehrlich, aber komplex -- ihre
-  Ergebnisse werden oft missbraucht oder missinterpretiert.}
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Frage an Sie}
-\protect\hypertarget{frage-an-sie}{}
-Wo begegnet Ihnen im Alltag ``Statistik'' -- und wann trauen Sie einer
-Zahl \textbf{nicht}?
-
-\vspace{.5em}
-
-\begin{itemize}[<+->]
-\tightlist
-\item
-  Denken Sie an eine Schlagzeile mit einer Prozentzahl, die Sie zuletzt
-  gelesen haben.
-\item
-  Wer hat die Daten erhoben -- und wer profitiert von der Aussage?
-\item
-  Ist die Grundgesamtheit klar? Wurde etwas Wichtiges \emph{nicht}
-  gemessen?
-\item
-  \emph{Not everything that counts can be counted, and not everything
-  that can be counted counts.}\\
-  William Bruce Cameron (1904--1988, Soziologe)
-\end{itemize}
-
-\begin{itemize}[<+->]
-\tightlist
-\item
-  \(\implies\) \textbf{Statistische Grundbildung heißt: die richtigen
-  kritischen Fragen stellen können.}
-\end{itemize}
-\end{frame}
-
-\hypertarget{gegenwart-zukunft-der-statistik}{%
-\subsection{Gegenwart \& Zukunft der
-Statistik}\label{gegenwart-zukunft-der-statistik}}
-
-\begin{frame}{``Big Data''}
-\protect\hypertarget{big-data}{}
-\begin{itemize}
-\tightlist
-\item
-  Analyse und Verarbeitung großer Datenmengen
-\item
-  Drei Vs: Volume, Velocity, Variety
-\item
-  Häufig rein heuristische/algorithmische Herangehensweise ohne
-  probabilistische Modelle oder kausale Theorien
-\item
-  Große Herausforderungen für Statistik und Informatik
-\end{itemize}
-\end{frame}
-
-\begin{frame}{``Big Data''}
-\protect\hypertarget{big-data-1}{}
-\begin{center}
-       \includegraphics [width = .9\textwidth]{pics/0-bigdata.png}
- \end{center}
-\end{frame}
-
-\begin{frame}{KI, Machine Learning \& Big Data: Warum Statistik?}
-\protect\hypertarget{ki-machine-learning-big-data-warum-statistik}{}
-\emph{Machine Learning} und heutige \emph{``Künstliche Intelligenz''}
-sind im Kern \textbf{induktive Statistik} -- Mustererkennung \&
-Vorhersage aus Daten. Datengetriebene Algorithmen prägen zunehmend
-Alltag \emph{und} Entscheidungen großer Tragweite:
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Alltag:} Empfehlungs- \& Feed-Algorithmen (\emph{filter
-  bubble}, \emph{engagement maximization}), Kreditscores bei
-  Online-Zahlungen
-\item
-  \textbf{Hohe Tragweite:} Kreditvergabe, medizinische Diagnostik,
-  \emph{Predictive Policing} \& Strafjustiz, autonome Waffensysteme
-\item
-  \textbf{Generative KI / LLMs} (ChatGPT \& Co.): flüssige, aber teils
-  falsche Ausgaben (\emph{Halluzinationen}), verzerrt durch
-  Trainingsdaten -- Datenqualität \& Bias schlagen direkt durch
-\end{itemize}
-
-\begin{itemize}[<+->]
-\tightlist
-\item
-  \emph{{[}M{]}any of these models encode human prejudice,
-  misunderstanding, and bias into the software systems that increasingly
-  manage our lives. {[}\ldots{]} Their verdicts, even when wrong or
-  harmful, are beyond dispute or appeal.}\\
-  \hfill Cathy O'Neil, \emph{Weapons of Math Destruction} (2016)
-\end{itemize}
-
-\begin{itemize}[<+->]
-\tightlist
-\item
-  \(\implies\) \textbf{Statistische Grundbildung ist im KI-Zeitalter
-  Voraussetzung, um Datenqualität, Unsicherheit \& Verzerrung von
-  Modellen kritisch beurteilen zu können.}
-\end{itemize}
-
-\vfill
-
-\footnotesize **Weiterführend:**
-\href{https://hai.stanford.edu/news/how-flawed-data-aggravates-inequality-credit}{Kreditscoring
-\& Ungleichheit (Stanford HAI 2024)} ·
-\href{https://www.rsna.org/news/2025/january/role-of-ai-in-medical-imaging}{KI
-in der Radiologie (RSNA 2024)} ·
-\href{https://www.naacp.org/resources/artificial-intelligence-predictive-policing-issue-brief}{Predictive
-Policing (NAACP)} ·
-\href{https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing}{COMPAS
-\& Bias (ProPublica)} ·
-\href{https://counciloncj.org/the-implications-of-ai-for-criminal-justice/}{KI
-\& Strafjustiz (CCJ 2024)} ·
-\href{https://www.sipri.org/publications/2025/other-publications/autonomous-weapon-systems-and-ai-enabled-decision-support-systems-military-targeting-comparison-and}{Autonome
-Waffensysteme (SIPRI 2025)}
-\end{frame}
-
-\begin{frame}{Gegenwart \& Zukunft der Statistik}
-\protect\hypertarget{gegenwart-zukunft-der-statistik-1}{}
-\begin{itemize}
-\item
-  Wachsender Bedarf durch Allgegenwart automatisiert erhobener Daten \&
-  Digitalisierung.\\
-  Wachsendes Angebot durch automatisierte, prompt-basierte Analysen mit
-  chatGPT \& Co.\\
-  \textbf{Statistisches Grundverständnis notwendig für alle, die mit
-  Daten arbeiten!}
-\item
-  Falsch/missbräuchlich angewendete Statistik führt zu
-  Reproduzierbarkeitskrisen in (Sozial-)psychologie, vielen Bereichen
-  der Medizin, Ernährungswissenschaften\\
-  \textbf{Gegenwärtiger Paradigmenwechsel in der angewandten
-  Forschung}\\
-  (Stichworte: \emph{p-hacking}, \emph{replication crisis})
-\item
-  ``Künstliche Intelligenz'' / Maschinelles Lernen \& Big Data:
-  Hochkomplexe, extrem rechenintensive Algorithmen in Kombination mit
-  riesigen Datenmengen ermöglichen ganz neue Anwendungen von
-  Datenanalyse\\
-  \textbf{Beitrag der Statistik zur Beherrschbarmachung / Interpretation
-  / Risikoabschätzung dieser Techniken?}
-\end{itemize}
-\end{frame}
-
-\hypertarget{theorie-empirie-statistik}{%
-\subsection{Theorie-Empirie-Statistik}\label{theorie-empirie-statistik}}
 
 \begin{frame}{Theorie \& Empirie}
 \protect\hypertarget{theorie-empirie}{}
+Wie hängen Mathematik \& Daten zusammen?
+
 \begin{center}
 \begin{tikzpicture}[
     >={Stealth[length=2.5mm]}, thick,
-    konzept/.style = {font=\large\bfseries},
+    konzept/.style = {font=\bfseries, align=center},
+    bsp/.style     = {font=\small, text=darkbrown, align=center},
     weg/.style     = {font=\small\itshape, sloped, above, align=center}
   ]
-  \node[konzept] (real)    at (4.5, 3.2) {REALITÄT};
-  \node[konzept] (theorie) at (0, 0)     {THEORIE};
-  \node[konzept] (empirie) at (9, 0)     {EMPIRIE};
-  \draw[->] (real) -- (theorie)
-    node[weg, pos = 0.45] {Modellierung};
-  \draw[->] (real) -- (empirie)
-    node[weg, pos = 0.45] {Beobachtung};
+  \node[konzept] (real) at (4.5, 3.0) {REALITÄT};
+  \node[bsp] at (4.5, 3.7) {Menschen in diesem Hörsaal,\\die sich Münzwürfe ausdenken};
+  \node[konzept] (theo) at (0, 0) {THEORIE};
+  \node[bsp] at (0, -0.8) {faire Münze:\\$P(K) = \tfrac12$, Würfe unabhängig};
+  \node[konzept] (emp) at (9, 0) {EMPIRIE};
+  \node[bsp] at (8.6, -0.8) {die Zahlen im Formular:\\3, 2, 4, 3, 5, 3, \ldots};
+  \draw[->] (real) -- (theo) node[weg, pos = .45] {Modell};
+  \draw[->] (real) -- (emp) node[weg, pos = .45] {Beobachtung};
+  \draw[<->] (theo) -- (emp) node[font=\small\itshape, midway, below = 1pt] {Vergleich: Ihre Serien gegen "ideale" Münze};
 \end{tikzpicture}
 \end{center}
 \end{frame}
 
-\begin{frame}{Theorie \& Empirie}
-\protect\hypertarget{theorie-empirie-1}{}
+\begin{frame}{Theorie \& Empirie (2)}
+\protect\hypertarget{theorie-empirie-2}{}
 \begin{center}
 \begin{tikzpicture}[
     >={Stealth[length=2.5mm]}, thick,
-    konzept/.style = {font=\large\bfseries},
+    konzept/.style = {font=\bfseries},
     weg/.style     = {font=\small\itshape, sloped, above, align=center},
     rueck/.style   = {densely dotted, ->},
     rueckweg/.style = {font=\small\itshape, align=center}
   ]
   \node[konzept] (real)  at (4.5, 3.2)  {REALITÄT};
-  \node[konzept, align=center] (stoch) at (0, 0) {STOCHASTIK\\STATISTIK};
-  \node[konzept] (daten) at (9, 0)      {DATEN};
+  \node[konzept, align=center] (stoch) at (0, 0) {THEORIE:\\STOCHASTIK, STATISTIK};
+  \node[konzept, align=center] (daten) at (9, 0)      {EMPIRIE:\\DATEN};
   \draw[->] (real) -- (stoch)
     node[weg, pos = 0.45] {Mathematische\\Formalisierung};
   \draw[->] (real) -- (daten)
@@ -1027,71 +741,509 @@ Waffensysteme (SIPRI 2025)}
     node[rueckweg, above right = -2pt] {Deskription,\\Visualisierung} (real.east);
 \end{tikzpicture}
 \end{center}
-\end{frame}
 
-\begin{frame}{Theorie \& Empirie}
-\protect\hypertarget{theorie-empirie-2}{}
 \begin{itemize}
+\tightlist
 \item
-  Modellbildung aus mathemat. Formalisierung liefert vereinfachte, grobe
-  Abbildung eines Ausschnitts der Realität in Symbolen.
+  \textbf{Modell:}~vereinfachte, grobe Abbildung eines Ausschnitts der
+  Realität in \emph{Symbolen}
 \item
-  Daten aus Messung liefern vereinfachte, grobe Abbildung eines
-  Ausschnitts der Realität in Zahlen.
+  \textbf{Daten:}~vereinfachte, grobe Abbildung eines Ausschnitts der
+  Realität in \emph{Zahlen}
 \item
-  Deskriptive Statistik fasst Aspekte der gemessenen Daten in
-  Kennzahlen, Grafiken, Tabellen für Menschen lesbar zusammen.
-\item
-  Statistische Inferenz (Schätzungen \& Tests) liefert auf Basis von
-  Daten quantitative Aussagen über Modell(komponenten).\\
-  \textbf{Obacht: Modell \(\neq\) Realität!}
-\item
-  Messung selbst bzw. Definition von Messverfahren oft
-  ``modellbasiert''.
-\item
-  Expertise für substantielle Fragestellung \emph{und} Mathe nötig um
-  Realitätsnähe \& Tauglichkeit einer mathematischen Formalisierung
-  beurteilen zu können.\\
-  \(\implies\) sinnvolle angewandte Statistik ist \textbf{immer
-  interdisziplinär}!
+  gestrichelt: Schlüsse zurück auf die Realität -- unsicher, oft
+  falsch.\\
+  Grundproblem unseres Fachs: Wann sie tragen können \& wie verlässlich
+  sie sind.
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Theorie \& Empirie}
-\protect\hypertarget{theorie-empirie-3}{}
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3333}}@{}}
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-\textbf{Mathematischer Formalismus}
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\textbf{Empirie / Daten}
-\end{minipage} \\
-\midrule\noalign{}
-\endhead
-Wahrscheinlichkeit & \(\xrightarrow{\textsf{verursacht(?)}}\) &
-Beobachtete Häufigkeit \\
-Wahrscheinlichkeit & \(\xleftarrow{\textsf{repräsentiert(?)}}\) &
-Beobachtete Häufigkeit \\
-& & \\
-Zufallsvariable &
-\(\stackrel{\textsf{entspricht}}{\longleftrightarrow}\) & Statistisches
-Merkmal \\
-& & \\
-Erwartungswert & \(\xleftarrow{\textsf{Schätzung für}}\) &
-Arithmetisches Mittel \\
-& & \\
-Stochastische Grundgesamtheit \(\Omega\) &
-\(\stackrel{\textsf{?}}{\longleftrightarrow}\) & Statistische
-Grundgesamtheit \\
-& & \\
-\bottomrule\noalign{}
-\end{longtable}
+\begin{frame}{Worum es in diesem Fach geht}
+\protect\hypertarget{worum-es-in-diesem-fach-geht}{}
+Statistik \& maschinelles Lernen: die Pfeile in diesem Dreieck verstehen
+\& nutzbar machen.\\
+Jeder Pfeil ist eine Vereinfachung -- und eine mögliche Fehlerquelle:
 
-usw.
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Formalisierung} (Realität \(\rightarrow\) Theorie):\\
+  Welche Annahmen stecken im Modell? Passen sie zur Realität?
+\item
+  \textbf{Messung} (Realität \(\rightarrow\) Daten):\\
+  Messen die Daten, was uns eigentlich interessiert? Wer oder was fehlt?
+\item
+  \textbf{Inferenz, Schätzung} (Daten \(\leftrightarrow\) Theorie):\\
+  Welches Modell passt zu den Daten -- und wie sicher ist das?
+\item
+  \textbf{Deskription, Induktion} (zurück zur Realität):\\
+  Was sagen Daten und Modell über die Welt -- auch über die Stichprobe
+  hinaus?
+\end{itemize}
+
+\(\implies\) ML automatisiert v.a. den unteren Pfeil -- die übrigen
+brauchen Fachwissen \& Urteilsvermögen.
+\end{frame}
+
+\begin{frame}{Modell \(\neq\) Realität}
+\protect\hypertarget{modell-neq-realituxe4t}{}
+\begin{itemize}[<+->]
+\tightlist
+\item
+  \emph{All models are wrong, but some are useful.}\\
+  George E. P. Box (1919--2013, Statistiker)
+\end{itemize}
+
+\begin{itemize}[<+->]
+\tightlist
+\item
+  ``faire Münze'': eine Modellannahme -- echte Münzen \& Würfe sind
+  nicht exakt fair \& unabhängig.\\
+  Als Vergleichsmaßstab trotzdem nützlich.
+\item
+  \emph{Far better an approximate answer to the right question, which is
+  often vague, than an exact answer to the wrong question, which can
+  always be made precise.}\\
+  John W. Tukey (1915--2000, Statistiker), 1962
+\item
+  \(\implies\) \textbf{Beurteilen erfordert Fachwissen über die Realität
+  \emph{und} über das Modell.}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Auch ein KI-Sprachmodell ist ein Modell}
+\protect\hypertarget{auch-ein-ki-sprachmodell-ist-ein-modell}{}
+\begin{itemize}
+\tightlist
+\item
+  an riesige Datenmengen angepasst:\\
+  trainiert darauf, Text plausibel fortzusetzen und Antworten zu geben,
+  die Menschen gut bewerten
+\item
+  \textbf{Messung:} Was wurde dabei eigentlich ``gemessen''?\\
+  Text und menschliche Bewertungen -- nicht die Welt selbst.\\
+  \(\implies\) sehr nützlich, solange ``gut bewertet'' und ``richtig''
+  zusammenfallen
+\item
+  \textbf{Induktion:} Wie gut funktioniert es in einer neuen
+  Situation?\\
+  Hängt (auch) davon ab, wie ähnlich diese den Trainingsdaten ist.\\
+  \(\implies\) dieselbe Frage wie bei jedem Schluss von beobachteten
+  Daten auf neue Fälle
+\end{itemize}
+
+\(\implies\) \textbf{Dieselben Pfeile, dieselben Fragen -- nur in viel
+größerem Maßstab.}
+\end{frame}
+
+\begin{frame}{Statistik studieren, während KI besser wird}
+\protect\hypertarget{statistik-studieren-wuxe4hrend-ki-besser-wird}{}
+\begin{itemize}
+\tightlist
+\item
+  KI-Werkzeuge: deutlich besser als vor 2 Jahren
+\item
+  in 4 Jahren? Weiß niemand\ldots{}
+\item
+  Ihre Studienentscheidung ist trotzdem jetzt fällig.
+\end{itemize}
+
+\(\implies\) Entscheidung unter Unsicherheit -- ein klassisches
+Statistik-Thema:\\
+mögliche Szenarien auflisten, dann die Handlung wählen, die in möglichst
+vielen davon gut ist.
+
+\vspace{0pt plus 1filll}
+
+\footnotesize Statistische Entscheidungstheorie: A. Wald (1950),
+\emph{Statistical Decision Functions}.
+\end{frame}
+
+\begin{frame}{Drei Welten}
+\protect\hypertarget{drei-welten}{}
+Grobe Szenarien für 2030 -- nicht vollständig, aber sie decken die
+Spanne ab:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.2cm}>{\raggedright\arraybackslash}p{7.6cm}@{}}
+\toprule
+\textbf{Szenario} & \textbf{KI im Jahr 2030 \ldots} \\
+\midrule
+Plateau & \ldots{} ist kompetenter, immer noch unzuverlässiger Assistent \\
+Fortschritt & \ldots{} führt aus; Menschen stellen die Fragen, prüfen die Ergebnisse, haften dafür \\
+Vollautomatisierung & \ldots{} erledigt alle (geistige) Arbeit selbst -- Menschen nicht mehr gebraucht \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Was kommt, weiß niemand. Entscheiden müssen wir trotzdem, und können das
+auch\ldots{}
+\end{frame}
+
+\begin{frame}{Die robuste Entscheidung}
+\protect\hypertarget{die-robuste-entscheidung}{}
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+ & \textbf{selbst lernen} & \textbf{erledigen lassen} \\
+\midrule
+Szenario 1: Plateau & $+$ & $--$ \\
+Szenario 2: Fortschritt & $++$ & $-$ \\
+Szenario 3: Vollautomatisierung & $0$ & $0$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{itemize}
+\tightlist
+\item
+  Szenario 1: unzuverlässige \emph{Agents} anweisen \& kontrollieren --
+  geht nur mit eigenem Können
+\item
+  Szenario 2: Prüfen \& Verantworten bleibt bei Menschen -- echte
+  Kompetenz zählt \emph{mehr} als heute, Routinearbeit gibt's nicht mehr
+\item
+  Szenario 3: es ist egal, was Sie tun
+\end{itemize}
+
+\(\implies\) \textbf{Selbst lernen ist in keinem Szenario schlechter, in
+den meisten besser.}
+\end{frame}
+
+\begin{frame}{Drei Fälle}
+\protect\hypertarget{drei-fuxe4lle}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Post Office (UK), 2000--2014:}\\
+  736 Menschen strafverfolgt -- auf Basis von Zahlen aus einer
+  fehlerhaften Buchhaltungssoftware
+\item
+  \textbf{Gerichte weltweit, seit 2023:}\\
+  über 2 100 Entscheidungen zu KI-erfundenen Zitaten in Schriftsätzen
+  (von Anwält:innen \& Privatpersonen)
+\item
+  \textbf{Air Canada, 2024:}\\
+  Chatbot erfindet Erstattungsregel -- die Airline haftet
+\end{itemize}
+
+\(\implies\) \textbf{Wer die Verantwortung für ein Ergebnis übernimmt,
+muss es verstehen und prüfen können.}\\
+Neu ist: fertige, flüssig formulierte Ergebnisse gibt es jetzt auf
+Knopfdruck.
+
+\vspace{0pt plus 1filll}
+
+\footnotesize Quellen:
+\href{https://www.bbc.com/news/business-56718036}{BBC: Post Office
+Horizon scandal};
+\href{https://www.damiencharlotin.com/hallucinations/}{D. Charlotin,
+\emph{AI Hallucination Cases}} (Stand 5.10.2026);
+\href{https://www.theguardian.com/world/2024/feb/16/air-canada-chatbot-lawsuit}{The
+Guardian zu Moffatt v. Air Canada, 2024 BCCRT 149}.
+\end{frame}
+
+\begin{frame}{Studie 1: Entwickler:innen mit KI-Werkzeugen}
+\protect\hypertarget{studie-1-entwicklerinnen-mit-ki-werkzeugen}{}
+\columnsbegin
+\column{.5\textwidth}
+
+\textbf{Wer:} 16 erfahrene Open-Source-Entwickler:innen, jeweils im
+eigenen Projekt
+
+\textbf{Was:} 246 echte Aufgaben
+
+\textbf{Design:} pro Aufgabe ausgelost: KI erlaubt / verboten
+
+\textbf{Gemessen:} Bearbeitungszeit\\
+dazu: Erwartung vorher, Gefühl nachher \column{.48\textwidth}
+\scriptsize
+
+\begin{center}\includegraphics[width=\textwidth]{main_files/figure-beamer/iD-metr-1} \end{center}
+
+\normalsize
+\columnsend
+
+Auslosen \(\implies\) fairer Vergleich (sonst evtl.: leichtere Aufgaben
+eher mit KI bearbeitet)
+
+\vspace{0pt plus 1filll}
+
+\footnotesize Becker, Rush, Barnes, Rein (METR, 2025), arXiv:2507.09089.
+Werkzeuge von Anfang 2025; kleine Stichprobe.
+\end{frame}
+
+\begin{frame}{Studie 2: Schüler:innen mit GPT-4 beim Üben}
+\protect\hypertarget{studie-2-schuxfclerinnen-mit-gpt-4-beim-uxfcben}{}
+\columnsbegin
+\column{.5\textwidth}
+
+\textbf{Wer:} ca. 1000 Schüler:innen, Mathematik, Türkei
+
+\textbf{Design:} Klassen ausgelost: ohne KI / GPT-4 frei / GPT-4 als
+Tutor (gibt nur Hinweise)
+
+\textbf{Gemessen:} Leistung in der Übung (mit KI) und in der Klausur
+danach (alle ohne KI)
+
+\textbf{Tutor:} +127\% in der Übung, kein Nachteil in der Klausur
+\column{.48\textwidth} \scriptsize
+
+\begin{center}\includegraphics[width=\textwidth]{main_files/figure-beamer/iD-bastani-1} \end{center}
+
+\normalsize
+\columnsend
+
+Klausur ohne KI = die eigentliche Messung; Übung mit KI misst Schüler:in
++ Assistent.
+
+\vspace{0pt plus 1filll}
+
+\footnotesize Bastani et al.~(2025), \emph{PNAS} 122(26),
+\url{doi:10.1073/pnas.2422633122}. Experiment in echten Schulklassen,
+Gruppen ausgelost.
+\end{frame}
+
+\begin{frame}{Was folgt daraus}
+\protect\hypertarget{was-folgt-daraus}{}
+\begin{itemize}
+\tightlist
+\item
+  Studie 1: gefühlt 20\% schneller, gemessen 19\% langsamer
+\item
+  Studie 2: in der Übung besser, in der Klausur schlechter
+\end{itemize}
+
+\(\implies\) \textbf{Wer fertige Ergebnisse übernimmt, überschätzt
+leicht das eigene Können.}\\
+Ob man etwas kann, zeigt sich erst ohne Hilfe -- z.B. in der Klausur.
+
+\begin{itemize}[<+->]
+\tightlist
+\item
+  \emph{The first principle is that you must not fool yourself -- and
+  you are the easiest person to fool.}\\
+  Richard P. Feynman (1918--1988, Physiker), 1974
+\item
+  Obacht: Sprachmodelle werden u.a. darauf trainiert, dass Ihnen ihre
+  Antworten gefallen.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Warum gerade Statistik}
+\protect\hypertarget{warum-gerade-statistik}{}
+Wer ein Ergebnis verantwortet, muss beantworten können:
+
+\begin{itemize}
+\tightlist
+\item
+  Wurde gemessen, was behauptet wird? (Kap. 1)
+\item
+  Wie unsicher ist die Zahl? (Kap. 2, 9)
+\item
+  Für wen gilt sie? (Kap. 4, 9)
+\item
+  Ist es eine Ursache? (Kap. 11)
+\end{itemize}
+
+\(\implies\) \textbf{Genau das sind die Themen dieses Fachs.}\\
+Je mehr Antworten \& Analysen KI liefert, desto öfter stellen sich diese
+Fragen.
+
+Und beim Lernen kann KI enorm helfen: Erklärungen \& Aufgaben zu jedem
+Thema, so oft Sie wollen.
+\end{frame}
+
+\begin{frame}{Was beim Lernen hängen bleibt}
+\protect\hypertarget{was-beim-lernen-huxe4ngen-bleibt}{}
+Lernforschung, vielfach repliziert:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{selbst abfragen} wirkt besser als wiederlesen (Roediger \&
+  Karpicke 2006)
+\item
+  \textbf{selbst lösen} wirkt besser als die Lösung lesen (Slamecka \&
+  Graf 1978)
+\item
+  Lernbedingungen, die sich schwerer anfühlen, führen oft zu besserem
+  Behalten\\
+  (``\textbf{\emph{desirable difficulties}}'', Bjork 1994)
+\end{itemize}
+
+\(\implies\) \textbf{Wer die Anstrengung an einen Assistenten abgibt,
+lernt nichts.}
+
+\vspace{0pt plus 1filll}
+
+\footnotesize Roediger \& Karpicke (2006), \emph{Psychological Science}
+17(3); Slamecka \& Graf (1978), \emph{J. Exp. Psychol.: Human Learning
+and Memory} 4(6); Bjork (1994), ``desirable difficulties''.
+\end{frame}
+
+\begin{frame}{Zwei Arten, KI zu benutzen}
+\protect\hypertarget{zwei-arten-ki-zu-benutzen}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{zum Lernen:} erklären lassen, abfragen lassen, Gegenbeispiele,
+  Fehlersuche im eigenen Code
+\item
+  \textbf{zum Erledigen:} Lösung schreiben lassen -- dabei lernen Sie
+  nichts
+\item
+  beim Chatten fühlt sich beides gleich an, in der Klausur nicht
+\end{itemize}
+
+\begin{itemize}[<+->]
+\tightlist
+\item
+  \emph{Civilization advances by extending the number of important
+  operations which we can perform without thinking about them.}\\
+  Alfred North Whitehead (1861--1947, Mathematiker), 1911
+\end{itemize}
+
+\begin{itemize}[<+->]
+\tightlist
+\item
+  \(\implies\) Die Frage ist nur: \emph{welche} Operationen?\\
+  Befehle \& Begriffe nachschlagen, Routinearbeit: \(\checkmark\)\\
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Zum Lernen: oneTutor}
+\protect\hypertarget{zum-lernen-onetutor}{}
+\columnsbegin
+\column{.58\textwidth}
+
+\begin{itemize}
+\tightlist
+\item
+  Chatbot für diesen Kurs: antwortet anhand der Kursmaterialien
+\item
+  Stil \textbf{Sokratisch}: hilft mit gezielten Rückfragen, selbst auf
+  die Antwort zu kommen\\
+  \(\implies\) KI \emph{zum Lernen}, wie eben besprochen
+\item
+  Stil \textbf{Normal}: beantwortet Fragen direkt -- zum Nachschlagen
+\item
+  \textbf{Thinking} einschalten: denkt länger nach, gründlichere
+  Antworten
+\end{itemize}
+
+\vspace{.5em}
+
+\includegraphics[width=2.6cm]{pics/qr-onetutor-2627.png}
+\column{.4\textwidth} \centering
+\includegraphics[height=.78\textheight]{pics/onetutor-sokratisch.png}
+\columnsend
+\end{frame}
+
+\begin{frame}{So arbeiten wir in diesem Kurs}
+\protect\hypertarget{so-arbeiten-wir-in-diesem-kurs}{}
+\begin{itemize}
+\tightlist
+\item
+  KI-Werkzeuge: erlaubt \& sehr nützlich -- aber erst \emph{nach} einem
+  eigenen Versuch
+
+  \begin{itemize}
+  \tightlist
+  \item
+    erst selbst versuchen, dann fragen / helfen lassen
+  \item
+    erklären \& abfragen lassen statt Lösungen beauftragen
+  \item
+    nur abgeben, was Sie \emph{selbst} erklären können
+  \end{itemize}
+\item
+  Benotete Übungsblätter (Hauptfach): \textbf{ohne KI-Werkzeuge}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Blätter = Übung, Klausur = Prüfung ohne Hilfe (vgl. Studie 2):\\
+    wer die Blätter erledigen lässt, übt nicht
+  \item
+    kontrollieren können wir das nicht -- die Regel ist in Ihrem eigenen
+    Interesse
+  \end{itemize}
+\item
+  Von uns:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    (fast) jede Methode erst am Beispiel, dann die Definition
+  \item
+    wir sagen, wo Methoden unsicher sind und wo wir KI benutzt haben
+  \item
+    geprüft wird nur, was gelehrt wurde
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Dieses Semester (1)}
+\protect\hypertarget{dieses-semester-1}{}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}r>{\raggedright\arraybackslash}p{3.9cm}>{\raggedright\arraybackslash}p{6.9cm}@{}}
+\toprule
+ & \textbf{Kapitel} & \textbf{Die Frage, die Sie danach stellen können} \\
+\midrule
+1 & Messung, Skalen & Was wurde hier eigentlich gemessen -- und wie? \\
+2 & Wahrscheinlichkeit & Was heißt "wahrscheinlich" überhaupt? \\
+3 & Diskrete Zusammenhänge & Hängt das zusammen -- oder nur in dieser Tabelle? \\
+4 & Zufallsvariablen, Verteilungen & Wie sähe es aus, wenn nur der Zufall wirkt? \\
+5 & Grafiken & Zeigt das Bild die Daten oder eine Meinung? \\
+6 & Kennwerte & Mittelwert oder Median -- und warum hier? \\
+\bottomrule
+\end{tabular}
+
+\vspace{1em}
+
+Roter Faden: Schlaf im ersten Semester -- Umfrage unter Erstsemestern,
+ab Blatt 1.
+\end{frame}
+
+\begin{frame}{Dieses Semester (2)}
+\protect\hypertarget{dieses-semester-2}{}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}r>{\raggedright\arraybackslash}p{3.9cm}>{\raggedright\arraybackslash}p{6.9cm}@{}}
+\toprule
+ & \textbf{Kapitel} & \textbf{Die Frage, die Sie danach stellen können} \\
+\midrule
+7 & Parametrische Verteilungen & Welche Annahmen stecken in diesem Modell? \\
+8 & Zufallsvektoren & Was passiert, wenn mehrere Dinge gleichzeitig zufällig sind? \\
+9 & Grenzwertsätze & Wie groß muss die Stichprobe sein, damit ich der Schätzung traue? \\
+10 & Korrelation & Wie eng hängen zwei Messungen zusammen -- und wie misst man das? \\
+11 & Kausalität & Hat das eine das andere verursacht? \\
+\bottomrule
+\end{tabular}
+\end{frame}
+
+\begin{frame}{Wie es weitergeht}
+\protect\hypertarget{wie-es-weitergeht}{}
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Moodle:} in den Kurs einschreiben:
+  \href{https://moodle.lmu.de/course/view.php?id=48727}{moodle.lmu.de/course/view.php?id=48727}
+  (Schlüssel s. Orga-Folien)\\
+  dort: Folien, Übungsblätter, Ankündigungen, Forum
+\item
+  \textbf{Blatt 1} erscheint diese Woche:\\
+  Schlaf-Umfrage unter Erstsemestern beschreiben -- Messungen,
+  Häufigkeiten, Grafiken, etc.
+\item
+  \textbf{Übungen:} Termine \& Anmeldung s. Orga-Folien
+\item
+  \textbf{Nächste Vorlesung: Messung \& Skalen}\\
+  Was ist ein Merkmal, was eine Skala -- und warum kann man
+  ``Schlafdauer'' mitteln, ``Studiengang'' aber nicht?
+\end{itemize}
 \end{frame}
 
 \hypertarget{datenerhebung-messung}{%
@@ -1177,18 +1329,45 @@ Merkmale einer Untersuchungseinheit zu einem bestimmten Messzeitpunkt.
   to objects or events according to rules.}\\
   Stanley S. Stevens (1951)
 \end{itemize}
+
+\vspace{1.5em}
+\begin{center}
+\begin{tikzpicture}[scale=.8, transform shape,
+    >={Stealth[length=2.5mm]}, thick,
+    konzept/.style = {font=\bfseries},
+    weg/.style     = {font=\small\itshape, sloped, above, align=center},
+    rueck/.style   = {densely dotted, ->},
+    rueckweg/.style = {font=\small\itshape, align=center},
+    blass/.style   = {draw=gray, text=gray}
+  ]
+  \node[konzept] (real)  at (4.5, 3.2)  {REALITÄT};
+  \node[konzept, align=center, text=gray] (stoch) at (0, 0) {THEORIE:\\STOCHASTIK, STATISTIK};
+  \node[konzept, align=center] (daten) at (9, 0)      {EMPIRIE:\\DATEN};
+  \draw[->, blass] (real) -- (stoch)
+    node[weg, pos = 0.45, text=gray] {Mathematische\\Formalisierung};
+  \draw[->, line width=2.5pt, draw=darkbrown] (real) -- (daten)
+    node[weg, pos = 0.45, font=\bfseries\itshape, text=darkbrown] {Messung};
+  \draw[<->, blass] (stoch) -- (daten)
+    node[font=\small\itshape, midway, below = 1pt, text=gray] {Inferenz, Schätzung};
+  \draw[rueck, blass] (stoch.north) to[bend left = 45]
+    node[rueckweg, above left = -2pt, text=gray] {Induktion} (real.west);
+  \draw[rueck, blass] (daten.north) to[bend right = 45]
+    node[rueckweg, above right = -2pt, text=gray] {Deskription,\\Visualisierung} (real.east);
+\end{tikzpicture}
+\end{center}
 \end{frame}
 
 \begin{frame}{Messen}
 \protect\hypertarget{messen-1}{}
-\textbf{Messen} bedeutet: Zuordnung von Zahlen/Symbolen zu Ausprägungen
-von Merkmalen an Untersuchungseinheiten.
+\textbf{Messen} bedeutet:\\
+Zuordnen von Zahlen/Symbolen zu Ausprägungen von Merkmalen an
+Untersuchungseinheiten.
 
 \begin{itemize}
 \tightlist
 \item
   Physikalische Messungen:\\
-  Länge, Blutdruck, Temperatur, \ldots{}\\
+  Länge, Blutdruck, Temperatur, \ldots{}
 \item
   Psychometrische Beispiele:\\
   Gewaltbereitschaft, Schwere der Depression, \ldots{}
@@ -1204,13 +1383,17 @@ Amir \(\longrightarrow\) 1.84\\
 Liz \(\longrightarrow\) 1.61\\
 Feihong \(\longrightarrow\) 1.72
 
-Jedes Merkmal definiert bestimmte \textbf{Relationen} zwischen den UE\\
+Jedes Merkmal definiert bestimmte \textbf{Relationen} zwischen den UE.\\
 Hier z.B.: ``Amir größer als Feihong größer als Liz''\\
-\hspace*{0.333em}
+\strut \\
 
 Jede gültige Messung ist eine \textbf{strukturerhaltende Abbildung}
 (Homomorphismus) bezüglich dieser Relationen.\\
-Hier z.B.: ``Liz ist kleiner als Amir'' \(\iff\) ``\(1.61 < 1.84\)''
+Hier z.B.:\\
+\strut \\
+
+``Liz ist kleiner als Amir'' \(\iff\)\\
+``Größe(Liz) \(= 1.61 < 1.84 =\) Größe(Amir)''
 \end{frame}
 
 \begin{frame}{Typen von Messungen}
@@ -1255,16 +1438,18 @@ Ist der \textbf{Durchschnitt von Postleitzahlen} eine sinnvolle Größe?
 \begin{itemize}[<+->]
 \tightlist
 \item
-  \textbf{Welche Rechnungen sinnvoll sind, hängt vom \emph{Skalenniveau}
-  des Merkmals ab --- nicht davon, ob sich die Ausprägungen als Zahlen
-  schreiben lassen.}
+  \textbf{Welche Rechen\emph{operationen} sinnvoll sind, hängt vom
+  \emph{Skalenniveau} des Merkmals ab.\\
+  \emph{Nicht} davon, ob sich die Ausprägungen als Zahlen schreiben
+  lassen.}
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Skalen}
 \protect\hypertarget{skalen}{}
 Messungen als strukturerhaltende Abbildungen\\
-also: empirisches Relativ \(\cong\) numerisches Relativ ~
+also: empirisches Relativ \(\cong\) numerisches Relativ.\\
+\strut \\
 
 \textbf{Existenz:}\\
 Ist die Struktur der Objekte so, dass eine strukturerhaltende Abbildung
@@ -1274,7 +1459,7 @@ existiert?\\
 \(\implies\) Verletzt z.B. oft durch unerfüllte Annahme von
 Eindimensionalität
 
-~
+\hfill\break
 
 \textbf{Eindeutigkeit:}\\
 Gibt es mehrere zulässige Skalen?\\
@@ -1321,15 +1506,15 @@ Relative, die durch Messungen repräsentiert wird.
 Die Menge zulässiger Transformationen bestimmt das Skalenniveau eines
 Merkmals.
 
-Höhere Skalenniveaus
+Höhere Skalenniveaus \ldots{}
 
 \begin{itemize}
 \tightlist
 \item
-  erlauben eine \emph{größere} Menge von sinnvollen \emph{Operationen
-  mit Werten auf der Skala},
+  \ldots{} erlauben eine \emph{größere} Menge von sinnvollen
+  \emph{Operationen mit Werten auf der Skala},
 \item
-  aber eine \emph{kleinere} Menge an zulässigen strukturerhaltenden
+  aber nur eine \emph{kleinere} Menge an zulässigen strukturerhaltenden
   \emph{Transformationen der Skala selbst}.
 \end{itemize}
 \end{frame}
@@ -1488,8 +1673,7 @@ aggregierten Merkmal (\emph{Score}, \emph{Index}).
 Häufig: Bildung von (gewichteten) Summen
 
 Beispiel: Wahl-O-Mat\\
-\(\text{Übereinstimmung SPD} = w_1 \cdot Q(\text{Tempolimit}) + w_2 \cdot Q(\text{Verteidigungsausgaben}) + ...\)
-~
+\(\text{Übereinstimmung SPD} = w_1 \cdot Q(\text{Tempolimit}) + w_2 \cdot Q(\text{Verteidigungsausgaben}) + ...\)\\
 
 Indexbildung meist theoriegeleitet bzw. nach fachspezifischen
 Überlegungen\\
@@ -1581,9 +1765,11 @@ Alle statistischen Einheiten einer Grundgesamtheit werden untersucht
 
 \begin{block}{Def.: \textbf{Stichprobe}}
 \protect\hypertarget{def.-stichprobe}{}
-Auch \emph{Teilerhebung}. Ein Teil der Untersuchungseinheiten in einer
-Grundgesamtheit wird untersucht. Ist die Auswahl dieser UE zufällig,
-spricht man von einer \textbf{Zufallsstichprobe}.
+Auch \emph{Teilerhebung}.\\
+Ein Teil der Untersuchungseinheiten in einer Grundgesamtheit wird
+untersucht.\\
+Ist die Auswahl dieser UE zufällig, spricht man von einer
+\textbf{Zufallsstichprobe}.
 \end{block}
 
 Induktive Statistik ist in der Regel nur auf Basis geeigneter
@@ -1662,13 +1848,15 @@ Also: Jeweils \textbf{mehrere} \emph{Beobachtungen} \textbf{mehrerer}
 \protect\hypertarget{experimente}{}
 Es werden in der Regel verschiedene ``Behandlungen'' verglichen.
 
-Gemeinsamkeit: Experimenteller Eingriff ins Geschehen
+Gemeinsamkeit:\\
+Experimenteller Eingriff ins Geschehen
 
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Randomisierte klinische Studie} : Zuordnung von Behandlungen
-  zu Personen erfolgt durch Losverfahren (Randomisierung)
+  \textbf{Randomisierte klinische Studie} :\\
+  Zuordnung von Behandlungen zu Personen erfolgt durch Losverfahren
+  (Randomisierung)
 \item
   Randomisierte Experimente (Produktion, Landwirtschaft )\\
   Vorlesung: \emph{Versuchplanung}
@@ -1688,7 +1876,8 @@ Gemeinsamkeit: Experimenteller Eingriff ins Geschehen
   \textbf{Kohortenstudien:}\\
   Synonym für Längsschnittdaten (\emph{retrospektiv} oder
   \emph{prospektiv})\\
-  Beispiel: EPIC Studie (European Prospective Investigation into Cancer)
+  Beispiel: EPIC Studie (European Prospective Investigation into
+  Cancer)\\
   400.000 Personen in neun europäischen Ländern
 \item
   \textbf{Fall-Kontroll-Studien:}\\
@@ -1706,6 +1895,34 @@ Definitionen}\label{wahrscheinlichkeit-grundlagen-definitionen}}
 \subsection{Wahrscheinlichkeit: Begriffsbildung \&
 Interpretation}\label{wahrscheinlichkeit-begriffsbildung-interpretation}}
 
+\begin{frame}{Stochastik}
+\protect\hypertarget{stochastik}{}
+\begin{center}
+\begin{tikzpicture}[scale=.8, transform shape,
+    >={Stealth[length=2.5mm]}, thick,
+    konzept/.style = {font=\bfseries},
+    weg/.style     = {font=\small\itshape, sloped, above, align=center},
+    rueck/.style   = {densely dotted, ->},
+    rueckweg/.style = {font=\small\itshape, align=center},
+    blass/.style   = {draw=gray, text=gray}
+  ]
+  \node[konzept, text=gray] (real)  at (4.5, 3.2)  {REALITÄT};
+  \node[konzept, align=center, text=darkbrown, draw=darkbrown, line width=2pt, rounded corners, inner sep=5pt] (stoch) at (0, 0) {THEORIE:\\STOCHASTIK, STATISTIK};
+  \node[konzept, align=center, text=gray] (daten) at (9, 0)      {EMPIRIE:\\DATEN};
+  \draw[->, blass] (real) -- (stoch)
+    node[weg, pos = 0.45, text=gray] {Mathematische\\Formalisierung};
+  \draw[->, blass] (real) -- (daten)
+    node[weg, pos = 0.45, text=gray] {Messung};
+  \draw[<->, blass] (stoch) -- (daten)
+    node[font=\small\itshape, midway, below = 1pt, text=gray] {Inferenz, Schätzung};
+  \draw[rueck, blass] (stoch.north) to[bend left = 45]
+    node[rueckweg, above left = -2pt, text=gray] {Induktion} (real.west);
+  \draw[rueck, blass] (daten.north) to[bend right = 45]
+    node[rueckweg, above right = -2pt, text=gray] {Deskription,\\Visualisierung} (real.east);
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
 \begin{frame}{Lernziele: Wahrscheinlichkeit \& elementare
 W'keitsrechnung}
 \protect\hypertarget{lernziele-wahrscheinlichkeit-elementare-wkeitsrechnung}{}
@@ -1715,7 +1932,7 @@ Nach diesem Kapitel können Sie \ldots{}
 \tightlist
 \item
   die frequentistische und die subjektivistische Interpretation von
-  \textgreater{} Wahrscheinlichkeit unterscheiden
+  Wahrscheinlichkeit unterscheiden
 \item
   Laplace-Wahrscheinlichkeiten mit kombinatorischen Abzählregeln
   berechnen
@@ -1751,7 +1968,8 @@ Wahrscheinlichkeit aus Wetteinsatz:
 ``Wie sicher bist \emph{Du}, dass das Ereignis \(A\) eintreten wird?''\\
 \(\longrightarrow\) ``Wie viel Einsatz \(e\) bist \emph{Du} maximal
 bereit zu setzen, wenn beim Eintreten von \(A\) ein Gewinn \(g\)
-ausgezahlt wird?'' (unter Risikoneutralität)
+ausgezahlt wird?''\\
+(unter Risikoneutralität)
 
 \[\implies P(A) = \frac{e}{g}\]
 
@@ -1780,11 +1998,11 @@ Lieblingsteam die Meisterschaft gewinnt (Ereignis \(M\)).
 
 \begin{frame}{Frequentistische Interpretation}
 \protect\hypertarget{frequentistische-interpretation}{}
-Wahrscheinlichkeit als \textbf{Häufigkeit}:
-
-Wenn der zufällige Vorgang beliebig oft wiederholt werden würde, dann
-würde die \textbf{relative Häufigkeit} des Eintretens des Ereignisses
-\(A\) gegen die Wahrscheinlichkeit \(P(A)\) konvergieren.
+Wahrscheinlichkeit als \textbf{Häufigkeit}:\\
+Wenn der zufällige Vorgang beliebig oft wiederholt werden würde,\\
+dann würde die \textbf{relative Häufigkeit} des Eintretens des
+Ereignisses \(A\) gegen die Wahrscheinlichkeit \(P(A)\) konvergieren.\\
+\strut \\
 
 Klassisches Beispiel:\\
 Wiederholtes Werfen eines ``fairen'' Würfels
@@ -1806,8 +2024,9 @@ Wiederholtes Werfen eines ``fairen'' Würfels
   \tightlist
   \item
     Frequentistische Interpretation der W.keit von \emph{einzigartigen}
-    Ereignissen? \ldots{} von bereits eingetretenen, aber
-    \emph{unbeobachteten} Ereignissen?
+    Ereignissen?\\
+    \ldots{} von bereits eingetretenen, aber \emph{unbeobachteten}
+    Ereignissen?
   \item
     Subjektivistische Interpretation von W.keiten für einfache \&
     wiederholbare physikalische Prozesse wie Würfelwurf? \ldots{}\\
@@ -1919,8 +2138,8 @@ Anzahl der Elemente in \(A\) ist.
 \end{block}
 
 \(\implies\) \textbf{``Anzahl \emph{günstiger} und
-gleichwahrscheinlicher Fälle durch Anzahl \emph{möglicher} und
-gleichwahrscheinlicher Fälle''}
+gleichwahrscheinlicher Fälle\\
+durch Anzahl \emph{möglicher} und gleichwahrscheinlicher Fälle''}
 
 \note[item]{Notation sauber einführen: Mengenmächtigkeit, ... }
 \note[item]{verbalisieren: Anzahl günstiger Fälle durch Anzahl möglicher Fälle. Nur gültig wenn alle  Fälle gleichwahrscheinlich sind.}
@@ -1934,7 +2153,7 @@ gleichwahrscheinlicher Fälle''}
   Laplace-W.keitsraums hat Wahrscheinlichkeit
   \(P(\{\omega_i\})=\frac{1}{n}\).
 \item
-  Die Wahrscheinlichkeit von \(\Omega\) ist \(P(\Omega)=1\). ~
+  Die Wahrscheinlichkeit von \(\Omega\) ist \(P(\Omega)=1\).\\
 \item
   Die entsprechende \textbf{Abbildung}
   \(P:{\mathcal P}(\Omega) \to [0,1]\) nennt man auch \textbf{diskrete
@@ -1946,7 +2165,7 @@ gleichwahrscheinlicher Fälle''}
     \({\mathcal P}(\Omega)\) ist die \textbf{Potenzmenge} (Menge aller
     Teilmengen) von \(\Omega\) -- nicht zu verwechseln mit
     \(P(\Omega)\)!\\
-    \hspace*{0.333em}
+    \strut \\
   \end{itemize}
 \item
   Die \textbf{Vereinigung} \(U = A \cup B\) zweier Ereignisse \(A, B\)
@@ -1966,7 +2185,8 @@ gleichwahrscheinlicher Fälle''}
 |\Omega| &= 6^2 =  36
 \end{align*}
 
-Sei \(A_k\) das Ereignis ``Augensumme ist \(k\)''. Dann gilt:
+Sei \(A_k\) das Ereignis ``Augensumme ist \(k\)''.\\
+Dann gilt:
 
 \[P(A_k) = \frac{6 - |k - 7|}{36}\quad\mbox{für}\quad k=2,...,12\]
 
@@ -1989,7 +2209,7 @@ P(A_{12}) & = & \frac{1}{36}
 auszuwählen?}
 
 \begin{itemize}
-\item \textbf{Auswahl mit Zurücklegen, Ergebnis mit Reihenfolgen:} $$n^k = n \cdot n \cdot \dots \cdot n$$  
+\item \textbf{Auswahl mit Zurücklegen, Ergebnis mit Reihenfolgen:} $$n^k = n \cdot n \cdot \dots \cdot n$$
    $\to$ \emph{je $n$ Möglichkeiten für alle $k$ Ziehungen}
 \item \textbf{Auswahl ohne Zurücklegen, Ergebnis mit Reihenfolge:}
         $$\frac{n!}{(n-k)!} = n \cdot (n-1) \cdot \ldots \cdot (n-k+1)$$
@@ -2061,7 +2281,7 @@ zum ersten Mal Zahl eintritt.
 Allgemein mit \(\omega_i := {i}\): \begin{align*}
 P(\{\omega_i\}) &= \frac{1}{2^i} \qquad i = 1, 2, 3, ...\\
 \sum\limits_{i=1}^{\infty} P(\{\omega_i\}) & =  \sum\limits_{i=1}^{\infty}  \frac{1}{2^i}   \; = \;  1 \qquad
-\end{align*} \footnotesize Beweis s.
+\end{align*} \vspace{0pt plus 1filll} \footnotesize Beweis s.
 \href{https://de.wikipedia.org/wiki/Geometrische_Reihe}{geom. Reihe}
 \note[item]{  $P(\{\omega_i\}) = \frac{1}{2^i}$ erklären !}
 \end{frame}
@@ -2121,9 +2341,9 @@ sie folgende Eigenschaften erfüllt:
 \tightlist
 \item
   \textbf{A1:} \(P(A)\geq 0\) \quad für beliebige \(A \subseteq \Omega\)
-  (\emph{Positivität})\\
+  (\emph{Positivität})
 \item
-  \textbf{A2:} \(P(\Omega) = 1\) (\emph{Sicheres Ereignis})\\
+  \textbf{A2:} \(P(\Omega) = 1\) (\emph{Sicheres Ereignis})
 \item
   \textbf{A3:} \(P(A \cup B) = P(A) + P(B)\) für \emph{disjunkte}
   Ereignisse \(A,B \subseteq \Omega\) (\emph{Additivität})
@@ -2446,8 +2666,9 @@ Unabhängigkeit}\label{stochastische-unabhuxe4ngigkeit}}
 
 \begin{frame}{Stochastische Unabhängigkeit: Motivation}
 \protect\hypertarget{stochastische-unabhuxe4ngigkeit-motivation}{}
-Frage: Wann sind 2 Ereignisse \(A, B\) \textbf{stochastisch unabhängig}?
-~
+Frage: Wann sind 2 Ereignisse \(A, B\) \textbf{stochastisch
+unabhängig}?\\
+\strut \\
 
 Motivation über bedingte Wahrscheinlichkeiten:
 
@@ -2457,8 +2678,7 @@ Zwei Ereignisse \(A, B\) sind \emph{stochastisch unabhängig}, wenn
 \mbox{ bzw. } \underbrace{P(B|A)}_{\frac{P(A \cap B)}{P(A)}} & =   P(B)
 \end{align*}
 
-Intuition:
-
+Intuition:\\
 Zwei Ereignisse sind stochastisch unabhängig, wenn das Eintreten des
 einen nichts an der Wahrscheinlichkeit des Eintretens des anderen
 verändert.
@@ -2509,7 +2729,8 @@ P(\bar A \cap \bar B) &= P(\bar A) - P(\bar A \cap B) \\
 
 \begin{frame}{Beispiel: Zweimaliges Würfeln}
 \protect\hypertarget{beispiel-zweimaliges-wuxfcrfeln}{}
-Ein fairer Würfel wird zweimal hintereinander geworfen. Definiere
+Ein fairer Würfel wird zweimal hintereinander geworfen.\\
+Definiere
 
 \begin{tabular}{ll}
 $A:$ & "Beim 1. Würfelwurf eine Sechs" \\
@@ -2526,10 +2747,11 @@ P(A \cap B) = P(A) \cdot P(B) = \frac{1}{36}
 
 \begin{frame}{Beispiel: Zweimaliges Würfeln mit Tricks}
 \protect\hypertarget{beispiel-zweimaliges-wuxfcrfeln-mit-tricks}{}
-Angenommen die Würfelwerfende legt es darauf an einen Pasch zu würfeln.
+Angenommen die Würfelwerfende legt es darauf an einen Pasch zu
+würfeln.\\
 Sie kann den zweiten Wurf so steuern, dass sie mit W.keit \(0.5\) das
-gleiche Ergebnis wie beim ersten Wurf würfelt. Die fünf anderen
-möglichen Ergebnisse haben dann jeweils W.keit \(0.1\).
+gleiche Ergebnis wie beim ersten Wurf würfelt.\\
+Die fünf anderen möglichen Ergebnisse haben dann jeweils W.keit \(0.1\).
 
 Dann ist zwar \(P(A)=\frac{1}{6}\) und auch \(P(B) = \frac{1}{6}\), aber
 \[P(A \cap B)= P(A)P(B|A) = \frac{1}{6} \cdot \frac{1}{2} = \frac{1}{12}\]
@@ -2576,9 +2798,9 @@ P(A_1) \cdot P(A_2) \cdot P(A_3) &= \frac{1}{8}
 \protect\hypertarget{bedingte-unabhuxe4ngigkeit}{}
 \begin{block}{Def.: \textbf{Bedingte Unabhängigkeit}}
 \protect\hypertarget{def.-bedingte-unabhuxe4ngigkeit}{}
-Sei \(C\) ein beliebiges Ereignis mit \(P(C)>0\). Zwei Ereignisse \(A\)
-und \(B\) nennt man \textbf{bedingt unabhängig gegeben} \(C\), genau
-dann wenn \[
+Sei \(C\) ein beliebiges Ereignis mit \(P(C)>0\).\\
+Zwei Ereignisse \(A\) und \(B\) nennt man \textbf{bedingt unabhängig
+gegeben} \(C\), genau dann wenn \[
 P(A \cap B|C) = P(A|C) \cdot P(B|C).
 \]
 \end{block}
@@ -2624,7 +2846,8 @@ Szenario: Einfacher Würfelwurf
 
 Definiere Ereignisse \(A = \{1, 2\}; B = \{2, 4, 6\}; C = \{1, 4\}\).
 
-Dann gilt: \(A \perp B\) (!), aber \((A \not \perp B)|C\)!
+Dann gilt:\\
+\(A \perp B\) (!), aber \((A \not \perp B)|C\)!
 
 Also: aus ``stochastisch unabhängig'' folgt \emph{nicht} ``bedingt
 stochastisch unabhängig''.
@@ -2714,8 +2937,9 @@ Allgemeiner gilt für eine disjunkte Zerlegung \(B_1, ..., B_n\):\\
 \end{itemize}
 
 \textbf{Ermöglicht Rückschluss auf Plausibilität nicht direkt
-beobachtbarer Phänomene/Modellannahmen \(B_i\), gegeben beobachtete
-Daten \(A\) und Wahrscheinlichkeitsmodell \(P(A|B_i)\)}
+beobachtbarer Phänomene/Modellannahmen \(B_i\),\\
+gegeben beobachtete Daten \(A\) und Wahrscheinlichkeitsmodell
+\(P(A|B_i)\)}
 
 \note[item]{anders:
 $P(B_i)$ ist Vorwissen, repräsentiert Annahmen. Bayes liefert Update-Regel wie neue Information durch die Beobachtung von A unser Wissen über die $B_i$ verändert.\\}
@@ -2794,8 +3018,9 @@ Odds kennen wir aus 2.1 -- jetzt zahlt sich das aus:
 \end{alignat*}
 
 Je weiter der \emph{Likelihood Quotient} (auch: \emph{Bayes-Faktor}) von
-1 weg ist, desto aussagekräftiger ist die Beobachtung von \(A\)
-bezüglich der Plausibilität der Annahme \(B\).
+1 weg ist,\\
+desto aussagekräftiger ist die Beobachtung von \(A\) bezüglich der
+Plausibilität der Annahme \(B\).
 \end{frame}
 
 \begin{frame}{Bsp: Bayesianisches Update mit Odds}
@@ -2960,7 +3185,10 @@ $\sum$ & 1193 & 1105 & 687 & 536 & 467 & 229 & 385 & 4602 \\
 \end{tabular}\normalsize
 \end{center}
 
-\vskip 5em \scriptsize  Quelle: Nachwahlbefragung ARD via
+\vspace{0pt plus 1filll}
+\scriptsize
+
+Quelle: Nachwahlbefragung ARD via
 \href{https://de.statista.com/statistik/daten/studie/1257090/umfrage/wahlverhalten-bei-der-bundestagswahl-nach-geschlecht/}{statista.com}
 \end{frame}
 
@@ -3164,8 +3392,7 @@ f_{X|Y}(a_1|b_j) = \frac{f_{1j}}{f_{\cdot j}} ,\ldots, f_{X|Y}(a_k|b_j) = \frac{
 \end{array}
 \end{displaymath}
 
-\noindent  \textbf{Merksatz:}
-
+\noindent \textbf{Merksatz:}\\
 Bedingte Häufigkeitsverteilungen werden durch Division der \(h_{ij}\)
 bzw. \(f_{ij}\) durch die entsprechende Zeilen- bzw. Spaltensumme
 gebildet.
@@ -3217,23 +3444,25 @@ $\sum$ & 1193 & 1105 & 687 & 536 & 467 & 229 & 385 & 4602 \\
 \protect\hypertarget{anteile-vergleichen-prozentpunkte-vs.-relative-uxe4nderung}{}
 Bedingte relative Häufigkeiten (Anteile) werden oft als
 \textbf{Prozente} angegeben -- beim Vergleich zweier Anteile lauern
-Fallstricke. Beispiel: SPD-Anteil bei Frauen \(27\%\), bei Männern
-\(25\%\).
+Fallstricke.\\
+Beispiel: SPD-Anteil bei Frauen \(27\%\), bei Männern \(25\%\).
 
 \begin{itemize}[<+->]
 \tightlist
 \item
   \textbf{Prozentpunkte} (\(\%\)-Punkte): \emph{absolute} Differenz
-  zweier Anteile. \(27\% - 25\% = 2\) Prozentpunkte.
+  zweier Anteile.\\
+  \(27\% - 25\% = 2\) Prozentpunkte.
 \item
   \textbf{relative Änderung}: Anteil der Differenz \emph{am
-  Ausgangswert}. \(\frac{27\% - 25\%}{25\%} = 8\%\) -- der Anteil ist um
-  \(8\%\) \textbf{größer}, aber nur um \(2\) Prozentpunkte.
+  Ausgangswert}.\\
+  \(\frac{27\% - 25\%}{25\%} = 8\%\) -- der Anteil ist um \(8\%\)
+  \textbf{größer}, aber nur um \(2\) Prozentpunkte.
 \item
   \textbf{``\(x\)-mal so groß''} ist eindeutig
-  (\(27\% = 1{,}08 \cdot 25\%\)). \textbf{``\(x\)-mal größer''} ist
-  strittig (Faktor \(x\) oder Zunahme \emph{um} das \(x\)-fache?)
-  \(\longrightarrow\) vermeiden.
+  (\(27\% = 1{,}08 \cdot 25\%\)).\\
+  \textbf{``\(x\)-mal größer''} ist strittig (Faktor \(x\) oder Zunahme
+  \emph{um} das \(x\)-fache?) \(\longrightarrow\) vermeiden.
 \end{itemize}
 \end{frame}
 
@@ -3262,8 +3491,9 @@ Einheiten).
 \begin{frame}{Bedingte und gemeinsame Häufigkeiten}
 \protect\hypertarget{bedingte-und-gemeinsame-huxe4ufigkeiten}{}
 Man kann auch umgekehrt aus bedingten Häufigkeiten und Randhäufigkeiten
-die gemeinsamen Häufigkeiten ausrechnen. Bei der Nachwahlbefragung aus
-den bedingten Häufigkeiten und Randhäufigkeiten also z.B. \[
+die gemeinsamen Häufigkeiten ausrechnen.\\
+Bei der Nachwahlbefragung aus den bedingten Häufigkeiten und
+Randhäufigkeiten also z.B. \[
 h(a_1) = 2504\,\,\, \mbox{Männer},\,\,\, h(a_2) = 2098 \,\,\,\mbox{Frauen}; \,\,\,n = 4602.
 \]
 
@@ -3386,15 +3616,17 @@ Odds}\label{diskrete-zusammenhangsanalyse-odds}}
 \begin{itemize}
 \tightlist
 \item
-  Wir betrachten die Merkmale \(X\) und \(Y\) zunächst asymmetrisch: Die
-  Ausprägungen von \(X\) definieren (hier 2) Subpopulationen, \(Y\) ist
-  das interessierende dichotome Merkmal in diesen Subpopulationen
+  Wir betrachten die Merkmale \(X\) und \(Y\) zunächst asymmetrisch:\\
+  Die Ausprägungen von \(X\) definieren (hier 2) Subpopulationen,\\
+  \(Y\) ist das interessierende dichotome Merkmal in diesen
+  Subpopulationen
 \item
   Unter einer \textbf{Chance} (\emph{odds}) versteht man nun das
   \textbf{Verhältnis der Häufigkeiten} von \(Y=1\) und \(Y=2\).
 \item
-  \textbf{bedingte Odds}: Verhältnis der bedingten Häufigkeiten von
-  \(Y=1\) und \(Y=2\) \textbf{in einer Subpopulation} \(X=a_i\).
+  \textbf{bedingte Odds}:\\
+  Verhältnis der bedingten Häufigkeiten von \(Y=1\) und \(Y=2\)
+  \textbf{in einer Subpopulation} \(X=a_i\).
 \end{itemize}
 \end{frame}
 
@@ -3564,8 +3796,9 @@ Beispiel: Morbus Alzheimer und Genetik
 \vspace{0.5cm}
 
 \(\implies\) Odds für ApoE3 bei Kontrollen um den Faktor 3 höher als bei
-Fällen \(\implies\) Odds für ApoE4 bei Kontrollen um den Faktor 3
-niedriger als bei Fällen
+Fällen\\
+\(\implies\) Odds für ApoE4 bei Kontrollen um den Faktor 3 niedriger als
+bei Fällen
 
 \vspace{0.3cm}
 
@@ -3778,8 +4011,9 @@ Vergleiche für jede Zelle \((i,j)\) die \emph{unter Unabh. erwarteten}
 \textbf{Schwachpunkt:}
 
 Wertebereich von \(\chi^2\) hängt vom Stichprobenumfang \(n\) und von
-der Dimension der Tafel ab. Numerischer Wert deshalb schwierig direkt
-interpretierbar \(\rightarrow\) Normierung
+der Dimension der Tafel ab.\\
+Numerischer Wert deshalb schwierig direkt interpretierbar
+\(\rightarrow\) Normierung
 \end{frame}
 
 \begin{frame}{Kontingenzkoeffizient und korrigierter
@@ -3806,10 +4040,10 @@ Der \textbf{korrigierte Kontingenzkoeffizient} ergibt sich durch
   Richtung wie beim Odds Ratio.
 \item
   Vorsicht ist geboten bei einem Vergleich von Kontingenztafeln gleicher
-  Zellenzahl mit stark unterschiedlichen Stichprobenumfängen, da
-  \(\chi^2\) mit wachsendem Stichprobenumfang wächst, beispielsweise
-  führt eine Verzehnfachung von \(h_{ij}\) und \(\tilde h_{ij}\) zu
-  zehnfachem \(\chi^2\)
+  Zellenzahl mit stark unterschiedlichen Stichprobenumfängen,\\
+  da \(\chi^2\) mit wachsendem Stichprobenumfang wächst,\\
+  beispielsweise führt eine Verzehnfachung von \(h_{ij}\) und
+  \(\tilde h_{ij}\) zu zehnfachem \(\chi^2\)
 \item
   Sämtliche Maße benutzen nur das Nominalskalenniveau von \(X\) und
   \(Y\).
@@ -3864,11 +4098,10 @@ $\sum$ & {\normalsize 1193} & {\normalsize 1105} & {\normalsize 687} & {\small 5
 
 \footnotesize
 
-Farbe: Abweichung von der Unabhängigkeitserwartung (Pearson-Residuen);
+Farbe: Abweichung von der Unabhängigkeitserwartung (Pearson-Residuen);\\
 \textcolor[rgb]{0.843,0.188,0.153}{rot} \(=\) seltener,
-\textcolor[rgb]{0.271,0.459,0.706}{blau} \(=\) häufiger als erwartet.
-Die Schriftgröße kodiert zusätzlich die Zellhäufigkeit (auch im
-Graustufendruck lesbar).
+\textcolor[rgb]{0.271,0.459,0.706}{blau} \(=\) häufiger als erwartet.\\
+Die Schriftgröße kodiert zusätzlich die Zellhäufigkeit.
 \end{frame}
 
 \begin{frame}{Interpretation:}
@@ -4196,7 +4429,32 @@ Zellen eingefärbt nach
 \section{Zufallsvariablen, Verteilungen \&
 Häufigkeiten}\label{zufallsvariablen-verteilungen-huxe4ufigkeiten}}
 
-\begin{frame}{Zufallsvariablen, Verteilungen \& Häufigkeiten}
+\begin{frame}{Mathematische Formalisierung}
+\protect\hypertarget{mathematische-formalisierung}{}
+\begin{center}
+\begin{tikzpicture}[scale=.8, transform shape,
+    >={Stealth[length=2.5mm]}, thick,
+    konzept/.style = {font=\bfseries},
+    weg/.style     = {font=\small\itshape, sloped, above, align=center},
+    rueck/.style   = {densely dotted, ->},
+    rueckweg/.style = {font=\small\itshape, align=center},
+    blass/.style   = {draw=gray, text=gray}
+  ]
+  \node[konzept] (real)  at (4.5, 3.2)  {REALITÄT};
+  \node[konzept, align=center] (stoch) at (0, 0) {THEORIE:\\STOCHASTIK, STATISTIK};
+  \node[konzept, align=center, text=gray] (daten) at (9, 0)      {EMPIRIE:\\DATEN};
+  \draw[->, line width=2.5pt, draw=darkbrown] (real) -- (stoch)
+    node[weg, pos = 0.45, font=\bfseries\itshape, text=darkbrown] {Mathematische\\Formalisierung};
+  \draw[->, blass] (real) -- (daten)
+    node[weg, pos = 0.45, text=gray] {Messung};
+  \draw[<->, blass] (stoch) -- (daten)
+    node[font=\small\itshape, midway, below = 1pt, text=gray] {Inferenz, Schätzung};
+  \draw[rueck, blass] (stoch.north) to[bend left = 45]
+    node[rueckweg, above left = -2pt, text=gray] {Induktion} (real.west);
+  \draw[rueck, blass] (daten.north) to[bend right = 45]
+    node[rueckweg, above right = -2pt, text=gray] {Deskription,\\Visualisierung} (real.east);
+\end{tikzpicture}
+\end{center}
 \end{frame}
 
 \begin{frame}{Lernziele: Zufallsvariablen, Verteilungen \& Häufigkeiten}
@@ -4209,26 +4467,26 @@ Nach diesem Kapitel können Sie \ldots{}
   Zufallsvariablen und ihre Verteilungsfunktion formal nutzen
 \item
   diskrete und stetige Verteilungen über Wahrscheinlichkeitsfunktion
-  bzw. \textgreater{} Dichte beschreiben
+  bzw. Dichte beschreiben
 \item
   die empirischen Gegenstücke (relative Häufigkeiten, empirische
-  \textgreater{} Verteilungsfunktion) berechnen und ablesen
+  Verteilungsfunktion) berechnen und ablesen
 \end{itemize}
 
 \vspace{1em}
 
-\textbf{Voraussetzungen:} Wahrscheinlichkeitsrechnung \& Ereignisse
-(Kap. 2).
+\textbf{Voraussetzungen:}\\
+Wahrscheinlichkeitsrechnung \& Ereignisse (Kap. 2).
 \end{frame}
 
 \begin{frame}{Zufallsvariablen - Motivation}
 \protect\hypertarget{zufallsvariablen---motivation}{}
 \begin{itemize}
 \item
-  Ergebnisse von Zufallsvorgängen sind nicht notwendigerweise Zahlen\\
+  Ergebnisse von Zufallsvorgängen sind nicht notwendigerweise Zahlen
 \item
   Oft ist es aber hilfreich diese durch Zahlen zu repräsentieren, um mit
-  ihnen rechnen zu können\\
+  ihnen rechnen zu können
 \item
   Beispiel: 3-maliger Wurf einer Münze\\
   \(\Omega = \{Z, K\} \times \{Z, K\} \times \{Z, K\}\)\\
@@ -4252,7 +4510,7 @@ Die Menge der möglichen Ausprägungen einer ZV X heißt \emph{Träger}
 \(\cal{T}_X\) der ZV \(X\)
 \end{block}
 
-Im Bsp: \(\cal{T}_Y = \{0,1,2,3\}\)\\
+Im Bsp: \(\cal{T}_Y = \{0,1,2,3\}\)
 
 \begin{block}{Def.: \textbf{Zufallsvariable}}
 \protect\hypertarget{def.-zufallsvariable}{}
@@ -4266,13 +4524,14 @@ von \(\Omega\) nach \(\cal{T}_X \subseteq \mathbb{R}\):
 \item
   Eine Zufallsvariable \(X\) ordnet also jedem Elementarereignis
   \(\omega \in \Omega\) \emph{genau einen} Zahlenwert
-  \(x \in \cal{T}_X\) zu: \(X(\omega) = x\)
+  \(x \in \cal{T}_X\) zu:\\
+  \(X(\omega) = x\)
 \item
   Mehrere Elementarereignisse können dem selben Zahlenwert zugeordnet
   werden.
 \item
-  Unterscheide: Zufallsvariable \(X:\Omega \to \cal{T}_X\)
-  vs.~Ausprägungen/Realisierungen \(x = X(\omega)\) von \(X\).
+  Unterscheide: Zufallsvariable \(X:\Omega \to \cal{T}_X\) vs.\\
+  Ausprägungen/Realisierungen \(x = X(\omega)\) von \(X\).
 \end{itemize}
 
 \note{Notation: GROSS: stochastische Größe, klein: Beobachtung, Realisierung!}
@@ -4287,8 +4546,9 @@ von \(\Omega\) nach \(\cal{T}_X \subseteq \mathbb{R}\):
 \protect\hypertarget{zufallsvariable---motivation}{}
 \begin{itemize}
 \item
-  Man kann mit \(X\) ``rechnen'': z.B \(P(X \leq a)\) oder
-  \(P(X^2 > b)\), oder ``Welches Ergebnis erwarten wir `im Mittel'?''
+  Man kann mit \(X\) ``rechnen'':\\
+  z.B \(P(X \leq a)\) oder \(P(X^2 > b)\),\\
+  oder ``Welches Ergebnis erwarten wir `im Mittel'?''
 \item
   Ursprünglicher Wahrscheinlichkeitsraum \((\Omega, P)\) wird
   letztendlich nicht mehr benötigt, stattdessen nur Wahrscheinlichkeiten
@@ -4316,9 +4576,9 @@ von \(\Omega\) nach \(\cal{T}_X \subseteq \mathbb{R}\):
 \begin{block}{Def.: \textbf{Diskrete Zufallsvariable}}
 \protect\hypertarget{def.-diskrete-zufallsvariable}{}
 Eine ZV \(X\) heißt \textbf{diskret}, falls sie nur endlich oder
-abzählbar unendlich viele Werte \(x_1, x_2, ...\) annehmen kann, also:
-falls die Menge \(\cal{T}=\{x_1, x_2, ...\}\) der möglichen Ausprägungen
-\(x_i\) von \(X\) mit \(P(X = x_i) > 0\) abzählbar ist.
+abzählbar unendlich viele Werte \(x_1, x_2, ...\) annehmen kann,\\
+also: falls die Menge \(\cal{T}=\{x_1, x_2, ...\}\) der möglichen
+Ausprägungen \(x_i\) von \(X\) mit \(P(X = x_i) > 0\) abzählbar ist.
 \end{block}
 
 \begin{block}{Def.: \textbf{Wahrscheinlichkeitsfunktion einer diskreten
@@ -4346,7 +4606,9 @@ Wahrscheinlichkeitsverteilung auf \(\mathbb{R}\).\\
 Man nennt diese die \textbf{Verteilung} der Zufallsvariable \(X\).
 
 Sie ist durch die Abbildung \(X\) und die Wahrscheinlichkeitsverteilung
-\(P\) über \(\omega \in \Omega\) induziert. ~ ~
+\(P\) über \(\omega \in \Omega\) induziert.
+
+\hfill\break
 
 Für \(x \not \in {\cal{T}_X}\) ist \(f_X(x) = P(\emptyset) = 0\).
 \end{frame}
@@ -4356,7 +4618,7 @@ Für \(x \not \in {\cal{T}_X}\) ist \(f_X(x) = P(\emptyset) = 0\).
 \begin{block}{Def.: \textbf{Verteilungsfunktion} (diskret)}
 \protect\hypertarget{def.-verteilungsfunktion-diskret}{}
 Die \emph{Verteilungsfunktion} einer diskreten ZV ist definiert als
-\[F_X(x) := P(X \leq x) = \sum_{i: x_i \leq x} f_X(x_i).\]
+\[F_X(x) := P(X \leq x) = \sum_{i:\, x_i \in T_X,\, x_i \leq x} f_X(x_i).\]
 \end{block}
 
 Kennt man also die \textbf{Wahrscheinlichkeitsfunktion} \(f(x)\) für
@@ -4371,7 +4633,7 @@ alle \(x \in \cal{T}\), so kennt man auch die
 \begin{itemize}
 \tightlist
 \item
-  \(F(x)\) ist monoton wachsend (``Treppenfunktion'')\\
+  \(F(x)\) ist monoton wachsend (``Treppenfunktion'')
 \item
   \(F(x)\) ist stückweise konstant mit Sprungstellen an Werten \(x_i\)
   mit \(f(x_i) > 0\), d.h. an allen Realisierungen \(x_i \in {\cal{T}}\)
@@ -4387,7 +4649,8 @@ alle \(x \in \cal{T}\), so kennt man auch die
 
 \begin{frame}{Beispiel: 3-maliger Münzwurf}
 \protect\hypertarget{beispiel-3-maliger-muxfcnzwurf}{}
-\(X :=\) ``Anzahl Kopf'', \({\cal{T}}=\{0,1,2,3\}\)
+\(X :=\) ``Anzahl Kopf'',\\
+\({\cal{T}}=\{0,1,2,3\}\)
 
 \[\begin{array}{lll}
 f(0) &= P(\{ZZZ\}) &= 1/8\\
@@ -4417,10 +4680,10 @@ Beachte: \(f(x)=0\) für alle \(x \notin {\cal{T}}\)
 \begin{block}{Def.: \textbf{Stetige Zufallsvariable}}
 \protect\hypertarget{def.-stetige-zufallsvariable}{}
 Eine Zufallsvariable \(X\) ist \textbf{stetig}, falls ihr Träger eine
-\emph{überabzählbare} Teilmenge der reellen Zahlen \(\mathbb{R}\) ist.\\
+\emph{überabzählbare} Teilmenge der reellen Zahlen \(\mathbb{R}\) ist.
 \end{block}
 
-~
+\hfill\break
 
 \emph{Beispiel:}\\
 Glücksrad mit stetigem Wertebereich \([0°, 360°)\)\\
@@ -4433,22 +4696,22 @@ angibt, an dem das Glücksrad stehen bleibt.
 \begin{block}{Def.: \textbf{Stetige Zufallsvariable}}
 \protect\hypertarget{def.-stetige-zufallsvariable-1}{}
 Eine Zufallsvariable \(X\) heißt \emph{stetig}, wenn es eine Funktion
-\(f(x) \geq 0\) gibt, so dass sich die Verteilungsfunktion
+\(f_X(x) \geq 0\) gibt, so dass sich die Verteilungsfunktion
 \(F_X(x) := P(X \leq x)\) von \(X\) wie folgt darstellen lässt:
 \[F_X(x) = \int_{-\infty}^x f_X(u) du\]
 \end{block}
 
 \begin{block}{Def.: \textbf{Dichtefunktion einer (stetigen) ZV}}
 \protect\hypertarget{def.-dichtefunktion-einer-stetigen-zv}{}
-Diese nicht-negative Funktion \(f(x)\) zur Verteilungsfunktion \(F(x)\)
-heißt \emph{Wahrscheinlichkeitsdichte} (auch: \emph{Dichte} oder
-\emph{Dichtefunktion}) von \(X\).
+Diese nicht-negative Funktion \(f_X(x)\) zur Verteilungsfunktion
+\(F_X(x)\) heißt \emph{Wahrscheinlichkeitsdichte} (auch: \emph{Dichte}
+oder \emph{Dichtefunktion}) von \(X\).
 \end{block}
 
 \hfill\break
 
 Beachte: bei \emph{diskreten} Zufallsvariablen gilt
-\(F(x) = \sum_{i: x_i \leq x} f(x_i)\).
+\(F_X(x) = \sum_{i:\, x_i \in T_X,\, x_i \leq x} f_X(x_i)\).
 \end{frame}
 
 \begin{frame}{Dichtefunktionen}
@@ -4456,7 +4719,7 @@ Beachte: bei \emph{diskreten} Zufallsvariablen gilt
 \begin{itemize}
 \tightlist
 \item
-  Nicht-negative, \emph{normierte} Funktion \(f(x) \geq 0\) mit
+  Nicht-negative, \emph{normierte} Funktion \(f(x) \geq 0\) mit\\
   \(\int_{-\infty}^{+\infty} f(x)\,dx = 1\)
 \item
   \(f(x)\) selbst gibt \textbf{keine W.keit} an, sondern misst die
@@ -4497,7 +4760,7 @@ Beachte: bei \emph{diskreten} Zufallsvariablen gilt
   \end{itemize}
 \item
   \(\int_{-\infty}^{+\infty} f(x)\,dx = 1 \qquad\) (da
-  \(F(\infty) = 1\))\\
+  \(F(\infty) = 1\))
 \item
   Mit Dichte- bzw. Verteilungsfunktion lassen sich W.keiten für
   beliebige Teilmengen des Trägers ausrechnen:\\
@@ -4544,16 +4807,14 @@ Beachte: bei \emph{diskreten} Zufallsvariablen gilt
 \scriptsize
 
 \emph{Für Expert:innen:} \textbf{Maßtheorie} vereinheitlicht diskret und
-stetig: \(\int_{[a,b]} \,dP_X = \int_{[a,b]} f_X \,d\mu\) mit \(\mu\) =
+stetig:\\
+\(\int_{[a,b]} \,dP_X = \int_{[a,b]} f_X \,d\mu\) mit \(\mu\) =
 Lebesgue-Maß (stetig: Integral) bzw. Zählmaß (diskret: Summe).
 \end{frame}
 
 \hypertarget{empirische-huxe4ufigkeitsverteilungen}{%
 \subsection{Empirische
 Häufigkeitsverteilungen}\label{empirische-huxe4ufigkeitsverteilungen}}
-
-\begin{frame}{Empirische Häufigkeitsverteilungen}
-\end{frame}
 
 \begin{frame}{Zurück zur Empirie}
 \protect\hypertarget{zuruxfcck-zur-empirie}{}
@@ -4582,8 +4843,8 @@ Im Weiteren:
   \(x_1, \ldots, x_n\) \textbf{Rohdaten}, \textbf{Urliste}
 \item
   \(a_1, a_2, \ldots, a_k, \, k \le n\) (evtl. der Größe nach geordnete)
-  \emph{verschiedene} Werte der Urliste \(x_1,\ldots,x_n\): die
-  \textbf{Menge der beobachteten Merkmalsausprägungen} von \(X\).
+  \emph{verschiedene} Werte der Urliste \(x_1,\ldots,x_n\):\\
+  die \textbf{Menge der beobachteten Merkmalsausprägungen} von \(X\).
 \end{itemize}
 \end{frame}
 
@@ -4616,7 +4877,7 @@ Im Weiteren:
   Für Nominalskalen hat die Anordnung ``\(<\)'' keine inhaltliche
   Bedeutung.
 \item
-  Bei kategorialen Merkmalen \(k =\) Anzahl der Kategorien\\
+  Bei kategorialen Merkmalen \(k =\) Anzahl der Kategorien
 \item
   Bei stetigen Merkmalen \(k\) oft nicht oder kaum kleiner als \(n\).
 \end{itemize}
@@ -4783,8 +5044,8 @@ F_n(x) =  f(a_1) + \ldots + f(a_j) = \sum_{i: a_i \leq x} f_i,
 \begin{frame}{Beispiel: \(F_n\)(Quadratmetermiete) für Klein \& Kalt}
 \protect\hypertarget{beispiel-f_nquadratmetermiete-fuxfcr-klein-kalt-1}{}
 Wie groß ist der Anteil von kleinen Wohnungen ohne ZH mit qm-Miete
-\(\leq\) 12 €? Wie viel kosten die günstigsten 25\% der Wohnungen
-höchstens?
+\(\leq\) 12 €?\\
+Wie viel kosten die günstigsten 25\% der Wohnungen höchstens?
 
 \scriptsize
 
@@ -4823,7 +5084,7 @@ Wohnungen?
 \end{frame}
 
 \begin{frame}{Theorie \& Empirie}
-\protect\hypertarget{theorie-empirie-4}{}
+\protect\hypertarget{theorie-empirie-1}{}
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4444}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.1111}}
@@ -4862,14 +5123,14 @@ Nach diesem Kapitel können Sie \ldots{}
 \tightlist
 \item
   für gegebene Merkmale (Skalenniveau) und Fragestellungen einen
-  \textbf{geeigneten \textgreater{} Grafiktyp auswählen}
+  \textbf{geeigneten Grafiktyp auswählen}
 \item
   die \textbf{Komponenten der Grammar of Graphics} (Daten, Geometrien,
-  Ästhetiken, \textgreater{} Statistiken, Skalen, Facettierung) an einer
-  Grafik benennen
+  Ästhetiken, Statistiken, Skalen, Facettierung) an einer Grafik
+  benennen
 \item
   Grafiken \textbf{kritisch beurteilen} -- insbesondere Flächentreue,
-  Farbskalen und \textgreater{} Wahrnehmbarkeit
+  Farbskalen und Wahrnehmbarkeit
 \item
   \textbf{mehrschichtige \texttt{ggplot2}-Analysen lesen und selbst
   schrittweise aufbauen}
@@ -4877,8 +5138,9 @@ Nach diesem Kapitel können Sie \ldots{}
 
 \vspace{1em}
 
-\textbf{Voraussetzungen:} Skalenniveaus (Kap. 1),
-Häufigkeitsverteilungen \& empirische Verteilungsfunktion (Kap. 4).
+\textbf{Voraussetzungen:}\\
+Skalenniveaus (Kap. 1), Häufigkeitsverteilungen \& empirische
+Verteilungsfunktion (Kap. 4).
 \end{frame}
 
 \begin{frame}[fragile]{Grammar of Graphics: Grundidee}
@@ -4887,7 +5149,7 @@ Statistische Grafiken repräsentieren die \emph{Ausprägungen} gewisser
 \emph{Merkmale} in einem \emph{Datensatz} durch die \emph{ästhetischen}
 Eigenschaften \emph{geometrischer} Objekte.
 
-Daraus lässt sich eine formale ``Grammatik'' für Grafiken ableiten --
+Daraus lässt sich eine formale ``Grammatik'' für Grafiken ableiten --\\
 (fast) jede sinnvolle Grafik ist Kombination folgender
 \textbf{Basis-Elemente}:
 
@@ -4895,16 +5157,18 @@ Daraus lässt sich eine formale ``Grammatik'' für Grafiken ableiten --
 \tightlist
 \item
   \emph{Daten}: die \emph{Beobachtungen} der dargestellten
-  \emph{Merkmale} (oft auch daraus abgeleitete \emph{Statistiken}:
-  Anteile, Mittelwerte, \ldots)
+  \emph{Merkmale}\\
+  (oft auch daraus abgeleitete \emph{Statistiken}: Anteile, Mittelwerte,
+  \ldots)
 \item
   \emph{Geometrische Elemente}: Punkte, Linien, Rechtecke, \ldots{}
 \item
   \emph{Ästhetische Zuordnungen}: Ausprägungen der Merkmale werden auf
-  sichtbare Eigenschaften der Geometrien abgebildet -- Position
-  (horizontal/vertikal), Farbe, Größe, Form, \ldots{}
+  sichtbare Eigenschaften der Geometrien abgebildet --\\
+  Position (horizontal/vertikal), Farbe, Größe, Form, \ldots{}
 \end{itemize}
 
+\vspace{0pt plus 1filll}
 \footnotesize
 
 (s.a. Wilkinson (2005) \emph{The Grammar of Graphics}; Wickham et
@@ -4941,10 +5205,11 @@ Zusätzlich zu Daten, Geometrien und Ästhetiken:
 \vspace{.3em}
 \footnotesize
 
-\textbf{Beispiel (Mietspiegel):} Streudiagramm der Miete gegen die
-Wohnfläche -- Wohnfläche \(\to\) x-Position, Nettomiete \(\to\)
-y-Position, Baujahr \(\to\) Farbe, Zimmerzahl \(\to\) Facette. (Die
-schrittweise Konstruktion sehen wir später.)
+\textbf{Beispiel (Mietspiegel):}\\
+Streudiagramm der Miete gegen die Wohnfläche --\\
+Wohnfläche \(\to\) x-Position, Nettomiete \(\to\) y-Position, Baujahr
+\(\to\) Farbe, Zimmerzahl \(\to\) Facette.\\
+(Die schrittweise Konstruktion sehen wir später.)
 \end{frame}
 
 \begin{frame}{Beispiele: Geometrien}
@@ -4955,6 +5220,7 @@ schrittweise Konstruktion sehen wir später.)
 
 .. und viele viele mehr \ldots{}
 
+\vspace{0pt plus 1filll}
 \footnotesize
 
 Abb: Wickham et al.~(2020)
@@ -4962,7 +5228,8 @@ Abb: Wickham et al.~(2020)
 
 \begin{frame}{Beispiele: Ästhetiken}
 \protect\hypertarget{beispiele-uxe4sthetiken}{}
-\includegraphics{main_files/pics/02-aesthetics.png} \footnotesize Abb:
+\includegraphics{main_files/pics/02-aesthetics.png}
+\vspace{0pt plus 1filll} \footnotesize Abb:
 \href{https://clauswilke.com/dataviz/aesthetic_mapping_files/figure-html/common-aesthetics-1.png}{Wilke
 (2020)} Interaktive Beispiele mit Code:
 \href{https://pkg.garrickadenbuie.com/gentle-ggplot2/\#68}{Aden-Buie
@@ -4981,6 +5248,7 @@ der korrekten Interpretation der folgenden Grafiktypen:
 
 \includegraphics{main_files/pics/02-clevelandgill1.png}
 
+\vspace{0pt plus 1filll}
 \scriptsize
 
 Abb.: Healy, K. (2018). \href{https://socviz.co}{Data visualization: a
@@ -4991,8 +5259,8 @@ Bostock})
 \vskip 3em Cleveland, W.S., McGill, R. (1984):
 \href{http://www.math.pku.edu.cn/teachers/xirb/Courses/biostatistics/Biostatistics2016/GraphicalPerception_Jasa1984.pdf}{Graphical
 Perception: Theory, Experimentation, and Application to the Development
-of Graphical Methods.} \emph{JASA} 79(387), 531--554. Heer, J., Bostock,
-M. (2010):
+of Graphical Methods.} \emph{JASA} 79(387), 531--554.\\
+Heer, J., Bostock, M. (2010):
 \href{http://vis.stanford.edu/files/2010-MTurk-CHI.pdf}{Crowdsourcing
 graphical perception: using Mechanical Turk to assess visualization
 design.} \emph{SIGCHI Proceedings}, 203--212.
@@ -5023,8 +5291,8 @@ Hierarchie der korrekten Interpretation:
   Farbton-Farbsättigung-Farbhelligkeit
 \end{enumerate}
 
-Da \textbf{Position \& Abstände} am besten wahrgenommen werden, müssen
-diese verwendet werden um die wichtigsten Merkmale zu codieren.
+Da \textbf{Position \& Abstände} am besten wahrgenommen werden,\\
+müssen diese verwendet werden um die wichtigsten Merkmale zu codieren.
 \end{frame}
 
 \begin{frame}{Goldene Regeln für Grafikgestaltung}
@@ -5056,9 +5324,11 @@ primär? welche Vergleiche?) und \textbf{Lesbarkeit} maximieren
 
 Nach Tufte (2001): \emph{graphical excellence} = interessante Daten mit
 \emph{Klarheit, Präzision, Effizienz}, meist \emph{multivariat}, und
-stets \emph{die Wahrheit über die Daten} sagend. Harrell (2017),
+stets \emph{die Wahrheit über die Daten} sagend.\\
+Harrell (2017),
 \href{https://hbiostat.org/doc/graphscourse.pdf}{Principles of Graph
-Construction}; Wickham \& Grolemund (2017)
+Construction};\\
+Wickham \& Grolemund (2017)
 \href{https://r4ds.had.co.nz/graphics-for-communication.html}{R for Data
 Science, Ch. 28}
 \end{frame}
@@ -5139,11 +5409,12 @@ Kodieren von Information durch:
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Position, Längen \& Abstände}: am einfachsten zu erkennen,
-  v.a. für gemeinsame/parallele Skalen
+  \textbf{Position, Längen \& Abstände}:\\
+  am einfachsten zu erkennen, v.a. für gemeinsame/parallele Skalen
 \item
-  \textbf{Winkel \& Steigung}: visueller Eindruck abhängig von Richtung
-  \& vom Seitenverhältnis der Darstellung
+  \textbf{Winkel \& Steigung}:\\
+  visueller Eindruck abhängig von Richtung \& vom Seitenverhältnis der
+  Darstellung
 \item
   \textbf{Flächen}:
 
@@ -5155,7 +5426,8 @@ Kodieren von Information durch:
     abhängig von Farbe: hellere Flächen wirken größer
   \end{itemize}
 \item
-  \textbf{Farbe}: oft schwierig präzise Vergleiche abzulesen
+  \textbf{Farbe}:\\
+  oft schwierig präzise Vergleiche abzulesen
 
   \begin{itemize}
   \tightlist
@@ -5189,8 +5461,8 @@ Kodieren von Information durch:
 
 \begin{frame}{Farbwahrnehmung}
 \protect\hypertarget{farbwahrnehmung-1}{}
-Rot-Grün-Sehschwäche (Protanopia: Prävalenz 6\%, Deuteranopia: Prävalenz
-2\%)
+Rot-Grün-Sehschwäche\\
+(Protanopia: Prävalenz 6\%, Deuteranopia: Prävalenz 2\%)
 
 \includegraphics[height=.7\textheight]{pics/5-colorblind.png}
 
@@ -5203,7 +5475,7 @@ aus  Wong, B. \textit{Nature Methods} \textbf{8}(6), p. 441 (2011).
 \protect\hypertarget{wahrnehmungseinheitlichkeit-veranschaulichung}{}
 \scriptsize
 
-\begin{center}\includegraphics[width=.9\textwidth,height=.8\textheight]{main_files/figure-beamer/unnamed-chunk-108-1} \end{center}
+\begin{center}\includegraphics[width=.9\textwidth,height=.8\textheight]{main_files/figure-beamer/unnamed-chunk-112-1} \end{center}
 
 \normalsize
 \end{frame}
@@ -5304,7 +5576,7 @@ Helligkeit (Zeilen):
   (korrigiert für menschliche Wahrnehmung) \scriptsize
 \end{itemize}
 
-\begin{center}\includegraphics[width=.9\textwidth,height=.5\textheight]{main_files/figure-beamer/unnamed-chunk-109-1} \end{center}
+\begin{center}\includegraphics[width=.9\textwidth,height=.5\textheight]{main_files/figure-beamer/unnamed-chunk-113-1} \end{center}
 
 \normalsize
 \end{frame}
@@ -5330,7 +5602,7 @@ Helligkeit (Zeilen):
   konstanter Farbton und Sättigung, variiere nur Helligkeit \scriptsize
 \end{itemize}
 
-\begin{center}\includegraphics[width=.9\textwidth,height=.25\textheight]{main_files/figure-beamer/unnamed-chunk-110-1} \end{center}
+\begin{center}\includegraphics[width=.9\textwidth,height=.25\textheight]{main_files/figure-beamer/unnamed-chunk-114-1} \end{center}
 
 \normalsize
 
@@ -5341,7 +5613,7 @@ Helligkeit (Zeilen):
   Helligkeit \scriptsize
 \end{itemize}
 
-\begin{center}\includegraphics[width=.9\textwidth,height=.25\textheight]{main_files/figure-beamer/unnamed-chunk-111-1} \end{center}
+\begin{center}\includegraphics[width=.9\textwidth,height=.25\textheight]{main_files/figure-beamer/unnamed-chunk-115-1} \end{center}
 
 \normalsize
 
@@ -5373,7 +5645,7 @@ Helligkeit (Zeilen):
   \scriptsize
 \end{itemize}
 
-\begin{center}\includegraphics[width=.9\textwidth,height=.25\textheight]{main_files/figure-beamer/unnamed-chunk-112-1} \end{center}
+\begin{center}\includegraphics[width=.9\textwidth,height=.25\textheight]{main_files/figure-beamer/unnamed-chunk-116-1} \end{center}
 
 \normalsize
 
@@ -5402,6 +5674,8 @@ Differenz der Änderungsraten von Median-Bruttolöhnen und
 Neuvertragsmieten 2014 - 2018:
 
 \includegraphics[height=.7\textheight]{pics/5-mietenlöhne.png}
+
+\vspace{0pt plus 1filll}
 
 Quelle: IW,
 \href{https://interaktiv.morgenpost.de/gehalt-miete-studie/}{Berliner
@@ -5433,15 +5707,17 @@ u.a. als
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Stabdiagramm:} Trage über \(a_1 , \ldots ,a_k\) jeweils einen
-  zur \(x\)-Achse senkrechten Strich (Stab) mit Höhe
-  \(h_1 , \ldots , h_k\) (oder \(f_1 , \ldots , f_k\)) ab.
+  \textbf{Stabdiagramm:}\\
+  Trage über \(a_1 , \ldots ,a_k\) jeweils einen zur \(x\)-Achse
+  senkrechten Strich (Stab) mit Höhe \(h_1 , \ldots , h_k\) (oder
+  \(f_1 , \ldots , f_k\)) ab.
 \item
   \textbf{Säulendiagramm} wie Stabdiagramm, aber mit Rechtecken statt
   Strichen.
 \item
-  \textbf{Balkendiagramm}: wie Säulendiagramm, aber mit vertikal statt
-  horizontal gelegter \(x\)-Achse.
+  \textbf{Balkendiagramm}:\\
+  wie Säulendiagramm, aber mit vertikal statt horizontal gelegter
+  \(x\)-Achse.
 \end{itemize}
 
 Anwendungen:
@@ -5489,8 +5765,9 @@ Vertikale oder horizontale Linien oder Rechtecke
 
 \begin{frame}{Stapeldiagramm}
 \protect\hypertarget{stapeldiagramm}{}
-Darstellen absoluter oder relativer Häufigkeiten als Länge. Die
-Abschnitte werden übereinander gestapelt und unterschiedlich eingefärbt.
+Darstellen absoluter oder relativer Häufigkeiten als Länge.\\
+Die Abschnitte werden übereinander gestapelt und unterschiedlich
+eingefärbt.
 
 Anwendungen:
 
@@ -5684,15 +5961,20 @@ Vorgehen:
 \protect\hypertarget{histogramm-1}{}
 \begin{itemize}
 \item
-  Flächentreue Darstellung ähnlich zu Idee von \emph{Dichtefunktionen}:
+  Flächentreue Darstellung ähnlich zu Idee von
+  \emph{Dichtefunktionen}:\\
   Histogramm ist stückweise konstante Approximation der Dichte.
 \item
-  nur bei metrischen Daten sinnvoll ~
+  nur bei metrischen Daten sinnvoll
+
+  \hfill\break
 \item
   Beachte: Interpretation der Balkenhöhe bei unterschiedlichen
   Klasssenbreiten nicht angemessen -- Flächentreue!\\
   \(\implies\) unterschiedlichen Klasssenbreiten vermeiden zu Gunsten
-  einfacher Interpretierbarkeit ~
+  einfacher Interpretierbarkeit
+
+  \hfill\break
 \item
   Nachteil: Visueller Eindruck von Klassenbreite abhängig\\
   \(\implies\) verschiedene Varianten ansehen, falls möglich:
@@ -5999,7 +6281,7 @@ für den Gruppenvergleich nach \emph{Baujahr-Klasse}.
   unterschiedlichen Klassenbreiten vorzuziehen.
 \end{itemize}
 
-\vspace{4em}
+\vspace{0pt plus 1filll}
 \scriptsize
 
 \href{http://varianceexplained.org/files/bandwidth.html}{Animation 1},
@@ -6015,18 +6297,21 @@ Verteilungen}\label{metrische-merkmale-visualisierung-gemeinsamer-verteilungen}}
 
 \begin{frame}{Bivariate metrische Daten}
 \protect\hypertarget{bivariate-metrische-daten}{}
-Daten liegen zu zwei metrischen Merkmalen vor: Datenpaare
-\((x_i,y_i),\; i=1,\ldots,n\)
+Daten liegen zu zwei metrischen Merkmalen vor:\\
+Datenpaare \((x_i,y_i),\; i=1,\ldots,n\)
 
-\textbf{Fragen:} Gibt es einen Zusammenhang zwischen diesen Merkmalen?
-Wie lässt sich dieser Zusammenhang beschreiben? Was ist die
-\emph{gemeinsame} Verteilung dieser Merkmale?\\
+\textbf{Fragen:}\\
+Gibt es einen Zusammenhang zwischen diesen Merkmalen?\\
+Wie lässt sich dieser Zusammenhang beschreiben?\\
+Was ist die \emph{gemeinsame} Verteilung dieser Merkmale?\\
+\strut \\
 
-Einfachste grafische Darstellung: \textbf{Streudiagramm.} Die Datenpaare
-entsprechen Punkten in der Ebene (``Punktwolke'')
+Einfachste grafische Darstellung: \textbf{Streudiagramm.}\\
+Die Datenpaare entsprechen Punkten in der Ebene (``Punktwolke'')
 
-\textbf{Beispiel (Mietspiegel):} \(X\): Wohnfläche {[}\(m^2\){]}, \(Y\):
-Quadratmetermiete {[}€/\(m^2\){]}
+\textbf{Beispiel (Mietspiegel):}\\
+\(X\): Wohnfläche {[}\(m^2\){]},\\
+\(Y\): Quadratmetermiete {[}€/\(m^2\){]}
 \end{frame}
 
 \begin{frame}[fragile]{Schritt für Schritt: 1. Punktwolke}
@@ -6097,8 +6382,11 @@ als Punkte.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(mietspiegel, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ wfl, }\AttributeTok{y =}\NormalTok{ nmqm, }\AttributeTok{colour =} \StringTok{\textasciigrave{}}\AttributeTok{Beste Lage}\StringTok{\textasciigrave{}}\NormalTok{)) }\SpecialCharTok{+} \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.2}\NormalTok{) }\SpecialCharTok{+}
-    \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{)}
+\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{arrange}\NormalTok{(mietspiegel, }\StringTok{\textasciigrave{}}\AttributeTok{Beste Lage}\StringTok{\textasciigrave{}}\NormalTok{), }\CommentTok{\# "ja" zuletzt zeichnen}
+       \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ wfl, }\AttributeTok{y =}\NormalTok{ nmqm, }\AttributeTok{colour =} \StringTok{\textasciigrave{}}\AttributeTok{Beste Lage}\StringTok{\textasciigrave{}}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =}\NormalTok{ .}\DecValTok{2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{se =} \ConstantTok{FALSE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_colour\_viridis\_d}\NormalTok{(}\AttributeTok{direction =} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\AttributeTok{end =}\NormalTok{ .}\DecValTok{8}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -6123,8 +6411,11 @@ als Punkte.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(mietspiegel, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ wfl, }\AttributeTok{y =}\NormalTok{ nmqm, }\AttributeTok{colour =} \StringTok{\textasciigrave{}}\AttributeTok{Beste Lage}\StringTok{\textasciigrave{}}\NormalTok{)) }\SpecialCharTok{+} \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.3}\NormalTok{,}
-    \AttributeTok{size =} \FloatTok{0.8}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\StringTok{\textasciigrave{}}\AttributeTok{\# Zimmer}\StringTok{\textasciigrave{}}\NormalTok{, }\AttributeTok{labeller =}\NormalTok{ label\_both)}
+\FunctionTok{ggplot}\NormalTok{(}\FunctionTok{arrange}\NormalTok{(mietspiegel, }\StringTok{\textasciigrave{}}\AttributeTok{Beste Lage}\StringTok{\textasciigrave{}}\NormalTok{), }\CommentTok{\# "ja" zuletzt zeichnen}
+       \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ wfl, }\AttributeTok{y =}\NormalTok{ nmqm, }\AttributeTok{colour =} \StringTok{\textasciigrave{}}\AttributeTok{Beste Lage}\StringTok{\textasciigrave{}}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =}\NormalTok{ .}\DecValTok{3}\NormalTok{, }\AttributeTok{size =}\NormalTok{ .}\DecValTok{8}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}} \StringTok{\textasciigrave{}}\AttributeTok{\# Zimmer}\StringTok{\textasciigrave{}}\NormalTok{, }\AttributeTok{labeller =}\NormalTok{ label\_both) }\SpecialCharTok{+}
+  \FunctionTok{scale\_colour\_viridis\_d}\NormalTok{(}\AttributeTok{direction =} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\AttributeTok{end =}\NormalTok{ .}\DecValTok{8}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -6147,14 +6438,6 @@ vermeiden: \scriptsize
 \protect\hypertarget{darstellung-fuxfcr-gruxf6uxdfere-datenmengen-1}{}
 Alternativen: Anzahlen/Dichte direkt über Farbe codieren
 (\texttt{hexbin}-Plots, 2D-Kerndichte): \scriptsize
-
-\begin{verbatim}
-## Warning: The dot-dot notation (`..density..`) was deprecated in ggplot2 3.4.0.
-## i Please use `after_stat(density)` instead.
-## This warning is displayed once per session.
-## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-## generated.
-\end{verbatim}
 
 \begin{center}\includegraphics[width=.9\textwidth,height=.8\textheight]{main_files/figure-beamer/04-hexbin-1} \end{center}
 
@@ -6221,8 +6504,8 @@ Nach diesem Kapitel können Sie \ldots{}
 
 \vspace{1em}
 
-\textbf{Voraussetzungen:} Häufigkeiten \& empirische Verteilungen (Kap.
-4).
+\textbf{Voraussetzungen:}\\
+Häufigkeiten \& empirische Verteilungen (Kap. 4).
 \end{frame}
 
 \begin{frame}{Statistische Kennwerte}
@@ -6261,7 +6544,8 @@ Lagemaße}\label{statistische-kennwerte-lagemauxdfe}}
 
 \begin{frame}{Lagemaß: Modus}
 \protect\hypertarget{lagemauxdf-modus}{}
-Definition: \textbf{Häufigster Wert}
+Definition:\\
+\textbf{Häufigster Wert}
 
 Eigenschaften:
 
@@ -6281,8 +6565,9 @@ Eigenschaften:
 
 \begin{frame}{Lagemaß: Median}
 \protect\hypertarget{lagemauxdf-median}{}
-Definition: Der \textbf{Median} (\(\tilde x_{\text{med}}\)) ist der Wert
-für den gilt
+Definition:\\
+Der \textbf{Median} (\(\tilde x_{\text{med}}\)) ist der Wert für den
+gilt
 
 \begin{itemize}
 \tightlist
@@ -6308,7 +6593,7 @@ für den gilt
 \item
   \(x_{(1)},\ldots,x_{(n)}\) sind \textbf{geordnete Werte}
 \item
-  Alternative Definition:
+  Alternative Definition:\\
   \(\tilde x_{\text{med}} \in [x_{(k)}, x_{(k+1)}]\) falls
   \(k = \frac{n}{2}\) ganze Zahl.
 \end{itemize}
@@ -6341,8 +6626,8 @@ Formal:
 
 \begin{frame}[fragile]{Lagemaß: Quantil}
 \protect\hypertarget{lagemauxdf-quantil}{}
-Definition: Das \(p\)-\textbf{Quantil} ist der Wert \(\tilde x_p\) für
-den gilt
+Definition:\\
+Das \(p\)-\textbf{Quantil} ist der Wert \(\tilde x_p\) für den gilt
 
 \begin{itemize}
 \tightlist
@@ -6736,7 +7021,7 @@ man
 \begin{itemize}
 \tightlist
 \item
-  \(x_{(i)}:\) geordnete \(x\)-Werte\\
+  \(x_{(i)}:\) geordnete \(x\)-Werte
 \item
   \(r\) ist die größte ganze Zahl mit \(r \leq n \alpha\)
 \end{itemize}
@@ -6778,9 +7063,9 @@ Jetzt:
   Zufallsvariablen}.
 \end{itemize}
 
-(Spätere Veranstaltungen: Schätztheorie -- welche empirischen Maße sind
-wie gut geeignet um bestimmte theoretische Größen aus Daten zu
-schätzen?)
+(Spätere Veranstaltungen: Schätztheorie --\\
+welche empirischen Maße sind wie gut geeignet um bestimmte theoretische
+Größen aus Daten zu schätzen?)
 \end{frame}
 
 \begin{frame}{Modus einer Zufallsvariablen}
@@ -6863,7 +7148,7 @@ E(X) &:= \int_{-\infty}^\infty x \cdot f_X(x) \,dx
 Der Erwartungswert ist \emph{gewichtetes arithmetisches Mittel} der
 möglichen Werte einer ZV, wobei die Gewichte den Wahrscheinlichkeiten
 entsprechen, einen bestimmten Wert zu beobachten.\\
-\hspace*{0.333em}
+\strut \\
 
 \begin{itemize}
 \item
@@ -6881,7 +7166,7 @@ entsprechen, einen bestimmten Wert zu beobachten.\\
   \end{itemize}
 \end{itemize}
 
-~
+\hfill\break
 
 \begin{itemize}
 \tightlist
@@ -6897,7 +7182,8 @@ entsprechen, einen bestimmten Wert zu beobachten.\\
 \begin{itemize}
 \item
   Sei \(X = a\) mit Wahrscheinlichkeit 1 (``\emph{deterministische}
-  ZV''). Dann gilt: \[E(X) = a\] ~
+  ZV'').\\
+  Dann gilt: \[E(X) = a\]\\
 \item
   \textbf{Linearität des Erwartungswertes}:\\
   Sei \(a, b \in \mathbb{R}\) und \(X, Y\) beliebige ZV. Dann gilt:
@@ -6907,7 +7193,7 @@ entsprechen, einen bestimmten Wert zu beobachten.\\
 \item
   Ist \(f(x)\) symmetrisch um einen Punkt \(c\), d.h.
   \(f(c-x) = f(c+x) \;\forall\, x \in T_X\),\\
-  dann ist \(E(X) = c\). ~
+  dann ist \(E(X) = c\).\\
 \end{itemize}
 
 \note{
@@ -6926,7 +7212,8 @@ beliebige ZV \(X_1, ..., X_n\):
 \begin{frame}{Transformationsregel für Erwartungswerte}
 \protect\hypertarget{transformationsregel-fuxfcr-erwartungswerte}{}
 Sei \(X\) eine ZV und \(g:\mathbb{R} \to \mathbb{R}\) eine reelle
-Funktion. Dann gilt für \(Y = g(X)\):
+Funktion.\\
+Dann gilt für \(Y = g(X)\):
 
 \[
 E(Y) = E[g(X)] = \begin{cases} \sum_{x \in {\cal T}} g(x)\, f(x) & X \text{ diskret} \\
@@ -6990,13 +7277,13 @@ Obacht: $$4 \frac{3}{4} = E(X^2) \neq E(X)^2 =
 
 \begin{frame}{Erwartungswert von ZVn mit Träger \(\mathbb{N}^+\)}
 \protect\hypertarget{erwartungswert-von-zvn-mit-truxe4ger-mathbbn}{}
-Für ZV \(X\) mit Träger \(\cal{T}_X = \mathbb{N}^+\) gilt:
-\(E(X) = \sum_{k=1}^\infty P(X \geq k)\)
+Nur für ZV \(X\) mit Träger \(\cal{T}_X = \mathbb{N}^+\) gilt außerdem:
+\[E(X) = \sum_{k=1}^\infty P(X \geq k)\]
 
 Beweis: \begin{align*}
 \sum_{k=1}^\infty P(X \geq k) &= \sum_{k=1}^\infty \sum_{t = k}^\infty P(X = t)\\
                               &= P(X = 1) + P(X = 2) + P (X = 3) + P(X = 4) + \ldots \\
-                              &\phantom{=}\phantom{P(X = 1)\;\;}+ P(X = 2) + P(X = 3) + P(X = 4) + \ldots \\ 
+                              &\phantom{=}\phantom{P(X = 1)\;\;}+ P(X = 2) + P(X = 3) + P(X = 4) + \ldots \\
                               &\phantom{=}\phantom{P(X = 1) + P(X = 2)\;\;}+ P(X = 3) + P(X = 4) + \ldots \\
                               &\phantom{=}\phantom{P(X = 1) + P(X = 2) + P(X = 3)\;\;} + P(X = 4) + \ldots\\
                               &\phantom{=}\;\;\; + \ldots \ldots \ldots \\
@@ -7087,7 +7374,7 @@ Definition: \begin{equation*}
     Länge der Box des Boxplots
   \end{itemize}
 \item
-  Alternativer Name: \emph{i}nter\emph{q}uartile\emph{r}ange: IQR
+  Alternativer Name: \emph{I}nter\emph{Q}uartile-\emph{R}ange: IQR
 \item
   Robust gegen Ausreißer
 \item
@@ -7107,16 +7394,17 @@ Definition: \begin{eqnarray*}
 \begin{itemize}
 \tightlist
 \item
-  \(s_x\) lose interpretierbar als ``mittlere Abweichung vom
-  Mittelwert''
-\item
-  Mindestens Intervallskala
+  \(X\) mindestens Intervallskala
 \item
   Empfindlich gegen Ausreißer
 \item
+  \(s_x\) lose interpretierbar als ``mittlere Abweichung vom
+  Mittelwert''
+\item
   Verwende
   \(\widetilde{s}_x^2:= \frac{1}{n} \sum_{i=1}^n (x_i - \bar x)^2\) für
-  Vollerhebungen, Division durch \(n-1\) nur bei Stichproben sinnvoll
+  Vollerhebungen,\\
+  Division durch \(n-1\) nur bei Stichproben sinnvoll
 \end{itemize}
 \end{frame}
 
@@ -7124,7 +7412,7 @@ Definition: \begin{eqnarray*}
 \protect\hypertarget{transformationsregel}{}
 \begin{eqnarray*}
  y_i = a + bx_i \implies \widetilde s_y^2 &=& b^2 \widetilde s_x^2 \\
-   \widetilde s_y &=& |b| \widetilde s_x  
+   \widetilde s_y &=& |b| \widetilde s_x
 \end{eqnarray*} (Analog für \(s_x, s_y\))
 
 Varianz und Standardabweichung sind also für lineare Transformationen
@@ -7207,14 +7495,14 @@ Zimmer & $n_j$ & $\bar x_j$ & $\tilde s^2_{xj}$\\
 
 \normalsize
 \vskip 1em
-Gesamtvarianz:  
-$\tilde s^2_x \approx 7.15$ 
+Gesamtvarianz:
+$\tilde s^2_x \approx 7.15$
 
-Innerhalb:  
-$\frac{1}{n} \sum_{j=1}^r n_j \widetilde s_{xj}^2 = 6.7$  
+Innerhalb:
+$\frac{1}{n} \sum_{j=1}^r n_j \widetilde s_{xj}^2 = 6.7$
 
-Zwischen:  
-$\frac{1}{n} \sum_{j=1}^r n_j(\bar x_j - \bar x)^2 = 0.45$ 
+Zwischen:
+$\frac{1}{n} \sum_{j=1}^r n_j(\bar x_j - \bar x)^2 = 0.45$
 \end{column}
 \begin{column}{0.55\textwidth}
 \scriptsize
@@ -7240,8 +7528,8 @@ Das Verhältnis von Standardabweichung und Mittelwert ist gegeben durch
 
 Der Variationskoeffizient hat keine Einheit und ist skalenunabhängig.
 
-Er ist eine Maßzahl für die relative Schwankung um den Mittelwert und
-nur für Merkmale mit positiven Ausprägungen sinnvoll.
+Er ist eine Maßzahl für die relative Schwankung um den Mittelwert\\
+und nur für Merkmale mit positiven Ausprägungen sinnvoll.
 \end{frame}
 
 \begin{frame}{Mittlere absolute Abweichung (MAD)}
@@ -7252,7 +7540,7 @@ Die \textbf{mittlere absolute Abweichung} (\emph{m}ean \emph{a}bsolute
 \end{equation*} Es gilt: MAD\(_x \leq \widetilde s_x\)
 
 Der \textbf{Median der absoluten Abweichungen} ist \begin{equation*}
-    \text{MedAD}_x := \text{Median}(|x_i - x_{med}|) 
+    \text{MedAD}_x := \text{Median}(|x_i - x_{med}|)
 \end{equation*}
 
 \begin{itemize}
@@ -7292,8 +7580,8 @@ Die \emph{Varianz} \(\Var(X)\) einer ZV \(X\) ist definiert als:
 \begin{itemize}
 \tightlist
 \item
-  Varianz nicht immer endlich! (\(\Var(X) = \infty \iff\) ``Varianz
-  existiert nicht.'')
+  Varianz nicht immer endlich!\\
+  (\(\Var(X) = \infty \iff\) ``Varianz existiert nicht.'')
 \item
   Existiert der Erwartungswert nicht, so existiert auch die Varianz
   nicht.
@@ -7318,7 +7606,7 @@ Die \emph{Varianz} \(\Var(X)\) einer ZV \(X\) ist definiert als:
 \item
   \(\Var(aX + b) = a^2 \Var(X) \;\forall\, a,b\in \mathbb{R}\)
 \item
-  für unabhängige Zufallsvariablen \(X, Y\) gilt:
+  für unabhängige Zufallsvariablen \(X, Y\) gilt:\\
   \(\Var(X + Y) = \Var(X) + \Var(Y)\)
 \end{itemize}
 \end{frame}
@@ -7352,7 +7640,8 @@ positive Wurzel ihrer Varianz: \[
 \end{block}
 
 Es gilt:\\
-\(\sigma(aX + b) = |a| \cdot \sigma(X)\) ~ ~
+\(\sigma(aX + b) = |a| \cdot \sigma(X)\)\\
+\strut \\
 
 Die \emph{erwartete absolute Abweichung} \(E(|X - E(X)|)\) wäre zwar das
 intuitivere Streuungsmaß, ist aber mathematisch deutlich schwieriger zu
@@ -7371,7 +7660,8 @@ Verteilungseigenschaften}\label{statistische-kennzahlen-verteilungseigenschaften
 
 \begin{frame}{Uni- und multimodale Verteilungen}
 \protect\hypertarget{uni--und-multimodale-verteilungen}{}
-\textbf{unimodal} = eingipflig, \textbf{multimodal} = mehrgipflig
+\textbf{unimodal} = eingipflig,\\
+\textbf{multimodal} = mehrgipflig
 
 \begin{center}
  \includegraphics[width=.5\textwidth]{pics/2-zinssatz3.jpg}\\
@@ -7412,9 +7702,11 @@ Verteilung~(c)}
   Symmetrische und unimodale Verteilung:\\
   \(\bar{x} \approx x_{med} \approx x_{mod}\)
 \item
-  Linkssteile Verteilung: \(\bar{x} > x_{med} > x_{mod}\)
+  Linkssteile Verteilung:\\
+  \(\bar{x} > x_{med} > x_{mod}\)
 \item
-  Rechtssteile Verteilung: \(\bar{x} < x_{med} < x_{mod}\)
+  Rechtssteile Verteilung:\\
+  \(\bar{x} < x_{med} < x_{mod}\)
 \item
   Bei gruppierten Daten: Auch für Histogramme gültig
 \end{itemize}
@@ -7427,8 +7719,8 @@ Verteilung~(c)}
   Lageregeln sind Daumenregeln, gelten nicht notwendigerweise in jedem
   Einzelfall.
 \item
-  Form der Verteilung bleibt bei linearen Transformationen gleich, aber
-  ändert sich bei nichtlinearen Transformationen.
+  Form der Verteilung bleibt bei linearen Transformationen gleich,\\
+  aber ändert sich bei nichtlinearen Transformationen.
 \end{itemize}
 \end{frame}
 
@@ -7498,11 +7790,11 @@ k^\star &= k - 3
 \tightlist
 \item
   \(k^\star \approx 0\): normalgipflig (vgl. \emph{Normalverteilung}),
-  \emph{mesokurtisch}.\\
+  \emph{mesokurtisch}.
 \item
   \(k^\star > 0\): steilgipflig, \emph{leptokurtisch}.\\
   Stärker ausgeprägter schmaler Gipfel im Vergleich zu den Rändern,\\
-  \textbf{häufigere extreme Werte}\\
+  \textbf{häufigere extreme Werte}
 \item
   \(k^\star < 0\): flachgipflig, \emph{platykurtisch}.\\
   Wenig ausgeprägter breiterer Gipfel im Vergleich zu den Rändern,\\
@@ -7516,6 +7808,7 @@ Klassisches theoretisches Schaubild:
 
 \begin{center}\includegraphics[height=.7\textheight]{pics/02-kurtosis-wiki.png}\end{center}
 
+\vspace{0pt plus 1filll}
 \scriptsize
 
 Abb:
@@ -7550,7 +7843,7 @@ Das \(k\)-te zentrierte Moment einer ZV \(X\) ist
 \begin{itemize}
 \tightlist
 \item
-  Der Erwartungswert ist das \emph{erste Moment} einer Verteilung\\
+  Der Erwartungswert ist das \emph{erste Moment} einer Verteilung
 \item
   Die Varianz ist das \emph{zweite zentrierte Moment} einer Verteilung
 \end{itemize}
@@ -7559,16 +7852,16 @@ Das \(k\)-te zentrierte Moment einer ZV \(X\) ist
 \begin{frame}{Höhere Momente von Zufallsvariablen}
 \protect\hypertarget{huxf6here-momente-von-zufallsvariablen}{}
 Theoretische Analoga zu empirischem Momentenkoeffizient der Schiefe und
-und Wölbung:
+Wölbung:
 
 \begin{itemize}
 \item
   Die \textbf{Schiefe} einer Verteilung ist das dritte (zentrale) Moment
-  ihrer standardisierten Werte:
+  ihrer standardisierten Werte:\\
   \(E\left[\left(\frac{X - E(X)}{\sigma(X)}\right)^3\right]\)
 \item
   Die \textbf{Wölbung} (Kurtosis) einer Verteilung ist das vierte
-  (zentrale) Moment ihrer standardisierten Werte:
+  (zentrale) Moment ihrer standardisierten Werte:\\
   \(E\left[\left(\frac{X - E(X)}{\sigma(X)}\right)^4\right]\)
 \item
   Alle geraden zentralen Momente sind im Endeffekt ``Varianzen'', die
@@ -7581,7 +7874,7 @@ und Wölbung:
 \end{frame}
 
 \begin{frame}{Theorie \& Empirie}
-\protect\hypertarget{theorie-empirie-5}{}
+\protect\hypertarget{theorie-empirie-3}{}
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4444}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.1111}}
@@ -7597,7 +7890,7 @@ Empirie (beob. Merkmale)
 \endhead
 \(E(X) := \int x\, f(x)\, dx\) & \(\leftrightarrow\) &
 \(\bar x := 1/n \sum^n_{i=1} x_i = \sum^k_{j=1} a_j f_j\) \\
-\(\Var(X) := \int (x - E(X)^2)\, f(x)\, dx\) & \(\leftrightarrow\) &
+\(\Var(X) := \int (x - E(X))^2\, f(x)\, dx\) & \(\leftrightarrow\) &
 \(s^2_x := 1/(n-1) \sum^n_{i=1} (x_i - \bar x)^2\) \\
 Median \(x_{\text{med}}: F_X(x_{\text{med}}) = 0.5\) &
 \(\leftrightarrow\) &
@@ -7606,8 +7899,6 @@ Modus \(x_{\text{mod}} := \arg\max(f_X(x))\) & \(\leftrightarrow\) &
 \(\tilde x_{\text{mod}}: h(x_{\text{mod}}) \geq h(a_j) \;\forall\, j=1, \dots, k\) \\
 \bottomrule\noalign{}
 \end{longtable}
-
-etc etc
 \end{frame}
 
 \hypertarget{statistische-kennzahlen-konzentrationsmauxdfe}{%
@@ -7618,8 +7909,8 @@ Konzentrationsmaße}\label{statistische-kennzahlen-konzentrationsmauxdfe}}
 \protect\hypertarget{konzentrationsmauxdfe}{}
 Motivation:
 
-Existiert eine Menge, die auf viele Individuen verteilt ist, kann es
-hilfreich sein zu wissen, wie diese Menge verteilt ist.
+Existiert eine Menge, die auf viele Individuen verteilt ist,\\
+kann es hilfreich sein zu wissen, wie diese Menge verteilt ist.
 
 Beispiele:
 
@@ -7825,7 +8116,8 @@ $a_j$ & $h_j$ & $f_j$ & $h_j a_j$ & $u_j$ & $v_j$ \\
 
 Der \textbf{Gini-Koeffizient} bzw. das \textbf{Lorenz'sche
 Konzentrationsmaß} ist eine Maßzahl, die das \textit{Ausmaß} der
-Konzentration beschreibt. Er ist definiert als \[
+Konzentration beschreibt.\\
+Er ist definiert als \[
 G = 2 \cdot F,
 \] wobei \(F\) die Fläche zwischen der Diagonalen und der Lorenzkurve
 ist. \column{5cm} \includegraphics[width = 5cm]{pics/2-gini.pdf}
@@ -7909,8 +8201,8 @@ Der Wertebereich ist von \(\frac{1}{n}\) (identische \(x_i\)) bis 1
 (Monopol)
 \end{frame}
 
-\begin{frame}{Konzentrationsmessung: Deutsche Vermögensverteilung}
-\protect\hypertarget{konzentrationsmessung-deutsche-vermuxf6gensverteilung}{}
+\begin{frame}{Konzentrationsmessung: Vermögensverteilung}
+\protect\hypertarget{konzentrationsmessung-vermuxf6gensverteilung}{}
 Jedes \textbf{Dezil} ist eine Klasse mit \(f_j = 10\%\) der Bevölkerung
 -- die Kurve ist also genau die Lorenzkurve für \emph{gruppierte Daten}
 (vgl. oben).
@@ -7919,29 +8211,50 @@ Jedes \textbf{Dezil} ist eine Klasse mit \(f_j = 10\%\) der Bevölkerung
 
 \scriptsize
 
-\begin{center}\includegraphics[width=.9\textwidth,height=.8\textheight]{main_files/figure-beamer/lorenzkurve-de-1} \end{center}
+\begin{center}\includegraphics[width=.9\textwidth,height=.68\textheight]{main_files/figure-beamer/lorenzkurve-de-1} \end{center}
 
 \normalsize
 \end{frame}
 
 \begin{frame}{Gini-Index Vermögen Deutschland}
 \protect\hypertarget{gini-index-vermuxf6gen-deutschland}{}
-\includegraphics[width = \textwidth]{pics/gini-vermoegen-de-zeitreihe.png}
-
 \scriptsize
 
+\begin{center}\includegraphics[width=.9\textwidth,height=.7\textheight]{main_files/figure-beamer/gini-vermoegen-de-1} \end{center}
+
+\normalsize
+
+Verschiedene Erhebungen \& Definitionen \(\implies\) Niveaus nicht
+direkt vergleichbar, Verläufe schon.
+
+\vspace{0pt plus 1filll}
+\scriptsize
+
+Daten:
 \href{https://www.armuts-und-reichtumsbericht.de/DE/Indikatoren/Gesellschaft/Vermoegensverteilung/G02-Indikator-Vermoegensverwaltung.html}{Armuts-
-\& Reichtumsbericht}, BM Arbeit \& Soziales
+\& Reichtumsbericht, Indikator G02} (SOEP, EVS);
+\href{https://www.bundesbank.de/de/aufgaben/themen/bundesbank-studie-vermoegen-in-deutschland-steigen-nominal-gehen-aber-real-zurueck-ungleichheit-bleibt-unveraendert-954622}{Deutsche
+Bundesbank, Vermögensbefragung 2023} (PHF). Abgerufen 9.10.2026.
 \end{frame}
 
 \begin{frame}{Gini-Index Einkommen Deutschland}
 \protect\hypertarget{gini-index-einkommen-deutschland}{}
-\includegraphics[width = \textwidth]{pics/gini-einkommen-de-zeitreihe.png}
-
 \scriptsize
 
+\begin{center}\includegraphics[width=.9\textwidth,height=.7\textheight]{main_files/figure-beamer/gini-einkommen-de-1} \end{center}
+
+\normalsize
+
+Einkommen viel gleichmäßiger verteilt als Vermögen (Gini ca. 0,3 vs.~ca.
+0,75).
+
+\vspace{0pt plus 1filll}
+\scriptsize
+
+Daten:
 \href{https://www.armuts-und-reichtumsbericht.de/DE/Indikatoren/Gesellschaft/Einkommensverteilung/G01-Indikator-Einkommensverteilung.html}{Armuts-
-\& Reichtumsbericht}, BM Arbeit \& Soziales
+\& Reichtumsbericht, Indikator G01} (SOEP, EU-SILC). Abgerufen
+9.10.2026.
 \end{frame}
 
 \hypertarget{wichtige-parametrische-verteilungen}{%
@@ -7967,8 +8280,9 @@ Nach diesem Kapitel können Sie \ldots{}
 
 \vspace{1em}
 
-\textbf{Voraussetzungen:} Zufallsvariablen \& Verteilungsfunktionen
-(Kap. 4), Erwartungswert \& Varianz (Kap. 6)
+\textbf{Voraussetzungen:}\\
+Zufallsvariablen \& Verteilungsfunktionen (Kap. 4),\\
+Erwartungswert \& Varianz (Kap. 6)
 \end{frame}
 
 \hypertarget{diskrete-parametrische-verteilungen}{%
@@ -8002,9 +8316,9 @@ P(X = 0) & = f(0)  = 1 - \pi \\
 f_X(x) & = \pi^x (1^-\pi)^{1-x} \cdot I(x \in \{0, 1\})
 \end{align*}
 
-\(\pi \in [0, 1]\) ist der einzige Parameter der Bernoulli-Verteilung.~
+\(\pi \in [0, 1]\) ist der einzige Parameter der Bernoulli-Verteilung.\\
 
-Notation: \[X \sim {\mathcal B}(\pi)\]~
+Notation: \[X \sim {\mathcal B}(\pi)\]\\
 
 Beispiel: Ergebnis eines Münzwurfs ist
 \({\mathcal B}(\pi = 0.5)\)-verteilt.
@@ -8025,13 +8339,13 @@ $$
 \protect\hypertarget{diskrete-gleichverteilung}{}
 Die allgemeine \textbf{diskrete Gleichverteilung} hat einen endlichen
 Träger \({T} = \{x_1, x_2, ..., x_k\}\), wobei
-\[ P(X = x) = f(x) = \frac{1}{k} \cdot I(x \in T)\]~
+\[ P(X = x) = f(x) = \frac{1}{k} \cdot I(x \in T)\]\\
 
 Häufig sind alle natürlichen Zahlen zwischen \(a \in \mathbb{N}\) und
 \(b\in \mathbb{N}\) Element des Trägers \({T}\). Die Grenzen \(a\) und
-\(b\) sind dann die Parameter der \textbf{diskreten Gleichverteilung}.~
+\(b\) sind dann die Parameter der \textbf{diskreten Gleichverteilung}.\\
 
-Notation: \[X \sim {\mathcal U}_D(a, b)\]~
+Notation: \[X \sim {\mathcal U}_D(a, b)\]\\
 
 Beispiel: Augenzahl beim fairen Würfelwurf ist
 \({\mathcal U}_D(a=1, b=6)\)-verteilt.
@@ -8042,8 +8356,9 @@ In R: \texttt{sample()}
 \begin{frame}{Geometrische Verteilung}
 \protect\hypertarget{geometrische-verteilung}{}
 Ein Zufallsvorgang, bei dem mit Wahrscheinlichkeit \(\pi\) ein Ereignis
-\(A\) eintritt, wird \emph{unabhängig} voneinander so oft wiederholt,
-bis zum ersten Mal \(A\) eintritt.
+\(A\) eintritt,\\
+wird \emph{unabhängig} voneinander so oft wiederholt, bis zum ersten Mal
+\(A\) eintritt.
 
 Sei \(X\) die ZV ``Anzahl der Versuche bis zum ersten Mal \(A\)
 eintritt''.\\
@@ -8051,7 +8366,7 @@ Dann ist \({T} = \mathbb{N}^+\) und die Wahrscheinlichkeitsfunktion von
 \(X\) lautet: \[
 f(x) =\underbrace{(1 - \pi)^{x-1}}_{\mbox{\footnotesize  (x-1)-mal $\bar{A}$}}\cdot \underbrace{\pi}_{\mbox{\footnotesize  1-mal $A$}} \cdot I(x \in T)
 \] \(\pi \in (0,1)\) ist der Parameter der geometrischen Verteilung.\\
-\hspace*{0.333em}
+\strut \\
 
 Notation: \[X \sim {\mathcal G}(\pi)\]\\
 
@@ -8066,7 +8381,8 @@ inhaltlich: $F(x)=P(\mbox{mindestens ein Erfolg in den ersten x Versuchen})= 1 -
 \begin{frame}[fragile]{Alternative Definition}
 \protect\hypertarget{alternative-definition}{}
 Sei \(Y:=\) ``Anzahl der Versuche \emph{bevor} das erste mal \(A\)
-eintritt'', d.h. \(Y=X-1\). Dann ist \begin{align*}
+eintritt'', d.h. \(Y=X-1\).\\
+Dann ist \begin{align*}
 T & =  \{0, 1, 2, ... \} = \mathbb{N}_0^+\\
 f(y) & =  (1 - \pi)^y  \pi \cdot I(y \in T)
 \end{align*}\\
@@ -8104,11 +8420,12 @@ Für diese Definition gibt es folgende Implementationen in R:
 Bei einer Folge von unabhängigen Bernoulli-Experimenten
 \(X_i,\, i = 1, \dots, n\) interessiert man sich häufig nur für die
 \textbf{Anzahl} \(X := \sum_{i=1}^n X_i\), wie oft \(X_i =1\)
-aufgetreten ist.~
+aufgetreten ist.\\
 
 Diese ZV \(X\) heißt \textbf{binomialverteilt} mit Parametern
-\(n \in \mathbb{N}\), \(\pi \in [0, 1]\). Sie hat Träger
-\({T} = \{0, 1, ..., n\}\) sowie die Wahrscheinlichkeitsfunktion:
+\(n \in \mathbb{N}\), \(\pi \in [0, 1]\).\\
+Sie hat Träger \({T} = \{0, 1, ..., n\}\) sowie die
+Wahrscheinlichkeitsfunktion:
 \[P(X = x) = f(x) = {n \choose x} \cdot \pi^x (1-\pi)^{n - x} \cdot I(x \in T)\]
 
 Notation: \[X \sim {\mathcal B}(n, \pi)\]
@@ -8136,7 +8453,7 @@ Binomialkoeffizienten: alle Bernoulli Folgen mit x 1-ern und $(n-x)$ O-ern führ
 \end{frame}
 
 \begin{frame}{Beispiele}
-\protect\hypertarget{beispiele-1}{}
+\protect\hypertarget{beispiele}{}
 Das \textbf{Urnenmodell}:\\
 Zufälliges \textbf{Ziehen mit Zurücklegen} einer Stichprobe von \(n\)
 Kugeln aus einer Urne mit \(N\) Kugeln, darunter \(M\) markierte.
@@ -8147,18 +8464,18 @@ Dann gilt \[ X \sim {\mathcal B}(n, M/N).\]
 
 \begin{frame}[fragile]{Hypergeometrische Verteilung}
 \protect\hypertarget{hypergeometrische-verteilung}{}
-Häufig wird jedoch \textbf{ohne Zurücklegen} gezogen, d.h.
-``Auswahlwahrscheinlichkeiten'' ändern sich von Ziehung zu Ziehung
+Häufig wird jedoch \textbf{ohne Zurücklegen} gezogen,\\
+d.h. ``Auswahlwahrscheinlichkeiten'' ändern sich von Ziehung zu Ziehung
 (Beispiel: Kartenspiele).\\
 
 Die Verteilung von \(X\) (Anzahl der markierten Kugeln) nennt man dann
-\textbf{hypergeometrisch}. Die \emph{hypergeometrische Verteilung} hat
-den Träger \[
+\textbf{hypergeometrisch}.\\
+Die \emph{hypergeometrische Verteilung} hat den Träger \[
 {T} = \left\{\max\left(0, n - (N - M)\right), ..., \min\left(n, M\right)\right\}
 \] und die Wahrscheinlichkeitsfunktion \[
 f(x) = \frac{\binom{M}{x}\binom{N - M}{n - x}}{\binom{N}{n}} \cdot I(x \in T)
 \] Notation: \[X \sim {\mathcal H}(n, N, M)\]\\
-\hspace*{0.333em}
+\strut \\
 
 Funktionen in R: \texttt{{[}dpqr{]}hyper(m\ =} \(M\)\texttt{,\ n\ =}
 \(N-M\)\texttt{,\ k=} \(n\)\texttt{,\ ...)}
@@ -8222,15 +8539,16 @@ einer \textbf{Poisson-Verteilung}.
 
 Der Parameter \(\lambda \in \mathbb{R}^+\) ist die durchschnittliche
 \textbf{Rate} oder die \textbf{Intensität}, mit der die interessierenden
-Ereignisse in dem zugrundeliegenden Zeitintervall auftreten.~
+Ereignisse in dem zugrundeliegenden Zeitintervall auftreten.\\
 
 Notation: \[X \sim {\mathcal P}(\lambda)\]\\
-\hspace*{0.333em}
+\strut \\
 
-Beachte: Wartezeiten zwischen Ereignissen, deren Gesamtzahl
+Beachte:\\
+Wartezeiten zwischen Ereignissen, deren Gesamtzahl
 \(\mathcal P(\lambda)\)-verteilt ist, sind
 \(\mathcal{E}(\lambda)\)-verteilt!\\
-\hspace*{0.333em}
+\strut \\
 
 Funktionen in R: \texttt{{[}dpqr{]}pois()}
 \end{frame}
@@ -8332,8 +8650,9 @@ Verteilungen}\label{stetige-parametrische-verteilungen}}
 \begin{frame}{Wichtige stetige Verteilungen}
 \protect\hypertarget{wichtige-stetige-verteilungen}{}
 Im Folgenden werden wir nun wichtige stetige parametrische Verteilungen
-kennenlernen. Diese hängen wie parametrische diskrete Verteilungen von
-einem oder mehreren \textbf{Parametern} ab.
+kennenlernen.\\
+Diese hängen wie parametrische diskrete Verteilungen von einem oder
+mehreren \textbf{Parametern} ab.
 
 Zur Charakterisierung geben wir meist die \textbf{Dichtefunktion} und
 den \textbf{Träger} an.
@@ -8351,10 +8670,10 @@ Die \textbf{stetige Gleichverteilung} hat
   Dichtefunktion
   \[f(x) = \begin{cases} \frac{1}{b-a} & x \in [a, b] \\ 0 & \text{sonst} \end{cases}\]
 \item
-  Träger \(T = [a,b]\). ~
+  Träger \(T = [a,b]\).\\
 \end{itemize}
 
-Notation: \[X \sim \mathcal{U}[a, b]\] ~
+Notation: \[X \sim \mathcal{U}[a, b]\]\\
 
 Funktionen in R: \texttt{{[}dprq{]}unif()}
 \end{frame}
@@ -8369,7 +8688,7 @@ Eine stetige Zufallsvariable \(X\)
   mit \emph{nichtnegativem} Träger \(T = \mathbb{R}^+_0\)
 \item
   und Dichtefunktion \[
-  f(x) = \begin{cases} 
+  f(x) = \begin{cases}
   \lambda \exp (-\lambda x) & x \geq 0 \\
   0            & \text{sonst}
   \end{cases}
@@ -8379,10 +8698,10 @@ Eine stetige Zufallsvariable \(X\)
 \end{itemize}
 
 heißt \emph{exponentialverteilt.} Die Verteilungsfunktion ist \[
-F(x) =  \begin{cases} 
+F(x) =  \begin{cases}
 1 - \exp (-\lambda x)   &  x \geq 0 \\
 0           &  x < 0
- \end{cases} 
+ \end{cases}
 \] Notation: \[X \sim \mathcal{E}(\lambda)\]\\
 
 in R: \texttt{{[}dpqr{]}exp(rate\ =}\(\lambda\)\texttt{,\ ...)}
@@ -8419,12 +8738,12 @@ Exponentialverteilung mit:
   \end{cases}
   \]
 \item
-  nichtnegativem Träger \({\cal T} = \mathbb{R}^+\) ~
+  nichtnegativem Träger \({\cal T} = \mathbb{R}^+\)\\
 \end{itemize}
 
 \(\Gamma(\alpha)\) bezeichnet die \textbf{Gammafunktion}
-\(\Gamma(\alpha) = \int_0^\infty x^{\alpha - 1} \exp(-x)\,dx,\) wobei
-\(\Gamma(x+1)=x!\,\) für \(x=0,1,2,...\) gilt.
+\(\Gamma(\alpha) = \int_0^\infty x^{\alpha - 1} \exp(-x)\,dx,\)\\
+wobei \(\Gamma(x+1)=x!\,\) für \(x=0,1,2,...\) gilt.
 
 Notation: \(X \sim \mathcal{G}(\alpha, \beta)\)
 
@@ -8505,12 +8824,12 @@ Eine Zufallsvariable \(X\)
   \(\sigma^2 \in \mathbb{R}_+\)
 \end{itemize}
 
-heißt \textbf{normalverteilt}.~
+heißt \textbf{normalverteilt}.\\
 
 Für \(\mu = 0\) und \(\sigma^2 = 1\) nennt man die Zufallsvariable
-\textbf{standardnormalverteilt}.~
+\textbf{standardnormalverteilt}.\\
 
-Notation: \[X \sim {\mathcal N}(\mu, \sigma^2)\]~
+Notation: \[X \sim {\mathcal N}(\mu, \sigma^2)\]\\
 
 In R: \texttt{{[}dpqr{]}norm(m\ =} \(\mu\)\texttt{,\ sd\ =}
 \(\sqrt{\sigma^2}\)\texttt{,\ ...)} (NB: \(\sigma\) nicht \(\sigma^2\)!)
@@ -8569,13 +8888,13 @@ Eine Zufallsvariable \(X\)
   \(\beta \in \mathbb{R}_+\)
 \end{itemize}
 
-heißt \textbf{betaverteilt}.~
+heißt \textbf{betaverteilt}.\\
 
 Notation: \[X \sim \mathcal{Be}(\alpha, \beta)\]
 
 \textbf{Betafunktion} \(B(\alpha, \beta)\) so definiert, dass
 Dichtefunktion die Normierungseigenschaft
-\(\int\limits_0^1 f(x) \,dx = 1\) besitzt:
+\(\int\limits_0^1 f(x) \,dx = 1\) besitzt:\\
 \(B(\alpha, \beta) = \frac{\Gamma(\alpha)\Gamma(\beta)}{\Gamma(\alpha+\beta)} = \int_0^1 x^{\alpha-1} (1-x)^{\beta-1} \,dx.\)
 
 In R: \texttt{{[}dpqr{]}beta(shape1\ =} \(\alpha\)\texttt{,\ shape2=}
@@ -8606,7 +8925,7 @@ Eine Zufallsvariable \(X\)
   \end{align*}
 \end{itemize}
 
-heißt \emph{Cauchy}-verteilt.~
+heißt \emph{Cauchy}-verteilt.\\
 
 Notation: \[X \sim \mathcal C\]
 
@@ -8633,34 +8952,11 @@ Wahrscheinlichkeitsmasse verteilt sich auf extreme Werte.
 \normalsize
 \end{frame}
 
-\begin{frame}{Welche Verteilung passt?}
-\protect\hypertarget{welche-verteilung-passt}{}
-Von der \textbf{datengenerierenden Geschichte} zur Verteilungsfamilie:
-
-\footnotesize
-\begin{tabular}{p{6.3cm}|l}
-Zufallsvorgang & Verteilung\\
-\hline
-Einzelner Ja/Nein-Versuch & $\mathcal B(\pi)$\\
-Anzahl Erfolge in $n$ Versuchen (mit Zurücklegen) & $\mathcal B(n, \pi)$\\
-Anzahl Markierte bei Ziehen ohne Zurücklegen & $\mathcal H(n, N, M)$\\
-Anzahl Versuche bis zum ersten Erfolg & $\mathcal G(\pi)$\\
-Anzahl seltener Ereignisse pro Zeit-/Raumeinheit & $\mathcal P(\lambda)$\\
-\hline
-Alle Werte in $[a,b]$ gleich wahrscheinlich & $\mathcal U[a,b]$\\
-Wartezeit auf/zwischen Poisson-Ereignissen & $\mathcal E(\lambda)$\\
-Summe von Wartezeiten ($\chi^2$ als Spezialfall) & $\mathcal G(\alpha, \beta)$\\
-Summe/Mittel vieler kleiner Einflüsse (ZGWS) & $\mathcal N(\mu, \sigma^2)$\\
-Anteil / W.keit mit Träger $(0,1)$ & $\mathcal{Be}(\alpha, \beta)$\\
-Extreme Ausreißer / "heavy tails" (kein $E(X)$) & $\mathcal C$\\
-\end{tabular}
-\end{frame}
-
 \begin{frame}{Einige stetige Verteilungen}
 \protect\hypertarget{einige-stetige-verteilungen}{}
 \begin{center}
 \begin{tabular}{l|c c c c}
-Name \& Symbol 
+Name \& Symbol
 & Parameter
 & Träger
 & $E(X)$
@@ -8709,6 +9005,29 @@ Erwartungswert, Varianz und höhere Momente der Cauchyverteilung sind
 \textbf{nicht definiert}, die entsprechenden Integrale divergieren!
 \end{frame}
 
+\begin{frame}{Welche Verteilung passt?}
+\protect\hypertarget{welche-verteilung-passt}{}
+Vom \textbf{datengenerierenden Prozess} zur Verteilungsfamilie:
+
+\footnotesize
+\begin{tabular}{p{6.3cm}|l}
+Zufallsvorgang & Verteilung\\
+\hline
+Einzelner Ja/Nein-Versuch & $\mathcal B(\pi)$\\
+Anzahl Erfolge in $n$ Versuchen (mit Zurücklegen) & $\mathcal B(n, \pi)$\\
+Anzahl Markierte bei Ziehen ohne Zurücklegen & $\mathcal H(n, N, M)$\\
+Anzahl Versuche bis zum ersten Erfolg & $\mathcal G(\pi)$\\
+Anzahl seltener Ereignisse pro Zeit-/Raumeinheit & $\mathcal P(\lambda)$\\[1em]
+\hline\\[1em]
+Alle Werte in $[a,b]$ gleich wahrscheinlich & $\mathcal U[a,b]$\\
+Wartezeit auf/zwischen Poisson-Ereignissen & $\mathcal E(\lambda)$\\
+Summe von Wartezeiten ($\chi^2$ als Spezialfall) & $\mathcal G(\alpha, \beta)$\\
+Summe/Mittel vieler kleiner Einflüsse (ZGWS) & $\mathcal N(\mu, \sigma^2)$\\
+Anteil / W.keit mit Träger $(0,1)$ & $\mathcal{Be}(\alpha, \beta)$\\
+Extreme Ausreißer / "heavy tails" (kein $E(X)$) & $\mathcal C$\\
+\end{tabular}
+\end{frame}
+
 \hypertarget{dichtetransformationssatz}{%
 \subsection{Dichtetransformationssatz}\label{dichtetransformationssatz}}
 
@@ -8755,8 +9074,8 @@ Was ist die Dichte von \(Y = g(X)\)?
 \protect\hypertarget{der-transformationssatz-fuxfcr-dichten}{}
 \begin{block}{Transformationssatz für Dichten:}
 \protect\hypertarget{transformationssatz-fuxfcr-dichten}{}
-Sei \(X\) eine stetige Zufallsvariable mit Dichte \(f_X(x)\) und sei
-\(Y\) die transformierte Zufallsvariable \(Y = g(X)\) mit Träger
+Sei \(X\) eine stetige Zufallsvariable mit Dichte \(f_X(x)\)\\
+und sei \(Y\) die transformierte Zufallsvariable \(Y = g(X)\) mit Träger
 \(T_Y = g(T_X) = \{y: (\exists x \in T_X: g(x) = y)\}.\)\\
 Für eine \emph{streng monotone und differenzierbare} Funktion \(g\)
 gilt: \[
@@ -8781,7 +9100,7 @@ Intuition für
 \begin{itemize}
 \item
   Es muss gelten:
-  \(P\left(X \in [a, b]\right) = P\left(Y = g(X) \in \left[g(a), g(b)\right]\right)\),
+  \(P\left(X \in [a, b]\right) = P\left(Y = g(X) \in \left[g(a), g(b)\right]\right)\),\\
   also \(\int^b_a f_X(x) dx = \int^{g(b)}_{g(a)} f_Y(y) dy\).
 \item
   Außerdem gilt \(\left(g^{-1}\right)'(y) = \frac{1}{g'(g^{-1}(y))}\),
@@ -8863,7 +9182,7 @@ Verteilungsfunktion \(F_X(x)\) verwenden:
 \tightlist
 \item
   Erzeuge Realisationen \(u_1, \dots, u_n\) mit
-  \(U_i \stackrel{\text{iid}}{\sim}\mathcal{U}[0,1]\).\\
+  \(U_i \stackrel{\text{iid}}{\sim}\mathcal{U}[0,1]\).
 \item
   Berechne \(x_i = F_X^{-1}(u_i), \; i=1, \dots, n\)
 \end{enumerate}
@@ -8918,8 +9237,8 @@ F(x)  &=  \frac{1}{2} + \frac{\arctan(x)}{\pi}
 \intertext {Die inverse Verteilungsfunktion ist somit:}
 F^{-1}(y) &= \tan \left[ \pi \left(y - \frac{1}{2}\right)\right]
 \end{align*} Zufallszahlen aus der Cauchy-Verteilung lassen sich also
-leicht erzeugen, indem man \(U_1, ..., U_n\) aus
-\(\sim \mathcal{U}[0,1]\) erzeugt und
+leicht erzeugen,\\
+indem man \(U_1, ..., U_n\) aus \(\sim \mathcal{U}[0,1]\) erzeugt und
 \(\tan \left[ \pi \left(U_i -\frac{1}{2}\right)\right]\) berechnet.
 \end{frame}
 
@@ -8951,8 +9270,10 @@ Nach diesem Kapitel können Sie \ldots{}
 
 \vspace{1em}
 
-\textbf{Voraussetzungen:} Zufallsvariablen (Kap. 4), Erwartungswert \&
-Varianz (Kap. 6), parametrische Verteilungen (Kap. 7)
+\textbf{Voraussetzungen:}\\
+Zufallsvariablen (Kap. 4),\\
+Erwartungswert \& Varianz (Kap. 6),\\
+parametrische Verteilungen (Kap. 7)
 \end{frame}
 
 \begin{frame}{Gemeinsame Verteilungsfunktion}
@@ -9104,16 +9425,17 @@ $$
 \protect\hypertarget{beispiel-betrug-beim-muxfcnzwurf}{}
 Ein Lehrer bittet seine Schüler, eine (faire) Münze zweimal zu werfen,
 und das Ergebnis (``Kopf'' = 0, ``Zahl'' = 1) für jeden Wurf zu
-notieren. Sei \(X\) das Ergebnis des ersten Wurfes und \(Y\) das
-Ergebnis des zweiten Wurfes.
+notieren.\\
+Sei \(X\) das Ergebnis des ersten Wurfes und \(Y\) das Ergebnis des
+zweiten Wurfes.
 
 \begin{itemize}
 \tightlist
 \item
   Ein gewissenhafter Schüler folgt genau den Anweisungen des Lehrers und
-  notiert das Ergebnis \(X_G\) und \(Y_G\). Ein fauler Schüler wirft nur
-  eine Münze und notiert das erzielte Ergebnis zweimal: \(X_F\) und
-  \(Y_F\).\\
+  notiert das Ergebnis \(X_G\) und \(Y_G\).\\
+  Ein fauler Schüler wirft nur eine Münze und notiert das erzielte
+  Ergebnis zweimal: \(X_F\) und \(Y_F\).\\
 \item
   Berechne die gemeinsame Wahrscheinlichkeitsfunktion von \((X_G, Y_G)\)
   und von \((X_F, Y_F)\).
@@ -9145,16 +9467,17 @@ Randverteilungen aufstellen, gemeinsame Verteilung über Unabh.
 Ein Experiment, bei dem ein von drei möglichen Ereignissen mit
 Wahrscheinlichkeit \(\pi_1\), \(\pi_2\) und \(\pi_3\)
 (\(\pi_1+\pi_2+\pi_3=1\)) auftritt, wird unabhängig voneinander
-\(n\)-mal wiederholt. Sei \(\symbf{X}\) ein drei-dimensionaler
-Zufallsvektor, dessen \(i\)-te Komponente angibt, wie oft das \(i\)-te
-Ereignis eingetreten ist.
+\(n\)-mal wiederholt.\\
+Sei \(\symbf{X}\) ein drei-dimensionaler Zufallsvektor, dessen \(i\)-te
+Komponente angibt, wie oft das \(i\)-te Ereignis eingetreten ist.
 
 Beispiel:
 
 In einer Population mit Häufigkeiten \(\pi_1\), \(\pi_2\) und \(\pi_3\)
 der Genotypen \(aa\), \(ab\) und \(bb\) wird eine Stichprobe vom Umfang
-\(n\) gezogen. Die Anzahlen \(X_1\), \(X_2\) und \(X_3\) der drei
-Genotypen ist dann \textbf{trinomialverteilt}.
+\(n\) gezogen.\\
+Die Anzahlen \(X_1\), \(X_2\) und \(X_3\) der drei Genotypen ist dann
+\textbf{trinomialverteilt}.
 \end{frame}
 
 \begin{frame}{Beispiel: Trinomialverteilung}
@@ -9166,7 +9489,7 @@ x_1+x_2+x_3=n\}\] und Wahrscheinlichkeitsfunktion \[
 f_{\symbf{X}}(\symbf{x}) = f_{X_1, X_2, X_3}(x_1, x_2, x_3) = \frac{n!}{x_1!x_2!x_3!}
 \pi_1^{x_1} \, \pi_2^{x_2} \, \pi_3^{x_3}
 \] besitzt.\\
-\hspace*{0.333em}
+\strut \\
 \end{frame}
 
 \begin{frame}{Multinomialverteilung}
@@ -9194,7 +9517,7 @@ Ein \({\mathcal M}_d(n, \symbf\pi)\)-verteilter Zufallsvektor
 Die Multinomialverteilung ist eine Verallgemeinerung der
 Binomialverteilung auf unabhängige Wiederholungen von identischen
 Zufallsexperimenten mit mehr als zwei möglichen Ergebnissen.\\
-\hspace*{0.333em}
+\strut \\
 
 Für ihre Randverteilungen gilt: \(X_i \sim {\mathcal B}(n, \pi_i)\).
 \end{frame}
@@ -9259,8 +9582,8 @@ Trägern gilt.
 
 \normalsize
 
-\textbf{Takeaway:} Dichte auf der Diagonalen konzentriert -- aus den
-Rändern \textbf{nicht} rekonstruierbar:
+\textbf{Takeaway:} Dichte auf der Diagonalen konzentriert --\\
+aus den Rändern \textbf{nicht} rekonstruierbar:
 \(f(x_1, x_2) \neq f_{X_1}(x_1)\, f_{X_2}(x_2)\).
 \end{frame}
 
@@ -9273,8 +9596,9 @@ Rändern \textbf{nicht} rekonstruierbar:
 \normalsize
 
 \textbf{Takeaway:} \emph{Gleiche} Ränder wie links, aber hier gilt
-\(f(x_1, x_2) = f_{X_1}(x_1)\, f_{X_2}(x_2)\) -- bei Unabhängigkeit
-bestimmen die Ränder die gemeinsame Verteilung vollständig.
+\(f(x_1, x_2) = f_{X_1}(x_1)\, f_{X_2}(x_2)\) --\\
+bei Unabhängigkeit bestimmen die Ränder die gemeinsame Verteilung
+vollständig.
 \end{frame}
 
 \begin{frame}{Beispiel: Bernoulli-Kette}
@@ -9286,8 +9610,8 @@ Sind \(X_1, X_2, ..., X_n\) jeweils Bernoulli-verteilt mit Parameter
 Beispiel:\\
 \strut \\
 
-\(n = 3\), \(\pi = \frac{1}{6}\); wegen der Unabhängigkeit gilt dann
-z.B. \begin{align*}
+\(n = 3\), \(\pi = \frac{1}{6}\);\\
+wegen der Unabhängigkeit gilt dann z.B. \begin{align*}
 P(\symbf{X} = (1, 0, 0)) &= P(X_1 = 1, X_2 = 0, X_3 = 0) \\
                          &= P(X_1 = 1) \cdot P(X_2 = 0) \cdot P(X_3 = 0)  \\
                          &= \frac{1}{6} \left(\frac{5}{6}\right)^2 = \frac{25}{216}
@@ -9370,7 +9694,7 @@ Intuition über Elementareignisse Bernoulli-Ketten:
 \begin{frame}[fragile]{Negative Binomialverteilung}
 \protect\hypertarget{negative-binomialverteilung}{}
 Die Verteilung der Faltung \(X = X_1 + ... + X_n\) mit
-\(X_i \stackrel{\text{iid}}{\sim} \mathcal{G}(\pi);\, i= 1, \dots, n\)
+\(X_i \stackrel{\text{iid}}{\sim} \mathcal{G}(\pi);\, i= 1, \dots, n\)\\
 ist eine \textbf{Negative Binomialverteilung} auf
 \(T_X = \{n, n+1, n+2, \ldots\}\) mit Parametern \(n \in \mathbb{N}^+\)
 und \(\pi \in (0,1)\) und Wahrscheinlichkeitsfunktion \[
@@ -9378,7 +9702,7 @@ f(x) = \binom{x - 1}{n - 1} \pi^n (1-\pi)^{x-n} I(x \geq n)
 \]
 
 Wir schreiben: \(X\sim \mathcal{NB}(n, \pi)\)\\
-\hspace*{0.333em}
+\strut \\
 
 Funktionen in R: \texttt{{[}dpqr{]}nbinom(size,\ prob)}\\
 Beachte: Abweichende Definition in R -- Träger ist \(\mathbb{N}^+_0\)!
@@ -9453,12 +9777,14 @@ P(X=x|Z=z) &= \frac{P(X=x \cap Y = z-x)}{P(Z=z)} \\
 \begin{frame}{Bedingte Verteilungen stetiger ZV: Problem}
 \protect\hypertarget{bedingte-verteilungen-stetiger-zv-problem}{}
 Betrachte die Zufallsvariablen \(X\) und \(Y\) mit gemeinsamer Dichte
-\(f_{X,Y}(x,y)\). Wir interessieren uns für die bedingte Verteilung von
-\(X\) gegeben \(Y = y\).
+\(f_{X,Y}(x,y)\).\\
+Wir interessieren uns für die bedingte Verteilung von \(X\) gegeben
+\(Y = y\).
 
 ``Problem'':
 
-Es gilt \(P(Y = y) = 0\) für alle \(y\). Daher ist \[
+Es gilt \(P(Y = y) = 0\) für alle \(y\).\\
+Daher ist \[
 P(X \leq x | Y = y) \; = \; \frac{P(X \leq x \quad \land
 \quad Y = y)}{P(Y = y)}
 \] nicht definiert.
@@ -9570,9 +9896,11 @@ Bayes-Lernens}:
 \begin{itemize}
 \tightlist
 \item
-  \textbf{gemeinsame} Verteilung, \textbf{bedingte} Verteilung
-  \(X|Y=y \sim {\mathcal B}e(\alpha + y,\, \beta + n - y)\) (Update der
-  Erfolgswahrscheinlichkeit, nachdem man \(y\) Erfolge beobachtet hat)
+  \textbf{gemeinsame} Verteilung,\\
+  \textbf{bedingte} Verteilung
+  \(X|Y=y \sim {\mathcal B}e(\alpha + y,\, \beta + n - y)\)\\
+  (Update der Erfolgswahrscheinlichkeit,\\
+  nachdem man \(y\) Erfolge beobachtet hat)\\
   und \textbf{Randverteilung} von \(Y\) (die
   \emph{Beta-Binomialverteilung})
 \end{itemize}
@@ -9655,7 +9983,7 @@ Beachte:
 \item
   \(E(X|Z = z)\) ist ein \emph{konkreter Zahlenwert}, der eine
   Eigenschaft der bedingten Verteilung von \(X\) für eine feste
-  Bedingung \(Z = z\) beschreibt.\\
+  Bedingung \(Z = z\) beschreibt.
 \item
   \(E(X|Z)\) ist als Funktion der Werte von \(Z\) selbst wieder eine
   \emph{Zufallsvariable}.
@@ -9759,7 +10087,8 @@ Parameterschätzung}\label{ausblick-parameterschuxe4tzung}}
 
 \emph{Offensichtlich:}\\
 Enger Zusammenhang -- Beobachtete Kennwerte haben theoretische
-Entsprechungen (z.B. \(\bar x \leftrightarrow E(X)\))
+Entsprechungen\\
+(z.B. \(\bar x \leftrightarrow E(X)\))
 
 \emph{Verbindung:}\\
 Daten als Realisierungen von Zufallsvariablen
@@ -9773,9 +10102,9 @@ zugrundeliegenden Zufallsvariablen\\
 \begin{frame}{Ausblick: Schätzung}
 \protect\hypertarget{ausblick-schuxe4tzung}{}
 \emph{Daten:} \(x_1, \dots, x_n\)\\
-\emph{Modellannahme:} Daten sind Realisierungen einer ZV \(X\) mit
-unbekannten Verteilungsparametern
-\(\symbf{\theta} = (\theta_1, \dots, \theta_p)\).
+\emph{Modellannahme:}\\
+Daten sind Realisierungen einer ZV \(X\) mit unbekannten
+Verteilungsparametern \(\symbf{\theta} = (\theta_1, \dots, \theta_p)\).
 
 3 Fragestellungen
 
@@ -9835,6 +10164,7 @@ Verteilung.
 
 \includegraphics[width=\textwidth,height=0.8\textheight]{main_files/pics/estimate-estimator.jpeg}
 
+\vspace{0pt plus 1filll}
 \raggedright
 \tiny
 
@@ -9936,8 +10266,8 @@ wachsenden Stichprobenumfang mit Sicherheit \emph{beliebig klein}.}
 \begin{itemize}
 \tightlist
 \item
-  stärkere Aussage als punktweiser Konvergenz in Wahrscheinlichkeit: die
-  \emph{maximale} Abweichung zwischen Schätzung \(F_n\) und Wahrheit
+  stärkere Aussage als punktweiser Konvergenz in Wahrscheinlichkeit:\\
+  die \emph{maximale} Abweichung zwischen Schätzung \(F_n\) und Wahrheit
   \(F\) geht mit Wahrscheinlichkeit 1 gegen Null.
 \end{itemize}
 
@@ -9981,8 +10311,8 @@ Grenzwertsatz}\label{der-zentrale-grenzwertsatz}}
 \item
   ``Die Verteilung des arithmetischen Mittels von \(n\) \emph{iid}
   Zufallsvariablen aus einer \emph{beliebigen(!)} Verteilung konvergiert
-  für wachsendes \(n\) gegen eine Normalverteilung.'' (\ldots{} unter
-  nicht besonders strengen Bedingungen)
+  für wachsendes \(n\) gegen eine Normalverteilung.''\\
+  (\ldots{} unter nicht besonders strengen Bedingungen)
 \item
   Begründet die zentrale Rolle der Normalverteilung in der Stochastik
   und Statistik.
@@ -10013,7 +10343,7 @@ E(\tilde{X}) & =  \frac{1}{\sigma} \left(E(X) - \mu_X\right) = 0   \\
 Betrachte \emph{iid} Zufallsvariablen \(X_1, X_2, ..., X_n\) mit
 endlichem Erwartungswert \(\mu_X = E(X_i)\) und endlicher Varianz
 \(\sigma_X^2 = \Var(X_i)\).\\
-\hspace*{0.333em}
+\strut \\
 
 Für die Summe \(Y_n = X_1 + X_2 + ... + X_n\) gilt also \begin{align*}
 E(Y_n) & =  n \cdot \mu_X,  \\
@@ -10041,7 +10371,7 @@ F_n(z) &\stackrel{n \to \infty}{\longrightarrow} F_{N(0,1)}(z)\quad \forall\, z 
 
 In der Praxis kann man also die Verteilung von \(Z_n\) für große \(n\)
 oft gut durch eine Standardnormalverteilung approximieren.\\
-\hspace*{0.333em}
+\strut \\
 
 \scriptsize
 
@@ -10094,8 +10424,9 @@ Englisch: \emph{c}entral \emph{l}imit \emph{t}heorem \emph{CLT}
 \item
   der ZGWS gilt sowohl für stetige als auch für diskrete ZV \(X_i\).
 \item
-  Anwendung: Die Verteilung der Summe/des Mittelwerts vieler (in etwa)
-  \emph{iid} Zufallsvariablen kann gut durch ein Normalverteilungsmodell
+  Anwendung:\\
+  Die Verteilung der Summe/des Mittelwerts vieler (in etwa) \emph{iid}
+  Zufallsvariablen kann gut durch ein Normalverteilungsmodell
   approximiert werden.
 \end{itemize}
 \end{frame}
@@ -10123,12 +10454,13 @@ Englisch: \emph{c}entral \emph{l}imit \emph{t}heorem \emph{CLT}
   Erwartungswert und \emph{endlicher} Varianz --- die datengenerierende
   Verteilung selbst ist beliebig.
 \item
-  \textbf{2.} Nur dann gilt \(\Var(\bar X_n) = \sigma^2/n \to 0\); ohne
-  endliche Varianz (z.B. Cauchy) konvergiert das Mittel nicht --- weder
-  GGZ noch ZGWS greifen.
+  \textbf{2.} Nur dann gilt \(\Var(\bar X_n) = \sigma^2/n \to 0\);\\
+  ohne endliche Varianz (z.B. Cauchy) konvergiert das Mittel nicht ---
+  weder GGZ noch ZGWS greifen.
 \item
-  \textbf{3.} Ja --- solange \(E(X_i)\) und \(\Var(X_i)\) existieren,
-  ist die Form der Verteilung (diskret, schief, multimodal) egal.
+  \textbf{3.} Ja ---\\
+  solange \(E(X_i)\) und \(\Var(X_i)\) existieren, ist die Form der
+  Verteilung (diskret, schief, multimodal) egal.
 \end{itemize}
 \end{frame}
 
@@ -10271,8 +10603,8 @@ Beachte:
 \tightlist
 \item
   Summand i positiv, falls Abweichungen von \(x_i\) und \(y_i\) zum
-  jeweiligen Mittelwert das gleiche Vorzeichen haben, negativ falls
-  unterschiedlich.
+  jeweiligen Mittelwert das gleiche Vorzeichen haben,\\
+  negativ falls unterschiedlich.
 \item
   Für \(S_{xx}\) ergibt sich die Varianz von \(X\): \(S_{xx} = S^2_{x}\)
 \item
@@ -10355,14 +10687,15 @@ den Daten \((x_i,y_i), i=1,\ldots,n\) durch
 \item
   Symmetrisch: \(r_{xy} = r_{yx}\)
 \item
-  Positive Korrelation bedeutet: ``Je größer X, desto größer im
-  Durchschnitt Y''
+  Positive Korrelation bedeutet:\\
+  ``Je größer X, desto größer im Durchschnitt Y''
 \item
   Korrelation = +1 {[}-1{]} falls die Punkte genau auf einer Geraden mit
-  positiver {[}negativer{]} Steigung liegen -- \textbf{unabhängig von
-  Steigung dieser Geraden} (außer sie ist 0 oder \(\infty\)).
+  positiver {[}negativer{]} Steigung liegen --\\
+  \textbf{unabhängig von Steigung dieser Geraden} (außer sie ist 0 oder
+  \(\infty\)).
 \item
-  ``Korrelation = 0'' bedeutet ``kein \emph{linearer} Zusammenhang'',
+  ``Korrelation = 0'' bedeutet ``kein \emph{linearer} Zusammenhang'',\\
   aber \textbf{nicht Unabhängigkeit}! (s. Bsp. unten)
 \item
   Korrelation (und Kovarianz) sind empfindlich gegenüber Ausreißern
@@ -10388,8 +10721,8 @@ Misst nur Stärke des \textbf{linearen} Zusammenhangs:
 
 \normalsize
 
-\textbf{Alle} diese Datensätze haben \textbf{\(r_{xy} = -0.06\)}! (und
-\(n = 142\), \(\bar x = 54.3, S_x = 16.8\),
+\textbf{Alle} diese Datensätze haben \textbf{\(r_{xy} = -0.06\)}!\\
+(und \(n = 142\), \(\bar x = 54.3, S_x = 16.8\),
 \(\bar y = 47.8, S_y = 26.9\))
 \end{frame}
 
@@ -10405,8 +10738,8 @@ Misst nur Stärke des \textbf{linearen} Zusammenhangs:
          \]
 \item
   Lineare Transformationen
-  \(\tilde{X} = a_X X+b_X, \tilde{Y} = a_Y Y+b_Y, a_X, a_Y \neq 0\):
-  \(r_{xy}\) Korrelationskoeffizient zwischen \(X\) und \(Y\)
+  \(\tilde{X} = a_X X+b_X, \tilde{Y} = a_Y Y+b_Y, a_X, a_Y \neq 0\):\\
+  \(r_{xy}\) Korrelationskoeffizient zwischen \(X\) und \(Y\)\\
   \(\tilde{r}_{xy}\) Korrelationskoeffizient zwischen \(\tilde{X}\) und
   \(\tilde{Y}\) \[
          \implies \begin{array}{lcl}
@@ -10472,7 +10805,7 @@ Für \textbf{Einheitsvektoren} \(a, b\) (d.h.
 
 Beliebige Vektoren \(x, y\) werden durch \textbf{Normieren} zu
 Einheitsvektoren
-\(\tfrac{x}{\lVert x \rVert}, \tfrac{y}{\lVert y \rVert}\)
+\(\tfrac{x}{\lVert x \rVert}, \tfrac{y}{\lVert y \rVert}\)\\
 \(\implies \cos(\theta) = \tfrac{\langle x, y \rangle}{\lVert x \rVert \, \lVert y \rVert}\)
 für beliebige \(x, y\). \columnsend
 \end{frame}
@@ -10685,8 +11018,9 @@ Es gilt zudem: \[
 E(XY) = E (X) \cdot E (Y)
 \] gilt.
 
-Beachte: Aus Unabhängigkeit folgt Unkorreliertheit, aber der
-Umkehrschluss gilt i.A. nicht!
+Beachte:\\
+Aus Unabhängigkeit folgt Unkorreliertheit,\\
+aber der Umkehrschluss gilt i.A. nicht!
 
 \(X\) und \(Y\) sind \textbf{positiv/negativ korreliert} falls \[
 \rho(X,Y) > 0 \quad \mbox{bzw.~ } \rho(X,Y) < 0
@@ -10767,7 +11101,8 @@ Transformationen
 
 \begin{frame}{Varianz der Summe zweier ZVn}
 \protect\hypertarget{varianz-der-summe-zweier-zvn}{}
-Seien \(X\) und \(Y\) beliebige ZVn. Dann gilt für \(X + Y\): \[
+Seien \(X\) und \(Y\) beliebige ZVn.\\
+Dann gilt für \(X + Y\): \[
 \Var(X + Y) = \Var(X) + \Var(Y) + 2 \cdot \Cov(X,Y)
 \]
 
@@ -10803,9 +11138,9 @@ f(x,y) \; = \; \frac{1}{2 \pi \sqrt{(1 - \rho^2)}} \: \exp
 \begin{itemize}
 \item
   Die Randverteilungen von \(X\) und \(Y\) sind (für jedes \(\rho\))
-  standard-normalverteilt.\\
+  standard-normalverteilt.
 \item
-  Die Korrelation zwischen \(X\) und \(Y\) ist gleich \(\rho\).\\
+  Die Korrelation zwischen \(X\) und \(Y\) ist gleich \(\rho\).
 \item
   Aus Unkorreliertheit von \(X\) und \(Y\) folgt in diesem Spezialfall
   die Unabhängigkeit von \(X\) und \(Y\).
@@ -11014,7 +11349,7 @@ Insgesamt \(n(n-1)/2\) mögliche Paare.
 \protect\hypertarget{kendalls-tau-veranschaulichung}{}
 \scriptsize
 
-\begin{center}\includegraphics[width=.9\textwidth,height=.8\textheight]{main_files/figure-beamer/unnamed-chunk-266-1} \end{center}
+\begin{center}\includegraphics[width=.9\textwidth,height=.8\textheight]{main_files/figure-beamer/unnamed-chunk-272-1} \end{center}
 
 \normalsize
 \end{frame}
@@ -11030,8 +11365,7 @@ Insgesamt \(n(n-1)/2\) mögliche Paare.
   \end{equation*}
 \item
   Somers' D wird typischerweise verwendet wenn Y binär ist\\
-  (\(\implies\) viele Paare mit Bindungen in \(Y\))\\
-  \begin{equation*}
+  (\(\implies\) viele Paare mit Bindungen in \(Y\)) \begin{equation*}
   D_{xy}:= \frac{N_C - N_D}{\mbox{Anzahl Paare mit ungleichem y}}
   \end{equation*}
 \end{itemize}
@@ -11113,8 +11447,8 @@ Die \textbf{Distanzkorrelation} ist definiert als
 \protect\hypertarget{eigenschaften-distanzkorrelation}{}
 \begin{itemize}
 \item
-  \(0 \leq dr_{xy} \leq 1\) -- misst nur Stärke, nicht ``Richtung'' der
-  Abhängigkeit.
+  \(0 \leq dr_{xy} \leq 1\) --\\
+  misst nur Stärke, nicht ``Richtung'' der Abhängigkeit.
 \item
   \(dr_{xy} = 0\) \(\iff\) \(X\) und \(Y\) \emph{empirisch unabhängig}
   (!)
@@ -11136,7 +11470,7 @@ Die \textbf{Distanzkorrelation} ist definiert als
   \end{itemize}
 \end{itemize}
 
-\vspace{4em}
+\vspace{0pt plus 1filll}
 \scriptsize
 
 \href{https://doi.org/10.1214\%2F009053607000000505}{(Székely, Rizzo,
@@ -11151,8 +11485,8 @@ Variablen}\label{beispiele-zusammenhuxe4nge-metrischer-variablen}}
 
 \begin{frame}{Beispiele: Deterministische Zusammenhänge}
 \protect\hypertarget{beispiele-deterministische-zusammenhuxe4nge}{}
-Lineare (unverrauschte) Funktion, \(Y = a + b \cdot X\), 101
-equidistante Stützstellen im Intervall {[}-1,1{]} \scriptsize
+Lineare (unverrauschte) Funktion, \(Y = a + b \cdot X\),\\
+101 equidistante Stützstellen im Intervall {[}-1,1{]} \scriptsize
 
 \begin{center}\includegraphics[width=.9\textwidth,height=.8\textheight]{main_files/figure-beamer/04-corrplots-1-1} \end{center}
 
@@ -11161,8 +11495,8 @@ equidistante Stützstellen im Intervall {[}-1,1{]} \scriptsize
 
 \begin{frame}{Beispiele: Deterministische Zusammenhänge}
 \protect\hypertarget{beispiele-deterministische-zusammenhuxe4nge-1}{}
-Periodische (unverrauschte) Funktionen, 101 equidistante Stützstellen im
-Intervall \([-1, 1]\)
+Periodische (unverrauschte) Funktionen,\\
+101 equidistante Stützstellen im Intervall \([-1, 1]\)
 
 \scriptsize
 
@@ -11173,8 +11507,8 @@ Intervall \([-1, 1]\)
 
 \begin{frame}{Beispiele: Deterministische Zusammenhänge}
 \protect\hypertarget{beispiele-deterministische-zusammenhuxe4nge-2}{}
-Quadratische und kubische (unverrauschte) Funktionen, 101 equidistante
-Stützstellen im Intervall \([-1,1]\)
+Quadratische und kubische (unverrauschte) Funktionen,\\
+101 equidistante Stützstellen im Intervall \([-1,1]\)
 
 \scriptsize
 
@@ -11196,17 +11530,9 @@ Fehler \(U\).\\
 \normalsize
 \end{frame}
 
-\begin{frame}[fragile]{Noch mehr Beispiele}
+\begin{frame}{Noch mehr Beispiele}
 \protect\hypertarget{noch-mehr-beispiele}{}
 \scriptsize
-
-\begin{verbatim}
-## Warning: The `label.size` argument of `geom_label()` is deprecated as of ggplot2 3.5.0.
-## i Please use the `linewidth` argument instead.
-## This warning is displayed once per session.
-## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-## generated.
-\end{verbatim}
 
 \begin{center}\includegraphics[width=.9\textwidth,height=.8\textheight]{main_files/figure-beamer/04-datasaurus2-1} \end{center}
 
@@ -11258,7 +11584,7 @@ Dichotomes Merkmal \(Y\) und ein mindestens ordinalskaliertes \(X\).
 ``Kreditausfall'', ``Kündigung'', \ldots)\\
 \(Y=0 \iff\) \textbf{``negativer''} Fall (z.B. ``gesund'',
 ``Rückzahlung'', ``Verlängerung'', \ldots)\\
-\hspace*{0.333em}
+\strut \\
 
 \emph{Ziel:}\\
 Vorhersage/Diagnose \(\hat{y}_{i}\) nur auf Basis von \(x_i\) und
@@ -11317,27 +11643,30 @@ positiv''& \# positive Vorhersagen\\
 \begin{frame}{Sensitivität und Spezifität}
 \protect\hypertarget{sensitivituxe4t-und-spezifituxe4t-2}{}
 \textbf{Anteil wahr positiver Prognosen für echt positive =
-Sensitivität} \(TPR(c) = f(\hat{Y}=1 | Y = 1) = f(X \geq c | Y=1)\)\\
+Sensitivität}\\
+\(TPR(c) = f(\hat{Y}=1 | Y = 1) = f(X \geq c | Y=1)\)\\
 ``Welcher Anteil der Kranken wurde entdeckt?'':
-\emph{``Empfindlichkeit'' des Tests}\\
+\emph{``Empfindlichkeit'' des Tests}
 
 \begin{footnotesize} \textit{true positive rate TPR} \end{footnotesize}
 
-~ ~
+\hfill\break
+\hfill\break
 
 \textbf{Anteil falsch positiver Prognosen für echt negative}\\
 \(FPR(c) = f(\hat{Y}=1 | Y=0) = f(X \geq c | Y=0)\)\\
-``Welcher Anteil der Gesunden wurde falsch diagnostiziert?''\\
+``Welcher Anteil der Gesunden wurde falsch diagnostiziert?''
 
 \begin{footnotesize} \textit{false positive rate FPR} \end{footnotesize}
 
-\textbf{Anteil wahr negativer Prognosen für echt negative = Spezifität}
+\textbf{Anteil wahr negativer Prognosen für echt negative =
+Spezifität}\\
 \(TNR(c) = f(\hat{Y}=0 | Y=0) = 1 - f(X \geq c | Y=0) = 1 - FPR(c)\)\\
-``Welcher Anteil der Gesunden wurde korrekt diagnostiziert?''\\
+``Welcher Anteil der Gesunden wurde korrekt diagnostiziert?''
 
 \begin{footnotesize} \textit{true negative rate TNR} \end{footnotesize}
 
-~
+\hfill\break
 \end{frame}
 
 \begin{frame}{ROC-Kurve}
@@ -11349,7 +11678,7 @@ Die \textbf{ROC-Kurve}
 \item
   verbindet die Punkte \((FPR(c),TPR(c))\), also (1-Spezifität,
   Sensitivität)\\
-  bzw (``falsch positiv''-Rate, ``wahr positiv''-Rate)\\
+  bzw (``falsch positiv''-Rate, ``wahr positiv''-Rate)
 \item
   für \emph{alle} möglichen Schwellenwerte \(c \in [x_{(1)}, x_{(n)}]\)
 \end{itemize}
@@ -11384,6 +11713,7 @@ Es gilt:
 \begin{center}\includegraphics[width=.9\textwidth,height=.8\textheight]{main_files/figure-beamer/04-roc-ex1-1} \end{center}
 
 \normalsize
+\vspace{0pt plus 1filll}
 \tiny
 
 s.a.
@@ -11397,6 +11727,7 @@ s.a.
 \begin{center}\includegraphics[width=.9\textwidth,height=.8\textheight]{main_files/figure-beamer/04-roc-ex2a-1} \end{center}
 
 \normalsize
+\vspace{0pt plus 1filll}
 \tiny
 
 s.a.
@@ -11410,6 +11741,7 @@ s.a.
 \begin{center}\includegraphics[width=.9\textwidth,height=.8\textheight]{main_files/figure-beamer/04-roc-ex2b-1} \end{center}
 
 \normalsize
+\vspace{0pt plus 1filll}
 \tiny
 
 s.a.
@@ -11423,6 +11755,7 @@ s.a.
 \begin{center}\includegraphics[width=.9\textwidth,height=.8\textheight]{main_files/figure-beamer/04-roc-ex2c-1} \end{center}
 
 \normalsize
+\vspace{0pt plus 1filll}
 \tiny
 
 s.a.
@@ -11436,6 +11769,7 @@ s.a.
 \begin{center}\includegraphics[width=.9\textwidth,height=.8\textheight]{main_files/figure-beamer/04-roc-ex3a-1} \end{center}
 
 \normalsize
+\vspace{0pt plus 1filll}
 \tiny
 
 s.a.
@@ -11449,6 +11783,7 @@ s.a.
 \begin{center}\includegraphics[width=.9\textwidth,height=.8\textheight]{main_files/figure-beamer/04-roc-ex3b-1} \end{center}
 
 \normalsize
+\vspace{0pt plus 1filll}
 \tiny
 
 s.a.
@@ -11462,6 +11797,7 @@ s.a.
 \begin{center}\includegraphics[width=.9\textwidth,height=.8\textheight]{main_files/figure-beamer/04-roc-ex3c-1} \end{center}
 
 \normalsize
+\vspace{0pt plus 1filll}
 \tiny
 
 s.a.
@@ -11475,6 +11811,7 @@ s.a.
 \begin{center}\includegraphics[width=.9\textwidth,height=.8\textheight]{main_files/figure-beamer/04-roc-ex4-1} \end{center}
 
 \normalsize
+\vspace{0pt plus 1filll}
 \tiny
 
 s.a.
@@ -11527,7 +11864,8 @@ einfachen Schwellenwertregel für \(X\) vorhersagen kann.
 
 AUC entspricht (in etwa) der \textbf{relativen Häufigkeit mit der, in
 einem beliebigen Paar von Untersuchungseinheiten mit unterschiedlichem
-\(Y\), die Beobachtung mit \(Y = 1\) den höheren \(X\)-Wert hat.}
+\(Y\),\\
+die Beobachtung mit \(Y = 1\) den höheren \(X\)-Wert hat.}
 \end{frame}
 
 \begin{frame}{Beispiel: Pima Indian Diabetes-Daten}
@@ -11620,7 +11958,7 @@ Bsp: Nicht-invasive Pränataldiagnostik (NIPT) für Trisomie-21
 \tightlist
 \item
   Prävalenz Trisomie-21 bei 22-jährigen Müttern:\\
-  ca. 8 von 10 000 Kindern (0.008\%)\\
+  ca. 8 von 10 000 Kindern (0.008\%)
 \item
   NIPT: Sensitivität \(99.2\%\), Spezifität \(99.9\%\)
 \end{itemize}
@@ -11642,9 +11980,11 @@ npV
 ppV
 \(:= \frac{\text{``wahr positiv''}}{\text{``wahr positiv''} + \text{``falsch positiv''}}= 794/1793 \approx 0.443\)
 
-~ Also: Negative NIPT Diagnosen sind nahezu sicher korrekt, aber
-\textbf{nur \(44\%\) der positiven NIPT Diagnosen sind zutreffend.}
+\hfill\break
+Also: Negative NIPT Diagnosen sind nahezu sicher korrekt,\\
+aber \textbf{nur \(44\%\) der positiven NIPT Diagnosen sind zutreffend.}
 
+\vspace{0pt plus 1filll}
 \tiny
 
 Zahlen aus Gießelmann, Kathrin: ``Nichtinvasive Pränataltests: Risiko
@@ -11723,6 +12063,8 @@ $\xymatrix{A \ar@{~}[r] & B} \;:$ ``A und B sind \textit{assoziiert}''
 \end{displaymath}
 \end{small}
 
+\vspace{0pt plus 1filll}
+
 \tiny Bezeichnungen nach McElreath (2020), \emph{Statistical
 Rethinking}, 2.~Aufl., Kap.~6.
 \end{frame}
@@ -11792,14 +12134,16 @@ ein Bedingen auf \(X\) (hier: teilweises Öffnen des Colliders).
 \(\implies\) Auch Variablen, die \emph{nur mittelbar} mit einer Struktur
 zusammenhängen, können beim Adjustieren Assoziationen verzerren.
 
+\vspace{0pt plus 1filll}
+
 \tiny nach McElreath (2020), \emph{Statistical Rethinking}, 2.~Aufl.,
 Kap.~6.
 \end{frame}
 
 \begin{frame}{Adjustieren -- hilft oder schadet? (1) Fork}
 \protect\hypertarget{adjustieren-hilft-oder-schadet-1-fork}{}
-Uns interessiert der Zusammenhang von \(Y\) und \(Z\). \textbf{Sollten
-wir auf die Drittvariable \(X\) bedingen (adjustieren)?}
+Uns interessiert der Zusammenhang von \(Y\) und \(Z\).\\
+\textbf{Sollten wir auf die Drittvariable \(X\) bedingen (adjustieren)?}
 
 \columnsbegin
 \column{3.7cm}
@@ -11812,8 +12156,8 @@ $\xymatrix@R-1pc{
 \column{7cm}
 \small
 
-\textbf{Beispiel:} \(Y\) = Eisverkauf, \(Z\) = Badeunfälle, \(X\) =
-Sommerhitze.
+\textbf{Beispiel:}\\
+\(Y\) = Eisverkauf, \(Z\) = Badeunfälle, \(X\) = Sommerhitze.
 
 An Tagen mit viel Eisverkauf gibt es mehr Badeunfälle -- macht Eis
 schwimmunfähig? \columnsend
@@ -11832,8 +12176,8 @@ schwimmunfähig? \columnsend
 
 \begin{frame}{Adjustieren -- hilft oder schadet? (2) Pipe}
 \protect\hypertarget{adjustieren-hilft-oder-schadet-2-pipe}{}
-Uns interessiert der Zusammenhang von \(Y\) und \(Z\). \textbf{Sollten
-wir auf die Drittvariable \(X\) bedingen (adjustieren)?}
+Uns interessiert der Zusammenhang von \(Y\) und \(Z\).\\
+\textbf{Sollten wir auf die Drittvariable \(X\) bedingen (adjustieren)?}
 
 \columnsbegin
 \column{3.7cm}
@@ -11846,8 +12190,9 @@ $\xymatrix@R-1pc{
 \column{7cm}
 \small
 
-\textbf{Beispiel:} \(Y\) = Lernzeit, \(X\) = Stoffverständnis, \(Z\) =
-Klausurpunkte.
+\textbf{Beispiel:}\\
+\(Y\) = Lernzeit, \(X\) = Stoffverständnis,\\
+\(Z\) = Klausurpunkte.
 
 Lernzeit wirkt auf die Punkte -- aber (fast) nur \emph{über} das
 Verständnis. \columnsend
@@ -11868,8 +12213,8 @@ Verständnis. \columnsend
 
 \begin{frame}{Adjustieren -- hilft oder schadet? (3) Collider}
 \protect\hypertarget{adjustieren-hilft-oder-schadet-3-collider}{}
-Uns interessiert der Zusammenhang von \(Y\) und \(Z\). \textbf{Sollten
-wir auf die Drittvariable \(X\) bedingen (adjustieren)?}
+Uns interessiert der Zusammenhang von \(Y\) und \(Z\).\\
+\textbf{Sollten wir auf die Drittvariable \(X\) bedingen (adjustieren)?}
 
 \columnsbegin
 \column{3.7cm}
@@ -11882,8 +12227,10 @@ $\xymatrix@R-1pc{
 \column{7cm}
 \small
 
-\textbf{Beispiel:} \(Y\) = Intelligenz, \(Z\) = Fleiß, \(X\) = Zulassung
-zu einem selektiven Studiengang (beides erhöht die Chancen). \columnsend
+\textbf{Beispiel:}\\
+\(Y\) = Intelligenz, \(Z\) = Fleiß,\\
+\(X\) = Zulassung zu einem selektiven Studiengang (beides erhöht die
+Chancen). \columnsend
 
 \begin{itemize}[<+->]
 \tightlist
@@ -11917,8 +12264,9 @@ $\xymatrix@R-1pc{
 \column{6.5cm}
 \small
 
-\textbf{Beispiel:} wie eben, zusätzlich \(D\) = Eintrag im
-Studierendenverzeichnis (Folge der Zulassung \(X\)).
+\textbf{Beispiel:}\\
+wie eben, zusätzlich \(D\) = Eintrag im Studierendenverzeichnis (Folge
+der Zulassung \(X\)).
 
 Wir befragen für eine Studie nur Personen aus dem
 Studierendenverzeichnis. \columnsend
@@ -12194,9 +12542,9 @@ Kausalität hier eher:
 \item
   hier kein ``Confounding'' mit \emph{Fork}-Struktur im klassischen Sinn
 \item
-  Stattdessen \emph{Pipe}-Struktur: Durch Bedingen auf \emph{Mediator}
-  ``Fach'' wird Assoziation zwischen ``Geschlecht'' und ``Aufnahme''
-  komplexer, hier insgesamt schwächer.
+  Stattdessen \emph{Pipe}-Struktur:\\
+  Durch Bedingen auf \emph{Mediator} ``Fach'' wird Assoziation zwischen
+  ``Geschlecht'' und ``Aufnahme'' komplexer, hier insgesamt schwächer.
 \end{itemize}
 \end{frame}
 
@@ -12222,9 +12570,11 @@ Zusammenhang Lernzeit -- Klausurpunkte in 5 Gruppen nach
 \normalsize
 
 \(\longrightarrow\) Auf \textbf{Aggregatebene} (schwarz): mehr Lernzeit
-\(\to\) \emph{weniger} Punkte. In jeder Notenschnitt-Gruppe aber: mehr
-Lernzeit \(\to\) \emph{mehr} Punkte! Schluss vom Aggregat auf Individuen
-hier falsch -- das Leistungsniveau konfundiert.
+\(\to\) \emph{weniger} Punkte.\\
+In jeder Notenschnitt-Gruppe aber: mehr Lernzeit \(\to\) \emph{mehr}
+Punkte!\\
+Schluss vom Aggregat auf Individuen hier falsch -- das Leistungsniveau
+konfundiert.
 \end{frame}
 
 \begin{frame}{Einkommen \& Politische Einstellung}
@@ -12233,7 +12583,7 @@ hier falsch -- das Leistungsniveau konfundiert.
 \includegraphics[height=.7\textheight]{pics/5-presidential2004-state.png}
 \end{center}
 
-``Republikaner gewinnen in \emph{ärmeren Bundesstaaten} \(\implies\)
+``Republikaner gewinnen in \emph{ärmeren Bundesstaaten} \(\implies\)\\
 höhere Zustimmung zu Republikanern bei \emph{Menschen mit niedrigerem
 Einkommen}'' ?
 \end{frame}
@@ -12245,9 +12595,11 @@ Einkommen}'' ?
 \end{center}
 
 \(\implies\) Aus ``Republikaner gewinnen in \emph{ärmeren
-Bundesstaaten}'' folgt \textbf{nicht} ``Höhere Zustimmung zu
-Republikanern bei \emph{Menschen mit niedrigerem Einkommen}''!
+Bundesstaaten}'' folgt \textbf{nicht}\\
+``Höhere Zustimmung zu Republikanern bei \emph{Menschen mit niedrigerem
+Einkommen}''!
 
+\vspace{0pt plus 1filll}
 \scriptsize
 
 Quelle: Gelman, A. et al.~(2007) ``Rich State, Poor State, Red State,
@@ -12292,6 +12644,7 @@ Journal of Political Science} 2: 345-367. \normalsize
 
 \normalsize
 
+\vspace{0pt plus 1filll}
 \begin{scriptsize}
 Quelle: WHO/OECD, Stand 2010 (\texttt{dslabs::gapminder})
 \end{scriptsize}
@@ -12380,10 +12733,11 @@ sind, können studieren,\\
 dadurch entsteht eine negative Korrelation in der \emph{beobachteten}
 Teilpopulation der Studierenden.
 
-Anders gesagt: Durch den Auswahlprozess der Stichprobe sind ``besonders
-schlau, nicht so fleißig'' und ``besonders fleißig, nicht so schlau'' in
-der Stichprobe relativ häufiger als in der Gesamtpopulation. Dadurch
-entsteht eine negative Korrelation.
+Anders gesagt:\\
+Durch den Auswahlprozess der Stichprobe sind ``besonders schlau, nicht
+so fleißig'' und ``besonders fleißig, nicht so schlau'' in der
+Stichprobe relativ häufiger als in der Gesamtpopulation.\\
+Dadurch entsteht eine negative Korrelation.
 \end{frame}
 
 \begin{frame}{Conditioning on the Collider: \emph{endogeneous selection
@@ -12421,10 +12775,9 @@ bias}}
 \begin{frame}[fragile]{Colophon}
 \protect\hypertarget{colophon}{}
 Material teils basierend auf früheren Vorlesungen von Helmut Küchenhoff,
-Torsten Hothorn und Leonhard Held.\\
-Berechnungen mit \textbf{\texttt{R}}, gerendert mit \texttt{pandoc} via
-\texttt{\{rmarkdown\}} und XƎTeX. Beamer-Theme ``Simple'' adaptiert von
-Facundo Muñoz.
+Torsten Hothorn und Leonhard Held. Berechnungen mit \textbf{\texttt{R}},
+gerendert mit \texttt{pandoc} via \texttt{\{rmarkdown\}} und XƎTeX.
+Beamer-Theme ``Simple'' adaptiert von Facundo Muñoz.
 
 \textbf{\texttt{R}}-Pakete:
 

@@ -2,7 +2,7 @@
 
 ### Der Satz von Bayes
 
-Thomas Bayes [1701-1761]  
+Thomas Bayes [1701-1761]
 
 Dieser Satz beruht auf der Asymmetrie der Definition von bedingten
 Wahrscheinlichkeiten:
@@ -15,7 +15,7 @@ P(A \cap B) = P(B|A)P(A)\\
 & \implies P(A|B)P(B) = P(B|A)P(A)
 \end{align*}
 
-### Der Satz von Bayes II 
+### Der Satz von Bayes II
 
 :::{.block}
 #### Satz von Bayes
@@ -25,37 +25,38 @@ P(B|A)&= \frac{P(A|B)P(B)}{P(A)} \\
 \end{align*}
 :::
 
-Allgemeiner gilt für eine disjunkte Zerlegung $B_1, ..., B_n$:  
+Allgemeiner gilt für eine disjunkte Zerlegung $B_1, ..., B_n$:\
 $$P(B_i|A) = \frac{P(A|B_i)P(B_i)}{\sum_{j=1}^n P(A|B_j)P(B_j)}$$
 
-### Interpretation 
+### Interpretation
 
-$P(B_i)$ als *a-priori*-Wahrscheinlichkeiten:  
+$P(B_i)$ als *a-priori*-Wahrscheinlichkeiten:
 
-- $\approx$ Vorwissen über bzw. Plausibilität der Annahmen/Hypothesen $B_i$ 
+- $\approx$ Vorwissen über bzw. Plausibilität der Annahmen/Hypothesen $B_i$
 
-$P(A|B_i)$ als *Likelihood* von A: 
+$P(A|B_i)$ als *Likelihood* von A:
 
 - wie plausibel ist die Beobachtung A *unter der Annahme dass $B_i$ der Fall ist*
 
-$P(B_i|A)$ *a-posteriori*-Wahrscheinlichkeiten:  
+$P(B_i|A)$ *a-posteriori*-Wahrscheinlichkeiten:
 
-- Durch die Beobachtung von $A$ ändert sich die Wahrscheinlichkeit der Hypothese $B_i$ von $P(B_i)$ zu $P(B_i|A).$  
+- Durch die Beobachtung von $A$ ändert sich die Wahrscheinlichkeit der Hypothese $B_i$ von $P(B_i)$ zu $P(B_i|A).$
 
-  $\implies$ Bayes liefert "Update-Regel":  
-  **Wie verändert sich durch die Beobachtung von Daten $A$ die Plausibilität der Annahme $B_i$?**  
+  $\implies$ Bayes liefert "Update-Regel":\
+  **Wie verändert sich durch die Beobachtung von Daten $A$ die Plausibilität der Annahme $B_i$?**
 
-### Bedeutung 
+### Bedeutung
 
-$\implies$ Satz von Bayes liefert ein extrem mächtiges Verfahren zur  
+$\implies$ Satz von Bayes liefert ein extrem mächtiges Verfahren zur\
 *Umkehr der Bedingungsreihenfolge*:
 
-- von $P(A|B_i)$:  
-"Wie wahrscheinlich wäre es, Daten $A$ zu beobachten *falls $B_i$ der Fall wäre*?"
-- zu $P(B_i|A)$:  
-"Wie plausibel/wahrscheinlich ist $B_i$ *wenn ich Daten $A$ beobachtet habe*?"  
+- von $P(A|B_i)$:\
+  "Wie wahrscheinlich wäre es, Daten $A$ zu beobachten *falls $B_i$ der Fall wäre*?"
+- zu $P(B_i|A)$:\
+  "Wie plausibel/wahrscheinlich ist $B_i$ *wenn ich Daten $A$ beobachtet habe*?"
 
-**Ermöglicht Rückschluss auf Plausibilität nicht direkt beobachtbarer Phänomene/Modellannahmen $B_i$, gegeben beobachtete Daten $A$ und Wahrscheinlichkeitsmodell $P(A|B_i)$** 
+**Ermöglicht Rückschluss auf Plausibilität nicht direkt beobachtbarer Phänomene/Modellannahmen $B_i$,\
+gegeben beobachtete Daten $A$ und Wahrscheinlichkeitsmodell $P(A|B_i)$**
 
 \note[item]{anders:
 $P(B_i)$ ist Vorwissen, repräsentiert Annahmen. Bayes liefert Update-Regel wie neue Information durch die Beobachtung von A unser Wissen über die $B_i$ verändert.\\}
@@ -63,16 +64,16 @@ $P(B_i)$ ist Vorwissen, repräsentiert Annahmen. Bayes liefert Update-Regel wie 
 
 ### Beispiel: Diagnostischer Test
 
-$K:=$ "Person ist krank"  
+$K:=$ "Person ist krank"\
 $T:=$ "Test auf Krankheit ist positiv"
 
-Gegeben:  
+Gegeben:
 
 - **Sensitivität** $P(T|K)$ ("wahr-positiv"-Rate) des Tests
-- **Spezifität** $P(\bar{T}|\bar{K})$ ("wahr-negativ"-Rate) des Tests 
+- **Spezifität** $P(\bar{T}|\bar{K})$ ("wahr-negativ"-Rate) des Tests
 - **Prävalenz** $P(K)$ der Krankheit in der Population.
 
-Für Therapieentscheidungen relevant:  
+Für Therapieentscheidungen relevant:
 
 - $P(K|T)$ ("positiv prädiktiver Wert")
 - $P(\bar K|\bar T)$ ("negativ prädiktiver Wert")
@@ -182,7 +183,8 @@ Odds kennen wir aus 2.1 -- jetzt zahlt sich das aus:
 \mbox{\em Posterior Odds} &=  \mbox{\em Prior Odds} &&\cdot \mbox{\em Likelihood Ratio}
 \end{alignat*}
 
-Je weiter der *Likelihood Quotient* (auch: *Bayes-Faktor*) von 1 weg ist, desto aussagekräftiger ist die Beobachtung von $A$ bezüglich der Plausibilität der Annahme $B$.
+Je weiter der *Likelihood Quotient* (auch: *Bayes-Faktor*) von 1 weg ist,\
+desto aussagekräftiger ist die Beobachtung von $A$ bezüglich der Plausibilität der Annahme $B$.
 
 ### Bsp: Bayesianisches Update mit Odds
 
@@ -195,9 +197,9 @@ P(K) = 0.001$$ ergibt sich:
 \end{align*}
 Also: Nur bei 1 von 13 positiven Test liegt tatsächlich eine Krankheit vor....
 
-Obacht, sehr häufiger Fehlschluss **"base-rate fallacy"** --  
-verwechselt Likelihood(-Ratio) (hier: positiver Test 80-mal wahrscheinlicher bei Kranken)  
-mit Posteriori (hier: *wahr* positive Tests sind viel seltener als falsch positive)  
+Obacht, sehr häufiger Fehlschluss **"base-rate fallacy"** --\
+verwechselt Likelihood(-Ratio) (hier: positiver Test 80-mal wahrscheinlicher bei Kranken)\
+mit Posteriori (hier: *wahr* positive Tests sind viel seltener als falsch positive)\
 und vergisst/ignoriert Einfluss der Priori/*base-rate* (hier: 1000-mal mehr Gesunde als Kranke)...
 **_remember your priors!_**
 
@@ -211,12 +213,12 @@ s.a. https://www.youtube.com/watch?v=BrK7X_XlGB8
 ### Bsp 2: Bayes
 
 
-75% der Mathestudierenden können Python.  
+75% der Mathestudierenden können Python.\
 15% der anderen Studierenden können Python.
 
-Von 1100 Studierenden studieren 100 Mathe.  
+Von 1100 Studierenden studieren 100 Mathe.
 
-Sei $M:=$"Kim studiert Mathe."  
+Sei $M:=$"Kim studiert Mathe."\
 Sei $P:=$"Kim kann Python"
 
 Berechnen Sie $\gamma(M|P)$ bzw $P(M|P)$.

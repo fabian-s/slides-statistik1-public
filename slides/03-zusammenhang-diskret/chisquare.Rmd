@@ -4,9 +4,9 @@
 
 *Jetzt:* Definiere allgemein anwendbares Zusammenhangsmaß für diskrete Merkmale.
 
-**Idee:**  
+**Idee:**
 
-1. Was *wären* die gemeinsamen Häufigkeiten $\tilde{h}_{ij}$ bzw. $\tilde{f}_{ij}$, falls - bei vorgegebenen Randverteilungen - die Merkmale $X$ und $Y$ *empirisch unabhängig* wären?  
+1. Was *wären* die gemeinsamen Häufigkeiten $\tilde{h}_{ij}$ bzw. $\tilde{f}_{ij}$, falls - bei vorgegebenen Randverteilungen - die Merkmale $X$ und $Y$ *empirisch unabhängig* wären?
 
 2. Quantifiziere "Abstand" der *beobachteten* gemeinsamen Häufigkeiten $h_{ij}$ bzw. $f_{ij}$ von den *unter Unabhängigkeit erwarteten* gemeinsamen Häufigkeiten $\tilde{h}_{ij}$ bzw. $\tilde{f}_{ij}$.
 
@@ -31,11 +31,11 @@ a_k    &  &   &  & h_{k\cdot}\\\cline{2-4}
 
 ### Empirische Unabhängigkeit
 
-**Idee:**  
+**Idee:**
 
-$X$ und $Y$ "empirisch unabhängig" $\iff$  
-Verteilung von $Y$ nicht beeinflusst von $X$ (und umgekehrt) $\iff$  
-Bedingte relative Häufigkeiten von $Y$ sind in jeder Teilpopulation $X = a_i$ identisch, d.h. unbeeinflusst von $X$:  
+$X$ und $Y$ "empirisch unabhängig" $\iff$\
+Verteilung von $Y$ nicht beeinflusst von $X$ (und umgekehrt) $\iff$\
+Bedingte relative Häufigkeiten von $Y$ sind in jeder Teilpopulation $X = a_i$ identisch, d.h. unbeeinflusst von $X$:
 
 $$f_{Y|X}(b_j|a_1) = f_{Y|X}(b_j|a_2) = \ldots = f_{Y|X}(b_j|a_k), \;\forall j = 1,\ldots,m$$
 
@@ -75,8 +75,8 @@ f_{Y|X}(b_1|a_i) = f_Y(b_1),\ldots, f_{Y|X}(b_m|a_i) = f_Y(b_m), ~i = 1,\ldots, 
 
 ###  Unabhängigkeitstabelle
 
-**Idee:**  
-Vergleiche für jede Zelle $(i,j)$ die *unter Unabh. erwarteten* $\tilde{h}_{ij}$ mit den *tatsächlich beobachteten* $h_{ij}$  
+**Idee:**\
+Vergleiche für jede Zelle $(i,j)$ die *unter Unabh. erwarteten* $\tilde{h}_{ij}$ mit den *tatsächlich beobachteten* $h_{ij}$
 
 $\chi^2$**-Koeffizient** ist bestimmt durch
 
@@ -91,7 +91,7 @@ $\chi^2$**-Koeffizient** ist bestimmt durch
 
 ###  Eigenschaften des $\chi^2$-Koeffizienten
 
--  $\chi^2 \in [0, n (\min(k, m) - 1)]$ 
+-  $\chi^2 \in [0, n (\min(k, m) - 1)]$
 <!-- Beweis: https://stats.stackexchange.com/a/13728-->
 -  $\chi^2 = 0 \iff X$ und $Y$ **empirisch unabhängig**
 -  $\chi^2$ groß $\iff$ starker Zusammenhang
@@ -99,9 +99,10 @@ $\chi^2$**-Koeffizient** ist bestimmt durch
 
 \vskip 2em
 
-**Schwachpunkt:**  
+**Schwachpunkt:**
 
-Wertebereich von $\chi^2$ hängt vom Stichprobenumfang $n$ und von der Dimension der Tafel ab. Numerischer Wert deshalb schwierig direkt interpretierbar $\rightarrow$ Normierung
+Wertebereich von $\chi^2$ hängt vom Stichprobenumfang $n$ und von der Dimension der Tafel ab.\
+Numerischer Wert deshalb schwierig direkt interpretierbar $\rightarrow$ Normierung
 
 
 ###  Kontingenzkoeffizient und korrigierter Kontingenzkoeffizient
@@ -112,15 +113,17 @@ Der Kontingenzkoeffizient ist bestimmt durch
 \begin{displaymath}
 K :=\sqrt{\frac{\chi^2}{n+\chi^2}}
 \end{displaymath}
-und besitzt den Wertebereich $K\in\left[0,\sqrt{\frac{M-1}{M}}\right],\;$ wobei $M=\min\{k,m\}.$  
+und besitzt den Wertebereich $K\in\left[0,\sqrt{\frac{M-1}{M}}\right],\;$ wobei $M=\min\{k,m\}.$
 
-Der **korrigierte Kontingenzkoeffizient** ergibt sich durch 
+Der **korrigierte Kontingenzkoeffizient** ergibt sich durch
 $$K^* := \frac{K}{\sqrt{(M-1)/M}}$$ mit dem Wertebereich $K^*\in[0,1]$.
 
 ### Eigenschaften des (korrigierten) Kontingenzkoeffizienten
 
 -  Es wird nur die *Stärke* des Zusammenhangs gemessen, nicht die Richtung wie beim Odds Ratio.
--  Vorsicht ist geboten bei einem Vergleich von Kontingenztafeln gleicher Zellenzahl mit stark unterschiedlichen Stichprobenumfängen, da $\chi^2$ mit wachsendem Stichprobenumfang wächst, beispielsweise führt eine Verzehnfachung von $h_{ij}$ und $\tilde h_{ij}$ zu zehnfachem $\chi^2$ 
+-  Vorsicht ist geboten bei einem Vergleich von Kontingenztafeln gleicher Zellenzahl mit stark unterschiedlichen Stichprobenumfängen,\
+   da $\chi^2$ mit wachsendem Stichprobenumfang wächst,\
+   beispielsweise führt eine Verzehnfachung von $h_{ij}$ und $\tilde h_{ij}$ zu zehnfachem $\chi^2$
 -  Sämtliche Maße benutzen nur das Nominalskalenniveau von $X$ und $Y$.
 
 
@@ -165,13 +168,13 @@ cat(gt_contingency(wahl_abs, proportional_size = TRUE, size_range = c(7, 16),
 \vskip 1em
 
 \footnotesize
-Farbe: Abweichung von der Unabhängigkeitserwartung (Pearson-Residuen);
-\textcolor[rgb]{0.843,0.188,0.153}{rot} $=$ seltener, \textcolor[rgb]{0.271,0.459,0.706}{blau} $=$ häufiger als erwartet.
-Die Schriftgröße kodiert zusätzlich die Zellhäufigkeit (auch im Graustufendruck lesbar).
+Farbe: Abweichung von der Unabhängigkeitserwartung (Pearson-Residuen);\
+\textcolor[rgb]{0.843,0.188,0.153}{rot} $=$ seltener, \textcolor[rgb]{0.271,0.459,0.706}{blau} $=$ häufiger als erwartet.\
+Die Schriftgröße kodiert zusätzlich die Zellhäufigkeit.
 
 ### Interpretation:
 
-Insgesamt hier 
+Insgesamt hier
 
 - $\chi^2 =  43.6$
 - $K = \sqrt{\frac{\chi^2}{\chi^2 + n}} =  0.097$ mit $n = 4602$

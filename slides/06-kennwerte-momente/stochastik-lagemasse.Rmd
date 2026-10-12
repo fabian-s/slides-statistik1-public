@@ -1,26 +1,27 @@
 ## Lagemaße für Zufallsvariablen
 
-### Einleitung 
+### Einleitung
 
-Bereits kennengelernt:  
+Bereits kennengelernt:
 
-- *Empirische* Lage- und Streuungsmaße   
-  (Mittelwerte, Median, Modus, Stichprobenvarianz, MAD, ...)  
+- *Empirische* Lage- und Streuungsmaße\
+  (Mittelwerte, Median, Modus, Stichprobenvarianz, MAD, ...)\
   die Verteilung der *Beobachtungen eines Merkmals in einer Stichprobe* beschreiben.
 
-Jetzt:  
+Jetzt:
 
 - *Theoretische* Entsprechungen für *Verteilungen von Zufallsvariablen*.
 
 
 
-(Spätere Veranstaltungen: Schätztheorie -- welche empirischen Maße sind wie gut geeignet um bestimmte theoretische Größen aus Daten zu schätzen?)
+(Spätere Veranstaltungen: Schätztheorie --\
+welche empirischen Maße sind wie gut geeignet um bestimmte theoretische Größen aus Daten zu schätzen?)
 
 
-### Modus einer Zufallsvariablen 
+### Modus einer Zufallsvariablen
 
 ::: {.block}
-#### Definition: **Modus** einer Zufallsvariable  
+#### Definition: **Modus** einer Zufallsvariable
 Der *Modus* einer Zufallsvariable $X$ ist ein Wert $x_{Mod}$, für den
 gilt:
 $$
@@ -33,7 +34,7 @@ $\implies$ Modi (auch: Modalwerte) sind die globalen Maximumsstellen der Dichte-
 - Genau wie der empirische Modus eines beobachteten Merkmals ist der Modus einer ZV weder notwendigerweise eindeutig noch muss er existieren.
 
 
-### Median und Quantile einer Zufallsvariablen 
+### Median und Quantile einer Zufallsvariablen
 
 Mediane und andere Quantile einer Zufallsvariable $X$ sind inhaltlich analog zu ihren empirischen Analoga definiert -- es gilt:
 

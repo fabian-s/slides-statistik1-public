@@ -8,7 +8,9 @@ Nach diesem Kapitel können Sie ...
 
 \vspace{1em}
 
-**Voraussetzungen:** Zufallsvariablen & Verteilungsfunktionen (Kap. 4), Erwartungswert & Varianz (Kap. 6)
+**Voraussetzungen:**\
+Zufallsvariablen & Verteilungsfunktionen (Kap. 4),\
+Erwartungswert & Varianz (Kap. 6)
 
 ## Diskrete parametrische Verteilungen
 
@@ -21,7 +23,7 @@ Statistik benutzt viele "gängige" Klassen von Verteilungen,
 
 ### Bernoulli-Verteilung
 
-Das einfachste Beispiel ist die **Bernoulli-Verteilung**.  
+Das einfachste Beispiel ist die **Bernoulli-Verteilung**.
 
 Eine Bernoulli-verteilte ZV kann nur die Werte $0$ und $1$ annehmen:
 \begin{align*}
@@ -31,9 +33,9 @@ f_X(x) & = \pi^x (1^-\pi)^{1-x} \cdot I(x \in \{0, 1\})
 \end{align*}
 
 
-$\pi \in [0, 1]$ ist der einzige Parameter der Bernoulli-Verteilung.\  
+$\pi \in [0, 1]$ ist der einzige Parameter der Bernoulli-Verteilung.\
 
-Notation: $$X \sim {\mathcal B}(\pi)$$\  
+Notation: $$X \sim {\mathcal B}(\pi)$$\
 
 Beispiel: Ergebnis eines Münzwurfs ist ${\mathcal B}(\pi = 0.5)$-verteilt.
 
@@ -49,31 +51,32 @@ $$
 }
 
 
-### Diskrete Gleichverteilung 
+### Diskrete Gleichverteilung
 
 Die allgemeine **diskrete Gleichverteilung** hat einen endlichen Träger ${T} = \{x_1, x_2, ..., x_k\}$, 
-wobei $$ P(X = x) = f(x) = \frac{1}{k} \cdot I(x \in T)$$\  
+wobei $$ P(X = x) = f(x) = \frac{1}{k} \cdot I(x \in T)$$\
 
-Häufig sind alle natürlichen Zahlen zwischen $a \in \mathbb{N}$ und $b\in \mathbb{N}$ Element des Trägers ${T}$. Die Grenzen $a$ und $b$ sind dann die Parameter der **diskreten Gleichverteilung**.\  
+Häufig sind alle natürlichen Zahlen zwischen $a \in \mathbb{N}$ und $b\in \mathbb{N}$ Element des Trägers ${T}$. Die Grenzen $a$ und $b$ sind dann die Parameter der **diskreten Gleichverteilung**.\
 
-Notation: $$X \sim {\mathcal U}_D(a, b)$$\  
+Notation: $$X \sim {\mathcal U}_D(a, b)$$\
 
 Beispiel: Augenzahl beim fairen Würfelwurf ist ${\mathcal U}_D(a=1, b=6)$-verteilt.
 
 In R: `sample()`
 
-### Geometrische Verteilung 
+### Geometrische Verteilung
 
-Ein Zufallsvorgang, bei dem mit Wahrscheinlichkeit $\pi$ ein Ereignis $A$ eintritt, wird *unabhängig* voneinander so oft wiederholt, bis zum ersten Mal $A$ eintritt.
+Ein Zufallsvorgang, bei dem mit Wahrscheinlichkeit $\pi$ ein Ereignis $A$ eintritt,\
+wird *unabhängig* voneinander so oft wiederholt, bis zum ersten Mal $A$ eintritt.
 
-Sei $X$ die ZV "Anzahl der Versuche bis zum ersten Mal $A$ eintritt".  
+Sei $X$ die ZV "Anzahl der Versuche bis zum ersten Mal $A$ eintritt".\
 Dann ist ${T} = \mathbb{N}^+$ und die Wahrscheinlichkeitsfunktion von $X$ lautet:
 $$
 f(x) =\underbrace{(1 - \pi)^{x-1}}_{\mbox{\footnotesize  (x-1)-mal $\bar{A}$}}\cdot \underbrace{\pi}_{\mbox{\footnotesize  1-mal $A$}} \cdot I(x \in T)
 $$
-$\pi \in (0,1)$ ist der Parameter der geometrischen Verteilung.  
-\  
-  
+$\pi \in (0,1)$ ist der Parameter der geometrischen Verteilung.\
+\
+
 Notation:  $$X \sim {\mathcal G}(\pi)$$\
 
 \note{Dichte herleiten/erklären.\\
@@ -87,7 +90,8 @@ inhaltlich: $F(x)=P(\mbox{mindestens ein Erfolg in den ersten x Versuchen})= 1 -
 ### Alternative Definition
 
 Sei $Y:=$ "Anzahl der Versuche *bevor* das erste mal $A$
-eintritt", d.h. $Y=X-1$. Dann ist 
+eintritt", d.h. $Y=X-1$.\
+Dann ist
 \begin{align*}
 T & =  \{0, 1, 2, ... \} = \mathbb{N}_0^+\\
 f(y) & =  (1 - \pi)^y  \pi \cdot I(y \in T)
@@ -113,14 +117,15 @@ p_geom[[1]] + p_geom[[2]] +
 
 ### Binomialverteilung
 
-Bei einer Folge von unabhängigen Bernoulli-Experimenten $X_i,\, i = 1, \dots, n$  interessiert man sich häufig nur für die **Anzahl** $X := \sum_{i=1}^n X_i$, wie oft $X_i =1$ aufgetreten ist.\  
+Bei einer Folge von unabhängigen Bernoulli-Experimenten $X_i,\, i = 1, \dots, n$  interessiert man sich häufig nur für die **Anzahl** $X := \sum_{i=1}^n X_i$, wie oft $X_i =1$ aufgetreten ist.\
 
-Diese ZV $X$ heißt **binomialverteilt**  mit Parametern $n \in \mathbb{N}$, $\pi \in [0, 1]$. Sie hat Träger ${T} = \{0, 1, ..., n\}$ sowie die Wahrscheinlichkeitsfunktion:
+Diese ZV $X$ heißt **binomialverteilt**  mit Parametern $n \in \mathbb{N}$, $\pi \in [0, 1]$.\
+Sie hat Träger ${T} = \{0, 1, ..., n\}$ sowie die Wahrscheinlichkeitsfunktion:
 $$P(X = x) = f(x) = {n \choose x} \cdot \pi^x (1-\pi)^{n - x} \cdot I(x \in T)$$
 
 Notation: $$X \sim {\mathcal B}(n, \pi)$$
 
-Es gilt ${\mathcal B}(1, \pi) = {\mathcal B}(\pi)$.  
+Es gilt ${\mathcal B}(1, \pi) = {\mathcal B}(\pi)$.\
 \ 
 
 in R: `[dpqr]binom(size=`$n$`, prob=`$\pi$`,...)`
@@ -145,21 +150,21 @@ scale_n10 <- scale_x_continuous(breaks = seq(0, 10, by = 2), minor_breaks = 0:10
 ```
 
 
-### Beispiele 
+### Beispiele
 
-Das **Urnenmodell**:  
+Das **Urnenmodell**:\
 Zufälliges **Ziehen mit Zurücklegen** einer Stichprobe von $n$ Kugeln aus einer Urne mit $N$ Kugeln, darunter $M$
-markierte.   
+markierte.
 
-Sei $X$: "Anzahl der markierten Kugeln in der Stichprobe".  
+Sei $X$: "Anzahl der markierten Kugeln in der Stichprobe".\
 Dann gilt $$ X \sim {\mathcal B}(n, M/N).$$
 
-### Hypergeometrische Verteilung 
+### Hypergeometrische Verteilung
 
-Häufig wird jedoch **ohne Zurücklegen** gezogen, d.h. "Auswahlwahrscheinlichkeiten" ändern sich von
-Ziehung zu Ziehung (Beispiel: Kartenspiele).\
+Häufig wird jedoch **ohne Zurücklegen** gezogen,\
+d.h. "Auswahlwahrscheinlichkeiten" ändern sich von Ziehung zu Ziehung (Beispiel: Kartenspiele).\
 
-Die Verteilung von $X$ (Anzahl der markierten Kugeln) nennt man dann **hypergeometrisch**.
+Die Verteilung von $X$ (Anzahl der markierten Kugeln) nennt man dann **hypergeometrisch**.\
 Die *hypergeometrische Verteilung* hat den Träger
 $$
 {T} = \left\{\max\left(0, n - (N - M)\right), ..., \min\left(n, M\right)\right\}
@@ -169,7 +174,7 @@ $$
 f(x) = \frac{\binom{M}{x}\binom{N - M}{n - x}}{\binom{N}{n}} \cdot I(x \in T)
 $$
 Notation: $$X \sim {\mathcal H}(n, N, M)$$\
-\  
+\
 
 Funktionen in R: `[dpqr]hyper(m =` $M$`, n = ` $N-M$`, k=` $n$`, ...)`
 
@@ -177,7 +182,7 @@ Funktionen in R: `[dpqr]hyper(m =` $M$`, n = ` $N-M$`, k=` $n$`, ...)`
 Simple Laplace-W.keiten / Kombinatorik: Anzahl günstige durch Anzahl mögliche Fälle
 }
 
-### Ziehen mit und ohne Zurücklegen I 
+### Ziehen mit und ohne Zurücklegen I
 
 ```{r, vis-dist-bin-hyper1, echo=FALSE, warning = FALSE, message = FALSE}
 bin_hyper <- bind_rows(
@@ -208,7 +213,7 @@ ggplot(bin_hyper) +
 ```
 
 
-### Ziehen mit und ohne Zurücklegen II 
+### Ziehen mit und ohne Zurücklegen II
 
 ```{r, vis-dist-bin-hyper2, echo=FALSE, warning = FALSE, message = FALSE}
 bin_hyper <- bind_rows(
@@ -241,14 +246,14 @@ ggplot(bin_hyper) +
 ```
 
 
-### Approximation der hypergeometrischen Verteilung 
+### Approximation der hypergeometrischen Verteilung
 
 Für $N$ "groß" und $n$ "klein" läßt sich die
 hypergeometrische Verteilung also gut durch die Binomialverteilung approximieren: \
 
 $${\mathcal H}(n, N, M)\quad \stackrel{d}{\approx} \quad {\mathcal B}\left(n, \pi = \frac{M}{N}\right)$$
 
-### Poisson-Verteilung 
+### Poisson-Verteilung
 
 Häufig gibt es zufällige Vorgänge, bei denen es (... zumindest theoretisch ...) keine natürliche obere
 Grenze für die interessierende Anzahl an Ereignissen in einem gegebenen Zeitintervall gibt, z.B.:
@@ -270,13 +275,14 @@ folgt einer **Poisson-Verteilung**.
 
 Der Parameter $\lambda \in \mathbb{R}^+$ ist die durchschnittliche **Rate** oder die
 **Intensität**, mit der die interessierenden Ereignisse in dem zugrundeliegenden
-Zeitintervall auftreten.\  
+Zeitintervall auftreten.\
 
 Notation: $$X \sim {\mathcal P}(\lambda)$$\
-\  
+\
 
-Beachte: Wartezeiten zwischen Ereignissen, deren Gesamtzahl $\mathcal P(\lambda)$-verteilt ist, sind $\mathcal{E}(\lambda)$-verteilt!  
-\  
+Beachte:\
+Wartezeiten zwischen Ereignissen, deren Gesamtzahl $\mathcal P(\lambda)$-verteilt ist, sind $\mathcal{E}(\lambda)$-verteilt!\
+\
 
 Funktionen in R: `[dpqr]pois()`
 
@@ -295,7 +301,7 @@ p_pois[[1]] + scale_n20 + p_pois[[2]] + scale_n20 +
 
 
 
-### Approximation der Binomialverteilung 
+### Approximation der Binomialverteilung
 
 Die Binomialverteilung $B(n, \pi)$ kann für "großes n" und "kleines $\pi$"
 gut durch die Poisson-Verteilung mit $\lambda = n \pi$
@@ -306,7 +312,7 @@ $$
 Je größer $n$ ist und vor allem je kleiner $\pi$, desto besser ist die
 Approximation.
 
-### Vergleich Binomial/Poissonverteilung (n = 10) 
+### Vergleich Binomial/Poissonverteilung (n = 10)
 
 ```{r, vis-dist-pois-bin-1, echo=FALSE, warning = FALSE, message = FALSE}
 bin_pois <- bind_rows(
@@ -335,7 +341,7 @@ ggplot(bin_pois) +
 ```
 
 
-### Vergleich Binomial/Poissonverteilung (n = 100) 
+### Vergleich Binomial/Poissonverteilung (n = 100)
 
 ```{r, vis-dist-pois-bin-2, echo=FALSE, warning = FALSE, message = FALSE}
 bin_pois <- bind_rows(
@@ -362,7 +368,7 @@ ggplot(bin_pois) +
   labs(caption = expression("P"~(n*pi)~"in grün; B("~n ==100 ~ ","~pi~") in rot"))  
 ```
 
-###  Vergleich Binomial/Poissonverteilung (n = 100) 
+###  Vergleich Binomial/Poissonverteilung (n = 100)
 
 ```{r, vis-dist-pois-bin-3, echo=FALSE, warning = FALSE, message = FALSE}
 bin_pois <- bind_rows(
@@ -388,7 +394,7 @@ ggplot(bin_pois) +
 ```
 
 
-### Einige diskrete Verteilungen 
+### Einige diskrete Verteilungen
 \small
 \begin{center}
 \begin{tabular}{l|c c c c}

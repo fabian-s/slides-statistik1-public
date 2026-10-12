@@ -10,24 +10,25 @@ Ist der **Durchschnitt von Postleitzahlen** eine sinnvolle Größe?
 
 \vspace{1em}
 
->- **Welche Rechnungen sinnvoll sind, hängt vom *Skalenniveau* des Merkmals ab --- nicht davon, ob sich die Ausprägungen als Zahlen schreiben lassen.**
+>- **Welche Rechen*operationen* sinnvoll sind, hängt vom *Skalenniveau* des Merkmals ab.\
+*Nicht* davon, ob sich die Ausprägungen als Zahlen schreiben lassen.**
 
 ### Skalen
 
-Messungen als strukturerhaltende Abbildungen  
-also: empirisches Relativ $\cong$ numerisches Relativ
-\  
+Messungen als strukturerhaltende Abbildungen\
+also: empirisches Relativ $\cong$ numerisches Relativ.\
+\
 
-**Existenz:**  
-Ist die Struktur der Objekte so, dass eine strukturerhaltende Abbildung existiert?  
-$\implies$ Axiome von Repräsentationstheoremen müssen erfüllt sein (z.B. Transitivität)  
-$\implies$ Verletzt z.B. oft durch unerfüllte Annahme von Eindimensionalität 
+**Existenz:**\
+Ist die Struktur der Objekte so, dass eine strukturerhaltende Abbildung existiert?\
+$\implies$ Axiome von Repräsentationstheoremen müssen erfüllt sein (z.B. Transitivität)\
+$\implies$ Verletzt z.B. oft durch unerfüllte Annahme von Eindimensionalität
 
-\   
+\
 
-**Eindeutigkeit:**  
-Gibt es mehrere zulässige Skalen?  
-(z.B. Fläche in km$^2$ & ha; Temperatur in °C, °F & °K)  
+**Eindeutigkeit:**\
+Gibt es mehrere zulässige Skalen?\
+(z.B. Fläche in km$^2$ & ha; Temperatur in °C, °F & °K)\
 $\implies$ gibt es zulässige (strukturerhaltende) Transformationen?
 
 <!-- mehr dazu: https://www.uni-goettingen.de/en/kat/download/2453f65e2e6bd4cf523bd241a3b92c29.pdf/Fol06.pdf-->
@@ -38,7 +39,7 @@ $\implies$ gibt es zulässige (strukturerhaltende) Transformationen?
 #### Def.: **Transformation** einer Skala
 Funktion, die Ausprägungen eines Merkmals auf neue Ausprägungen abbildet.
 :::
-in etwa: "Skalenwechsel", z.B:  
+in etwa: "Skalenwechsel", z.B:
 
  - Umwandlung in andere physikalische Einheit (Temperatur: °F $\to$ °C)
  - Relabeling (Beruf: "Putzkraft" $\to$ "Raumpfleger*in")
@@ -56,10 +57,10 @@ Zulässige Skalentransformationen erhalten die Struktur der empirischen Relative
 
 Die Menge zulässiger Transformationen bestimmt das Skalenniveau eines Merkmals.
 
-Höhere Skalenniveaus 
+Höhere Skalenniveaus ...
 
-- erlauben eine *größere* Menge von sinnvollen *Operationen mit Werten auf der Skala*,
-- aber eine *kleinere* Menge an zulässigen strukturerhaltenden *Transformationen der Skala selbst*.
+- ... erlauben eine *größere* Menge von sinnvollen *Operationen mit Werten auf der Skala*,
+- aber nur eine *kleinere* Menge an zulässigen strukturerhaltenden *Transformationen der Skala selbst*.
 
 ### Nominalskala
 
@@ -150,30 +151,30 @@ $0.0003$ &oder& $\log_{10}(3.0 \cdot 10^{-4})\approx -3.5$ \\
 $0.00003$ && $\log_{10}(3.0 \cdot 10^{-5})\approx -4.5$
 \end{tabular}
 \end{table}
-      
+
 Skalenwahl $\iff$ Interpretation der Differenz
 
-Also: Inhaltlich sinnvoll, theoretisch nicht zulässig!^[Willkommen in der wunderbaren Welt der angewandten Statistik...]  
+Also: Inhaltlich sinnvoll, theoretisch nicht zulässig!^[Willkommen in der wunderbaren Welt der angewandten Statistik...]
 
 
-Bei $\log$-Skala: Differenz = $\log$(Faktor der Veränderung)  
+Bei $\log$-Skala: Differenz = $\log$(Faktor der Veränderung)\
 Oft: Verwende $\log$ zur Basis 10 oder 2
 
 ### Indexbildung
 
 Zusammenfassung verschiedener Merkmale (*Items*) zu einem aggregierten Merkmal (*Score*, *Index*).
 
-Häufig: Bildung von (gewichteten) Summen  
+Häufig: Bildung von (gewichteten) Summen
 
-Beispiel: Wahl-O-Mat  
+Beispiel: Wahl-O-Mat\
 $\text{Übereinstimmung SPD} = w_1 \cdot Q(\text{Tempolimit}) + w_2 \cdot Q(\text{Verteidigungsausgaben}) + ...$
-\ 
+\
 
-Indexbildung meist theoriegeleitet bzw. nach fachspezifischen Überlegungen  
-Häufige Problematik:  
+Indexbildung meist theoriegeleitet bzw. nach fachspezifischen Überlegungen\
+Häufige Problematik:
 
--  Gewichtung der Items? 
--  Skalenniveau des Index? 
+-  Gewichtung der Items?
+-  Skalenniveau des Index?
 
 ### Indexbildung: Likert-Skalen
 
@@ -195,24 +196,24 @@ Häufig verwendetes Verfahren in der Pychometrie:
 
 ### Merkmalstypen: Stetige und diskrete Merkmale
 
--  **Diskretes** Merkmal:  
-  nur endlich oder abzählbar unendlich viele verschiedene Werte möglich  
+-  **Diskretes** Merkmal:\
+  nur endlich oder abzählbar unendlich viele verschiedene Werte möglich\
   z.B. Geschlecht, Kinderanzahl
-- **Stetiges** Merkmal:  
-  alle Werte in einem Kontinuum möglich  
+- **Stetiges** Merkmal:\
+  alle Werte in einem Kontinuum möglich\
   z.B. Zeitdauer, Größe, Gewicht
-  
+
 Wichtige Unterscheidung für Wahl geeigneter grafischer Darstellungsformen & numerischer Zusammenfassungen.
 
 <!-- abzählbar/überabzählbar unendlich!!-->
 
 ### Weitere Klassen
 
--  **Quasi-stetiges** Merkmal:  
-   diskret, sehr kleine Einheiten, "praktisch" stetig.  
-   Beispiel: Monetäre Größen in Cent  
+-  **Quasi-stetiges** Merkmal:\
+   diskret, sehr kleine Einheiten, "praktisch" stetig.\
+   Beispiel: Monetäre Größen in Cent\
    (Real existierende Messungen immer quasi-stetig wegen beschränkter Auflösung des Messinstruments & der Gleitkommazahlendarstellung im Rechner.)
--  **Gruppierte** Daten, **Häufigkeits**daten:   
-  Wertebereich eines (quasi-)stetigen Merkmals wird in Gruppen (Klassen, Kategorien) eingeteilt.  
-              Beispiele: Gehalt in Gehaltsklassen, Alter in Altersklassen  
+-  **Gruppierte** Daten, **Häufigkeits**daten:\
+  Wertebereich eines (quasi-)stetigen Merkmals wird in Gruppen (Klassen, Kategorien) eingeteilt.\
+              Beispiele: Gehalt in Gehaltsklassen, Alter in Altersklassen\
               Bemerkung: Gruppierung dient auch dem Datenschutz!

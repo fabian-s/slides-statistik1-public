@@ -2,7 +2,8 @@
 
 ### Uni- und multimodale Verteilungen
 
-**unimodal** = eingipflig, **multimodal** = mehrgipflig
+**unimodal** = eingipflig,\
+**multimodal** = mehrgipflig
 \begin{center}
  \includegraphics[width=.5\textwidth]{pics/2-zinssatz3.jpg}\\
   {\small Das Histogramm der Zinssätze zeigt eine
@@ -35,17 +36,19 @@ Verteilung~(c)}
 
 ### Lageregeln
 
-- Symmetrische und unimodale Verteilung:  
+- Symmetrische und unimodale Verteilung:\
   $\bar{x} \approx x_{med} \approx x_{mod}$
-- Linkssteile Verteilung:  $\bar{x} > x_{med} > x_{mod}$ 
-- Rechtssteile Verteilung: $\bar{x} < x_{med} < x_{mod}$
+- Linkssteile Verteilung:\
+  $\bar{x} > x_{med} > x_{mod}$
+- Rechtssteile Verteilung:\
+  $\bar{x} < x_{med} < x_{mod}$
 - Bei gruppierten Daten: Auch für Histogramme gültig
 
-**Beachte:**  
+**Beachte:**
 
 - Lageregeln sind Daumenregeln, gelten nicht notwendigerweise in jedem Einzelfall.
-- Form der Verteilung bleibt bei linearen Transformationen gleich, aber 
-ändert sich bei nichtlinearen Transformationen.
+- Form der Verteilung bleibt bei linearen Transformationen gleich,\
+  aber ändert sich bei nichtlinearen Transformationen.
 
 
 
@@ -88,7 +91,7 @@ Werte des Momentenkoeffizienten:
 
 ### Wölbung und Extremwerte
 
-Sehr wichtige Verteilungseigenschaft für viele Anwendungsbereiche:  
+Sehr wichtige Verteilungseigenschaft für viele Anwendungsbereiche:
 
 *Wie häufig oder selten treten extreme Werte auf, die weit entfernt von der "Mitte" der Verteilung liegen?*
 
@@ -112,12 +115,12 @@ k^\star &= k - 3
 \end{align*}
 \vskip -1em
 
-- $k^\star \approx 0$: normalgipflig (vgl. *Normalverteilung*), *mesokurtisch*.  
-- $k^\star > 0$: steilgipflig, *leptokurtisch*.  
-   Stärker ausgeprägter schmaler Gipfel im Vergleich zu den Rändern,  
-  **häufigere extreme Werte**  
-- $k^\star < 0$: flachgipflig, *platykurtisch*.  
-   Wenig ausgeprägter breiterer Gipfel im Vergleich zu den Rändern,  
+- $k^\star \approx 0$: normalgipflig (vgl. *Normalverteilung*), *mesokurtisch*.
+- $k^\star > 0$: steilgipflig, *leptokurtisch*.\
+   Stärker ausgeprägter schmaler Gipfel im Vergleich zu den Rändern,\
+  **häufigere extreme Werte**
+- $k^\star < 0$: flachgipflig, *platykurtisch*.\
+   Wenig ausgeprägter breiterer Gipfel im Vergleich zu den Rändern,\
   **seltenere extreme Werte**
 
 ### Wölbung und Extremwerte
@@ -126,6 +129,7 @@ Klassisches theoretisches Schaubild:
 
 \begin{center}\includegraphics[height=.7\textheight]{pics/02-kurtosis-wiki.png}\end{center}
 
+\vspace{0pt plus 1filll}
 \scriptsize
 Abb: [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Standard_symmetric_pdfs.svg)
 
@@ -152,17 +156,19 @@ Das $k$-te Moment einer ZV $X$ ist $E(X^k)$
 Das $k$-te zentrierte Moment einer ZV $X$ ist $E\left((X-E(X))^k\right)$
 ::::
 
-- Der Erwartungswert ist das *erste Moment* einer Verteilung  
-- Die Varianz ist das *zweite zentrierte Moment* einer Verteilung   
+- Der Erwartungswert ist das *erste Moment* einer Verteilung
+- Die Varianz ist das *zweite zentrierte Moment* einer Verteilung
 
 ### Höhere Momente von Zufallsvariablen
 
-Theoretische Analoga zu empirischem Momentenkoeffizient der Schiefe und 
+Theoretische Analoga zu empirischem Momentenkoeffizient der Schiefe
 und Wölbung:
 
-- Die **Schiefe** einer Verteilung ist das dritte (zentrale) Moment ihrer standardisierten Werte: $E\left[\left(\frac{X - E(X)}{\sigma(X)}\right)^3\right]$  
+- Die **Schiefe** einer Verteilung ist das dritte (zentrale) Moment ihrer standardisierten Werte:\
+  $E\left[\left(\frac{X - E(X)}{\sigma(X)}\right)^3\right]$
 
-- Die **Wölbung** (Kurtosis) einer Verteilung ist das vierte (zentrale) Moment ihrer standardisierten Werte: $E\left[\left(\frac{X - E(X)}{\sigma(X)}\right)^4\right]$
+- Die **Wölbung** (Kurtosis) einer Verteilung ist das vierte (zentrale) Moment ihrer standardisierten Werte:\
+  $E\left[\left(\frac{X - E(X)}{\sigma(X)}\right)^4\right]$
 
 - Alle geraden zentralen Momente sind im Endeffekt "Varianzen", die zunehmend mehr Gewicht auf die extremen Ränder der Verteilung legen 
 - Alle ungeraden zentralen Momente (außer dem ersten) messen die *Asymmetrie* von Verteilungen, mit immer größerem Gewicht auf Asymmetrie in den extremen Rändern der Verteilung
@@ -172,10 +178,7 @@ und Wölbung:
 
 Theorie (ZV) |  | Empirie (beob. Merkmale)
 --------|--|--------
-$E(X) := \int x\, f(x)\, dx$ |  $\leftrightarrow$ | $\bar x := 1/n \sum^n_{i=1} x_i = \sum^k_{j=1} a_j f_j$  
-$\Var(X) := \int (x - E(X)^2)\, f(x)\, dx$   |  $\leftrightarrow$ | $s^2_x :=  1/(n-1) \sum^n_{i=1} (x_i - \bar x)^2$  
-Median $x_{\text{med}}: F_X(x_{\text{med}}) = 0.5$   | $\leftrightarrow$ | $\tilde x_{\text{med}} := x_{(\lceil n/2 \rceil)}$  
-Modus $x_{\text{mod}} := \arg\max(f_X(x))$ | $\leftrightarrow$ | $\tilde x_{\text{mod}}: h(x_{\text{mod}}) \geq h(a_j) \;\forall\, j=1, \dots, k$  
-
-
-etc etc
+$E(X) := \int x\, f(x)\, dx$ |  $\leftrightarrow$ | $\bar x := 1/n \sum^n_{i=1} x_i = \sum^k_{j=1} a_j f_j$
+$\Var(X) := \int (x - E(X))^2\, f(x)\, dx$   |  $\leftrightarrow$ | $s^2_x :=  1/(n-1) \sum^n_{i=1} (x_i - \bar x)^2$
+Median $x_{\text{med}}: F_X(x_{\text{med}}) = 0.5$   | $\leftrightarrow$ | $\tilde x_{\text{med}} := x_{(\lceil n/2 \rceil)}$
+Modus $x_{\text{mod}} := \arg\max(f_X(x))$ | $\leftrightarrow$ | $\tilde x_{\text{mod}}: h(x_{\text{mod}}) \geq h(a_j) \;\forall\, j=1, \dots, k$

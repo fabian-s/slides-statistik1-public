@@ -2,7 +2,7 @@
 
 ### Conditioning on the Collider
 
-- $X$ ist "collider" wenn $Y$ und $Z$ beides Ursachen von $X$ sind:  
+- $X$ ist "collider" wenn $Y$ und $Z$ beides Ursachen von $X$ sind:
 
 $$\xymatrix@R-2pc{
 & \ar[dl]  Y\\
@@ -77,17 +77,18 @@ $$\xymatrix@R-2pc{
 \text{Studiert}  &\\
 & \ar[ul] \text{Fleißig}}$$ 
 
-Durch die Bedingung auf "Studiert" entsteht eine Scheinkorrelation zwischen Schläue und Fleiß:  
-nur diejenigen, die eher schlau oder eher fleißig oder sogar beides sind, können studieren,  
+Durch die Bedingung auf "Studiert" entsteht eine Scheinkorrelation zwischen Schläue und Fleiß:\
+nur diejenigen, die eher schlau oder eher fleißig oder sogar beides sind, können studieren,\
 dadurch entsteht eine negative Korrelation in der *beobachteten* Teilpopulation der Studierenden.
 
-Anders gesagt: Durch den Auswahlprozess der Stichprobe sind "besonders schlau, nicht so fleißig" und
-"besonders fleißig, nicht so schlau" in der Stichprobe relativ häufiger als in der Gesamtpopulation.
+Anders gesagt:\
+Durch den Auswahlprozess der Stichprobe sind "besonders schlau, nicht so fleißig" und
+"besonders fleißig, nicht so schlau" in der Stichprobe relativ häufiger als in der Gesamtpopulation.\
 Dadurch entsteht eine negative Korrelation.
 
 ### Conditioning on the Collider: *endogeneous selection bias*
 
-Hier also Spezialfall *endogeneous selection bias*:  
+Hier also Spezialfall *endogeneous selection bias*:
 
 Ob eine Untersuchungseinheit in der beobachteten Stichprobe ist oder nicht hängt von einer Variable ab, die von den untersuchten Variablen kausal abhängt. 
 

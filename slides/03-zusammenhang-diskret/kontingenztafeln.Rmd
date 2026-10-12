@@ -43,7 +43,7 @@ Nach diesem Kapitel können Sie ...
 
 ### Einführung
 
-Zurück zur Empirie --  
+Zurück zur Empirie --
 
 Wie können wir in beobachteten Daten Aussagen über die (Un-)Abhängigkeit von
 Merkmalen machen?
@@ -54,13 +54,13 @@ $\longrightarrow$ **mehrdimensionale** oder **multivariate** Daten
 
 - Stichprobe mit Untersuchungseinheiten $i = 1, \dots, n$
 - **Beobachtungen** $(x_i,y_i,z_i)$ der **Merkmale** $(X,Y,Z)$
--  Daten  $(x_1,y_1,z_1),\ldots,(x_i,y_i,z_i),\ldots,(x_n,y_n,z_n)$  
+-  Daten  $(x_1,y_1,z_1),\ldots,(x_i,y_i,z_i),\ldots,(x_n,y_n,z_n)$\
   (Im weiteren: Meistens nur 2 Merkmale $X, Y$)
--  Fragestellungen:  
-     - $X \leftrightarrow Y$: (Wie) hängen $X$ und $Y$ zusammen?  
-        **Assoziation**, **Korrelation**  
+-  Fragestellungen:
+     - $X \leftrightarrow Y$: (Wie) hängen $X$ und $Y$ zusammen?\
+        **Assoziation**, **Korrelation**\
         ("Sind X und Y *unabhängig*?")
-     - $X \rightarrow Y$: (Wie) beeinflusst $X$ das (Ziel-)Merkmal $Y$?  
+     - $X \rightarrow Y$: (Wie) beeinflusst $X$ das (Ziel-)Merkmal $Y$?\
         **Regression**, **Kausalität** (... nicht Teil dieses Kurses)
 
 ### Diskrete und gruppierte Merkmale
@@ -90,7 +90,7 @@ cat(gt_contingency(wahl_abs, proportional_size = FALSE, independence_colors = FA
 ```
 \end{center}
 
-\vskip 5em
+\vspace{0pt plus 1filll}
 \scriptsize 
 Quelle: Nachwahlbefragung ARD via [statista.com](https://de.statista.com/statistik/daten/studie/1257090/umfrage/wahlverhalten-bei-der-bundestagswahl-nach-geschlecht/)
 

@@ -1,0 +1,28 @@
+---
+title: |
+    | Statistik I -- Einführung (Variante D: Papier, Formular, Vorabend)
+author: |
+    | **LMU München**
+output:
+  beamer_presentation:
+    latex_engine: xelatex
+    keep_tex: true
+    slide_level: 3
+header-includes:
+  - \input{header.tex}
+fontsize: 10pt
+handout: false
+mathfont: "Fira Math"
+mainfont: "Fira Sans"
+sansfont: "Fira Sans"
+urlcolor: darkbrown
+linkcolor: darkbrown
+---
+
+```{r setup, include=FALSE, cache=FALSE, code = readLines('setup.R')}
+```
+
+# Einführung
+
+```{r 0-D, child="00-intro/variante-D/intro-D.Rmd"}
+```

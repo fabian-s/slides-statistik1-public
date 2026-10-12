@@ -50,7 +50,8 @@ add_stats <- function(target,
 
 ###  Beispiele: Deterministische Zusammenhänge
 
-Lineare (unverrauschte) Funktion, $Y = a + b \cdot X$, 101 equidistante Stützstellen im Intervall [-1,1]
+Lineare (unverrauschte) Funktion, $Y = a + b \cdot X$,\
+101 equidistante Stützstellen im Intervall [-1,1]
 ```{r, 04-corrplots-1, echo=FALSE, fig.height=5}
 corrplot + scale_x_continuous(labels = NULL) + scale_y_continuous(labels = NULL) +
   geom_point(aes(y = f1), col = "red") + add_stats("f1", col = "red", labelpos_x = 1) + 
@@ -60,7 +61,8 @@ corrplot + scale_x_continuous(labels = NULL) + scale_y_continuous(labels = NULL)
 ```
 ###  Beispiele: Deterministische Zusammenhänge
 
-Periodische (unverrauschte) Funktionen, 101 equidistante Stützstellen im Intervall $[-1, 1]$
+Periodische (unverrauschte) Funktionen,\
+101 equidistante Stützstellen im Intervall $[-1, 1]$
 
 ```{r, 04-corrplots-4, echo=FALSE, fig.height=5}
 corrplot + scale_x_continuous(labels = NULL) + scale_y_continuous(labels = NULL) +
@@ -73,7 +75,8 @@ corrplot + scale_x_continuous(labels = NULL) + scale_y_continuous(labels = NULL)
 
 ###  Beispiele: Deterministische Zusammenhänge
 
-Quadratische und kubische (unverrauschte) Funktionen, 101 equidistante Stützstellen im Intervall $[-1,1]$
+Quadratische und kubische (unverrauschte) Funktionen,\
+101 equidistante Stützstellen im Intervall $[-1,1]$
 
 ```{r, 04-corrplots-6, echo=FALSE, fig.height=5}
 corrplot + scale_x_continuous(labels = NULL) + scale_y_continuous(labels = NULL) +
@@ -87,7 +90,7 @@ corrplot + scale_x_continuous(labels = NULL) + scale_y_continuous(labels = NULL)
 
 ###  Beispiele: Exakte & verrauschte Zusammenhänge
 
-Lineare, verrauschte Funktionen $Y = 2 + 0.8 X + U$ mit zufälligem Fehler $U$.  
+Lineare, verrauschte Funktionen $Y = 2 + 0.8 X + U$ mit zufälligem Fehler $U$.\
 101 equidistante Stützstellen im Intervall [-1,1]
 
 ```{r, 04-corrplots-9, echo=FALSE, fig.height=5}
@@ -122,7 +125,7 @@ ggplot(datasaurus_dozen %>% filter(dataset != "slant_down"), aes(x = x, y = y)) 
     theme(legend.position = "none") +
     facet_wrap( ~ dataset, ncol = 4, labeller = function(...) "") +
   geom_label(data = cortable, aes(x = 25, y = 50,
-    label = label), alpha = .7, col = "red", label.size = NA, nudge_x = 5, 
+    label = label), alpha = .7, col = "red", linewidth = 0, nudge_x = 5, 
     parse = TRUE, size = 4)
 ```
 

@@ -2,24 +2,29 @@
 
 **Vorlesung:** *Fabian Scheipl*  
 
-- Montag & Donnerstag 14-16 
+- Montag 14-16 (S 001)  
+- Donnerstag 14-16 (A 240)
 \ 
 
 **Übung:** *Daniel Schlichting*  
 
-- Beginn am **20.10.**
-- Montag **12 -14** & Mittwoch 10-12  
+- Montag **12-14** (S 002) & Mittwoch 10-12 (M 010)  
   (selber Stoff an beiden Terminen)
 \ 
 
-
 **Tutorium:** *Michael Kobl*  
 
-- Beginn am **28.10.**  
-- Dienstag 18-20 (10 Termine, s. Moodlekalender)
+- Beginn am **13.10.**  
+- Dienstag 18-20 (S 001), 14-tägig (s. Moodlekalender)
+\ 
+
+**Tutorium Mathematische Grundlagen:** *Maxim Winter*  
+
+- Beginn am **20.10.**  
+- Dienstag 10-12 (S 003, Schellingstraße 3), 14-tägig (s. Moodlekalender)
 
 **Korrektor:innen:**  
-- *Simon Schreiner, Jo-Tung Wang, Laurant Qiriqi, Kilian Schödlbauer*
+- *Laurant Qiriqi, Nina Scheerer, Kilian Schödlbauer, Maxim Winter*
 
 ### Formales
 
@@ -51,7 +56,7 @@
     Nur wer eingeschrieben ist kann auf Material zugreifen, Hausaufgaben abgeben,
     etc.
 
-**Moodle URL:** [moodle.lmu.de/course/view.php?id=41420](https://moodle.lmu.de/course/view.php?id=41420)
+**Moodle URL:** [moodle.lmu.de/course/view.php?id=48727](https://moodle.lmu.de/course/view.php?id=48727)
 
 ### Programmierung
 
@@ -77,20 +82,31 @@ tippen statt klicken\&wischen!
 
 $\implies$ praktische Umsetzung der hier vermittelten Inhalte mit Programmiersprache `R`
 
-### DataCamp
+### KI-Tutor: oneTutor
 
-![](pics/datacamp.png)
+\begin{columns}[T]
+\begin{column}{0.55\textwidth}
+\textbf{oneTutor} ist ein KI-Tutor speziell für diese Vorlesung:
 
-Wir bieten Ihnen kostenfreie, zeitlich limitierte Datacamp-Accounts fürs Selbststudium.
+\begin{itemize}
+\item beantwortet Ihre Fragen zum Stoff -- rund um die Uhr
+\item Antworten basieren auf \textbf{unseren} Kursmaterialien (Folien, Übungen, ...) und zitieren diese
+\item erklärt, gibt Hinweise, fragt nach -- statt fertige Lösungen vorzusagen
+\item Login mit Ihrer LMU-Kennung
+\end{itemize}
 
-### DataCamp
-
-[Sign-Up Link:](https://www.datacamp.com/groups/shared_links/324a1de77efebe315dfd0f304efb44b0803ed9e8a006e2db0bf05aba7eb06342)
-
-\centering \includegraphics[height = 0.75\textheight]{pics/qr-datacamp-2526.png}
-
+\medskip
 \footnotesize
-**Sign-up nur mit Ihrer `@campus.lmu.de`-Adresse möglich.** 
+Ersetzt nicht Übung, Tutorium oder Sprechstunde --\\
+und ist \textbf{kein} zugelassenes Hilfsmittel für benotete Abgaben.
+\end{column}
+\begin{column}{0.4\textwidth}
+\centering
+\includegraphics[width=\textwidth]{pics/qr-onetutor-2627.png}
+
+\scriptsize\href{https://lmu.onetutor.ai/course/8522f2dc-cd16-4a3c-9f32-bf80473663d5}{\texttt{lmu.onetutor.ai/course/...}}
+\end{column}
+\end{columns}
 
 ### Literatur
 

@@ -2,13 +2,13 @@
 
 ### Confounding
 
-- Gemeinsame Ursache $X$ für interessierende Variablen $Y$, $Z$  
+- Gemeinsame Ursache $X$ für interessierende Variablen $Y$, $Z$\
 (Kausale Struktur: *Fork*)
 
-- erzeugt oft marginale Abhängigkeiten zwischen nicht kausal verbundenen $Y$ und $Z$:  
+- erzeugt oft marginale Abhängigkeiten zwischen nicht kausal verbundenen $Y$ und $Z$:\
 "Scheinkorrelation", *spurious correlation*
 
-- kann auch evtl. vorhandene (bedingte) Assoziationen zwischen $Y$ und $Z$ gegeben $X$ abschwächen oder sogar umkehren:  
+- kann auch evtl. vorhandene (bedingte) Assoziationen zwischen $Y$ und $Z$ gegeben $X$ abschwächen oder sogar umkehren:\
 *Simpson's "Paradox"*
 
 ### Confounding: Schein-Assoziationen

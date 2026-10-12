@@ -3,7 +3,7 @@
 ### Varianz
 
 ::: {.block}
-#### Def.: **Varianz einer ZV**  
+#### Def.: **Varianz einer ZV**
 Die *Varianz* $\Var(X)$ einer ZV $X$ ist definiert als:
 \begin{align*}
 \Var(X) &:= E\left[(X -E(X))^2\right] \\
@@ -18,7 +18,8 @@ $\implies$ "erwartete quadratische Abweichung vom Erwartungswert"
 
 *Beachte:* 
 
-- Varianz nicht immer endlich! ($\Var(X) = \infty \iff$ "Varianz existiert nicht.")
+- Varianz nicht immer endlich!\
+  ($\Var(X) = \infty \iff$ "Varianz existiert nicht.")
 - Existiert der Erwartungswert nicht, so existiert auch die Varianz nicht.
 
 ### Eigenschaften der Varianz
@@ -34,9 +35,10 @@ $$\Var(X) = E(X^2) -(E(X))^2$$
 \end{align*}
 }
 - $\Var(aX + b) = a^2 \Var(X) \;\forall\, a,b\in \mathbb{R}$
-- für unabhängige Zufallsvariablen $X, Y$ gilt: $\Var(X + Y) = \Var(X) + \Var(Y)$
+- für unabhängige Zufallsvariablen $X, Y$ gilt:\
+  $\Var(X + Y) = \Var(X) + \Var(Y)$
 
-### Ungleichung von Tschebyscheff 
+### Ungleichung von Tschebyscheff
 
 :::{.block}
 #### Tschebyscheff-Ungleichung
@@ -55,20 +57,20 @@ P(|X - E(X)| \geq 2) &\leq  \frac{1}{4} \\
 P(|X - E(X)| \geq 3) &\leq  \frac{1}{9}
 \end{align*}
 
-### Standardabweichung 
+### Standardabweichung
 
 ::: {.block}
-#### Def.: **Standardabweichung** einer ZV  
+#### Def.: **Standardabweichung** einer ZV
 Die *Standardabweichung* $\sigma(X)$ einer ZV $X$ ist die positive Wurzel ihrer Varianz:
 $$
 \sigma(X) = + \sqrt{\Var(X)}
 $$
 :::
 
-Es gilt:  
+Es gilt:\
 $\sigma(aX + b) = |a| \cdot \sigma(X)$
-\  
-\  
+\
+\
 
 Die *erwartete absolute Abweichung* $E(|X - E(X)|)$ wäre zwar das intuitivere Streuungsmaß, 
 ist aber mathematisch deutlich schwieriger zu handhaben.

@@ -1,4 +1,4 @@
-## Das Gesetz der großen Zahlen 
+## Das Gesetz der großen Zahlen
 
 ### Das Gesetz der großen Zahlen (GGZ)
 
@@ -13,12 +13,12 @@ E(\bar{X}_n) = \mu_X &\;\text{und}\; \Var(\bar{X}_n) = \frac{1}{n} \, \sigma_X^2
 \text{Man schreibt: } \bar{X}_n &\stackrel{P}{\longrightarrow} \mu_x
 \end{align*}
 :::
-$\implies$ **Das arithmetische Mittel beobachteter *i.i.d.* Daten konvergiert "in Wahrscheinlichkeit" gegen den Erwartungswert der datengenerierenden Verteilung.**  
-Die Varianz dieses Schätzers wird bei wachsendem Stichprobenumfang beliebig klein.  
+$\implies$ **Das arithmetische Mittel beobachteter *i.i.d.* Daten konvergiert "in Wahrscheinlichkeit" gegen den Erwartungswert der datengenerierenden Verteilung.**\
+Die Varianz dieses Schätzers wird bei wachsendem Stichprobenumfang beliebig klein.
 
 \scriptsize Terminologie: *i.i.d.* := "*i*ndependent and *i*dentically *d*istributed"
 
-### Beispiel: Normalverteilung 
+### Beispiel: Normalverteilung
 
 ```{r ggz-prep, echo = FALSE}
 plot_sequential_means <- 
@@ -92,7 +92,8 @@ $$P\left(\sup_{x \in \mathbb R}\left(|F_n(x) - F_X(x)|\right) < \epsilon\right) 
 
 $\implies$ **Die *maximale* Abweichung zwischen ECDF und Verteilungsfunktion der datengenerierenden Verteilung wird für wachsenden Stichprobenumfang mit Sicherheit *beliebig klein*.**
 
-- stärkere Aussage als punktweiser Konvergenz in Wahrscheinlichkeit: die *maximale* Abweichung zwischen Schätzung $F_n$ und Wahrheit $F$ geht mit Wahrscheinlichkeit 1 gegen Null. 
+- stärkere Aussage als punktweiser Konvergenz in Wahrscheinlichkeit:\
+  die *maximale* Abweichung zwischen Schätzung $F_n$ und Wahrheit $F$ geht mit Wahrscheinlichkeit 1 gegen Null.
 
 ```{r glivenko-prep, echo= FALSE}
 set.seed(1221)

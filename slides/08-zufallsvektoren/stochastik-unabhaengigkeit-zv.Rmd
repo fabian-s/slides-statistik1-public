@@ -24,7 +24,7 @@ f_{X_1, \dots, X_n}(X_1 = x_1, ..., X_n = x_n) &= \prod_{i=1}^n f_{X_i}(x_i) \\
 für alle $x_1, x_2, ..., x_n$ aus den entsprechenden Trägern gilt.
 
 - Zufallsvariablen sind stochastisch unabhängig, wenn ihre gemeinsame Verteilung dem Produkt 
-ihrer Randverteilungen entspricht.  
+ihrer Randverteilungen entspricht.\
  Ihre gemeinsame Verteilung enthält dann also keine zusätzliche Information gegenüber den Randverteilungen. 
  
 - Analog zu stoch. Unabhängigkeit von Ereignissen $A, B$: 
@@ -84,7 +84,8 @@ p_x1_dep + plot_spacer() + p_dep + p_x2_dep +
                   theme = theme(plot.caption = element_text(size = rel(2.5))))
 ```
 
-**Takeaway:** Dichte auf der Diagonalen konzentriert -- aus den Rändern **nicht** rekonstruierbar: $f(x_1, x_2) \neq f_{X_1}(x_1)\, f_{X_2}(x_2)$.
+**Takeaway:** Dichte auf der Diagonalen konzentriert --\
+aus den Rändern **nicht** rekonstruierbar: $f(x_1, x_2) \neq f_{X_1}(x_1)\, f_{X_2}(x_2)$.
 
 ### Beispiel: Randverteilung & Gemeinsame Verteilung
 
@@ -101,17 +102,19 @@ p_x1_ind + plot_spacer() + p_ind + p_x2_ind +
                   theme = theme(plot.caption = element_text(size = rel(2.5))))
 ```
 
-**Takeaway:** *Gleiche* Ränder wie links, aber hier gilt $f(x_1, x_2) = f_{X_1}(x_1)\, f_{X_2}(x_2)$ -- bei Unabhängigkeit bestimmen die Ränder die gemeinsame Verteilung vollständig.
+**Takeaway:** *Gleiche* Ränder wie links, aber hier gilt $f(x_1, x_2) = f_{X_1}(x_1)\, f_{X_2}(x_2)$ --\
+bei Unabhängigkeit bestimmen die Ränder die gemeinsame Verteilung vollständig.
 
 ### Beispiel: Bernoulli-Kette
 
 Sind $X_1, X_2, ..., X_n$ jeweils Bernoulli-verteilt mit Parameter $\pi$ und unabhängig, so
 heißt $\symbf{X}=(X_1, X_2, ..., X_n)$ **Bernoulli-Kette**.\
   \
-Beispiel:  
+Beispiel:\
   \
-  
-$n = 3$, $\pi = \frac{1}{6}$; wegen der Unabhängigkeit gilt dann z.B. 
+
+$n = 3$, $\pi = \frac{1}{6}$;\
+wegen der Unabhängigkeit gilt dann z.B. 
 \begin{align*}
 P(\symbf{X} = (1, 0, 0)) &= P(X_1 = 1, X_2 = 0, X_3 = 0) \\
                          &= P(X_1 = 1) \cdot P(X_2 = 0) \cdot P(X_3 = 0)  \\

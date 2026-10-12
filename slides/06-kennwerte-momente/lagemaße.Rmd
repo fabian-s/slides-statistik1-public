@@ -11,7 +11,8 @@ Nach diesem Kapitel können Sie ...
 
 \vspace{1em}
 
-**Voraussetzungen:** Häufigkeiten & empirische Verteilungen (Kap. 4).
+**Voraussetzungen:**\
+Häufigkeiten & empirische Verteilungen (Kap. 4).
 
 ### Statistische Kennwerte
 
@@ -34,7 +35,8 @@ Nach diesem Kapitel können Sie ...
 
 ### Lagemaß: Modus
 
-Definition: **Häufigster Wert**
+Definition:\
+**Häufigster Wert**
 
 Eigenschaften:
 
@@ -46,7 +48,8 @@ Eigenschaften:
 
 ### Lagemaß: Median
 
-Definition: Der **Median** ($\tilde x_{\text{med}}$) ist der Wert für den gilt
+Definition:\
+Der **Median** ($\tilde x_{\text{med}}$) ist der Wert für den gilt
 
 - mindestens 50\% der Daten sind kleiner oder gleich $\tilde x_{\text{med}}$,
 - mindestens 50\% der Daten sind größer oder gleich $\tilde x_{\text{med}}$.
@@ -61,8 +64,8 @@ Definition: Der **Median** ($\tilde x_{\text{med}}$) ist der Wert für den gilt
 \end{equation*}
 
 - $x_{(1)},\ldots,x_{(n)}$ sind **geordnete Werte**
-- Alternative Definition: $\tilde x_{\text{med}} \in [x_{(k)}, x_{(k+1)}]$ 
-falls $k = \frac{n}{2}$ ganze Zahl.
+- Alternative Definition:\
+  $\tilde x_{\text{med}} \in [x_{(k)}, x_{(k+1)}]$ falls $k = \frac{n}{2}$ ganze Zahl.
 
 ### Eigenschaften des Medians
 
@@ -71,14 +74,15 @@ falls $k = \frac{n}{2}$ ganze Zahl.
 -  robust gegenüber extremen Werten
 -  direkt übertragbar bei monotonen Transformationen
 
-Formal:  
+Formal:
 
 - Wert, der die Summe der *absoluten* Differenzen zu den beobachteten Werten minimiert:
 $$\tilde x_{\text{med}} = \arg\min_x \sum^n_{i=1} |x_i - x|$$
 
 ### Lagemaß: Quantil
 
-Definition: Das $p$-**Quantil** ist der Wert $\tilde x_p$ für den gilt
+Definition:\
+Das $p$-**Quantil** ist der Wert $\tilde x_p$ für den gilt
 
 - mindestens Anteil $p$ der Daten sind kleiner oder gleich $\tilde x_p$,
 - mindestens Anteil $1-p$ der Daten sind größer oder gleich $\tilde x_p$.
@@ -110,7 +114,7 @@ $k=np$ ganze Zahl}
 - geeignet für intervallskalierte Daten
 - "Durchschnitt" oder "Schwerpunkt" der Daten 
 
-Formal:  
+Formal:
 
 - Wert, der die Summe der *quadrierten* Differenzen zu den beobachteten Werten minimiert:
 $$\bar x = \arg\min_x \sum^n_{i=1} (x_i - x)^2$$
@@ -164,7 +168,7 @@ Anfangskapital 100 €, Entwicklung über 3 Quartale
 - Q2: 50% Gewinn (Faktor 1.5)
 - Q3: 40% Verlust (Faktor 0.6)
   \
-  
+
 \scriptsize
 ```r
 r <- c(1.2, 1.5, 0.6)
@@ -203,19 +207,19 @@ Das harmonische Mittel entspricht dem inversen Mittelwert der inversen Werte:
 
 ### Bsp: harmonisches Mittel
 
-Sie fahren die ersten 100 km mit 30km/h und die zweiten 100km mit 100 km/h.  
+Sie fahren die ersten 100 km mit 30km/h und die zweiten 100km mit 100 km/h.\
 Was ist Ihre Durchschnittsgeschwindigkeit?
 
-Gesamtstrecke: $200$ km  
-Gesamtzeit: $3.33 h +  1h = 4.33h$  
+Gesamtstrecke: $200$ km\
+Gesamtzeit: $3.33 h +  1h = 4.33h$\
 $\implies \frac{200 km}{4.33 h} = 46.2$km/h.
 
-Arithm. Mittel:  
+Arithm. Mittel:\
 $\bar x = \frac{30 + 100}{2} = 65$, wäre also 65 km/h und offensichtlich falsch.
 
-Harmonisches Mittel:  
+Harmonisches Mittel:\
 $\bar x_H = \frac{1}{\tfrac{1}{2}\left(\tfrac{1}{30}+ \tfrac{1}{100}\right)} = \tfrac{600}{13} = 46.2$, also 46.2 km/h!
-  
+
 
 ### Allgemeine Transformation des Arithm. Mittels
 
@@ -288,7 +292,7 @@ d.h.
 <!-- \frac{1}{n} \sum\limits_{i=1}^n \frac{1}{x_i}$   -->
 <!-- $\implies \underbrace{\sqrt[n]{\prod\limits_{i=1}^n x_i}}_{\bar x_G} \geq -->
 <!--   \underbrace{\frac{1}{\frac{1}{n} \sum\limits_{i=1}^n \frac{1}{x_i}}}_{\bar x_H}$ -->
-  
+
 ### Getrimmtes Mittel
 
 Um die Ausreißerempfindlichkeit von $\bar x$ abzuschwächen
@@ -298,13 +302,13 @@ definiert man
     \bar x_{\alpha} = \frac{1}{n-2r} \sum_{i=r+1}^{n-r} x_{(i)}
 \end{equation*}
 
-- $x_{(i)}:$ geordnete $x$-Werte  
+- $x_{(i)}:$ geordnete $x$-Werte
 - $r$ ist die größte ganze Zahl mit $r \leq n \alpha$
 
-Es wird also "unten" und "oben" jeweils der Anteil $\alpha$ der extremsten Werte abgeschnitten:  
+Es wird also "unten" und "oben" jeweils der Anteil $\alpha$ der extremsten Werte abgeschnitten:\
 **$\alpha$-getrimmtes Mittel**
 
 Alternative:
 
-**Winsorisiertes** Mittel (**gestutztes** Mittel):  
+**Winsorisiertes** Mittel (**gestutztes** Mittel):\
 Der Anteil $\alpha$ der extremsten Werte wird **durch die entsprechenden oberen/unteren Quantile ersetzt**. 

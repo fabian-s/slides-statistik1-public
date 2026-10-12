@@ -3,11 +3,11 @@
 ### Simpson's Paradox
 
 - Kein echtes Paradox
-- Beschreibt häufig auftretendes Phänomen:  
+- Beschreibt häufig auftretendes Phänomen:\
     Durch Bedingen auf Drittvariable(n) können Assoziationen 
     - entstehen (s. Titanic),
     - verschwinden (s. Berkeley),
-    - oder ihre Richtung ändern.  (s. Nachhilfe)  
+    - oder ihre Richtung ändern.  (s. Nachhilfe)\
   (Autsch.) 
 - Synonyme: *omitted variable bias*
 
@@ -103,7 +103,7 @@ mosaicplot(apply(UCBAdmissions, c(2, 1), sum), main = "",  xlab = "", ylab = "",
 
 \normalsize
 
-$\implies$ Benachteiligung von Bewerberinnen ...?  
+$\implies$ Benachteiligung von Bewerberinnen ...?
 
 Odds Ratio: $\gamma(\text{Admitted, Rejected} | \text{Male, Female}) =  1.83$! 
 
@@ -143,13 +143,14 @@ $$\xymatrix@R-2pc{
                          & \text{Aufnahme}}$$
 
 - hier kein "Confounding" mit *Fork*-Struktur im klassischen Sinn 
-- Stattdessen *Pipe*-Struktur:  Durch Bedingen auf *Mediator* "Fach" wird Assoziation zwischen 
+- Stattdessen *Pipe*-Struktur:\
+  Durch Bedingen auf *Mediator* "Fach" wird Assoziation zwischen
   "Geschlecht" und "Aufnahme" komplexer, hier insgesamt schwächer.
 <!-- - bessere Visualisierung: [vudlab.com/simpsons/](https://htmlpreview.github.io/?https://github.com/vicapow/vudlab-website/blob/master/simpsons/index.html) -->
 
 ### Ökologischer Fehlschluss
 
-Allgemeinere Art von "omitted variable bias":  
+Allgemeinere Art von "omitted variable bias":\
 Unzulässige / falsche Schlüsse von aggregierten Daten auf Individualdaten.
 
 Aus einem bestehenden Zusammenhang auf Aggregatebene folgt nicht zwangsläufig ein
@@ -194,7 +195,8 @@ ggplot(dat, aes(Lernzeit, Punkte)) +
 ```
 
 $\longrightarrow$ Auf **Aggregatebene** (schwarz): mehr Lernzeit $\to$ *weniger*
-Punkte. In jeder Notenschnitt-Gruppe aber: mehr Lernzeit $\to$ *mehr* Punkte!
+Punkte.\
+In jeder Notenschnitt-Gruppe aber: mehr Lernzeit $\to$ *mehr* Punkte!\
 Schluss vom Aggregat auf Individuen hier falsch -- das Leistungsniveau
 konfundiert.
 
@@ -276,7 +278,7 @@ konfundiert.
 \includegraphics[height=.7\textheight]{pics/5-presidential2004-state.png}
 \end{center}
 
-"Republikaner gewinnen in *ärmeren Bundesstaaten* $\implies$ 
+"Republikaner gewinnen in *ärmeren Bundesstaaten* $\implies$\
 höhere Zustimmung zu Republikanern bei *Menschen mit niedrigerem Einkommen*" ?
 
 ### Einkommen & Politische Einstellung
@@ -285,10 +287,11 @@ höhere Zustimmung zu Republikanern bei *Menschen mit niedrigerem Einkommen*" ?
 \includegraphics[height=.6\textheight]{pics/5-presidential2004-income.png}
 \end{center}
 
-$\implies$ Aus "Republikaner gewinnen in *ärmeren Bundesstaaten*" folgt **nicht**
+$\implies$ Aus "Republikaner gewinnen in *ärmeren Bundesstaaten*" folgt **nicht**\
 "Höhere Zustimmung zu Republikanern bei *Menschen mit niedrigerem Einkommen*"!
 <!-- auflösung: "in poor states, rich people are much more likely than poor people to vote for the Republican presidential candidate. in rich states, income has a very low correlation with vote preference."  -->
 
+\vspace{0pt plus 1filll}
 \scriptsize 
 Quelle: Gelman, A. et al. (2007) "Rich State, Poor State, Red State, Blue State: What’s the Matter with Connecticut?" *Quarterly Journal of Political Science* 2: 345-367.
 \normalsize
@@ -402,6 +405,7 @@ gapminder %>%
   theme(legend.position = "none") + theme(strip.text = element_text(size = 12))
 ```
 
+\vspace{0pt plus 1filll}
 \begin{scriptsize}
 Quelle: WHO/OECD, Stand 2010 (\texttt{dslabs::gapminder})
 \end{scriptsize}

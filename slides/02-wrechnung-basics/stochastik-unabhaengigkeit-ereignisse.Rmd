@@ -1,9 +1,9 @@
-## Stochastische Unabhängigkeit 
+## Stochastische Unabhängigkeit
 
 ### Stochastische Unabhängigkeit: Motivation
 
-Frage: Wann sind 2 Ereignisse $A, B$ **stochastisch unabhängig**?
-\ 
+Frage: Wann sind 2 Ereignisse $A, B$ **stochastisch unabhängig**?\
+\
 
 Motivation über bedingte Wahrscheinlichkeiten:
 
@@ -13,24 +13,23 @@ Zwei Ereignisse $A, B$ sind *stochastisch unabhängig*, wenn
 \mbox{ bzw. } \underbrace{P(B|A)}_{\frac{P(A \cap B)}{P(A)}} & =   P(B)
 \end{align*}
 
-Intuition:  
-
+Intuition:\
 Zwei Ereignisse sind stochastisch unabhängig, wenn das Eintreten des einen nichts an der Wahrscheinlichkeit des Eintretens des anderen verändert.
 
 
 ### Stochastische Unabhängigkeit
 ::: {.block}
-#### Def.: **Stochastische Unabhängigkeit**  
-Zwei Ereignisse $A, B$ sind *stochastisch unabhängig*, wenn gilt: 
+#### Def.: **Stochastische Unabhängigkeit**
+Zwei Ereignisse $A, B$ sind *stochastisch unabhängig*, wenn gilt:
 $$ P(A \cap B) = P(A) \cdot P(B)$$
 Notation: $A \perp B :\iff P(A \cap B) = P(A) \cdot P(B)$
 :::
 
-- Voraussetzungen $P(B) > 0$ und/oder $P(A) > 0$ dafür nicht nötig. 
+- Voraussetzungen $P(B) > 0$ und/oder $P(A) > 0$ dafür nicht nötig.
 - Unabhängigkeit überträgt sich auf die Gegenereignisse:
     - $A \perp B \iff \bar{A} \perp B$
-    - $A \perp B \iff A \perp \bar B$ 
-    - $A \perp B \iff \bar A \perp \bar B$ 
+    - $A \perp B \iff A \perp \bar B$
+    - $A \perp B \iff \bar A \perp \bar B$
 
 \note{
 \begin{align*}
@@ -47,27 +46,28 @@ P(\bar A \cap \bar B) &= P(\bar A) - P(\bar A \cap B) \\
 \end{align*}
 }
 
-### Beispiel: Zweimaliges Würfeln 
+### Beispiel: Zweimaliges Würfeln
 
-Ein fairer Würfel wird zweimal hintereinander geworfen. Definiere
+Ein fairer Würfel wird zweimal hintereinander geworfen.\
+Definiere
 
 \begin{tabular}{ll}
 $A:$ & "Beim 1. Würfelwurf eine Sechs" \\
 $B:$ & "Beim 2. Würfelwurf eine Sechs"
 \end{tabular}
 
-Bei jedem Würfelwurf ist die Grundgesamtheit $\Omega = \{1,2,3,4,5,6 \}$.  
-Nach Laplace gilt $P(A) = P(B) = \frac{1}{6}$.  
+Bei jedem Würfelwurf ist die Grundgesamtheit $\Omega = \{1,2,3,4,5,6 \}$.\
+Nach Laplace gilt $P(A) = P(B) = \frac{1}{6}$.\
 Bei "unabhängigem" Werfen gilt somit
 $$
 P(A \cap B) = P(A) \cdot P(B) = \frac{1}{36}
 $$
 
 
-### Beispiel: Zweimaliges Würfeln mit Tricks 
+### Beispiel: Zweimaliges Würfeln mit Tricks
 
-Angenommen die Würfelwerfende legt es darauf an einen Pasch zu würfeln. 
-Sie kann den zweiten Wurf so steuern, dass sie mit W.keit $0.5$ das gleiche Ergebnis wie beim ersten Wurf würfelt.
+Angenommen die Würfelwerfende legt es darauf an einen Pasch zu würfeln.\
+Sie kann den zweiten Wurf so steuern, dass sie mit W.keit $0.5$ das gleiche Ergebnis wie beim ersten Wurf würfelt.\
 Die fünf anderen möglichen Ergebnisse haben dann jeweils W.keit $0.1$.
 
 Dann ist zwar $P(A)=\frac{1}{6}$ und auch $P(B) = \frac{1}{6}$, aber
@@ -77,12 +77,12 @@ $$
 \frac{1}{12} = P(A \cap B) \neq P(A) \cdot P(B) = \frac{1}{36}
 $$
 
-### Unabhängigkeit von mehr als zwei Ereignissen 
+### Unabhängigkeit von mehr als zwei Ereignissen
 
 Allgemeiner:
 
 ::: {.block}
-#### Def.: **Stochastische Unabhängigkeit von mehr als zwei Ereignissen**  
+#### Def.: **Stochastische Unabhängigkeit von mehr als zwei Ereignissen**
 Ereignisse $A_1, A_2, ..., A_n$ sind *stochastisch unabhängig*,
 wenn für **alle Teilmengen** $I \subseteq \{1, 2, ..., n\}$ mit $I = \{i_1, i_2, ..., i_k \}$ gilt:
 $$
@@ -91,11 +91,11 @@ P(A_{i_1}) \cdot P(A_{i_2}) \cdot ... \cdot P(A_{i_k})
 $$
 :::
 
-*Bemerkung:*  
+*Bemerkung:*\
 Aus paarweiser Unabhängigkeit folgt **nicht** die Unabhängigkeit von mehr als zwei Ereignissen.
 
 
-### Beispiel zur paarweisen Unabhängigkeit 
+### Beispiel zur paarweisen Unabhängigkeit
 
 \begin{align*}
 \Omega &= \{0, 1, 2, 3\} \quad \mbox{Laplace-Wahrscheinlichkeitsraum}\\
@@ -109,11 +109,12 @@ P(A_1) \cdot P(A_2) \cdot P(A_3) &= \frac{1}{8}
 \end{align*}
 $\implies A_1, A_2, A_3$ also **nicht** unabhängig.
 
-### Bedingte Unabhängigkeit 
+### Bedingte Unabhängigkeit
 
 ::: {.block}
 #### Def.: **Bedingte Unabhängigkeit**
-Sei $C$ ein beliebiges Ereignis mit $P(C)>0$.  Zwei Ereignisse $A$ und
+Sei $C$ ein beliebiges Ereignis mit $P(C)>0$.\
+Zwei Ereignisse $A$ und
 $B$ nennt man **bedingt unabhängig gegeben** $C$, genau dann wenn
 $$
 P(A \cap B|C) = P(A|C) \cdot P(B|C).
@@ -122,26 +123,26 @@ $$
 
 Notation: $(A \perp B)|C :\iff P(A \cap B|C) = P(A|C) \cdot P(B|C)$
 
-- Für feste Bedingung $C$ gelten die selben Folgerungen wie für unbedingte stochastische Unabhängigkeit:  
-$(A \perp B)|C \iff (\bar{A} \perp B)|C;\; (A \perp \bar B)|C;\; (\bar A \perp \bar B)|C$
+- Für feste Bedingung $C$ gelten die selben Folgerungen wie für unbedingte stochastische Unabhängigkeit:\
+  $(A \perp B)|C \iff (\bar{A} \perp B)|C;\; (A \perp \bar B)|C;\; (\bar A \perp \bar B)|C$
 - Aus bedingter stochastischer Unabhängigkeit folgt nicht unbedingte stochastische Unabhängigkeit!
 - Aus unbedingter stochastischer Unabhängigkeit folgt nicht bedingte stochastische Unabhängigkeit!
 
-### Beispiel 1 zu bedingter (Un)abhängigkeit 
+### Beispiel 1 zu bedingter (Un)abhängigkeit
 
-Eine Box enthält 2 Münzen -- eine normale und eine gezinkte, die auf beiden Seiten "Kopf" zeigt.  
-Eine Münze wird zufällig aus der Box gezogen und zweimal geworfen.  
+Eine Box enthält 2 Münzen -- eine normale und eine gezinkte, die auf beiden Seiten "Kopf" zeigt.\
+Eine Münze wird zufällig aus der Box gezogen und zweimal geworfen.
 
 
-Definiere  
-$A :=$ "Kopf beim 1. Wurf",  
-$B :=$ "Kopf beim 2. Wurf",  
+Definiere\
+$A :=$ "Kopf beim 1. Wurf",\
+$B :=$ "Kopf beim 2. Wurf",\
 $C:=$ "Normale Münze wurde ausgewählt".
 
-Dann gilt:  
+Dann gilt:\
 $A \not \perp B$, aber $(A \perp B)|C$!
 
-Also: aus "bedingt stochastisch unabhängig" folgt *nicht* "stochastisch unabhängig".  
+Also: aus "bedingt stochastisch unabhängig" folgt *nicht* "stochastisch unabhängig".
 
 <!-- see https://www.probabilitycourse.com/chapter1/1_4_4_conditional_independence.php-->
 
@@ -149,10 +150,11 @@ Also: aus "bedingt stochastisch unabhängig" folgt *nicht* "stochastisch unabhä
 
 Szenario: Einfacher Würfelwurf
 
-Definiere Ereignisse $A = \{1, 2\}; B = \{2, 4, 6\}; C = \{1, 4\}$.  
+Definiere Ereignisse $A = \{1, 2\}; B = \{2, 4, 6\}; C = \{1, 4\}$.
 
-Dann gilt: $A \perp B$ (!), aber $(A \not \perp B)|C$!
+Dann gilt:\
+$A \perp B$ (!), aber $(A \not \perp B)|C$!
 
-Also: aus "stochastisch unabhängig" folgt *nicht* "bedingt stochastisch unabhängig".  
+Also: aus "stochastisch unabhängig" folgt *nicht* "bedingt stochastisch unabhängig".
 
 <!-- see https://www.probabilitycourse.com/chapter1/1_4_4_conditional_independence.php-->

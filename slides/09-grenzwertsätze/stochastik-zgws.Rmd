@@ -1,15 +1,16 @@
 ## Der zentrale Grenzwertsatz
 
-### Der zentrale Grenzwertsatz 
+### Der zentrale Grenzwertsatz
 
-- "Die Verteilung des arithmetischen Mittels von $n$ *iid* Zufallsvariablen aus einer *beliebigen(!)* Verteilung konvergiert für wachsendes $n$ gegen eine Normalverteilung." (... unter nicht besonders strengen Bedingungen)
+- "Die Verteilung des arithmetischen Mittels von $n$ *iid* Zufallsvariablen aus einer *beliebigen(!)* Verteilung konvergiert für wachsendes $n$ gegen eine Normalverteilung."\
+  (... unter nicht besonders strengen Bedingungen)
 
 - Begründet die zentrale Rolle der Normalverteilung in der Stochastik und Statistik.
 
 Zunächst müssen wir noch *standardisierte* Zufallsvariablen definieren.
 
 
-### Standardisierte Zufallsvariablen 
+### Standardisierte Zufallsvariablen
 
 #### Def.: Standardisierte Zufallsvariable
 Jede Zufallsvariable $X$ mit endlichem Erwartungswert $\mu_X = E(X)$ und
@@ -29,8 +30,8 @@ E(\tilde{X}) & =  \frac{1}{\sigma} \left(E(X) - \mu_X\right) = 0   \\
 
 Betrachte *iid* Zufallsvariablen $X_1, X_2, ..., X_n$ mit
 endlichem Erwartungswert $\mu_X = E(X_i)$ und endlicher Varianz
-$\sigma_X^2 = \Var(X_i)$.  
-\  
+$\sigma_X^2 = \Var(X_i)$.\
+\
 
 Für die Summe $Y_n = X_1 + X_2 + ... + X_n$ gilt also
 \begin{align*}
@@ -42,7 +43,7 @@ Z_n &= \frac{Y_n - n \mu_X}{\sqrt{n} \sigma_X} =
 \intertext{gilt somit $E(Z_n) = 0$ und $\Var(Z_n) = 1$.}
 \end{align*}
 
-### Der zentrale Grenzwertsatz (ZGWS) 
+### Der zentrale Grenzwertsatz (ZGWS)
 
 :::{.block}
 #### **Zentraler Grenzwertsatz**
@@ -56,18 +57,18 @@ F_n(z) &\stackrel{n \to \infty}{\longrightarrow} F_{N(0,1)}(z)\quad \forall\, z 
 :::
 
 In der Praxis kann man also die Verteilung von $Z_n$ für große $n$
-oft gut durch eine Standardnormalverteilung approximieren.  
-\  
+oft gut durch eine Standardnormalverteilung approximieren.\
+\
 
 \scriptsize 
-"$\stackrel{a}{\sim}$" :$\cong$ "asymptotisch/approximativ verteilt wie"  
+"$\stackrel{a}{\sim}$" :$\cong$ "asymptotisch/approximativ verteilt wie"\
 Englisch: *c*entral *l*imit *t*heorem *CLT*
 
-### Bemerkungen 
+### Bemerkungen
 - Solange Erwartungswert und Varianz existieren, gilt der ZGWS auch für 
   - diskrete $X_i$,
   - $X_i$ mit anderem Träger $T_X \neq \mathbb R$ als die Normalverteilung,
-  - und $X_i$ mit schiefen oder multimodalen Verteilungen!  
+  - und $X_i$ mit schiefen oder multimodalen Verteilungen!
 
 - Unter zusätzlichen Bedingungen an höhere Momente von $|X_i|$ (Lyapunov-/Lindeberg-ZGWS)
  gilt der ZGWS sogar auch für *unabhängige, aber nicht identisch verteilte $X_i$*.
@@ -80,16 +81,17 @@ Y_n \stackrel{a}{\sim} {\mathcal N}(\mu = n\mu_X, \sigma^2 = n\sigma_X^2)
 $$
 
 - Damit dann im speziellen auch (vgl. GGZ): $$\bar X_n  \stackrel{a}{\sim} {\mathcal N}\left(\mu = \mu_X, \sigma^2 = \frac{\sigma_X^2}{n}\right)$$ 
-  
 
 
-### Bemerkungen 
+
+### Bemerkungen
 
 - GGZ liefert asymptotische Aussage über EW und Varianz des arithmetischen Mittels.
 - ZGWS liefert Aussage über die *komplette (asymptotische) Verteilung* des arithmetischen Mittels
 - der ZGWS gilt sowohl für stetige als auch für diskrete ZV $X_i$. 
 
-- Anwendung: Die Verteilung der Summe/des Mittelwerts vieler (in etwa) *iid* Zufallsvariablen kann gut durch ein Normalverteilungsmodell approximiert werden. 
+- Anwendung:\
+  Die Verteilung der Summe/des Mittelwerts vieler (in etwa) *iid* Zufallsvariablen kann gut durch ein Normalverteilungsmodell approximiert werden.
 
 
 ### Selbsttest: GGZ & ZGWS
@@ -103,8 +105,10 @@ $$
 \vspace{0.5em}
 
 >- **1.** i.i.d. Zufallsvariablen mit *existierendem* Erwartungswert und *endlicher* Varianz --- die datengenerierende Verteilung selbst ist beliebig.
->- **2.** Nur dann gilt $\Var(\bar X_n) = \sigma^2/n \to 0$; ohne endliche Varianz (z.B. Cauchy) konvergiert das Mittel nicht --- weder GGZ noch ZGWS greifen.
->- **3.** Ja --- solange $E(X_i)$ und $\Var(X_i)$ existieren, ist die Form der Verteilung (diskret, schief, multimodal) egal.
+>- **2.** Nur dann gilt $\Var(\bar X_n) = \sigma^2/n \to 0$;\
+  ohne endliche Varianz (z.B. Cauchy) konvergiert das Mittel nicht --- weder GGZ noch ZGWS greifen.
+>- **3.** Ja ---\
+  solange $E(X_i)$ und $\Var(X_i)$ existieren, ist die Form der Verteilung (diskret, schief, multimodal) egal.
 
 ### Veranschaulichung ZGWS und GGZ
 
@@ -145,7 +149,7 @@ for (use in c(10, 30)) {
 - Schwarze Kurve ist beobachtete Dichte dieser 50 Mittelwerte, rote die vom ZGWS "vorhergesagte" $\mathcal{N}(\mu = 4, \sigma^2 = 16/n)$.
 
 
-### Veranschaulichung ZGWS und GGZ 
+### Veranschaulichung ZGWS und GGZ
 
 ```{r zgws-ggz-vis-2, echo = FALSE, out.height='.8\\textheight'}
 par(mgp = c(2,1,0), mfrow = c(2,2))

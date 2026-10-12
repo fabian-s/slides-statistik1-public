@@ -21,7 +21,7 @@ positiv heisst abweichungen von EW tendenziell in die gleiche, negativ in versch
 Korelation: in $[-1, 1]$, normierung der kovarianz
 }
 
-### Der Verschiebungssatz für die Kovarianz 
+### Der Verschiebungssatz für die Kovarianz
 
 Es gilt zudem:
 $$
@@ -34,7 +34,7 @@ Beweis:
           &= E(XY) - 2E(X)E(Y) +  E(X)E(Y) = E(XY) - E(X)E(Y)
 \end{align*}
 
-### Unkorreliertheit 
+### Unkorreliertheit
 
 $X$ und $Y$ heißen **unkorreliert**, wenn
 $$
@@ -46,7 +46,9 @@ E(XY) = E (X) \cdot E (Y)
 $$
 gilt.
 
-Beachte: Aus Unabhängigkeit folgt Unkorreliertheit, aber der Umkehrschluss gilt i.A. nicht!  
+Beachte:\
+Aus Unabhängigkeit folgt Unkorreliertheit,\
+aber der Umkehrschluss gilt i.A. nicht!
 
 
 $X$ und $Y$ sind **positiv/negativ korreliert** falls
@@ -66,7 +68,7 @@ E(XY) & =  \sum_x \sum_y x \cdot y \: f_{X,Y}(x,y)\\
 }
 
 
-### Beispiel: Unabhängig vs Unkorreliert 
+### Beispiel: Unabhängig vs Unkorreliert
 
 Seien  $X \sim {\mathcal B}(\pi = \frac{1}{2})$ und $Y \sim {\mathcal B}(\pi = \frac{1}{2})$
 unabhängig.
@@ -97,7 +99,7 @@ z_2 = 0 & 1/4 & 0 & 1/4 & 1/2 \\
 z_2 = 1 & 0 & 1/4 & 0 & 1/4 \\ \hline
 f_{Z_1}(z_1) & 1/4 & 1/2 & 1/4 & 
 \end{array}$$
-$\implies f(z_1,z_2) \neq f(z_1) f(z_2)$ d.h. $Z_1$, $Z_2$ nicht unabhängig.  
+$\implies f(z_1,z_2) \neq f(z_1) f(z_2)$ d.h. $Z_1$, $Z_2$ nicht unabhängig.\
 Aber $E(Z_1) = 1, E(Z_2) = 0; E(Z_1 Z_2) = 0$, also $\Cov(Z_1,Z_2) = 0$!
 
 
@@ -135,7 +137,8 @@ $\operatorname{sgn}(x) := \frac{x}{|x|} = \begin{cases} 1 & x > 0 \\ 0 & x=0 \\ 
 
 ### Varianz der Summe zweier ZVn 
 
-Seien $X$ und $Y$ beliebige ZVn. Dann gilt für $X + Y$:
+Seien $X$ und $Y$ beliebige ZVn.\
+Dann gilt für $X + Y$:
 $$
 \Var(X + Y) = \Var(X) + \Var(Y) + 2 \cdot \Cov(X,Y)
 $$
@@ -169,9 +172,9 @@ f(x,y) \; = \; \frac{1}{2 \pi \sqrt{(1 - \rho^2)}} \: \exp
 $$
 
 - Die Randverteilungen von $X$ und $Y$ sind (für jedes
-$\rho$) standard-normalverteilt.\
+$\rho$) standard-normalverteilt.
 
-- Die Korrelation zwischen $X$ und $Y$ ist gleich $\rho$.\
+- Die Korrelation zwischen $X$ und $Y$ ist gleich $\rho$.
 
 - Aus Unkorreliertheit von $X$ und $Y$ folgt in diesem Spezialfall die
 Unabhängigkeit von $X$ und $Y$.
@@ -238,7 +241,7 @@ Die allgemeine bivariate Normalverteilung erhält man durch
 lineare Transformation der Komponenten der bivariaten Standardnormalverteilung:
 $$ X \to \mu_X + \sigma_X \cdot X; \qquad Y \to \mu_Y + \sigma_Y \cdot Y$$
 
-Insgesamt fünf Parameter: $\mu_X, \mu_Y, \sigma_X^2, \sigma_Y^2, \rho$.  
+Insgesamt fünf Parameter: $\mu_X, \mu_Y, \sigma_X^2, \sigma_Y^2, \rho$.\
 Es gilt $\sigma_{XY} := \Cov(X,Y) = \rho\sigma_{X}\sigma_Y$
 
 Notation: 

@@ -1,0 +1,755 @@
+```{r iD-setup, include=FALSE, cache=FALSE}
+# globalen Zustand merken, wird am Ende dieser Datei (Chunk iD-reset) wiederhergestellt
+.iD_vorher <- ls(all.names = TRUE)
+.iD_opts <- knitr::opts_chunk$get(c("echo", "cache", "message", "warning", "dev",
+                                    "fig.width", "fig.height", "out.width", "out.height"), drop = FALSE)
+.iD_theme <- ggplot2::theme_get()
+knitr::opts_chunk$set(echo = FALSE, cache = FALSE, message = FALSE, warning = FALSE, dev = "cairo_pdf",
+                      fig.width = 8, fig.height = 4.2, out.width = ".95\\textwidth", out.height = NULL)
+theme_set(theme_minimal(base_size = 20) +
+            theme(panel.grid.minor = element_blank(),
+                  plot.caption = element_text(size = 11, colour = "grey40")))
+stamp <- "Simulierte Beispieldaten"
+
+# ---- Live-Daten aus dem Google-Formular -------------------------------------------------------
+# Dateien in LIVE_DIR (Voreinstellung: slides/data):
+#   live-url.txt       eine Zeile: CSV-Export-URL der Antworttabelle oder lokaler Pfad
+#   live-form-url.txt  eine Zeile: Link zum Formular (QR-Code auf der Einstiegsfolie)
+#   live-since.txt     optional: Zeitstempel; frühere Antworten (Testantworten) werden ignoriert
+# Spalten der Antworttabelle NACH POSITION: 1 Zeitstempel, 2 längste Serie, 3 Studiengang, 4 Schlaf
+live_dir <- Sys.getenv("LIVE_DIR", unset = "")
+if (!nzchar(live_dir)) {
+  # slides/data, egal in welchem Verzeichnis knitr den Child-Code ausführt
+  out_dir <- knitr::opts_knit$get("output.dir")
+  cand <- c(if (!is.null(out_dir)) file.path(out_dir, "data"), "data", file.path("..", "..", "data"))
+  hit <- cand[file.exists(file.path(cand, "live-url.txt")) | file.exists(file.path(cand, "live-form-url.txt"))]
+  live_dir <- if (length(hit)) hit[1] else "data"
+}
+read_txt <- function(name) {
+  f <- file.path(live_dir, name)
+  if (!file.exists(f)) return(NA_character_)
+  x <- tryCatch(trimws(readLines(f, warn = FALSE, encoding = "UTF-8")), error = function(e) character())
+  x <- x[nzchar(x)]
+  if (length(x)) x[1] else NA_character_
+}
+fetch_csv <- function(src) {
+  if (grepl("^https?://", src)) {
+    tmp <- tempfile(fileext = ".csv")
+    old <- options(timeout = 20); on.exit(options(old))
+    utils::download.file(src, tmp, quiet = TRUE, mode = "wb")
+    tmp
+  } else src
+}
+read_csv_any <- function(f) {
+  first <- readLines(f, n = 1, warn = FALSE, encoding = "UTF-8")
+  cnt <- function(ch) lengths(regmatches(first, gregexpr(ch, first, fixed = TRUE)))
+  sep <- c(",", ";", "\t")[which.max(c(cnt(","), cnt(";"), cnt("\t")))]
+  read.csv(f, sep = sep, fileEncoding = "UTF-8-BOM", stringsAsFactors = FALSE,
+           strip.white = TRUE, check.names = FALSE, na.strings = c("", "NA"), header = TRUE)
+}
+dez <- function(x, k = 1) format(round(x, k), nsmall = k, decimal.mark = ",")
+num <- function(x) suppressWarnings(as.numeric(gsub(",", ".", trimws(as.character(x)), fixed = TRUE)))
+parse_ts <- function(x) {
+  x <- trimws(as.character(x))
+  fmts <- c("%d.%m.%Y %H:%M:%S", "%d.%m.%Y %H:%M", "%m/%d/%Y %I:%M:%S %p", "%m/%d/%Y %I:%M %p", "%m/%d/%Y %H:%M:%S", "%m/%d/%Y %H:%M",
+            "%Y-%m-%d %H:%M:%S", "%Y-%m-%dT%H:%M:%S", "%Y-%m-%d %H:%M", "%Y-%m-%d", "%d.%m.%Y", "%m/%d/%Y")
+  best <- as.POSIXct(rep(NA_character_, length(x)), tz = "Europe/Berlin")
+  for (f in fmts) {
+    p <- as.POSIXct(x, format = f, tz = "Europe/Berlin")
+    if (sum(!is.na(p)) > sum(!is.na(best))) best <- p
+  }
+  best
+}
+clean_form <- function(d) {
+  stopifnot(ncol(d) >= 4)
+  serie_raw <- trimws(as.character(d[[2]]))
+  schlaf_raw <- trimws(as.character(d[[4]]))
+  tibble(
+    ts = parse_ts(d[[1]]),
+    serie = ifelse(grepl("10", serie_raw), 10, num(serie_raw)),
+    gruppe = case_when(grepl("haupt", d[[3]], ignore.case = TRUE) ~ "Hauptfach",
+                       grepl("neben", d[[3]], ignore.case = TRUE) ~ "Nebenfach",
+                       TRUE ~ NA_character_),
+    schlaf = case_when(grepl("weniger", schlaf_raw, ignore.case = TRUE) ~ 4,
+                       grepl("mehr", schlaf_raw, ignore.case = TRUE) ~ 10,
+                       TRUE ~ num(schlaf_raw))
+  ) |>
+    mutate(serie = ifelse(serie >= 1 & serie <= 10, serie, NA),
+           schlaf = ifelse(schlaf >= 0 & schlaf <= 24, schlaf, NA))
+}
+sim_form <- function(n = 170) {
+  set.seed(20261013)
+  gen_run <- function() {   # ausgedachte Folge: zu viele Wechsel (Wechselwahrscheinlichkeit .62)
+    s <- integer(20); s[1] <- rbinom(1, 1, .5)
+    for (i in 2:20) s[i] <- if (runif(1) < .62) 1 - s[i - 1] else s[i - 1]
+    min(max(rle(s)$lengths), 10)
+  }
+  gruppe <- sample(c("Hauptfach", "Nebenfach"), n, replace = TRUE, prob = c(.6, .4))
+  kurz <- runif(n) < .2
+  schlaf <- round(2 * rnorm(n, mean = ifelse(kurz, 5.2, 7.3) + ifelse(gruppe == "Hauptfach", -.15, .15),
+                            sd = ifelse(kurz, 1, .9))) / 2
+  tibble(ts = as.POSIXct(NA), serie = replicate(n, gen_run()), gruppe = gruppe,
+         schlaf = pmin(pmax(schlaf, 4), 10))
+}
+read_live_form <- function(min_n = 10) {
+  src <- read_txt("live-url.txt")
+  if (is.na(src)) return(list(data = sim_form(), live = FALSE, note = "keine live-url.txt"))
+  d <- tryCatch(clean_form(read_csv_any(fetch_csv(src))), error = function(e) NULL)
+  if (is.null(d)) return(list(data = sim_form(), live = FALSE, note = "Antworten nicht lesbar"))
+  since <- read_txt("live-since.txt")
+  if (!is.na(since)) {
+    s0 <- parse_ts(since)
+    keep <- is.na(d$ts) | d$ts >= s0
+    # Schutz: Filter nur anwenden, wenn die Zeitstempel sicher lesbar sind
+    if (!is.na(s0) && mean(!is.na(d$ts)) >= .5) {
+      d <- d[keep, ]
+    } else if (!is.na(s0)) {
+      warning("live-since.txt ignoriert: Zeitstempel nicht sicher lesbar")
+    }
+  }
+  d <- d |> filter(!is.na(serie))
+  if (nrow(d) < min_n) return(list(data = sim_form(), live = FALSE, note = paste0("nur ", nrow(d), " brauchbare Antworten")))
+  list(data = d, live = TRUE, note = NULL)
+}
+live <- read_live_form()
+if (!live$live) warning("Live-Daten: ", live$note, " -- simulierte Daten verwendet")
+d_live <- live$data
+quelle <- if (live$live) "Antworten aus dem Hörsaal" else stamp
+form_url <- read_txt("live-form-url.txt")
+
+# ---- exakte Verteilung der längsten Serie bei n fairen Würfen, O(n^2) ---------------------------
+# A(m, k) = Anzahl 0/1-Folgen der Länge m ohne Serie > k; letzte Serie hat Länge j <= k,
+# davor eine zulässige Folge der Länge m - j, die mit dem anderen Symbol endet (leer: 2 Symbole)
+exact_longest_run <- function(n = 20) {
+  count_max_run <- function(k) {
+    A <- numeric(n + 1); A[1] <- 1
+    for (m in 1:n) { j <- 1:min(k, m); A[m + 1] <- sum(ifelse(m - j == 0, 2, A[m - j + 1])) }
+    A[n + 1]
+  }
+  cdf <- sapply(1:n, count_max_run) / 2^n
+  tibble(laenge = 1:n, p = diff(c(0, cdf)))
+}
+ex_run <- exact_longest_run(20)
+stopifnot(abs(sum(ex_run$p) - 1) < 1e-12)
+p_ge4 <- sum(ex_run$p[ex_run$laenge >= 4])
+p_le3 <- sum(ex_run$p[ex_run$laenge <= 3])
+pct <- function(p) round(100 * p)
+# gemeinsame Klassen für Münze und Hörsaal
+klassen <- c("1-2", "3", "4", "5", "6+")
+to_klasse <- function(l) factor(case_when(l <= 2 ~ "1-2", l == 3 ~ "3", l == 4 ~ "4", l == 5 ~ "5", TRUE ~ "6+"), levels = klassen)
+ex_bins <- ex_run |> mutate(klasse = to_klasse(laenge)) |> group_by(klasse) |> summarise(p = sum(p), .groups = "drop")
+room_bins <- d_live |> mutate(klasse = to_klasse(serie)) |> count(klasse, .drop = FALSE) |> mutate(p = n / sum(n))
+n_room <- nrow(d_live)
+room_ge4 <- mean(d_live$serie >= 4)
+```
+
+### Statistik I: eine Sprache lernen
+
+Vieles in der Statistik ist **nicht intuitiv**:\
+Zufall, Durchschnitte, Zusammenhänge, Unsicherheit.
+
+- Alltagssprache ist dafür zu ungenau:\
+"im Schnitt", "deutlich mehr", "wahrscheinlich", "hängt zusammen", ...
+- Ein großer Teil von Statistik I: eine **Sprache** lernen,\
+um über solche Dinge **präzise** zu sprechen -- und damit präzise zu denken.
+- Gilt auch für die Arbeit mit KI:\
+präzise fragen & Antworten prüfen geht nur mit präzisen Begriffen.
+
+$\implies$ Heute: zwei Beispiele, bei denen die Intuition danebenliegt & die nötigen Begriffsklärungen.\
+$\implies$ Generell: Präzision im Denken durch Präzision in der Sprache.\
+
+<br>
+> Wahrscheinlichkeitsmathe und Statistik liefern die Sprache, in der wir *präzise über unsicheres und unvollständig bekanntes* sprechen können.
+
+### Zum Einstieg
+
+Heute:
+
+- zwei kurze Messungen -- Sie liefern die Daten
+- daran: Was ist Statistik, wie arbeitet sie?
+- danach: (Statistik) studieren, während die KI immer besser wird
+
+\columnsbegin
+\column{.6\textwidth}
+Gleich brauchen Sie: Papier, Stift, Handy.
+
+Formular: 3 Fragen, anonym, ohne Anmeldung
+```{r iD-formlink, results="asis"}
+if (!is.na(form_url)) {
+  cat("\\url{", form_url, "}\n", sep = "")
+} else {
+  cat("\\texttt{TODO: Formular-Link (slides/data/live-form-url.txt)}\n")
+}
+```
+\column{.36\textwidth}
+\centering
+```{r iD-qr, fig.width=3, fig.height=3, out.width=".9\\textwidth", eval=!is.na(form_url)}
+par(mar = c(0, 0, 0, 0))
+plot(qrcode::qr_code(form_url, ecl = "M"))
+```
+```{r iD-qr-placeholder, results="asis", eval=is.na(form_url)}
+cat("\\fbox{\\parbox[c][3.2cm][c]{3.2cm}{\\centering TODO:\\\\QR-Code\\\\(live-form-url.txt fehlt)}}\n")
+```
+\columnsend
+
+
+### Messung 1: Zufall ausdenken
+
+Papier & Stift raus.
+
+Schreiben Sie eine Folge von 20 Münzwürfen auf -- **ohne** zu werfen:\
+`K` für Kopf, `Z` für Zahl.
+
+Ziel: Die Folge soll so aussehen, als käme sie von einer echten Münze.
+
+Zeit: 60 Sekunden.
+
+
+### Zählen und eintragen
+
+Meine Behauptung: Ausgedachte Folgen kann man meistens erkennen -- das prüfen wir gleich mit Ihren Daten.\
+Dafür reicht eine einzige Zahl pro Folge, die **längste Serie** gleicher Zeichen:
+
+\texttt{K Z Z K Z K K Z Z Z K Z K K Z K Z Z K K} $\longrightarrow$ \texttt{ZZZ} $\longrightarrow$ **3**
+
+\columnsbegin
+\column{.6\textwidth}
+Ins Formular:
+
+1. Ihre längste Serie
+2. Haupt- oder Nebenfach
+3. Wie lange Sie letzte Nacht geschlafen haben
+
+
+\column{.36\textwidth}
+\centering
+```{r iD-qr2, fig.width=3, fig.height=3, out.width=".9\\textwidth", eval=!is.na(form_url)}
+par(mar = c(0, 0, 0, 0))
+plot(qrcode::qr_code(form_url, ecl = "M"))
+```
+```{r iD-qr2-placeholder, results="asis", eval=is.na(form_url)}
+cat("\\fbox{\\parbox[c][3.2cm][c]{3.2cm}{\\centering TODO:\\\\QR-Code}}\n")
+```
+\columnsend
+
+### Messung 2: Weniger als der Durchschnitt?
+
+```{r iD-einkommen-data, include=FALSE}
+set.seed(2026)
+einkommen <- round(exp(rnorm(400, log(3300), .55)))
+ek_mean <- mean(einkommen); ek_med <- median(einkommen)
+ek_below <- mean(einkommen < ek_mean)
+eur <- function(x) format(round(x, -1), big.mark = ".", decimal.mark = ",")
+ek_plot <- ggplot(tibble(einkommen), aes(x = einkommen)) +
+  geom_histogram(binwidth = 250, boundary = 0, fill = "grey60", colour = "white") +
+  geom_vline(xintercept = ek_mean, linewidth = 1.1) +
+  coord_cartesian(xlim = c(0, 13000)) +
+  labs(x = "Monatseinkommen [Euro]", y = "Anzahl")
+```
+
+```{r iD-einkommen, fig.height=3.3}
+ek_plot + annotate("label", x = ek_mean + 300, y = Inf, vjust = 1.3, hjust = 0, size = 6,
+                   label = paste0("Durchschnitt: ", eur(ek_mean), " €"))
+```
+
+Monatseinkommen von 400 Personen (simulierte Beispieldaten).\
+Behauptung: "**`r pct(ek_below)`%** dieser Personen verdienen weniger als der Durchschnitt."
+
+Kann das stimmen? Handzeichen: ja oder nein?
+
+### Messung 2: Auflösung
+
+```{r iD-einkommen-aufl, fig.height=2.7}
+ek_plot +
+  geom_vline(xintercept = ek_med, linewidth = 1.1, linetype = "dashed") +
+  annotate("label", x = ek_mean + 300, y = Inf, vjust = 1.3, hjust = 0, size = 5.5,
+           label = paste0("Mittelwert: ", eur(ek_mean), " €")) +
+  annotate("label", x = ek_med - 300, y = Inf, vjust = 1.3, hjust = 1, size = 5.5,
+           label = paste0("Median: ", eur(ek_med), " €"))
+```
+
+- Die Behauptung **stimmt**. **Mittelwert** (der übliche "Durchschnitt"): Summe aller Werte / Anzahl der Werte
+- **Median**: der mittlere Wert -- die Hälfte liegt darunter, die Hälfte darüber
+- wenige sehr hohe Einkommen ziehen den Mittelwert nach oben, den Median aber nicht.\
+$\implies$ mehr als die Hälfte liegt hier unter dem Mittelwert (!)
+
+$\implies$ **"Der Durchschnitt" ist zu ungenau -- klären, was gemeint ist.** (Kap. 6)
+
+### Messung 1: Ihre Serien gegen die faire Münze
+
+```{r iD-serien, fig.height=3.4, fig.width=9}
+plot_bins <- bind_rows(
+  ex_bins |> mutate(quelle = "faire Münze (exakt berechnet)"),
+  room_bins |> dplyr::select(klasse, p) |> mutate(quelle = paste0("Hörsaal (n = ", n_room, ")"))
+) |> mutate(quelle = factor(quelle, levels = c("faire Münze (exakt berechnet)", paste0("Hörsaal (n = ", n_room, ")"))))
+ggplot(plot_bins, aes(x = klasse, y = p, fill = quelle)) +
+  geom_col(position = position_dodge(width = .75), width = .7) +
+  geom_text(aes(label = paste0(round(100 * p), " %")), position = position_dodge(width = .75), vjust = -.4, size = 5) +
+  scale_fill_manual(values = c("grey35", "#D55E00"), name = NULL) +
+  scale_y_continuous(labels = scales::percent, limits = c(0, max(.45, max(plot_bins$p) + .1))) +
+  labs(x = "längste Serie in 20 Würfen", y = "Anteil") +
+  theme(legend.position = "top", legend.text = element_text(size = 15))
+```
+
+- faire Münze: **`r pct(p_ge4)`%** aller Folgen haben eine Serie $\geq 4$ (exakt berechnet)
+- Hörsaal: **`r pct(room_ge4)`%** (n = `r n_room`)
+
+>- Wo unterscheiden sich die beiden Verteilungen?
+>- Aus der Forschung: Ausgedachte Folgen wechseln meist zu oft.
+
+\vspace{0pt plus 1filll}
+\footnotesize Bar-Hillel & Wagenaar (1991). The perception of randomness. *Advances in Applied Mathematics* 12(4):428--454.\
+`r if (!live$live) paste0("Hörsaal-Balken: ", stamp, ".")`
+
+### Ein einfaches Prognosemodell
+
+Regel: längste Serie $\geq 4 \implies$ Prognose "echt", sonst "ausgedacht"
+
+- Schwelle 4 kommt aus dem Modell "faire Münze" -- festgelegt, *bevor* Sie geschrieben haben
+- zwei Fehlerquoten:
+    - echte Folgen, die als "ausgedacht" gelten: `r pct(p_le3)`% (berechnet)
+    - ausgedachte Folgen, die als "echt" gelten: `r pct(room_ge4)`% (Ihre Daten)
+- für eine einzelne Folge oft falsch -- nützlich erst über viele Folgen
+- **Obacht:** Schwelle erst *nach* Ansicht der Daten wählen $\implies$ geschönte Fehlerquote
+
+>- *To consult the statistician after an experiment is finished is often merely to ask him to conduct a post mortem examination. He can perhaps say what the experiment died of.*\
+Ronald A. Fisher (1890--1962, Statistiker), 1938
+
+### Nebenbei gemessen: Ihr Schlaf
+
+```{r iD-schlaf, fig.height=4.75, fig.width=11, out.width="\\textwidth"}
+d_schlaf <- d_live |> filter(!is.na(schlaf))
+med_s <- median(d_schlaf$schlaf); mean_s <- mean(d_schlaf$schlaf)
+yl <- c(3.75, 10.25)
+ps1 <- ggplot(d_schlaf, aes(y = schlaf)) +
+  geom_histogram(binwidth = .5, boundary = .25, fill = "grey60", colour = "white") +
+  geom_hline(yintercept = mean_s, linewidth = 1.1) +
+  geom_hline(yintercept = med_s, linewidth = 1.1, linetype = "dashed") +
+  coord_cartesian(ylim = yl) +
+  labs(title = "Alle", y = "Schlaf letzte Nacht [h]", x = "Anzahl Personen")
+d_grp <- d_schlaf |> filter(!is.na(gruppe)) |> mutate(gruppe = factor(gruppe, levels = c("Hauptfach", "Nebenfach")))
+n_g <- d_grp |> count(gruppe, .drop = FALSE)
+both <- all(n_g$n >= 3)
+ps2 <- if (both) {
+  grp_sum <- d_grp |> group_by(gruppe) |> summarise(m = mean(schlaf), md = median(schlaf)) |>
+    mutate(x = as.numeric(gruppe))
+  set.seed(1)
+  ggplot(d_grp, aes(x = gruppe, y = schlaf)) +
+    geom_jitter(aes(colour = gruppe), width = .3, height = 0, alpha = .55, size = 2.2) +
+    geom_segment(data = grp_sum, aes(x = x - .4, xend = x + .4, y = m, yend = m), linewidth = 1.1) +
+    geom_segment(data = grp_sum, aes(x = x - .4, xend = x + .4, y = md, yend = md),
+                 linewidth = 1.1, linetype = "dashed") +
+    scale_colour_manual(values = c("#E69F00", "#56B4E9"), guide = "none") +
+    coord_cartesian(ylim = yl) +
+    labs(title = "Nach Studiengang", x = NULL, y = NULL)
+} else {
+  ggplot() + annotate("text", 0, 0, label = "zu wenige Antworten\nje Studiengang", size = 6) + theme_void()
+}
+(ps1 | ps2) & theme(plot.title = element_text(size = 18, face = "bold"), plot.margin = margin(2, 4, 0, 2))
+```
+
+\vspace{-1.2em}\small
+Links alle, rechts nach Studiengang (je Punkt eine Person). Linien: Mittelwert (durchgezogen), Median (gestrichelt).
+
+>- Schläft das Nebenfach länger als das Hauptfach -- oder umgekehrt?
+>- Was genau müsste man dafür vergleichen? Mittelwerte? Mediane? Einzelne Personen?
+
+\vspace{0pt plus 1filll}
+\footnotesize `r if (!live$live) paste0(stamp, ".")`
+
+
+### Was haben Sie gerade gemacht?
+
+In den letzten 20 Minuten haben Sie:
+
+1. **Daten erhoben:** Folge geschrieben, Serie gezählt, Formular ausgefüllt
+2. **Daten zusammengefasst:** Balkendiagramm, Histogramm, Mittelwert, Median
+3. **Daten mit einem Modell verglichen:** Ihre Serien vs. faire Münze
+4. **ein Prognosemodell angewendet** und seine Fehlerquoten bestimmt
+5. **eine Behauptung an Daten geprüft:** "mehr als die Hälfte unter dem Durchschnitt"
+
+$\implies$ **Das ist Statistik.**\
+Der Rest des Semesters: die meisten dieser Schritte genauer & sauberer.
+
+### Was ist Statistik?
+
+**Statistik als Wissenschaft bezeichnet eine Methodenlehre, die sich mit
+der Erhebung, der Darstellung, der Analyse und der Bewertung von Daten auseinander
+setzt. Ein zentraler Aspekt ist dabei die Modellbildung mit zufälligen
+Komponenten.**
+
+- **Deskriptive** Statistik: Beschreibung, Zusammenfassung, Visualisierung von Daten\
+  heute: Diagramme, Median & Mittelwert
+- **Explorative** Statistik: Suche nach Strukturen in Daten\
+  heute: Ihre Serien vs. faire Münze; Schlaf nach Studiengang
+- **Induktive** Statistik: Schluss von beobachteten Daten auf zugrundeliegende Strukturen\
+  heute: Fehlerquote aus dem Prognose-Modell; Gruppenunterschiede im Schlafverhalten
+
+**Auch große Teile von *Machine Learning* & KI sind im Kern induktive Statistik -- mit denselben Fehlerquellen.**
+
+### Theorie & Empirie
+
+Wie hängen Mathematik & Daten zusammen?
+
+\begin{center}
+\begin{tikzpicture}[
+    >={Stealth[length=2.5mm]}, thick,
+    konzept/.style = {font=\bfseries, align=center},
+    bsp/.style     = {font=\small, text=darkbrown, align=center},
+    weg/.style     = {font=\small\itshape, sloped, above, align=center}
+  ]
+  \node[konzept] (real) at (4.5, 3.0) {REALITÄT};
+  \node[bsp] at (4.5, 3.7) {Menschen in diesem Hörsaal,\\die sich Münzwürfe ausdenken};
+  \node[konzept] (theo) at (0, 0) {THEORIE};
+  \node[bsp] at (0, -0.8) {faire Münze:\\$P(K) = \tfrac12$, Würfe unabhängig};
+  \node[konzept] (emp) at (9, 0) {EMPIRIE};
+  \node[bsp] at (8.6, -0.8) {die Zahlen im Formular:\\3, 2, 4, 3, 5, 3, \ldots};
+  \draw[->] (real) -- (theo) node[weg, pos = .45] {Modell};
+  \draw[->] (real) -- (emp) node[weg, pos = .45] {Beobachtung};
+  \draw[<->] (theo) -- (emp) node[font=\small\itshape, midway, below = 1pt] {Vergleich: Ihre Serien gegen "ideale" Münze};
+\end{tikzpicture}
+\end{center}
+
+### Theorie & Empirie (2)
+
+\begin{center}
+\begin{tikzpicture}[
+    >={Stealth[length=2.5mm]}, thick,
+    konzept/.style = {font=\bfseries},
+    weg/.style     = {font=\small\itshape, sloped, above, align=center},
+    rueck/.style   = {densely dotted, ->},
+    rueckweg/.style = {font=\small\itshape, align=center}
+  ]
+  \node[konzept] (real)  at (4.5, 3.2)  {REALITÄT};
+  \node[konzept, align=center] (stoch) at (0, 0) {THEORIE:\\STOCHASTIK, STATISTIK};
+  \node[konzept, align=center] (daten) at (9, 0)      {EMPIRIE:\\DATEN};
+  \draw[->] (real) -- (stoch)
+    node[weg, pos = 0.45] {Mathematische\\Formalisierung};
+  \draw[->] (real) -- (daten)
+    node[weg, pos = 0.45] {Messung};
+  \draw[<->] (stoch) -- (daten)
+    node[font=\small\itshape, midway, below = 1pt] {Inferenz, Schätzung};
+  \draw[rueck] (stoch.north) to[bend left = 45]
+    node[rueckweg, above left = -2pt] {Induktion} (real.west);
+  \draw[rueck] (daten.north) to[bend right = 45]
+    node[rueckweg, above right = -2pt] {Deskription,\\Visualisierung} (real.east);
+\end{tikzpicture}
+\end{center}
+
+- **Modell:**\ vereinfachte, grobe Abbildung eines Ausschnitts der Realität in *Symbolen*
+- **Daten:**\ vereinfachte, grobe Abbildung eines Ausschnitts der Realität in *Zahlen*
+- gestrichelt: Schlüsse zurück auf die Realität -- unsicher, oft falsch.\
+  Grundproblem unseres Fachs: Wann sie tragen können & wie verlässlich sie sind.
+
+### Worum es in diesem Fach geht
+
+Statistik & maschinelles Lernen: die Pfeile in diesem Dreieck verstehen & nutzbar machen.\
+Jeder Pfeil ist eine Vereinfachung -- und eine mögliche Fehlerquelle:
+
+- **Formalisierung** (Realität $\rightarrow$ Theorie):\
+Welche Annahmen stecken im Modell? Passen sie zur Realität?
+- **Messung** (Realität $\rightarrow$ Daten):\
+Messen die Daten, was uns eigentlich interessiert? Wer oder was fehlt?
+- **Inferenz, Schätzung** (Daten $\leftrightarrow$ Theorie):\
+Welches Modell passt zu den Daten -- und wie sicher ist das?
+- **Deskription, Induktion** (zurück zur Realität):\
+Was sagen Daten und Modell über die Welt -- auch über die Stichprobe hinaus?
+
+$\implies$ ML automatisiert v.a. den unteren Pfeil -- die übrigen brauchen Fachwissen & Urteilsvermögen.
+
+
+### Modell $\neq$ Realität
+
+>- *All models are wrong, but some are useful.*\
+George E. P. Box (1919--2013, Statistiker)
+
+>- "faire Münze": eine Modellannahme -- echte Münzen & Würfe sind nicht exakt fair & unabhängig.\
+Als Vergleichsmaßstab trotzdem nützlich.
+>- *Far better an approximate answer to the right question, which is often vague, than an exact answer to the wrong question, which can always be made precise.*\
+John W. Tukey (1915--2000, Statistiker), 1962
+>- $\implies$ **Beurteilen erfordert Fachwissen über die Realität *und* über das Modell.**
+
+### Auch ein KI-Sprachmodell ist ein Modell
+
+- an riesige Datenmengen angepasst:\
+trainiert darauf, Text plausibel fortzusetzen und Antworten zu geben, die Menschen gut bewerten
+- **Messung:** Was wurde dabei eigentlich "gemessen"?\
+Text und menschliche Bewertungen -- nicht die Welt selbst.\
+$\implies$ sehr nützlich, solange "gut bewertet" und "richtig" zusammenfallen
+- **Induktion:** Wie gut funktioniert es in einer neuen Situation?\
+Hängt (auch) davon ab, wie ähnlich diese den Trainingsdaten ist.\
+$\implies$ dieselbe Frage wie bei jedem Schluss von beobachteten Daten auf neue Fälle
+
+$\implies$ **Dieselben Pfeile, dieselben Fragen -- nur in viel größerem Maßstab.**
+
+### Statistik studieren, während KI besser wird
+
+- KI-Werkzeuge: deutlich besser als vor 2 Jahren
+- in 4 Jahren? Weiß niemand...
+- Ihre Studienentscheidung ist trotzdem jetzt fällig.
+
+$\implies$ Entscheidung unter Unsicherheit -- ein klassisches Statistik-Thema:\
+mögliche Szenarien auflisten, dann die Handlung wählen, die in möglichst vielen davon gut ist.
+
+\vspace{0pt plus 1filll}
+\footnotesize Statistische Entscheidungstheorie: A. Wald (1950), *Statistical Decision Functions*.
+
+### Drei Welten
+
+Grobe Szenarien für 2030 -- nicht vollständig, aber sie decken die Spanne ab:
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.2cm}>{\raggedright\arraybackslash}p{7.6cm}@{}}
+\toprule
+\textbf{Szenario} & \textbf{KI im Jahr 2030 \ldots} \\
+\midrule
+Plateau & \ldots{} ist kompetenter, immer noch unzuverlässiger Assistent \\
+Fortschritt & \ldots{} führt aus; Menschen stellen die Fragen, prüfen die Ergebnisse, haften dafür \\
+Vollautomatisierung & \ldots{} erledigt alle (geistige) Arbeit selbst -- Menschen nicht mehr gebraucht \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Was kommt, weiß niemand. Entscheiden müssen wir trotzdem, und können das auch...
+
+### Die robuste Entscheidung
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+ & \textbf{selbst lernen} & \textbf{erledigen lassen} \\
+\midrule
+Szenario 1: Plateau & $+$ & $--$ \\
+Szenario 2: Fortschritt & $++$ & $-$ \\
+Szenario 3: Vollautomatisierung & $0$ & $0$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+- Szenario 1: unzuverlässige *Agents* anweisen & kontrollieren -- geht nur mit eigenem Können
+- Szenario 2: Prüfen & Verantworten bleibt bei Menschen -- echte Kompetenz zählt *mehr* als heute, Routinearbeit gibt's nicht mehr
+- Szenario 3: es ist egal, was Sie tun
+
+$\implies$ **Selbst lernen ist in keinem Szenario schlechter, in den meisten besser.**
+
+
+### Drei Fälle
+
+- **Post Office (UK), 2000--2014:**\
+  736 Menschen strafverfolgt -- auf Basis von Zahlen aus einer fehlerhaften Buchhaltungssoftware
+- **Gerichte weltweit, seit 2023:**\
+  über 2 100 Entscheidungen zu KI-erfundenen Zitaten in Schriftsätzen (von Anwält:innen & Privatpersonen)
+- **Air Canada, 2024:**\
+  Chatbot erfindet Erstattungsregel -- die Airline haftet
+
+$\implies$ **Wer die Verantwortung für ein Ergebnis übernimmt, muss es verstehen und prüfen können.**\
+Neu ist: fertige, flüssig formulierte Ergebnisse gibt es jetzt auf Knopfdruck.
+
+\vspace{0pt plus 1filll}
+\footnotesize Quellen: [BBC: Post Office Horizon scandal](https://www.bbc.com/news/business-56718036); [D. Charlotin, *AI Hallucination Cases*](https://www.damiencharlotin.com/hallucinations/) (Stand 5.10.2026); [The Guardian zu Moffatt v. Air Canada, 2024 BCCRT 149](https://www.theguardian.com/world/2024/feb/16/air-canada-chatbot-lawsuit).
+
+### Studie 1: Entwickler:innen mit KI-Werkzeugen
+
+\columnsbegin
+\column{.5\textwidth}
+**Wer:** 16 erfahrene Open-Source-Entwickler:innen, jeweils im eigenen Projekt
+
+**Was:** 246 echte Aufgaben
+
+**Design:** pro Aufgabe ausgelost: KI erlaubt / verboten
+
+**Gemessen:** Bearbeitungszeit\
+dazu: Erwartung vorher, Gefühl nachher
+\column{.48\textwidth}
+```{r iD-metr, fig.width = 6, fig.height = 4.6, out.width = "\\textwidth"}
+metr <- tibble(
+  was = factor(c("Erwartung\nvorher", "Gefühl\nnachher", "Messung"),
+               levels = c("Erwartung\nvorher", "Gefühl\nnachher", "Messung")),
+  wert = c(-24, -20, 19)
+)
+ggplot(metr, aes(was, wert, fill = wert > 0)) +
+  geom_hline(yintercept = 0, colour = "grey40") +
+  geom_col(width = .6) +
+  geom_text(aes(label = sprintf("%+d %%", wert), vjust = ifelse(wert > 0, -.4, 1.4)), size = 7) +
+  scale_fill_manual(values = c("grey55", "#654321"), guide = "none") +
+  scale_y_continuous(limits = c(-32, 30), breaks = NULL) +
+  labs(x = NULL, y = "Bearbeitungszeit mit KI") +
+  theme(panel.grid = element_blank(), text = element_text(size = 20))
+```
+\columnsend
+
+Auslosen $\implies$ fairer Vergleich (sonst evtl.: leichtere Aufgaben eher mit KI bearbeitet)
+
+\vspace{0pt plus 1filll}
+\footnotesize Becker, Rush, Barnes, Rein (METR, 2025), arXiv:2507.09089. Werkzeuge von Anfang 2025; kleine Stichprobe.
+
+### Studie 2: Schüler:innen mit GPT-4 beim Üben
+
+\columnsbegin
+\column{.5\textwidth}
+**Wer:** ca. 1000 Schüler:innen, Mathematik, Türkei
+
+**Design:** Klassen ausgelost: ohne KI / GPT-4 frei / GPT-4 als Tutor (gibt nur Hinweise)
+
+**Gemessen:** Leistung in der Übung (mit KI) und in der Klausur danach (alle ohne KI)
+
+**Tutor:** +127% in der Übung, kein Nachteil in der Klausur
+\column{.48\textwidth}
+```{r iD-bastani, fig.width = 6, fig.height = 4.6, out.width = "\\textwidth"}
+bast <- tibble(
+  was = factor(c("Übung,\nmit GPT-4", "Klausur,\nohne"), levels = c("Übung,\nmit GPT-4", "Klausur,\nohne")),
+  wert = c(48, -17)
+)
+ggplot(bast, aes(was, wert, fill = wert > 0)) +
+  geom_hline(yintercept = 0, colour = "grey40") +
+  geom_col(width = .5) +
+  geom_text(aes(label = sprintf("%+d %%", wert), vjust = ifelse(wert > 0, -.4, 1.4)), size = 7) +
+  scale_fill_manual(values = c("#654321", "grey55"), guide = "none") +
+  scale_y_continuous(limits = c(-30, 60), breaks = NULL) +
+  labs(x = NULL, y = "Leistung vs. Kontrollgruppe") +
+  theme(panel.grid = element_blank(), text = element_text(size = 20))
+```
+\columnsend
+
+Klausur ohne KI = die eigentliche Messung; Übung mit KI misst Schüler:in + Assistent.
+
+\vspace{0pt plus 1filll}
+\footnotesize Bastani et al. (2025), *PNAS* 122(26), doi:10.1073/pnas.2422633122. Experiment in echten Schulklassen, Gruppen ausgelost.
+
+### Was folgt daraus
+
+- Studie 1: gefühlt 20% schneller, gemessen 19% langsamer
+- Studie 2: in der Übung besser, in der Klausur schlechter
+
+$\implies$ **Wer fertige Ergebnisse übernimmt, überschätzt leicht das eigene Können.**\
+Ob man etwas kann, zeigt sich erst ohne Hilfe -- z.B. in der Klausur.
+
+>- *The first principle is that you must not fool yourself -- and you are the easiest person to fool.*\
+Richard P. Feynman (1918--1988, Physiker), 1974
+>- Obacht: Sprachmodelle werden u.a. darauf trainiert, dass Ihnen ihre Antworten gefallen.
+
+### Warum gerade Statistik
+
+Wer ein Ergebnis verantwortet, muss beantworten können:
+
+- Wurde gemessen, was behauptet wird? (Kap. 1)
+- Wie unsicher ist die Zahl? (Kap. 2, 9)
+- Für wen gilt sie? (Kap. 4, 9)
+- Ist es eine Ursache? (Kap. 11)
+
+$\implies$ **Genau das sind die Themen dieses Fachs.**\
+Je mehr Antworten & Analysen KI liefert, desto öfter stellen sich diese Fragen.
+
+Und beim Lernen kann KI enorm helfen: Erklärungen & Aufgaben zu jedem Thema, so oft Sie wollen.
+
+### Was beim Lernen hängen bleibt
+
+Lernforschung, vielfach repliziert:
+
+- **selbst abfragen** wirkt besser als wiederlesen (Roediger & Karpicke 2006)
+- **selbst lösen** wirkt besser als die Lösung lesen (Slamecka & Graf 1978)
+- Lernbedingungen, die sich schwerer anfühlen, führen oft zu besserem Behalten\
+  ("***desirable difficulties***", Bjork 1994)
+
+$\implies$ **Wer die Anstrengung an einen Assistenten abgibt, lernt nichts.**
+
+\vspace{0pt plus 1filll}
+\footnotesize Roediger & Karpicke (2006), *Psychological Science* 17(3); Slamecka & Graf (1978), *J. Exp. Psychol.: Human Learning and Memory* 4(6); Bjork (1994), "desirable difficulties".
+
+### Zwei Arten, KI zu benutzen
+
+- **zum Lernen:** erklären lassen, abfragen lassen, Gegenbeispiele, Fehlersuche im eigenen Code
+- **zum Erledigen:** Lösung schreiben lassen -- dabei lernen Sie nichts
+- beim Chatten fühlt sich beides gleich an, in der Klausur nicht
+
+>- *Civilization advances by extending the number of important operations which we can perform without thinking about them.*\
+Alfred North Whitehead (1861--1947, Mathematiker), 1911
+
+>- $\implies$ Die Frage ist nur: *welche* Operationen?\
+Befehle & Begriffe nachschlagen, Routinearbeit: $\checkmark$\
+
+### Zum Lernen: oneTutor
+
+\columnsbegin
+\column{.58\textwidth}
+- Chatbot für diesen Kurs: antwortet anhand der Kursmaterialien
+- Stil **Sokratisch**: hilft mit gezielten Rückfragen, selbst auf die Antwort zu kommen\
+$\implies$ KI *zum Lernen*, wie eben besprochen
+- Stil **Normal**: beantwortet Fragen direkt -- zum Nachschlagen
+- **Thinking** einschalten: denkt länger nach, gründlichere Antworten
+
+\vspace{.5em}
+\includegraphics[width=2.6cm]{pics/qr-onetutor-2627.png}
+\column{.4\textwidth}
+\centering
+\includegraphics[height=.78\textheight]{pics/onetutor-sokratisch.png}
+\columnsend
+
+### So arbeiten wir in diesem Kurs
+
+- KI-Werkzeuge: erlaubt & sehr nützlich -- aber erst *nach* einem eigenen Versuch
+    - erst selbst versuchen, dann fragen / helfen lassen
+    - erklären & abfragen lassen statt Lösungen beauftragen
+    - nur abgeben, was Sie *selbst* erklären können
+- Benotete Übungsblätter (Hauptfach): **ohne KI-Werkzeuge**
+    - Blätter = Übung, Klausur = Prüfung ohne Hilfe (vgl. Studie 2):\
+      wer die Blätter erledigen lässt, übt nicht
+    - kontrollieren können wir das nicht -- die Regel ist in Ihrem eigenen Interesse
+- Von uns:
+    - (fast) jede Methode erst am Beispiel, dann die Definition
+    - wir sagen, wo Methoden unsicher sind und wo wir KI benutzt haben
+    - geprüft wird nur, was gelehrt wurde
+
+### Dieses Semester (1)
+
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}r>{\raggedright\arraybackslash}p{3.9cm}>{\raggedright\arraybackslash}p{6.9cm}@{}}
+\toprule
+ & \textbf{Kapitel} & \textbf{Die Frage, die Sie danach stellen können} \\
+\midrule
+1 & Messung, Skalen & Was wurde hier eigentlich gemessen -- und wie? \\
+2 & Wahrscheinlichkeit & Was heißt "wahrscheinlich" überhaupt? \\
+3 & Diskrete Zusammenhänge & Hängt das zusammen -- oder nur in dieser Tabelle? \\
+4 & Zufallsvariablen, Verteilungen & Wie sähe es aus, wenn nur der Zufall wirkt? \\
+5 & Grafiken & Zeigt das Bild die Daten oder eine Meinung? \\
+6 & Kennwerte & Mittelwert oder Median -- und warum hier? \\
+\bottomrule
+\end{tabular}
+
+\vspace{1em}
+Roter Faden: Schlaf im ersten Semester -- Umfrage unter Erstsemestern, ab Blatt 1.
+
+### Dieses Semester (2)
+
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}r>{\raggedright\arraybackslash}p{3.9cm}>{\raggedright\arraybackslash}p{6.9cm}@{}}
+\toprule
+ & \textbf{Kapitel} & \textbf{Die Frage, die Sie danach stellen können} \\
+\midrule
+7 & Parametrische Verteilungen & Welche Annahmen stecken in diesem Modell? \\
+8 & Zufallsvektoren & Was passiert, wenn mehrere Dinge gleichzeitig zufällig sind? \\
+9 & Grenzwertsätze & Wie groß muss die Stichprobe sein, damit ich der Schätzung traue? \\
+10 & Korrelation & Wie eng hängen zwei Messungen zusammen -- und wie misst man das? \\
+11 & Kausalität & Hat das eine das andere verursacht? \\
+\bottomrule
+\end{tabular}
+
+### Wie es weitergeht
+
+- **Moodle:** in den Kurs einschreiben: [moodle.lmu.de/course/view.php?id=48727](https://moodle.lmu.de/course/view.php?id=48727) (Schlüssel s. Orga-Folien)\
+  dort: Folien, Übungsblätter, Ankündigungen, Forum
+- **Blatt 1** erscheint diese Woche:\
+  Schlaf-Umfrage unter Erstsemestern beschreiben -- Messungen, Häufigkeiten, Grafiken, etc.
+- **Übungen:** Termine & Anmeldung s. Orga-Folien
+- **Nächste Vorlesung: Messung & Skalen**\
+  Was ist ein Merkmal, was eine Skala -- und warum kann man "Schlafdauer" mitteln, "Studiengang" aber nicht?
+
+```{r iD-reset, include=FALSE, cache=FALSE}
+# Chunk-Optionen und ggplot-Theme für die folgenden Kapitel zurücksetzen,
+# alle in dieser Datei angelegten Objekte entfernen
+knitr::opts_chunk$set(.iD_opts)
+ggplot2::theme_set(.iD_theme)
+rm(list = setdiff(ls(all.names = TRUE), .iD_vorher))
+```

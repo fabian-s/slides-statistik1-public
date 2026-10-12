@@ -1,6 +1,6 @@
 ## Erwartungswert einer Zufallsvariablen
 
-### Erwartungswert einer ZV 
+### Erwartungswert einer ZV
 
 ::: {.block}
 #### Definition: Diskreter Erwartungswert
@@ -21,42 +21,42 @@ E(X) &:= \int_{-\infty}^\infty x \cdot f_X(x) \,dx
 \end{align*}
 :::
 
-### Erwartungswert einer  ZV 
+### Erwartungswert einer  ZV
 
-**Intuition:**  
-Der Erwartungswert ist *gewichtetes arithmetisches Mittel* der möglichen Werte einer ZV, wobei die Gewichte den Wahrscheinlichkeiten entsprechen, einen 
-bestimmten Wert zu beobachten.  
-\  
+**Intuition:**\
+Der Erwartungswert ist *gewichtetes arithmetisches Mittel* der möglichen Werte einer ZV, wobei die Gewichte den Wahrscheinlichkeiten entsprechen, einen
+bestimmten Wert zu beobachten.\
+\
 
 - Der Erwartungswert existiert bzw. ist endlich, wenn gilt:
 
   - für diskrete ZV: $\sum_{x \in T_X} |x| \cdot f(x) < \infty$ (absolut konvergente Summe),
   - für stetige ZV: $\int_{-\infty}^\infty |x f(x)| \,dx = \int_{-\infty}^\infty |x| f(x) \,dx< \infty$ (absolut integrierbar).
-  
-\  
+
+\
 
 - Beachte:  $\sum_{x \in T_X} x \cdot P(X = x) = \sum_{x \in \mathbb{R}} x \cdot P(X = x)$, da $P(X = x) = 0 \;\forall\, x \notin T_X$
 
-### Eigenschaften des Erwartungswertes 
+### Eigenschaften des Erwartungswertes
 
-- Sei $X = a$ mit Wahrscheinlichkeit 1 ("*deterministische* ZV").
+- Sei $X = a$ mit Wahrscheinlichkeit 1 ("*deterministische* ZV").\
 Dann gilt: $$E(X) = a$$
-\  
+\
 
-- **Linearität des Erwartungswertes**:  
+- **Linearität des Erwartungswertes**:\
 Sei $a, b \in \mathbb{R}$ und $X, Y$ beliebige ZV. Dann gilt:
-$$E(a \cdot X + b \cdot Y) = a \cdot E (X) + b \cdot E (Y)$$  
+$$E(a \cdot X + b \cdot Y) = a \cdot E (X) + b \cdot E (Y)$$\
 $\implies$ Für beliebige $a, b \in \mathbb{R}$ gilt daher $$E(aX + b) = a \cdot E(X) + b$$
 
-- Ist $f(x)$ symmetrisch um einen Punkt $c$, d.h. $f(c-x) = f(c+x) \;\forall\, x \in T_X$,  
+- Ist $f(x)$ symmetrisch um einen Punkt $c$, d.h. $f(c-x) = f(c+x) \;\forall\, x \in T_X$,\
 dann ist $E(X) = c$.
-\  
+\
 
 \note{
 $E(aX + b) = aE(X) + b = aE(X) + bE(Y) $, mit $Y$ als deterministische Zufallsvariable mit Träger $T_Y = \{1\}$
 }
 
-### Eigenschaften des Erwartungswertes II 
+### Eigenschaften des Erwartungswertes II
 
 Allgemeiner auch für beliebige
 $a_1, ..., a_n \in \mathbb{R}$ und beliebige ZV $X_1, ..., X_n$:
@@ -66,9 +66,10 @@ $$E\left( \sum_{i=1}^n a_iX_i \right) = \sum_{i=1}^n a_i \cdot E(X_i)$$
 <!-- Daher gilt für $X \sim {\mathcal B}(n, \pi)$: $E(X)=n \pi$-->
 
 
-### Transformationsregel für Erwartungswerte 
+### Transformationsregel für Erwartungswerte
 
-Sei $X$ eine ZV und $g:\mathbb{R} \to \mathbb{R}$ eine reelle Funktion. Dann gilt für $Y = g(X)$:
+Sei $X$ eine ZV und $g:\mathbb{R} \to \mathbb{R}$ eine reelle Funktion.\
+Dann gilt für $Y = g(X)$:
 
 $$
 E(Y) = E[g(X)] = \begin{cases} \sum_{x \in {\cal T}} g(x)\, f(x) & X \text{ diskret} \\
@@ -81,7 +82,7 @@ $$
 für lineare $g()$ : $E(g(X)) = g(E(X))$
 }
 
-### Beispiel 
+### Beispiel
 
 Sei $X$ eine ZV mit folgender Wahrscheinlichkeitsfunktion
 $$
@@ -128,14 +129,14 @@ Obacht: $$4 \frac{3}{4} = E(X^2) \neq E(X)^2 =
 
 ### Erwartungswert von ZVn mit Träger $\mathbb{N}^+$
 
-Für ZV $X$ mit Träger $\cal{T}_X = \mathbb{N}^+$ gilt: 
-$E(X) = \sum_{k=1}^\infty P(X \geq k)$
+Nur für ZV $X$ mit Träger $\cal{T}_X = \mathbb{N}^+$ gilt außerdem:
+$$E(X) = \sum_{k=1}^\infty P(X \geq k)$$
 
 Beweis:
 \begin{align*}
 \sum_{k=1}^\infty P(X \geq k) &= \sum_{k=1}^\infty \sum_{t = k}^\infty P(X = t)\\
                               &= P(X = 1) + P(X = 2) + P (X = 3) + P(X = 4) + \ldots \\
-                              &\phantom{=}\phantom{P(X = 1)\;\;}+ P(X = 2) + P(X = 3) + P(X = 4) + \ldots \\ 
+                              &\phantom{=}\phantom{P(X = 1)\;\;}+ P(X = 2) + P(X = 3) + P(X = 4) + \ldots \\
                               &\phantom{=}\phantom{P(X = 1) + P(X = 2)\;\;}+ P(X = 3) + P(X = 4) + \ldots \\
                               &\phantom{=}\phantom{P(X = 1) + P(X = 2) + P(X = 3)\;\;} + P(X = 4) + \ldots\\
                               &\phantom{=}\;\;\; + \ldots \ldots \ldots \\

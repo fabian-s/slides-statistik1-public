@@ -3,62 +3,61 @@
 ### Stetige Zufallsvariable - Definition 1
 
 :::{.block}
-#### Def.: **Stetige Zufallsvariable**  
-Eine Zufallsvariable $X$ ist **stetig**, falls ihr Träger eine *überabzählbare* Teilmenge der reellen Zahlen $\mathbb{R}$ ist.\
+#### Def.: **Stetige Zufallsvariable**
+Eine Zufallsvariable $X$ ist **stetig**, falls ihr Träger eine *überabzählbare* Teilmenge der reellen Zahlen $\mathbb{R}$ ist.
 :::
-\  
+\
 
-*Beispiel:*  
-Glücksrad mit stetigem Wertebereich $[0°, 360°)$  
+*Beispiel:*\
+Glücksrad mit stetigem Wertebereich $[0°, 360°)$\
 Von Interesse also die Zufallsvariable, die den *exakten* Winkel angibt, an dem das Glücksrad stehen bleibt.
 
 ### Stetige Zufallsvariablen - Definition 2
 
 :::{.block}
-#### Def.: **Stetige Zufallsvariable**  
-Eine Zufallsvariable $X$ heißt *stetig*, wenn es eine Funktion $f(x) \geq 0$ gibt,
+#### Def.: **Stetige Zufallsvariable**
+Eine Zufallsvariable $X$ heißt *stetig*, wenn es eine Funktion $f_X(x) \geq 0$ gibt,
 so dass sich die Verteilungsfunktion $F_X(x) := P(X \leq x)$ von $X$ wie
 folgt darstellen lässt:
 $$F_X(x) = \int_{-\infty}^x f_X(u) du$$
 :::
 
 :::{.block}
-#### Def.: **Dichtefunktion einer (stetigen) ZV**  
+#### Def.: **Dichtefunktion einer (stetigen) ZV**
 
-Diese nicht-negative Funktion $f(x)$ zur Verteilungsfunktion $F(x)$ heißt *Wahrscheinlichkeitsdichte*
-(auch: *Dichte* oder *Dichtefunktion*) von $X$. 
+Diese nicht-negative Funktion $f_X(x)$ zur Verteilungsfunktion $F_X(x)$ heißt *Wahrscheinlichkeitsdichte*
+(auch: *Dichte* oder *Dichtefunktion*) von $X$.
 :::
 \
 
-Beachte: bei *diskreten* Zufallsvariablen gilt $F(x) = \sum_{i: x_i \leq x} f(x_i)$.
+Beachte: bei *diskreten* Zufallsvariablen gilt $F_X(x) = \sum_{i:\, x_i \in T_X,\, x_i \leq x} f_X(x_i)$.
 
-### Dichtefunktionen 
+### Dichtefunktionen
 
-- Nicht-negative, *normierte* Funktion $f(x) \geq 0$ mit 
+- Nicht-negative, *normierte* Funktion $f(x) \geq 0$ mit\
   $\int_{-\infty}^{+\infty} f(x)\,dx = 1$
 - $f(x)$ selbst gibt **keine W.keit** an, sondern misst die *"Dichte"* von Realisierungen von $X$ in der Umgebung von $x$
 - Intuitiv: Je höher die Dichte an einer Stelle, desto mehr "W.keit" steckt in der Umgebung dieser Stelle
   - Je größer $f(x)$, desto wahrscheinlicher ist es, dass $X$ Werte in der Nähe von $x$ annimmt
   - W.keit für $X$ in einem Intervall $[a,b]$ ist $$P(a \leq X \leq b) = \int_a^b f(x)\,dx$$ -- Dichte also quasi  *Vorstufe* von Wahrscheinlichkeiten
 
-### Folgerungen 
+### Folgerungen
 
-- $F(x)$ einer stetigen ZV ist 
-    - stetig und 
-    - monoton wachsend 
+- $F(x)$ einer stetigen ZV ist
+    - stetig und
+    - monoton wachsend
     - mit $\lim\limits_{x \to \infty} F(x) = 1$,   $\lim\limits_{x \to -\infty} F(x) = 0$
 - $\int_{-\infty}^{+\infty} f(x)\,dx = 1 \qquad$  (da $F(\infty) = 1$)
-\
-- Mit Dichte- bzw. Verteilungsfunktion lassen sich W.keiten für beliebige Teilmengen des 
-Trägers ausrechnen:  
-  $P(X \in [a, b])	=  \int_a^b f(x)\,dx = F(b) - F(a)$  
+- Mit Dichte- bzw. Verteilungsfunktion lassen sich W.keiten für beliebige Teilmengen des
+Trägers ausrechnen:\
+  $P(X \in [a, b])	=  \int_a^b f(x)\,dx = F(b) - F(a)$\
   $\implies$ **Unintuitive Konsequenz:**  für stetige ZV gilt $$P(X = x) = 0 \; \forall \; x \in \mathbb{R} \;(!!)$$   da $\int^x_x f_X(u)du = 0$
-  
+
   \scriptsize [Video dazu von `3blue1brown`](https://youtu.be/ZA4JkHKZM50)
 
 ### Folgerungen
 
-- $\lim\limits_{x \to -\infty} F(x) = 0$ 
+- $\lim\limits_{x \to -\infty} F(x) = 0$
 - $\lim\limits_{x \to \infty} F(x) = 1$
 - $F'(x) = f(x)$ überall dort wo $f(x)$ stetig ist.
 
@@ -132,7 +131,7 @@ p1 + p2 + p3
 ```
 
 \scriptsize
-*Für Expert:innen:* **Maßtheorie** vereinheitlicht diskret und stetig:
+*Für Expert:innen:* **Maßtheorie** vereinheitlicht diskret und stetig:\
 $\int_{[a,b]} \,dP_X = \int_{[a,b]} f_X \,d\mu$ mit $\mu$ = Lebesgue-Maß (stetig: Integral)
 bzw. Zählmaß (diskret: Summe).
 

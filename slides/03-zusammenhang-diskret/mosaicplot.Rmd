@@ -4,7 +4,7 @@
 
 Beispiel: Überleben beim Titanic-Untergang
 
-  -  Mehrere diskrete Merkmale: 
+  -  Mehrere diskrete Merkmale:
       - Geschlecht (m / w)
       - Klasse (1st / 2nd / 3rd / Crew)
       - Alter (Kind/ Erwachsene)
@@ -70,8 +70,8 @@ Bedingte Verteilung:
 apply(Titanic, FUN = sum, MAR = c(2, 4))/apply(Titanic, FUN = sum, MAR = c(2))
 ```
 
-Überlebens-Chance Frauen: $\frac{344}{126} \approx 2.7 \approx 3:1$  
-Überlebens-Chance Männer: $\frac{367}{1364} \approx 0.27 \approx 1:3$  
+Überlebens-Chance Frauen: $\frac{344}{126} \approx 2.7 \approx 3:1$\
+Überlebens-Chance Männer: $\frac{367}{1364} \approx 0.27 \approx 1:3$\
 Chancenverhältnis: $10$
 
 \note{erkläre unterschied zu bed. rel. hfgk!}
@@ -79,7 +79,7 @@ Chancenverhältnis: $10$
 ### Mosaik-Plot
 
 -  *Flächentreue* Darstellung von gemeinsamen Häufigkeiten
--  Aufteilung schrittweise:  
+-  Aufteilung schrittweise:\
   Zuerst nach *Einfluss*größen, dann nach *Ziel*größe aufteilen
 -  Gut geeignet für mehrkategoriale ordinale Daten
 -  Auch für höhere Dimensionen geeignet (... angeblich)

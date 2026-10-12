@@ -9,6 +9,10 @@ main-embed.pdf: main.pdf
 	# embed fonts:
 	gs -dNOPAUSE -sDEVICE=pdfwrite -sOUTPUTFILE=main-embed.pdf -dBATCH main.pdf
 
+# Live-Render der Einführung mit den aktuellen Formular-Antworten:
+live:
+	bash live.sh
+
 texclean:
 	rm -rf *.html
 	rm -rf *.md

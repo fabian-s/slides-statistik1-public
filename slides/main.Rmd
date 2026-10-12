@@ -1,11 +1,11 @@
 ---
-title: | 
-    | Statistik I 
+title: |
+    | Statistik I
 subtitle: |
     | *Deskriptive Statistik & Explorative Datenanalyse*
-author: | 
+author: |
     | **LMU München**
-output: 
+output:
   beamer_presentation:
     latex_engine: xelatex
     keep_tex: true
@@ -26,7 +26,7 @@ linkcolor: darkbrown
 ```{r setup, include=FALSE, cache=FALSE, code = readLines('setup.R')}
 ```
 
-```{r 0-orga, child="orga-2025.Rmd"}
+```{r 0-orga, child="orga-2026.Rmd"}
 ```
 
 ### Inhalt
@@ -38,16 +38,7 @@ linkcolor: darkbrown
 
 # Einführung
 
-```{r 0-bsp, child="00-intro/intro-beispiele.Rmd"}
-```
-
-```{r 0-bsp, child="00-intro/intro-definition.Rmd"}
-```
-
-```{r 0-def, child="00-intro/intro-statistik-ki-ml.Rmd"}
-```
-
-```{r 0-def, child="00-intro/intro-theorie-empirie.Rmd"}
+```{r 0-intro, child="00-intro/variante-D/intro-D.Rmd"}
 ```
 
 
@@ -234,8 +225,8 @@ linkcolor: darkbrown
 
 ### Colophon
 
-Material teils basierend auf früheren Vorlesungen von Helmut Küchenhoff, Torsten Hothorn und Leonhard Held.  
-Berechnungen mit **`R`**, gerendert mit `pandoc` via `{rmarkdown}` und XƎTeX. 
+Material teils basierend auf früheren Vorlesungen von Helmut Küchenhoff, Torsten Hothorn und Leonhard Held.
+Berechnungen mit **`R`**, gerendert mit `pandoc` via `{rmarkdown}` und XƎTeX.
 Beamer-Theme "Simple" adaptiert von Facundo Muñoz.
 
 

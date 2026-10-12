@@ -44,10 +44,11 @@ $\xymatrix{A \ar@{~}[r] & B} \;:$ ``A und B sind \textit{assoziiert}''
 \end{displaymath}
 \end{small}
 
+\vspace{0pt plus 1filll}
 \tiny Bezeichnungen nach McElreath (2020), *Statistical Rethinking*, 2.\ Aufl., Kap.\ 6.
 
 
-### Kausale & assoziative Strukturen 
+### Kausale & assoziative Strukturen
 
 \begin{small}
 $\xymatrix{A \ar[r] & B} \;:$ ``A ist \textit{Ursache} von B''  
@@ -101,11 +102,12 @@ Bedingt man auf $D$, so bedingt man *teilweise* auch auf $X$ selbst -- mit
 $\implies$ Auch Variablen, die *nur mittelbar* mit einer Struktur zusammenhängen,
 können beim Adjustieren Assoziationen verzerren.
 
+\vspace{0pt plus 1filll}
 \tiny nach McElreath (2020), *Statistical Rethinking*, 2.\ Aufl., Kap.\ 6.
 
 ### Adjustieren -- hilft oder schadet? (1) Fork
 
-Uns interessiert der Zusammenhang von $Y$ und $Z$.
+Uns interessiert der Zusammenhang von $Y$ und $Z$.\
 **Sollten wir auf die Drittvariable $X$ bedingen (adjustieren)?**
 
 \columnsbegin
@@ -118,7 +120,8 @@ $\xymatrix@R-1pc{
 \end{center}
 \column{7cm}
 \small
-**Beispiel:** $Y$ = Eisverkauf, $Z$ = Badeunfälle,
+**Beispiel:**\
+$Y$ = Eisverkauf, $Z$ = Badeunfälle,
 $X$ = Sommerhitze.
 
 An Tagen mit viel Eisverkauf gibt es mehr Badeunfälle --
@@ -130,7 +133,7 @@ macht Eis schwimmunfähig?
 
 ### Adjustieren -- hilft oder schadet? (2) Pipe
 
-Uns interessiert der Zusammenhang von $Y$ und $Z$.
+Uns interessiert der Zusammenhang von $Y$ und $Z$.\
 **Sollten wir auf die Drittvariable $X$ bedingen (adjustieren)?**
 
 \columnsbegin
@@ -143,7 +146,8 @@ $\xymatrix@R-1pc{
 \end{center}
 \column{7cm}
 \small
-**Beispiel:** $Y$ = Lernzeit, $X$ = Stoffverständnis,
+**Beispiel:**\
+$Y$ = Lernzeit, $X$ = Stoffverständnis,\
 $Z$ = Klausurpunkte.
 
 Lernzeit wirkt auf die Punkte -- aber (fast) nur *über* das
@@ -155,7 +159,7 @@ Verständnis.
 
 ### Adjustieren -- hilft oder schadet? (3) Collider
 
-Uns interessiert der Zusammenhang von $Y$ und $Z$.
+Uns interessiert der Zusammenhang von $Y$ und $Z$.\
 **Sollten wir auf die Drittvariable $X$ bedingen (adjustieren)?**
 
 \columnsbegin
@@ -168,7 +172,8 @@ $\xymatrix@R-1pc{
 \end{center}
 \column{7cm}
 \small
-**Beispiel:** $Y$ = Intelligenz, $Z$ = Fleiß,
+**Beispiel:**\
+$Y$ = Intelligenz, $Z$ = Fleiß,\
 $X$ = Zulassung zu einem selektiven Studiengang
 (beides erhöht die Chancen).
 \columnsend
@@ -193,7 +198,8 @@ $\xymatrix@R-1pc{
 \end{center}
 \column{6.5cm}
 \small
-**Beispiel:** wie eben, zusätzlich
+**Beispiel:**\
+wie eben, zusätzlich
 $D$ = Eintrag im Studierendenverzeichnis (Folge der Zulassung $X$).
 
 Wir befragen für eine Studie nur Personen aus dem

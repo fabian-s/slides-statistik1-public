@@ -3,8 +3,8 @@
 ### Konzentrationsmaße
 Motivation:
 
-Existiert eine Menge, die auf viele Individuen verteilt ist, kann es hilfreich sein zu wissen, wie diese
-Menge verteilt ist.
+Existiert eine Menge, die auf viele Individuen verteilt ist,\
+kann es hilfreich sein zu wissen, wie diese Menge verteilt ist.
 
 Beispiele:
 
@@ -182,7 +182,8 @@ ggplot(lor, aes(u, v)) +
 
 \columnsbegin
 \column{5cm}
-Der **Gini-Koeffizient** bzw. das **Lorenz'sche Konzentrationsmaß** ist eine Maßzahl, die das \textit{Ausmaß} der Konzentration beschreibt. Er ist definiert als
+Der **Gini-Koeffizient** bzw. das **Lorenz'sche Konzentrationsmaß** ist eine Maßzahl, die das \textit{Ausmaß} der Konzentration beschreibt.\
+Er ist definiert als
 \[
 G = 2 \cdot F,
 \]
@@ -194,7 +195,7 @@ wobei $F$ die Fläche zwischen der Diagonalen und der Lorenzkurve ist.
 
 ### Gini-Koeffizient
 
-Berechnung:  
+Berechnung:
 
 Für die praktische Berechnung von $G$ aus den Wertepaaren $(u_{i}; v_{i})$ stehen folgende alternative Formeln zur Verfügung:
 \[
@@ -205,7 +206,7 @@ oder alternativ
       G = 1 - \frac{1}{n} \sum_{i=1}^{n}(v_{i-1} + v_{i}).
 \]
 
-Wertebereich des Gini-Koeffizienten:  
+Wertebereich des Gini-Koeffizienten:\
   \[
       0 \leq G \leq \frac{n - 1}{n}
   \]
@@ -228,14 +229,14 @@ Der Gini-Koeffizient wird auf folgende Weise normiert:
 
 ### Eigenschaften des Gini-Koeffizient
 
-- Sehr unterschiedliche Lorenzkurven führen zum selben Gini-Wert,  
+- Sehr unterschiedliche Lorenzkurven führen zum selben Gini-Wert,\
 z.B: $G^{+} = 0.5$ für
    - Verteilung 1: 50% ohne Anteile, restliche 50% haben gleiche Anteile an Gesamtsumme 
    - Verteilung 2: untere 75% teilen sich gleichmäßig 25% der Gesamtsumme, obere 25% gleichmäßig 75% 
 - Unempfindlich gegen relatives Wachstum: $G^{+}$-Wert bleibt unverändert falls alle $x$-Werte um den selben Faktor wachsen/schrumpfen
-- "Empfindlich" gegen Ausreißer am oberen Ende  
+- "Empfindlich" gegen Ausreißer am oberen Ende\
  $\implies$ niedrige Gini-Werte für große Grundgesamtheiten unwahrscheinlicher selbst wenn Verteilung ähnlich zu der in kleinerer Grundgesamtheit,
- da größere Grundgesamtheiten häufiger extremere Ausreißer enthalten  
+ da größere Grundgesamtheiten häufiger extremere Ausreißer enthalten\
  (z.B. US-Amerikaner $\ni$ Jeff Bezos $\gg$ Susanne Klatten $\in$ Deutsche)
 
 - Häufig Anwendung von verallgemeinerten Lorenzkurven bzw. Ginikoeffizienten auch auf Merkmale mit teils negativen Ausprägungen (z.B. Schulden als negatives Vermögen, s. übernächste Folie) - dann keine Monotonie etc mehr. 
@@ -251,7 +252,7 @@ $$ H := \sum_{i=1}^n p_i^2 $$
 
 Der Wertebereich ist von $\frac{1}{n}$ (identische $x_i$) bis 1 (Monopol)
 
-### Konzentrationsmessung: Deutsche Vermögensverteilung
+### Konzentrationsmessung: Vermögensverteilung
 
 Jedes **Dezil** ist eine Klasse mit $f_j = 10\%$ der Bevölkerung -- die Kurve ist
 also genau die Lorenzkurve für *gruppierte Daten* (vgl. oben).
@@ -278,7 +279,7 @@ lorenz_netto_indiv <-
 saveRDS(lorenz_netto_indiv, "lorenz-netto-indiv-2017.rds")   
 ```
 
-```{r, lorenzkurve-de, echo = FALSE}
+```{r, lorenzkurve-de, echo = FALSE, fig.height = 5, out.height = ".68\\textheight"}
 lorenz_netto_indiv <- readRDS("lorenz-netto-indiv-2017.rds")
 ggplot(lorenz_netto_indiv, aes(x = decile_num, y = sum, group = year, col = year)) +  
   geom_abline(slope = 1, intercept = 0, col = "darkgray") +
@@ -289,21 +290,77 @@ ggplot(lorenz_netto_indiv, aes(x = decile_num, y = sum, group = year, col = year
   ylab("Anteil am Gesamtnettovermögen") + xlab("Bevölkerungsanteil") + 
   labs(title = "Lorenzkurve der individuellen Nettovermögen in Deutschland", 
        subtitle = "Gini-Koeffizienten: ca. 0.77 - 0.80",
-       caption = "Daten: www.armuts-und-reichtumsbericht.de / BM Arbeit & Soziales, 4.10.2021 (nur Dezile)")
+       caption = "Daten: www.armuts-und-reichtumsbericht.de / BM Arbeit & Soziales, 4.10.2021 (nur Dezile)") +
+  theme(text = element_text(size = 15))
 ```
 
-###  Gini-Index Vermögen Deutschland
+### Gini-Index Vermögen Deutschland
 
-\includegraphics[width = \textwidth]{pics/gini-vermoegen-de-zeitreihe.png}  
+```{r, gini-vermoegen-de, echo = FALSE, fig.height = 4.6, fig.width = 8, out.height = ".7\\textheight"}
+# Quellen (abgerufen 9.10.2026):
+# SOEP & EVS: Armuts- und Reichtumsbericht, Indikator G02
+#   https://www.armuts-und-reichtumsbericht.de/DE/Indikatoren/Gesellschaft/Vermoegensverteilung/G02-Indikator-Vermoegensverwaltung.html
+# PHF: Deutsche Bundesbank, Pressegespräch Vermögensbefragung 2023 (10.4.2025) bzw. Monatsbericht April 2025
+#   (2021: 72,8 %, 2023: 72,4 %; frühere Wellen nur gerundet veröffentlicht)
+gini_verm <- tribble(
+  ~jahr,  ~gini,  ~quelle,
+  2002,   0.765,  "SOEP (Personen)",
+  2007,   0.800,  "SOEP (Personen)",
+  2012,   0.783,  "SOEP (Personen)",
+  2017,   0.783,  "SOEP (Personen)",
+  1998,   0.674,  "EVS (Haushalte)",
+  2003,   0.714,  "EVS (Haushalte)",
+  2008,   0.748,  "EVS (Haushalte)",
+  2013,   0.743,  "EVS (Haushalte)",
+  2018,   0.713,  "EVS (Haushalte)",
+  2010.5, 0.76,   "PHF Bundesbank (Haushalte)",
+  2014,   0.76,   "PHF Bundesbank (Haushalte)",
+  2017,   0.74,   "PHF Bundesbank (Haushalte)",
+  2021,   0.728,  "PHF Bundesbank (Haushalte)",
+  2023,   0.724,  "PHF Bundesbank (Haushalte)")
+ggplot(gini_verm, aes(jahr, gini, colour = quelle)) +
+  geom_line(linewidth = 1) + geom_point(size = 2.5) +
+  scale_colour_viridis_d(NULL, end = .85) +
+  scale_y_continuous(limits = c(.6, .85)) +
+  labs(x = NULL, y = "Gini-Koeffizient Nettovermögen") +
+  theme(legend.position = "top", text = element_text(size = 15))
+```
 
+Verschiedene Erhebungen & Definitionen $\implies$ Niveaus nicht direkt vergleichbar, Verläufe schon.
+
+\vspace{0pt plus 1filll}
 \scriptsize
-[Armuts- & Reichtumsbericht](https://www.armuts-und-reichtumsbericht.de/DE/Indikatoren/Gesellschaft/Vermoegensverteilung/G02-Indikator-Vermoegensverwaltung.html), BM Arbeit & Soziales
+Daten: [Armuts- & Reichtumsbericht, Indikator G02](https://www.armuts-und-reichtumsbericht.de/DE/Indikatoren/Gesellschaft/Vermoegensverteilung/G02-Indikator-Vermoegensverwaltung.html) (SOEP, EVS);
+[Deutsche Bundesbank, Vermögensbefragung 2023](https://www.bundesbank.de/de/aufgaben/themen/bundesbank-studie-vermoegen-in-deutschland-steigen-nominal-gehen-aber-real-zurueck-ungleichheit-bleibt-unveraendert-954622) (PHF). Abgerufen 9.10.2026.
 
 
-###  Gini-Index Einkommen Deutschland
+### Gini-Index Einkommen Deutschland
 
-\includegraphics[width = \textwidth]{pics/gini-einkommen-de-zeitreihe.png}  
+```{r, gini-einkommen-de, echo = FALSE, fig.height = 4.6, fig.width = 8, out.height = ".7\\textheight"}
+# Quelle (abgerufen 9.10.2026): Armuts- und Reichtumsbericht, Indikator G01
+#   https://www.armuts-und-reichtumsbericht.de/DE/Indikatoren/Gesellschaft/Einkommensverteilung/G01-Indikator-Einkommensverteilung.html
+# Gini der Nettoäquivalenzeinkommen; Jahr = Einkommensjahr.
+# EU-SILC: Zeitreihenbruch 2019 (Integration in den Mikrozensus).
+gini_eink <- bind_rows(
+  tibble(quelle = "SOEP",
+         jahr = c(1995, 2000, 2005, 2010:2022),
+         gini = c(.254, .254, .286, .282, .286, .287, .294, .289, .293, .292, .292, .292,
+                  .300, .308, .307, .310)),
+  tibble(quelle = "EU-SILC (bis 2018)", jahr = 2010:2018,
+         gini = c(.290, .283, .297, .307, .301, .295, .291, .311, .297)),
+  tibble(quelle = "EU-SILC (ab 2019)", jahr = 2019:2023,
+         gini = c(.305, .312, .290, .294, .295)))
+ggplot(gini_eink, aes(jahr, gini, colour = quelle)) +
+  geom_line(linewidth = 1) + geom_point(size = 2.5) +
+  scale_colour_viridis_d(NULL, end = .85) +
+  scale_y_continuous(limits = c(.24, .33)) +
+  labs(x = "Einkommensjahr", y = "Gini-Koeffizient Nettoäquivalenzeinkommen") +
+  theme(legend.position = "top", text = element_text(size = 15))
+```
 
+Einkommen viel gleichmäßiger verteilt als Vermögen (Gini ca. 0,3 vs. ca. 0,75).
+
+\vspace{0pt plus 1filll}
 \scriptsize
-[Armuts- & Reichtumsbericht](https://www.armuts-und-reichtumsbericht.de/DE/Indikatoren/Gesellschaft/Einkommensverteilung/G01-Indikator-Einkommensverteilung.html), BM Arbeit & Soziales
+Daten: [Armuts- & Reichtumsbericht, Indikator G01](https://www.armuts-und-reichtumsbericht.de/DE/Indikatoren/Gesellschaft/Einkommensverteilung/G01-Indikator-Einkommensverteilung.html) (SOEP, EU-SILC). Abgerufen 9.10.2026.
 

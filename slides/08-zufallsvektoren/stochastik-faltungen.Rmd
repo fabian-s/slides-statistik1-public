@@ -1,4 +1,4 @@
-## Faltungen 
+## Faltungen
 
 ### Faltungen
 
@@ -30,10 +30,10 @@ $$f_Z(z) = \int f_X(x) f_Y(z-x) dx = \int f_X(z-y) f_Y(y) dy$$
 Man muss immer mit der allgemeinen Faltungsformel (sh. vorige Seite) starten. 
 Wenn stu vorliegt, kann diese Formel dann so vereinfacht werden wie hier gezeigt.
 }
-  
 
 
-### Bsp: Faltung zweier geometrischen ZV 
+
+### Bsp: Faltung zweier geometrischen ZV
 
 Seien $X \sim {\mathcal G}(\pi)$ und $Y \sim {\mathcal G}(\pi)$
 unabhängig.
@@ -60,18 +60,19 @@ Intuition über Elementareignisse Bernoulli-Ketten:
 }
 
 
-### Negative Binomialverteilung 
+### Negative Binomialverteilung
 
-Die Verteilung der Faltung $X = X_1 + ... + X_n$ mit $X_i \stackrel{\text{iid}}{\sim} \mathcal{G}(\pi);\, i= 1, \dots, n$ ist eine **Negative Binomialverteilung** auf $T_X = \{n, n+1, n+2, \ldots\}$ mit Parametern 
+Die Verteilung der Faltung $X = X_1 + ... + X_n$ mit $X_i \stackrel{\text{iid}}{\sim} \mathcal{G}(\pi);\, i= 1, \dots, n$\
+ist eine **Negative Binomialverteilung** auf $T_X = \{n, n+1, n+2, \ldots\}$ mit Parametern 
 $n \in \mathbb{N}^+$ und $\pi \in (0,1)$ und Wahrscheinlichkeitsfunktion
 $$
 f(x) = \binom{x - 1}{n - 1} \pi^n (1-\pi)^{x-n} I(x \geq n)
 $$
 
-Wir schreiben: $X\sim \mathcal{NB}(n, \pi)$  
-\  
+Wir schreiben: $X\sim \mathcal{NB}(n, \pi)$\
+\
 
-Funktionen in R: `[dpqr]nbinom(size, prob)`  
+Funktionen in R: `[dpqr]nbinom(size, prob)`\
 Beachte: Abweichende Definition in R -- Träger ist $\mathbb{N}^+_0$!
 
 
